@@ -124,14 +124,31 @@ export const BrandedVideo: React.FC<BrandedVideoProps> = ({
       }
     }
 
+    // Handle tab visibility (pause playback when user switches tabs)
+    const handleVisibilityChange = () => {
+      if (document.hidden) {
+        if (!video.paused) video.pause();
+      } else if (autoPlay && video.paused) {
+        const rect = video.getBoundingClientRect();
+        const isInViewport = rect.top < window.innerHeight && rect.bottom > 0;
+        if (isInViewport) {
+          video.play().catch(() => {});
+        }
+      }
+    };
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+
     return () => {
       if (playbackObserver) playbackObserver.disconnect();
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
       video.removeEventListener('play', applyPlaybackRate);
       video.removeEventListener('loadedmetadata', applyPlaybackRate);
       video.removeEventListener('playing', handlePlaying);
       video.removeEventListener('error', handleError);
-      // Clean up buffers on unmount
+      // Clean up buffers and release hardware decoder on unmount
       if (!video.paused) video.pause();
+      video.removeAttribute('src');
+      video.load();
     };
   }, [shouldLoadSource, playbackRate, autoPlay]);
 

@@ -18,7 +18,6 @@ import {
 import { MEDIA_CONFIG, VIDEO_ASSETS } from '../config/assets';
 import { BrandedVideo } from '../components/common/BrandedVideo';
 import { QualitySeal } from '../components/common/QualitySeal';
-import { ScientificParticles } from '../components/common/ScientificParticles';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 
 interface HomePageProps {
@@ -66,15 +65,15 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
       color: '#E52D27'
     },
     {
-      id: 'gastroenterology',
-      title: 'Gastroenterology',
+      id: 'gastro-intestinal',
+      title: 'Gastro-intestinal',
       icon: Pill,
       description: 'Targeted digestive and gastrointestinal formulations to restore digestive balance and comfort.',
       color: '#0A4D9E'
     },
     {
       id: 'vitamins',
-      title: 'Vitamins & Supplements',
+      title: 'Vitamins',
       icon: Sparkles,
       description: 'Essential micronutrients and nutritional compounds designed to replenish energy and support immunity.',
       color: '#0D2C54'
@@ -114,28 +113,17 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
   return (
     <div className="homepage-wrapper">
       {/* ====================================================================
-          SECTION 1: HERO
+          SECTION 1: HERO — OPTION 5: OFFSET LAYERED COMPOSITION
+          Dynamic & Premium pharmaceutical corporate composition:
+          Deep navy scientific panel with angled red-accent seam on left,
+          vivid natural cleanroom manufacturing footage on right.
           ==================================================================== */}
       <section
-        className="hero-section"
-        style={{
-          position: 'relative',
-          minHeight: 'clamp(680px, calc(100vh - var(--header-height)), 780px)',
-          display: 'flex',
-          alignItems: 'center',
-          marginTop: 'var(--header-height)',
-          overflow: 'hidden',
-          backgroundColor: '#FFFFFF',
-        }}
+        className="hero-option5-section"
+        aria-label="SALAS Pharmaceuticals Home Hero"
       >
-        {/* Full-bleed Laboratory Video Background Layer */}
-        <div
-          style={{
-            position: 'absolute',
-            inset: 0,
-            zIndex: 1,
-          }}
-        >
+        {/* RIGHT LAYER: Pharmaceutical Manufacturing Video */}
+        <div className="hero-option5-video-layer">
           <BrandedVideo
             src={VIDEO_ASSETS.hero.video}
             poster={VIDEO_ASSETS.hero.poster}
@@ -146,151 +134,202 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
             playsInline={true}
             priority={true}
             ariaLabel={VIDEO_ASSETS.hero.alt}
-            style={{
-              width: '100%',
-              height: '100%',
-              objectFit: 'cover',
-              objectPosition: 'left center',
-            }}
           />
-          {/* Smooth Right-Side White Blend Gradient:
-              Strong, natural footage clarity across left & center (95%+ visual strength), smoothly fading to pure white on the right */}
-          <div
-            className="hero-gradient-mask"
-            style={{
-              position: 'absolute',
-              inset: 0,
-              background: 'linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0) 52%, rgba(255, 255, 255, 0.22) 65%, rgba(255, 255, 255, 0.82) 84%, #FFFFFF 100%)',
-              pointerEvents: 'none',
-            }}
-          />
+          {/* Subtle localized boundary overlay (preserves natural video color & contrast) */}
+          <div className="hero-option5-video-overlay" />
         </div>
 
-        {/* Layered Scientific Molecular Particles (Subtle drifting nodes & connecting lines, pointer-events: none) */}
-        <ScientificParticles
-          particleCount={18}
-          interactive={true}
-          style={{
-            position: 'absolute',
-            inset: 0,
-            zIndex: 2,
-            pointerEvents: 'none',
-          }}
-        />
-
-        {/* Hero Content Overlay (Positioned on the right / middle-right white area for pristine readability) */}
-        <div className="container" style={{ position: 'relative', zIndex: 3, padding: '3.5rem 1.5rem', width: '100%' }}>
-          <div className="hero-grid-layout" style={{ display: 'grid', gridTemplateColumns: '1fr minmax(320px, 680px)', gap: '2rem', alignItems: 'center' }}>
-            {/* Left Spacer Column so the laboratory cleanroom video is completely visible */}
-            <div className="hero-video-window" style={{ minHeight: '1px' }} />
-
-            {/* Right Content Panel sitting on clean white background */}
-            <div className="hero-text-content" style={{ padding: '1rem 0', textAlign: 'left' }}>
-              <div
-                style={{
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '0.5rem',
-                  backgroundColor: 'rgba(20, 86, 160, 0.08)',
-                  padding: '0.45rem 1.15rem',
-                  borderRadius: 'var(--radius-full)',
-                  color: '#1456A0',
-                  fontSize: '0.8125rem',
-                  fontWeight: 700,
-                  letterSpacing: '0.1em',
-                  textTransform: 'uppercase',
-                  marginBottom: '1.5rem',
-                  border: '1px solid rgba(20, 86, 160, 0.18)',
-                }}
+        {/* LEFT LAYER: Deep Navy Scientific Panel Stage with Left-to-Right Reveal */}
+        <div className="hero-option5-panel-stage">
+          <div className="hero-option5-navy-panel">
+            {/* Scientific Decorative Background: Thin bonds, connected nodes & molecular structures */}
+            <div className="hero-option5-chemistry-bg" aria-hidden="true">
+              <svg
+                className="hero-option5-chemistry-art"
+                viewBox="0 0 650 800"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
               >
-                <ShieldCheck size={16} style={{ color: '#D32F2F' }} />
+                <defs>
+                  <linearGradient id="bondGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stopColor="#38BDF8" stopOpacity="0.45" />
+                    <stop offset="100%" stopColor="#60A5FA" stopOpacity="0.18" />
+                  </linearGradient>
+                  <linearGradient id="bondGrad2" x1="0%" y1="100%" x2="100%" y2="0%">
+                    <stop offset="0%" stopColor="#60A5FA" stopOpacity="0.38" />
+                    <stop offset="100%" stopColor="#38BDF8" stopOpacity="0.14" />
+                  </linearGradient>
+                </defs>
+
+                {/* Ambient Particle Nodes */}
+                <circle cx="120" cy="180" r="2.5" fill="#38BDF8" opacity="0.45" />
+                <circle cx="280" cy="120" r="2" fill="#60A5FA" opacity="0.40" />
+                <circle cx="210" cy="680" r="2.5" fill="#38BDF8" opacity="0.35" />
+                <circle cx="360" cy="740" r="2" fill="#60A5FA" opacity="0.40" />
+                <circle cx="80" cy="420" r="1.5" fill="#38BDF8" opacity="0.30" />
+
+                {/* Hexagonal Molecular Cluster (Upper Right / Angled Region) */}
+                <g transform="translate(400, 130)">
+                  {/* Hexagon 1 */}
+                  <polygon
+                    points="60,0 120,34.6 120,103.9 60,138.6 0,103.9 0,34.6"
+                    stroke="url(#bondGrad1)"
+                    strokeWidth="1.5"
+                    fill="rgba(56, 189, 248, 0.04)"
+                  />
+                  {/* Inner Aromatic Circle */}
+                  <circle
+                    cx="60"
+                    cy="69.3"
+                    r="28"
+                    stroke="#38BDF8"
+                    strokeWidth="1"
+                    strokeDasharray="4 4"
+                    opacity="0.25"
+                  />
+                  {/* Vertices */}
+                  <circle cx="60" cy="0" r="3.5" fill="#38BDF8" opacity="0.6" />
+                  <circle cx="120" cy="34.6" r="3.5" fill="#38BDF8" opacity="0.6" />
+                  <circle cx="120" cy="103.9" r="3.5" fill="#38BDF8" opacity="0.6" />
+                  <circle cx="60" cy="138.6" r="3.5" fill="#38BDF8" opacity="0.6" />
+                  <circle cx="0" cy="103.9" r="3.5" fill="#38BDF8" opacity="0.6" />
+                  <circle cx="0" cy="34.6" r="3.5" fill="#38BDF8" opacity="0.6" />
+
+                  {/* Fused Adjacent Hexagon 2 */}
+                  <polygon
+                    points="120,34.6 180,0 240,34.6 240,103.9 180,138.6 120,103.9"
+                    stroke="url(#bondGrad1)"
+                    strokeWidth="1.5"
+                    fill="none"
+                    opacity="0.65"
+                  />
+                  <circle cx="180" cy="0" r="3" fill="#60A5FA" opacity="0.5" />
+                  <circle cx="240" cy="34.6" r="3" fill="#60A5FA" opacity="0.5" />
+                  <circle cx="240" cy="103.9" r="3.5" fill="#60A5FA" opacity="0.5" />
+                  <circle cx="180" cy="138.6" r="3" fill="#60A5FA" opacity="0.5" />
+
+                  {/* Branching covalent bonds */}
+                  <line x1="60" y1="138.6" x2="60" y2="190" stroke="#38BDF8" strokeWidth="1.5" opacity="0.4" />
+                  <circle cx="60" cy="190" r="4" fill="#38BDF8" opacity="0.7" />
+                  <line x1="60" y1="190" x2="18" y2="215" stroke="#38BDF8" strokeWidth="1.2" opacity="0.3" />
+                  <circle cx="18" cy="215" r="3" fill="#60A5FA" opacity="0.5" />
+                  <line x1="60" y1="190" x2="102" y2="215" stroke="#38BDF8" strokeWidth="1.2" opacity="0.3" />
+                  <circle cx="102" cy="215" r="3" fill="#60A5FA" opacity="0.5" />
+                </g>
+
+                {/* Second Subtle Structural Cluster (Lower Region) */}
+                <g transform="translate(320, 520)">
+                  <polygon
+                    points="50,0 100,28.9 100,86.6 50,115.5 0,86.6 0,28.9"
+                    stroke="url(#bondGrad2)"
+                    strokeWidth="1.2"
+                    fill="none"
+                    opacity="0.45"
+                  />
+                  <circle cx="50" cy="0" r="3" fill="#38BDF8" opacity="0.45" />
+                  <circle cx="100" cy="28.9" r="3" fill="#38BDF8" opacity="0.45" />
+                  <circle cx="100" cy="86.6" r="3" fill="#38BDF8" opacity="0.45" />
+                  <circle cx="50" cy="115.5" r="3" fill="#38BDF8" opacity="0.45" />
+                  <circle cx="0" cy="86.6" r="3" fill="#38BDF8" opacity="0.45" />
+                  <circle cx="0" cy="28.9" r="3" fill="#38BDF8" opacity="0.45" />
+
+                  <line x1="0" y1="28.9" x2="-60" y2="0" stroke="#60A5FA" strokeWidth="1" strokeDasharray="3 3" opacity="0.25" />
+                  <circle cx="-60" cy="0" r="2.5" fill="#60A5FA" opacity="0.35" />
+                  <line x1="50" y1="115.5" x2="50" y2="160" stroke="#38BDF8" strokeWidth="1" strokeDasharray="4 4" opacity="0.25" />
+                  <circle cx="50" cy="160" r="2.5" fill="#38BDF8" opacity="0.35" />
+                </g>
+              </svg>
+            </div>
+
+            {/* Centered Content Wrapper (Strictly left-aligned text, guaranteed vertical rhythm) */}
+            <div className="hero-option5-content-inner">
+              {/* Company Badge: SALAS PHARMACEUTICALS PVT. LTD. */}
+              <div className="hero-option5-badge">
+                <ShieldCheck size={16} style={{ color: '#E52D27' }} />
                 <span>Salas Pharmaceuticals Pvt. Ltd.</span>
               </div>
 
-              {/* Main Heading: "Welcome to SALAS" (Always 100% visible, robust typography) */}
-              <h1
-                className="hero-main-heading hero-animate-entrance"
-                style={{
-                  marginBottom: '1.25rem',
-                  lineHeight: 1.15,
-                  fontWeight: 900,
-                }}
-              >
-                <span style={{ color: '#24364B' }}>Welcome to </span>
-                <span style={{ color: '#1456A0', position: 'relative', display: 'inline-block' }}>
+              {/* Main Heading: "Welcome to SALAS" */}
+              <h1 className="hero-option5-heading">
+                <span>Welcome to </span>
+                <span className="heading-salas-brand">
                   SALAS
-                  <span
-                    style={{
-                      position: 'absolute',
-                      bottom: '-4px',
-                      left: 0,
-                      right: 0,
-                      height: '4px',
-                      backgroundColor: '#D32F2F',
-                      borderRadius: '2px',
-                    }}
-                  />
+                  <span className="heading-salas-underline" />
                 </span>
               </h1>
 
-              <p
-                style={{
-                  color: '#34445A',
-                  fontSize: 'clamp(1.05rem, 1.6vw, 1.2rem)',
-                  lineHeight: 1.65,
-                  marginBottom: '2rem',
-                  maxWidth: '600px',
-                  fontWeight: 500,
-                }}
-              >
+              {/* Supporting text: Approved corporate copy */}
+              <p className="hero-option5-description">
                 We are a pharmaceutical company engaged in the manufacture and marketing of pharmaceutical products, committed to quality, innovation and better healthcare.
               </p>
 
-              <div
-                className="reveal-left delay-300"
-                style={{
-                  display: 'flex',
-                  flexWrap: 'wrap',
-                  gap: '1rem',
-                }}
-              >
+              {/* CTA Group: Primary Discover SALAS & Secondary Explore Our Products */}
+              <div className="hero-option5-ctas">
                 <button
                   type="button"
                   onClick={() => onNavigate('about')}
-                  className="btn btn-primary"
-                  style={{
-                    fontSize: '1rem',
-                    padding: '0.9rem 2rem',
-                    fontWeight: 700,
-                  }}
+                  className="hero-option5-btn-primary"
+                  aria-label="Discover SALAS company heritage and profile"
                 >
                   <span>Discover SALAS</span>
-                  <ArrowRight size={18} />
+                  <ArrowRight size={17} />
                 </button>
 
                 <button
                   type="button"
                   onClick={() => onNavigate('products')}
-                  className="btn btn-secondary"
-                  style={{
-                    fontSize: '1rem',
-                    padding: '0.9rem 2rem',
-                    backgroundColor: '#FFFFFF',
-                  }}
+                  className="hero-option5-btn-secondary"
+                  aria-label="Explore our pharmaceutical products portfolio"
                 >
                   <span>Explore Our Products</span>
                 </button>
               </div>
             </div>
           </div>
-        </div>
 
-        {/* Subtle Ambient Scroll Indicator */}
-        <div className="hero-scroll-indicator" aria-hidden="true">
-          <div className="hero-scroll-pill">
-            <div className="hero-scroll-dot" />
-          </div>
-          <span>Scroll to explore</span>
+          {/* Crisp Sub-pixel Angled Seam with Restrained SALAS-Red Line */}
+          <svg
+            className="hero-option5-seam-svg"
+            viewBox="0 0 1000 1000"
+            preserveAspectRatio="none"
+            aria-hidden="true"
+          >
+            <defs>
+              <linearGradient id="salasSeamGlow" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stopColor="#E52D27" stopOpacity="0" />
+                <stop offset="12%" stopColor="#E52D27" stopOpacity="0.45" />
+                <stop offset="50%" stopColor="#E52D27" stopOpacity="0.75" />
+                <stop offset="85%" stopColor="#E52D27" stopOpacity="0.45" />
+                <stop offset="100%" stopColor="#E52D27" stopOpacity="0" />
+              </linearGradient>
+              <linearGradient id="salasSeamCore" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stopColor="#FF4D47" stopOpacity="0.3" />
+                <stop offset="10%" stopColor="#E52D27" stopOpacity="1" />
+                <stop offset="85%" stopColor="#E52D27" stopOpacity="1" />
+                <stop offset="100%" stopColor="#C5221F" stopOpacity="0.3" />
+              </linearGradient>
+            </defs>
+            {/* Subtle Outer Glow */}
+            <line
+              x1="1000"
+              y1="0"
+              x2="850"
+              y2="1000"
+              stroke="url(#salasSeamGlow)"
+              strokeWidth="7"
+              vectorEffect="non-scaling-stroke"
+            />
+            {/* Precise SALAS Red Line */}
+            <line
+              x1="1000"
+              y1="0"
+              x2="850"
+              y2="1000"
+              stroke="url(#salasSeamCore)"
+              strokeWidth="2.5"
+              vectorEffect="non-scaling-stroke"
+            />
+          </svg>
         </div>
       </section>
 
@@ -719,20 +758,13 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
             </p>
           </div>
 
-          <div
-            className="reveal-stagger"
-            style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(270px, 1fr))',
-              gap: '1.75rem',
-            }}
-          >
+          <div className="therapeutic-grid reveal-stagger">
             {therapeuticSegments.map((seg) => {
               const IconComp = seg.icon;
               return (
                 <div
                   key={seg.id}
-                  className="interactive-card"
+                  className="therapeutic-card"
                   role="button"
                   tabIndex={0}
                   aria-label={`View formulations for ${seg.title}`}
@@ -747,6 +779,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
                   <span className="card-animated-underline" aria-hidden="true" />
                   <div>
                     <div
+                      className="therapeutic-card-icon"
                       style={{
                         width: '52px',
                         height: '52px',
@@ -763,7 +796,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
                     >
                       <IconComp size={26} />
                     </div>
-                    <h3 style={{ fontSize: '1.2rem', fontWeight: 700, color: 'var(--color-navy)', marginBottom: '0.65rem' }}>
+                    <h3 style={{ fontSize: '1.1875rem', fontWeight: 700, color: 'var(--color-navy)', marginBottom: '0.65rem' }}>
                       {seg.title}
                     </h3>
                     <p style={{ fontSize: '0.9rem', color: 'var(--color-text-body)', lineHeight: 1.6, margin: 0 }}>
@@ -772,6 +805,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
                   </div>
 
                   <div
+                    className="therapeutic-card-action"
                     style={{
                       display: 'flex',
                       alignItems: 'center',

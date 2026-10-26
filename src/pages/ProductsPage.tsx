@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react';
-import { Search, Pill, X, Info, ArrowRight } from 'lucide-react';
+import { Search, Pill, X, ArrowRight } from 'lucide-react';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 
 interface ProductsPageProps {
@@ -157,31 +157,9 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({ onNavigate }) => {
           <h1 style={{ fontSize: 'clamp(2.2rem, 4vw, 3.2rem)', marginBottom: '1.25rem', color: 'var(--color-navy)' }}>
             Explore Our Pharmaceutical Portfolio
           </h1>
-          <p style={{ fontSize: '1.125rem', color: 'var(--color-text-muted)', lineHeight: 1.7 }}>
+          <p style={{ fontSize: '1.125rem', color: 'var(--color-text-muted)', lineHeight: 1.7, marginBottom: 0 }}>
             We produce a diverse portfolio of pharmaceutical products across multiple dosage forms and therapeutic segments, committed to safety, stability, and therapeutic consistency.
           </p>
-
-          {/* Internal Transparency Alert */}
-          <div 
-            style={{
-              marginTop: '1.75rem',
-              padding: '0.85rem 1.25rem',
-              backgroundColor: 'var(--color-primary-subtle)',
-              border: '1px solid #BFDBFE',
-              borderRadius: 'var(--radius-sm)',
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '0.75rem',
-              fontSize: '0.875rem',
-              color: 'var(--color-primary-hover)',
-              textAlign: 'left',
-            }}
-          >
-            <Info size={20} style={{ flexShrink: 0 }} />
-            <span>
-              <strong>Catalogue Architecture Notice:</strong> Layout and dosage data structure are fully implemented. The client product master catalogue will populate this framework upon supply of official product names, compositions, and registrations.
-            </span>
-          </div>
         </div>
       </section>
 
