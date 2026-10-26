@@ -1,0 +1,152 @@
+/**
+ * SALAS PHARMA — Central Asset & Media Configuration
+ * 
+ * Maps master brand assets, official 4K/HD pharmaceutical footage, and video playback rates.
+ */
+
+export interface VideoMediaAsset {
+  id: string;
+  title: string;
+  subtitle: string;
+  video: string;
+  poster: string;
+  playbackRate: number;
+  description: string;
+  alt: string;
+}
+
+export const BRAND_ASSETS = {
+  // Master Transparent Brand Logo (High-resolution, transparent background)
+  logo: "/assets/brand/salas-pharma-logo-transparent.png",
+  logoMaster: "/assets/brand/salas-pharma-logo.png",
+  logoTransparent: "/assets/brand/salas-pharma-logo-transparent.png",
+  logoSvg: "/assets/brand/salas-pharma-logo.svg",
+  logoWhite: "/assets/brand/salas-pharma-logo-white.svg",
+  favicon: "/favicon.png",
+  faviconSvg: "/favicon.svg",
+  emblem512: "/assets/brand/salas-emblem-512.png",
+};
+
+export const VIDEO_ASSETS: Record<string, VideoMediaAsset> = {
+  hero: {
+    id: "hero",
+    title: "State-of-the-Art Cleanroom Formulation",
+    subtitle: "Sterile bioprocessing vessels, stainless-steel formulation lines, and automated cleanrooms",
+    video: "/assets/videos/salas1.mp4",
+    poster: "/assets/videos/posters/salas1.mp4_f50.jpg",
+    playbackRate: 1.0, // salas2.mp4 accelerated playback (1.5x - 2.0x recommended speed)
+    description: "Full sterile cleanroom facility with high-capacity stainless-steel formulation reactors and cleanroom operator.",
+    alt: "Technician in sterile cleanroom attire operating pharmaceutical bioprocess formulation vessels",
+  },
+  manufacturing: {
+    id: "manufacturing",
+    title: "Precision Packaging & Conveyor Lines",
+    subtitle: "Continuous automated bottle filling, labeling, and quality inspection",
+    video: "/assets/videos/salas2.mp4",
+    poster: "/assets/videos/posters/salas2.mp4_f50.jpg",
+    playbackRate: 1.0,
+    description: "Automated high-speed packaging conveyor line with inline optical inspection and monitoring.",
+    alt: "Pharmaceutical production specialists operating automated bottle packaging and conveyor line",
+  },
+  research: {
+    id: "research",
+    title: "Formulation Dissolution & Bioavailability",
+    subtitle: "In-vitro dissolution kinetics, active ingredient release, and molecular stability",
+    video: "/assets/videos/salas4.mp4",
+    poster: "/assets/videos/posters/salas4.mp4_f50.jpg",
+    playbackRate: 1.0,
+    description: "Macro slow-motion analysis of tablet effervescence and active dissolution kinetics.",
+    alt: "Cinematic macro laboratory view of pharmaceutical tablet dissolution testing",
+  },
+  products: {
+    id: "products",
+    title: "Capsule Formulation & Micro-Pellet Encapsulation",
+    subtitle: "Precision dosing, multi-particulate pellet filling, and gelatin capsule sealing",
+    video: "/assets/videos/salas3.mp4",
+    poster: "/assets/videos/posters/salas3.mp4_f50.jpg",
+    playbackRate: 1.0,
+    description: "3D visualization of pharmaceutical pellet filling and capsule assembly mechanics.",
+    alt: "3D rendered visualization of pharmaceutical capsule filling and sealing technology",
+  },
+  laboratoryHero: {
+    id: "laboratoryHero",
+    title: "Pharmaceutical Dissolution & Analytical Kinetics",
+    subtitle: "4K magnetic stirring, active dissolution, and cleanroom analytical testing",
+    video: "/assets/videos/laboratory/Lab2.mp4",
+    poster: "/assets/videos/posters/Lab2-poster.jpg",
+    playbackRate: 1.0,
+    description: "4K UHD laboratory magnetic stirrer beaker with active dissolution testing in sterile pharmaceutical setting.",
+    alt: "Salas Pharma laboratory magnetic stirrer beaker with dissolution testing and analytical monitoring",
+  },
+  laboratoryEditorial: {
+    id: "laboratoryEditorial",
+    title: "Analytical Testing & Sample Traceability",
+    subtitle: "Validated documentation, HPLC assay characterization, and batch release",
+    video: "/assets/videos/laboratory/Lab1.mp4",
+    poster: "/assets/videos/posters/Lab1-poster.jpg",
+    playbackRate: 1.0,
+    description: "Pharmaceutical scientist verifying test metrics and documenting sample logs in research laboratory.",
+    alt: "Salas Pharma scientist logging analytical test data and sample measurements in laboratory",
+  },
+  ambientBackground: {
+    id: "ambientBackground",
+    title: "Molecular DNA Helical Structure",
+    subtitle: "Scientific ambient visualization for pharmaceutical research and discovery",
+    video: "/assets/videos/background.mp4",
+    poster: "/assets/videos/posters/background-poster.jpg",
+    playbackRate: 1.0,
+    description: "3D molecular DNA double helix rotating in ambient scientific lighting.",
+    alt: "Ambient scientific 3D molecular DNA background visualization",
+  },
+};
+
+export const MEDIA_CONFIG = {
+  hero: {
+    image: "/assets/images/hero/hero-laboratory.jpg",
+    video: "/assets/videos/salas2.mp4",
+    poster: "/assets/videos/posters/salas2.mp4_f50.jpg",
+    playbackRate: 1.75,
+    alt: "Salas Pharma sterile bioprocess formulation reactors",
+  },
+  manufacturing: {
+    image: "/assets/images/manufacturing/manufacturing-line.jpg",
+    video: "/assets/videos/salas1.mp4",
+    poster: "/assets/videos/posters/salas1.mp4_f50.jpg",
+    playbackRate: 1.0,
+    alt: "Salas Pharma automated packaging and conveyor line",
+  },
+  research: {
+    image: "/assets/images/research/laboratory-research.jpg",
+    video: "/assets/videos/salas4.mp4",
+    poster: "/assets/videos/posters/salas4.mp4_f50.jpg",
+    playbackRate: 1.0,
+    alt: "Salas Pharma laboratory research and analytical testing",
+  },
+  quality: {
+    image: "/assets/images/quality/quality-control.jpg",
+    alt: "Salas Pharma quality assurance testing and compliance inspection",
+  },
+  products: {
+    image: "/assets/images/products/dosage-forms.jpg",
+    video: "/assets/videos/salas3.mp4",
+    poster: "/assets/videos/posters/salas3.mp4_f50.jpg",
+    playbackRate: 1.0,
+    alt: "Salas Pharma pharmaceutical dosage forms - tablets, capsules and injectables",
+  },
+  about: {
+    image: "/assets/images/hero/hero-laboratory.jpg",
+    alt: "Salas Pharmaceuticals corporate heritage and facilities",
+  },
+  packaging: {
+    image: "/assets/images/manufacturing/packaging-inspection.jpg",
+    alt: "Salas Pharma automated pharmaceutical packaging line",
+  },
+  laboratory: {
+    environmentImage: "/assets/images/laboratory/lab-environment.jpg",
+    analyticalImage: "/assets/images/laboratory/analytical-testing.jpg",
+    microscopeImage: "/assets/images/laboratory/microscope-evaluation.jpg",
+    video: "/assets/videos/laboratory/Lab2.mp4",
+    poster: "/assets/videos/posters/Lab2-poster.jpg",
+    alt: "Salas Pharma analytical testing and research laboratory facilities",
+  },
+};

@@ -1,0 +1,720 @@
+/* ==========================================================================
+   SALAS PHARMA — DESIGN SYSTEM & TOKENS
+   Pure White Base, Royal & Navy Blue, Restrained Red Accent
+   ========================================================================== */
+
+:root {
+  /* Brand Color Tokens */
+  --color-primary: #0A4D9E;
+  --color-primary-hover: #073B75;
+  --color-primary-light: #1E66BC;
+  --color-primary-subtle: #EBF3FC;
+
+  --color-navy: #061D38;
+  --color-navy-dark: #041224;
+  --color-navy-light: #0D2C54;
+
+  --color-accent: #E52D27;
+  --color-accent-hover: #C5221F;
+  --color-accent-subtle: #FEF2F2;
+  --color-accent-border: #FCA5A5;
+
+  /* Neutral Backgrounds (Strictly White & Pristine Light Gray) */
+  --color-bg-white: #FFFFFF;
+  --color-bg-surface: #FFFFFF;
+  --color-bg-light: #F8FAFC;
+  --color-bg-alt: #F1F5F9;
+
+  /* Typography Colors */
+  --color-text-heading: #061D38;
+  --color-text-body: #334155;
+  --color-text-muted: #64748B;
+  --color-text-light: #94A3B8;
+
+  /* Borders & Dividers */
+  --color-border: #E2E8F0;
+  --color-border-light: #F1F5F9;
+  --color-border-focus: #0A4D9E;
+
+  /* Premium Elevated Shadows */
+  --shadow-xs: 0 1px 2px 0 rgba(6, 29, 56, 0.05);
+  --shadow-sm: 0 2px 8px -1px rgba(6, 29, 56, 0.06);
+  --shadow-md: 0 6px 20px -3px rgba(6, 29, 56, 0.08);
+  --shadow-lg: 0 12px 32px -4px rgba(6, 29, 56, 0.10);
+  --shadow-xl: 0 20px 48px -8px rgba(6, 29, 56, 0.14);
+  --shadow-primary: 0 8px 24px -4px rgba(10, 77, 158, 0.25);
+  --shadow-glow: 0 0 35px rgba(10, 77, 158, 0.15);
+
+  /* Geometry & Radius */
+  --radius-xs: 4px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-full: 9999px;
+
+  /* Layout */
+  --container-width: 1280px;
+  --header-height: 80px;
+
+  /* Transitions */
+  --transition-fast: 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-normal: 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-slow: 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Base Reset */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--color-text-body);
+  background-color: var(--color-bg-white);
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+body {
+  background-color: var(--color-bg-white);
+  min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Typography Standards */
+h1, h2, h3, h4, h5, h6 {
+  color: var(--color-text-heading);
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+}
+
+h1 { font-size: clamp(2.2rem, 4.5vw, 3.6rem); font-weight: 800; }
+h2 { font-size: clamp(1.8rem, 3.2vw, 2.6rem); font-weight: 800; }
+h3 { font-size: clamp(1.3rem, 2.2vw, 1.8rem); font-weight: 700; }
+h4 { font-size: 1.25rem; font-weight: 600; }
+p { margin-bottom: 1rem; color: var(--color-text-body); }
+p:last-child { margin-bottom: 0; }
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+img, video {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+button, input, textarea, select {
+  font-family: inherit;
+  font-size: inherit;
+}
+
+/* Layout Utilities */
+.container {
+  width: 100%;
+  max-width: var(--container-width);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+.section-spacing {
+  padding-top: clamp(4rem, 7vw, 7.5rem);
+  padding-bottom: clamp(4rem, 7vw, 7.5rem);
+}
+
+.section-header {
+  text-align: center;
+  max-width: 760px;
+  margin: 0 auto 3.5rem auto;
+}
+
+.section-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--color-primary);
+  background-color: var(--color-primary-subtle);
+  padding: 0.35rem 0.9rem;
+  border-radius: var(--radius-full);
+  margin-bottom: 1rem;
+}
+
+.section-title {
+  margin-bottom: 1.15rem;
+}
+
+.section-description {
+  font-size: 1.125rem;
+  color: var(--color-text-muted);
+  line-height: 1.7;
+}
+
+/* ==========================================================================
+   BUTTONS & CALL-TO-ACTIONS
+   ========================================================================== */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.625rem;
+  font-weight: 600;
+  font-size: 0.9375rem;
+  padding: 0.875rem 1.85rem;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: all var(--transition-fast);
+  white-space: nowrap;
+  line-height: 1;
+}
+
+.btn-primary {
+  background-color: var(--color-primary);
+  color: var(--color-bg-white);
+  box-shadow: var(--shadow-primary);
+}
+
+.btn-primary:hover {
+  background-color: var(--color-primary-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px -4px rgba(10, 77, 158, 0.35);
+}
+
+.btn-secondary {
+  background-color: var(--color-bg-white);
+  color: var(--color-primary);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-xs);
+}
+
+.btn-secondary:hover {
+  background-color: var(--color-primary-subtle);
+  border-color: var(--color-primary-light);
+  color: var(--color-primary-hover);
+  transform: translateY(-2px);
+}
+
+.btn-accent {
+  background-color: var(--color-accent);
+  color: var(--color-bg-white);
+  box-shadow: 0 6px 20px -3px rgba(229, 45, 39, 0.3);
+}
+
+.btn-accent:hover {
+  background-color: var(--color-accent-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px -3px rgba(229, 45, 39, 0.4);
+}
+
+.btn-outline-white {
+  background-color: transparent;
+  color: #FFFFFF;
+  border: 1.5px solid rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(8px);
+}
+
+.btn-outline-white:hover {
+  background-color: #FFFFFF;
+  color: var(--color-primary);
+  border-color: #FFFFFF;
+  transform: translateY(-2px);
+}
+
+/* ==========================================================================
+   SCROLL DIRECTIONAL REVEAL ANIMATIONS
+   ========================================================================== */
+
+.reveal-left {
+  opacity: 0;
+  transform: translateX(-40px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.reveal-right {
+  opacity: 0;
+  transform: translateX(40px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.reveal-up {
+  opacity: 0;
+  transform: translateY(35px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.reveal-zoom {
+  opacity: 0;
+  transform: scale(0.95);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.is-revealed {
+  opacity: 1 !important;
+  transform: translate(0, 0) scale(1) !important;
+}
+
+.delay-100 { transition-delay: 100ms; }
+.delay-200 { transition-delay: 200ms; }
+.delay-300 { transition-delay: 300ms; }
+.delay-400 { transition-delay: 400ms; }
+.delay-500 { transition-delay: 500ms; }
+
+/* Image Hover Zoom Container */
+.img-zoom-wrapper {
+  overflow: hidden;
+  border-radius: var(--radius-md);
+  position: relative;
+}
+
+.img-zoom-wrapper img {
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.img-zoom-wrapper:hover img {
+  transform: scale(1.05);
+}
+
+/* ==========================================================================
+   CINEMATIC CAPSULE LOADER & CENTRE-SPLIT CURTAINS
+   ========================================================================== */
+
+.cinematic-loader-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 999999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: all;
+  overflow: hidden;
+  background-color: #061D38;
+}
+
+.cinematic-loader-overlay.curtains-parting {
+  pointer-events: none;
+}
+
+/* Centre-splitting Royal Blue Theatre Curtain Panels
+   Uniform, identical royal-blue color matching base with zero initial box-shadow,
+   eliminating premature center partition lines, dark stripes, or color seams. */
+.loader-curtain {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 50.5vw;
+  height: 100vh;
+  background: #061D38; /* Exact matching uniform royal blue */
+  z-index: 10;
+  box-shadow: none;
+  border: none;
+  transition: transform 1.25s cubic-bezier(0.77, 0, 0.175, 1), box-shadow 0.4s ease;
+  will-change: transform;
+}
+
+.loader-curtain.curtain-left {
+  left: 0;
+  transform: translateX(0);
+}
+
+.loader-curtain.curtain-right {
+  right: 0;
+  transform: translateX(0);
+}
+
+/* Centre Theatre Curtain Parting:
+   Only when parting begins does the center split open and reveal the homepage underneath,
+   with subtle edge shadows providing depth as the panels move off-screen. */
+.curtains-parting .curtain-left {
+  transform: translateX(-102%);
+  box-shadow: 30px 0 60px rgba(0, 0, 0, 0.55);
+}
+
+.curtains-parting .curtain-right {
+  transform: translateX(102%);
+  box-shadow: -30px 0 60px rgba(0, 0, 0, 0.55);
+}
+
+/* Center Stage Container */
+.loader-stage-content {
+  position: relative;
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
+  max-width: 600px;
+  padding: 1.5rem;
+  transition: opacity 0.5s ease-out, transform 0.6s ease-out;
+}
+
+.curtains-parting .loader-stage-content {
+  opacity: 0;
+  transform: scale(1.06);
+}
+
+/* ==========================================================================
+   STAGES 1, 2 & 3: REFINED THIN WHITE CAPSULE OUTLINE & SCIENTIFIC ELEMENTS
+   Hollow capsule drawn with thin white strokes, opening visibly from the centre,
+   releasing a thin DNA double helix and molecular structures.
+   ========================================================================== */
+
+.capsule-minimal-stage {
+  position: relative;
+  width: 360px;
+  max-width: 85vw;
+  height: 160px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1), transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.capsule-minimal-stage.capsule-dissolved {
+  opacity: 0;
+  transform: scale(0.85);
+  pointer-events: none;
+}
+
+.capsule-minimal-svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  filter: drop-shadow(0 10px 28px rgba(0, 0, 0, 0.4));
+}
+
+/* Capsule Outline Halves Opening Visibly from Centre */
+.capsule-half-outline {
+  transform-origin: 180px 80px;
+  transition: transform 0.85s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
+}
+
+.capsule-half-outline.left-half.opened {
+  transform: translateX(-48px);
+}
+
+.capsule-half-outline.right-half.opened {
+  transform: translateX(48px);
+}
+
+/* Scientific Elements Emerge (DNA Double Helix & Molecular Clusters) */
+.scientific-elements-group {
+  transform-origin: 180px 80px;
+  opacity: 0;
+  transform: scale(0.65);
+  transition: opacity 0.65s ease-out, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.scientific-elements-group.scientific-active {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* DNA Double Helix Strands Draw In */
+.dna-strand-1,
+.dna-strand-2 {
+  stroke-dasharray: 240;
+  stroke-dashoffset: 240;
+  animation: drawDnaStrand 1.1s cubic-bezier(0.2, 0.8, 0.3, 1) forwards;
+}
+
+.dna-strand-2 {
+  animation-delay: 0.1s;
+}
+
+@keyframes drawDnaStrand {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.dna-rung {
+  opacity: 0;
+  animation: fadeInRung 0.5s ease-out 0.4s forwards;
+}
+
+@keyframes fadeInRung {
+  to {
+    opacity: 0.85;
+  }
+}
+
+/* Molecular Cluster Float */
+.molecular-cluster.cluster-top {
+  animation: floatMolTop 1.1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes floatMolTop {
+  0% { transform: translateY(18px); opacity: 0; }
+  100% { transform: translateY(-4px); opacity: 1; }
+}
+
+.molecular-cluster.cluster-bottom {
+  animation: floatMolBottom 1.1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes floatMolBottom {
+  0% { transform: translateY(-18px); opacity: 0; }
+  100% { transform: translateY(4px); opacity: 1; }
+}
+
+.particle-float-1 { animation: floatSubtle1 1.8s ease-in-out infinite alternate; }
+.particle-float-2 { animation: floatSubtle2 1.8s ease-in-out infinite alternate; }
+.particle-float-3 { animation: floatSubtle1 2.2s ease-in-out infinite alternate; }
+.particle-float-4 { animation: floatSubtle2 2.2s ease-in-out infinite alternate; }
+
+@keyframes floatSubtle1 {
+  from { transform: translateY(0); }
+  to { transform: translateY(-5px); }
+}
+
+@keyframes floatSubtle2 {
+  from { transform: translateY(0); }
+  to { transform: translateY(5px); }
+}
+
+/* ==========================================================================
+   STAGE 4: MASTER SALAS PHARMA LOGO REVEAL & SPECULAR LIGHT SWEEP
+   ========================================================================== */.loader-logo-presentation {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.92);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+}
+
+.loader-logo-presentation.logo-active {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+  pointer-events: auto;
+}
+
+/* Free-Floating Favicon Symbol Container (Zero Rectangular Card, Zero Background Box) */
+.loader-logo-wrap {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: none !important;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  padding: 0 !important;
+  overflow: visible;
+}
+
+.loader-master-logo {
+  width: clamp(140px, 18vw, 200px);
+  max-width: 60vw;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  object-fit: contain;
+  display: block;
+  filter: drop-shadow(0 12px 30px rgba(0, 0, 0, 0.5));
+}
+
+/* White Specular Beam Sweeping Strictly Across Logo Symbol Artwork */
+.loader-specular-sweep {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  -webkit-mask-image: url('/assets/brand/salas-emblem-512.png');
+  mask-image: url('/assets/brand/salas-emblem-512.png');
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+}
+
+.loader-specular-sweep::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -140%;
+  width: 80%;
+  height: 200%;
+  background: linear-gradient(
+    115deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0) 25%,
+    rgba(255, 255, 255, 0.95) 50%,
+    rgba(255, 255, 255, 0) 75%,
+    transparent 100%
+  );
+  transform: skewX(-24deg);
+  animation: sweepSpecularBeam 0.95s cubic-bezier(0.4, 0, 0.2, 1) 0.3s forwards;
+}
+
+@keyframes sweepSpecularBeam {
+  0% { left: -140%; opacity: 0; }
+  25% { opacity: 1; }
+  75% { opacity: 1; }
+  100% { left: 165%; opacity: 0; }
+}
+
+/* ==========================================================================
+   ROTATING QUALITY SEAL (SECTION 5)
+   Clockwise rotation on outer text/ring, Stationary central core
+   ========================================================================== */
+
+.quality-seal-container {
+  position: relative;
+  width: 240px;
+  height: 240px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Outer Ring Rotating Clockwise */
+.seal-rotating-ring {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  animation: rotateClockwise 22s linear infinite;
+  transform-origin: center center;
+  pointer-events: none;
+}
+
+@keyframes rotateClockwise {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Stationary Core Emblem */
+.seal-static-core {
+  position: relative;
+  z-index: 2;
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #0A4D9E 0%, #073B75 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #FFFFFF;
+  box-shadow: 0 8px 24px rgba(10, 77, 158, 0.35);
+  text-align: center;
+  border: 4px solid #FFFFFF;
+}
+
+.seal-static-core .core-icon {
+  margin-bottom: 0.25rem;
+  color: #FFFFFF;
+}
+
+.seal-static-core .core-text {
+  font-size: 0.6875rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  line-height: 1.2;
+}
+
+.seal-static-core .core-subtext {
+  font-size: 0.625rem;
+  font-weight: 600;
+  color: #FCA5A5;
+  letter-spacing: 0.05em;
+  margin-top: 0.15rem;
+}
+
+/* ==========================================================================
+   HERO FULL-BLEED VIDEO & RIGHT-SIDE WHITE GRADIENT BLEND
+   ========================================================================== */
+
+@media (max-width: 992px) {
+  .hero-grid-layout {
+    grid-template-columns: 1fr !important;
+  }
+  .hero-video-window {
+    display: none !important;
+  }
+  .hero-gradient-mask {
+    background: linear-gradient(
+      to bottom,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(255, 255, 255, 0) 25%,
+      rgba(255, 255, 255, 0.25) 45%,
+      rgba(255, 255, 255, 0.75) 68%,
+      rgba(255, 255, 255, 0.95) 85%,
+      #FFFFFF 100%
+    ) !important;
+  }
+  .hero-text-content {
+    background: rgba(255, 255, 255, 0.88);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-radius: var(--radius-lg);
+    padding: 1.75rem !important;
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    box-shadow: 0 4px 24px rgba(10, 77, 158, 0.08);
+  }
+}
+
+/* ==========================================================================
+   ACCESSIBILITY & REDUCED MOTION
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  
+  .cinematic-loader-overlay {
+    display: none !important;
+  }
+  
+  .reveal-left, .reveal-right, .reveal-up, .reveal-zoom {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .seal-rotating-ring {
+    animation: none !important;
+  }
+}

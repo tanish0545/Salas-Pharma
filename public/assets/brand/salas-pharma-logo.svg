@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 120" width="520" height="120" fill="none">
+  <defs>
+    <linearGradient id="blueGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0056B3"/>
+      <stop offset="100%" stop-color="#073B75"/>
+    </linearGradient>
+    <linearGradient id="redGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#E52D27"/>
+      <stop offset="100%" stop-color="#B31217"/>
+    </linearGradient>
+    <linearGradient id="shineGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="rgba(255,255,255,0)"/>
+      <stop offset="50%" stop-color="rgba(255,255,255,0.85)"/>
+      <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Pharmaceutical Capsule Emblem -->
+  <g transform="translate(15, 10)">
+    <!-- Blue Left/Upper Capsule Half -->
+    <path d="M 38,15 
+             C 18,15 5,28 5,48 
+             C 5,68 18,81 38,81 
+             L 50,81 
+             L 50,15 Z" 
+          fill="url(#blueGrad)" />
+    
+    <!-- White Capsule Divider Line -->
+    <line x1="50" y1="12" x2="50" y2="84" stroke="#FFFFFF" stroke-width="3" />
+
+    <!-- Red Right/Lower Capsule Half with Cross Accent -->
+    <path d="M 50,15 
+             L 62,15 
+             C 82,15 95,28 95,48 
+             C 95,68 82,81 62,81 
+             L 50,81 Z" 
+          fill="url(#redGrad)" />
+    
+    <!-- Medical Cross Highlight in Capsule Center -->
+    <g transform="translate(50, 48)">
+      <rect x="-3" y="-14" width="6" height="28" rx="2" fill="#FFFFFF"/>
+      <rect x="-14" y="-3" width="28" height="6" rx="2" fill="#FFFFFF"/>
+    </g>
+
+    <!-- Capsule Subtle Glass Highlight Curve -->
+    <path d="M 16,32 C 16,24 24,20 38,20 L 62,20 C 76,20 84,24 84,32" 
+          stroke="rgba(255,255,255,0.4)" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+  </g>
+
+  <!-- Typography: SALAS -->
+  <text x="135" y="65" 
+        font-family="'Inter', 'Plus Jakarta Sans', 'Segoe UI', -apple-system, sans-serif" 
+        font-size="46" 
+        font-weight="900" 
+        letter-spacing="1.5" 
+        fill="#073B75">SALAS</text>
+
+  <!-- Red Accent Dot / Pharmaceutical Marker -->
+  <circle cx="318" cy="42" r="5" fill="#E52D27"/>
+
+  <!-- Subtitle: PHARMACEUTICALS -->
+  <text x="136" y="86" 
+        font-family="'Inter', 'Plus Jakarta Sans', 'Segoe UI', -apple-system, sans-serif" 
+        font-size="12" 
+        font-weight="700" 
+        letter-spacing="6" 
+        fill="#DC2626">PHARMACEUTICALS</text>
+
+  <!-- Corporate Baseline Tagline -->
+  <text x="136" y="102" 
+        font-family="'Inter', 'Plus Jakarta Sans', 'Segoe UI', -apple-system, sans-serif" 
+        font-size="9.5" 
+        font-weight="500" 
+        letter-spacing="2" 
+        fill="#64748B">COMMITMENT TO QUALITY HEALTHCARE</text>
+</svg>
