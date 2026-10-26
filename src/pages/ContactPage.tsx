@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { MapPin, Mail, Phone, Send, CheckCircle2, AlertCircle, Building2, Factory } from 'lucide-react';
+import { MapPin, Mail, Phone, Send, CheckCircle2, AlertCircle, Building2, Factory, Copy, Check, ExternalLink } from 'lucide-react';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 
 export const ContactPage: React.FC = () => {
@@ -13,23 +13,63 @@ export const ContactPage: React.FC = () => {
     message: '',
   });
 
-  const [formState, setFormState] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
+  const [formState, setFormState] = useState<'idle' | 'dispatched'>('idle');
   const [errorMessage, setErrorMessage] = useState('');
+  const [copied, setCopied] = useState(false);
+
+  const getInquirySummary = () => {
+    return `SALAS PHARMACEUTICALS INQUIRY\nSubject: ${formData.subject}\nName: ${formData.name.trim()}\nEmail: ${formData.email.trim()}\nPhone: ${formData.phone.trim() || 'Not provided'}\n\nMessage:\n${formData.message.trim()}\n\nRecipient: info@salaspharma.co.in`;
+  };
+
+  const getMailtoUri = () => {
+    const subject = `[SALAS Inquiry] ${formData.subject} — ${formData.name.trim()}`;
+    const body = `Dear Salas Pharmaceuticals Corporate Team,\n\nI am contacting you regarding: ${formData.subject}\n\nName: ${formData.name.trim()}\nEmail: ${formData.email.trim()}\nPhone: ${formData.phone.trim() || 'Not provided'}\n\nInquiry Details:\n${formData.message.trim()}\n\n---\nTransmitted via Salas Pharma official website contact portal.`;
+    return `mailto:info@salaspharma.co.in?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  };
+
+  const validateForm = () => {
+    if (!formData.name.trim() || formData.name.trim().length < 2) {
+      return 'Please enter your full name (minimum 2 characters).';
+    }
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(formData.email.trim())) {
+      return 'Please enter a valid corporate or professional email address.';
+    }
+    if (formData.phone.trim() && !/^[0-9+()-\s]{7,20}$/.test(formData.phone.trim())) {
+      return 'Please enter a valid contact phone number.';
+    }
+    if (!formData.message.trim() || formData.message.trim().length < 10) {
+      return 'Please provide more details in your message (minimum 10 characters).';
+    }
+    return null;
+  };
 
   const handleFormSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!formData.name.trim() || !formData.email.trim() || !formData.message.trim()) {
-      setErrorMessage('Please fill in all mandatory fields.');
+    const error = validateForm();
+    if (error) {
+      setErrorMessage(error);
       return;
     }
 
-    setFormState('submitting');
     setErrorMessage('');
+    const mailto = getMailtoUri();
+    try {
+      window.location.href = mailto;
+    } catch {
+      // Browser mail handler
+    }
+    setFormState('dispatched');
+  };
 
-    // Simulate resilient submission with client-side validation
-    setTimeout(() => {
-      setFormState('success');
-    }, 600);
+  const handleCopyDetails = async () => {
+    try {
+      await navigator.clipboard.writeText(getInquirySummary());
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2500);
+    } catch {
+      // Fallback
+    }
   };
 
   return (
@@ -242,7 +282,7 @@ export const ContactPage: React.FC = () => {
               </p>
             </div>
 
-            {formState === 'success' ? (
+            {formState === 'dispatched' ? (
               <div 
                 style={{
                   padding: '2.5rem',
@@ -253,70 +293,132 @@ export const ContactPage: React.FC = () => {
                 }}
               >
                 <CheckCircle2 size={48} style={{ color: 'var(--color-primary)', margin: '0 auto 1rem auto' }} />
-                <h3 style={{ color: 'var(--color-navy)', marginBottom: '0.5rem' }}>Inquiry Received</h3>
-                <p style={{ color: 'var(--color-text-body)', fontSize: '0.95rem', margin: 0 }}>
-                  Thank you, <strong>{formData.name}</strong>. Your message regarding <em>"{formData.subject}"</em> has been logged. Our corporate office will contact you at <strong>{formData.email}</strong>.
+                <h3 style={{ color: 'var(--color-navy)', marginBottom: '0.5rem', fontSize: '1.5rem', fontWeight: 800 }}>
+                  Inquiry Ready for Transmission
+                </h3>
+                <p style={{ color: 'var(--color-text-body)', fontSize: '1rem', lineHeight: 1.65, maxWidth: '600px', margin: '0 auto 1.5rem auto' }}>
+                  Thank you, <strong>{formData.name}</strong>. Your inquiry regarding <em>"{formData.subject}"</em> has been prepared for our corporate office at <strong>info@salaspharma.co.in</strong>. Your default email application was prompted to transmit this message.
                 </p>
-                <button
-                  type="button"
-                  onClick={() => {
-                    setFormData({ name: '', email: '', phone: '', subject: 'Distribution & Trade Partnership', message: '' });
-                    setFormState('idle');
-                  }}
-                  className="btn btn-secondary"
-                  style={{ marginTop: '1.5rem' }}
-                >
-                  Send Another Inquiry
-                </button>
+
+                <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', flexWrap: 'wrap', marginBottom: '1.5rem' }}>
+                  <a
+                    href={getMailtoUri()}
+                    className="btn btn-primary"
+                    style={{ textDecoration: 'none' }}
+                  >
+                    <span>Open in Email App</span>
+                    <ExternalLink size={16} />
+                  </a>
+
+                  <button
+                    type="button"
+                    onClick={handleCopyDetails}
+                    className="btn btn-secondary"
+                    style={{ backgroundColor: '#FFFFFF' }}
+                  >
+                    {copied ? (
+                      <>
+                        <Check size={16} style={{ color: '#16A34A' }} />
+                        <span style={{ color: '#16A34A', fontWeight: 700 }}>Inquiry Copied!</span>
+                      </>
+                    ) : (
+                      <>
+                        <Copy size={16} />
+                        <span>Copy Inquiry Details</span>
+                      </>
+                    )}
+                  </button>
+                </div>
+
+                <div style={{ borderTop: '1px solid #DBEAFE', paddingTop: '1.25rem' }}>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setFormData({ name: '', email: '', phone: '', subject: 'Distribution & Trade Partnership', message: '' });
+                      setFormState('idle');
+                    }}
+                    style={{
+                      background: 'none',
+                      border: 'none',
+                      color: 'var(--color-text-muted)',
+                      fontSize: '0.875rem',
+                      cursor: 'pointer',
+                      textDecoration: 'underline',
+                    }}
+                  >
+                    Create another inquiry
+                  </button>
+                </div>
               </div>
             ) : (
-              <form onSubmit={handleFormSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+              <form onSubmit={handleFormSubmit} noValidate style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
                 {errorMessage && (
-                  <div style={{ padding: '0.75rem 1rem', backgroundColor: '#FEE2E2', border: '1px solid #FCA5A5', color: '#991B1B', borderRadius: 'var(--radius-sm)', fontSize: '0.875rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                    <AlertCircle size={18} />
-                    <span>{errorMessage}</span>
+                  <div 
+                    role="alert"
+                    style={{ 
+                      padding: '0.85rem 1.15rem', 
+                      backgroundColor: '#FEE2E2', 
+                      border: '1px solid #FCA5A5', 
+                      color: '#991B1B', 
+                      borderRadius: 'var(--radius-sm)', 
+                      fontSize: '0.875rem', 
+                      display: 'flex', 
+                      alignItems: 'center', 
+                      gap: '0.5rem' 
+                    }}
+                  >
+                    <AlertCircle size={18} style={{ flexShrink: 0 }} />
+                    <span style={{ fontWeight: 600 }}>{errorMessage}</span>
                   </div>
                 )}
 
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '1.25rem' }}>
                   <div>
-                    <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: 600, color: 'var(--color-navy)', marginBottom: '0.4rem' }}>
+                    <label 
+                      htmlFor="contact-name"
+                      style={{ display: 'block', fontSize: '0.875rem', fontWeight: 600, color: 'var(--color-navy)', marginBottom: '0.4rem' }}
+                    >
                       Full Name *
                     </label>
                     <input
+                      id="contact-name"
                       type="text"
                       required
                       placeholder="e.g. Vikram Patel"
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                      className="form-input-field"
                       style={{
                         width: '100%',
                         padding: '0.75rem 1rem',
                         borderRadius: 'var(--radius-sm)',
                         border: '1px solid var(--color-border)',
                         fontSize: '0.9375rem',
-                        outline: 'none',
                       }}
                     />
                   </div>
 
                   <div>
-                    <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: 600, color: 'var(--color-navy)', marginBottom: '0.4rem' }}>
+                    <label 
+                      htmlFor="contact-email"
+                      style={{ display: 'block', fontSize: '0.875rem', fontWeight: 600, color: 'var(--color-navy)', marginBottom: '0.4rem' }}
+                    >
                       Email Address *
                     </label>
                     <input
+                      id="contact-email"
                       type="email"
                       required
                       placeholder="e.g. vikram@pharmadistributor.com"
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                      className="form-input-field"
                       style={{
                         width: '100%',
                         padding: '0.75rem 1rem',
                         borderRadius: 'var(--radius-sm)',
                         border: '1px solid var(--color-border)',
                         fontSize: '0.9375rem',
-                        outline: 'none',
                       }}
                     />
                   </div>
@@ -324,39 +426,47 @@ export const ContactPage: React.FC = () => {
 
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '1.25rem' }}>
                   <div>
-                    <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: 600, color: 'var(--color-navy)', marginBottom: '0.4rem' }}>
+                    <label 
+                      htmlFor="contact-phone"
+                      style={{ display: 'block', fontSize: '0.875rem', fontWeight: 600, color: 'var(--color-navy)', marginBottom: '0.4rem' }}
+                    >
                       Contact Phone Number
                     </label>
                     <input
+                      id="contact-phone"
                       type="tel"
                       placeholder="e.g. +91 98250 12345"
                       value={formData.phone}
                       onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                      className="form-input-field"
                       style={{
                         width: '100%',
                         padding: '0.75rem 1rem',
                         borderRadius: 'var(--radius-sm)',
                         border: '1px solid var(--color-border)',
                         fontSize: '0.9375rem',
-                        outline: 'none',
                       }}
                     />
                   </div>
 
                   <div>
-                    <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: 600, color: 'var(--color-navy)', marginBottom: '0.4rem' }}>
+                    <label 
+                      htmlFor="contact-subject"
+                      style={{ display: 'block', fontSize: '0.875rem', fontWeight: 600, color: 'var(--color-navy)', marginBottom: '0.4rem' }}
+                    >
                       Inquiry Subject
                     </label>
                     <select
+                      id="contact-subject"
                       value={formData.subject}
                       onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
+                      className="form-input-field"
                       style={{
                         width: '100%',
                         padding: '0.75rem 1rem',
                         borderRadius: 'var(--radius-sm)',
                         border: '1px solid var(--color-border)',
                         fontSize: '0.9375rem',
-                        outline: 'none',
                         backgroundColor: '#FFFFFF',
                       }}
                     >
@@ -370,22 +480,26 @@ export const ContactPage: React.FC = () => {
                 </div>
 
                 <div>
-                  <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: 600, color: 'var(--color-navy)', marginBottom: '0.4rem' }}>
+                  <label 
+                    htmlFor="contact-message"
+                    style={{ display: 'block', fontSize: '0.875rem', fontWeight: 600, color: 'var(--color-navy)', marginBottom: '0.4rem' }}
+                  >
                     Message Details *
                   </label>
                   <textarea
+                    id="contact-message"
                     rows={5}
                     required
-                    placeholder="Please specify your therapeutic interest, geographic territory, or inquiry details..."
+                    placeholder="Please specify your therapeutic interest, geographic territory, or inquiry details (min 10 characters)..."
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                    className="form-input-field"
                     style={{
                       width: '100%',
                       padding: '0.75rem 1rem',
                       borderRadius: 'var(--radius-sm)',
                       border: '1px solid var(--color-border)',
                       fontSize: '0.9375rem',
-                      outline: 'none',
                       resize: 'vertical',
                     }}
                   />
@@ -395,10 +509,9 @@ export const ContactPage: React.FC = () => {
                   <button 
                     type="submit" 
                     className="btn btn-primary"
-                    disabled={formState === 'submitting'}
                     style={{ padding: '0.85rem 2.25rem' }}
                   >
-                    <span>{formState === 'submitting' ? 'Sending Message...' : 'Transmit Inquiry'}</span>
+                    <span>Send Corporate Inquiry</span>
                     <Send size={16} />
                   </button>
                 </div>

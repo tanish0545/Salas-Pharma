@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 
 export interface BrandedVideoProps {
   src: string;
@@ -9,6 +9,7 @@ export interface BrandedVideoProps {
   loop?: boolean;
   playsInline?: boolean;
   preload?: 'auto' | 'metadata' | 'none';
+  priority?: boolean;
   className?: string;
   style?: React.CSSProperties;
   ariaLabel?: string;
@@ -22,18 +23,61 @@ export const BrandedVideo: React.FC<BrandedVideoProps> = ({
   muted = true,
   loop = true,
   playsInline = true,
-  preload = 'metadata',
+  preload,
+  priority = false,
   className = '',
   style = {},
   ariaLabel = 'Pharmaceutical video footage',
 }) => {
+  const containerRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
+  // Hero videos are mounted immediately; below-the-fold videos are mounted only on proximity
+  const [shouldLoadSource, setShouldLoadSource] = useState<boolean>(priority);
+  const [isVideoPlaying, setIsVideoPlaying] = useState<boolean>(false);
+  const [hasError, setHasError] = useState<boolean>(false);
 
+  // Effective preload: hero defaults to 'metadata', below-the-fold defaults to 'none'
+  const effectivePreload = preload || (priority ? 'metadata' : 'none');
+
+  // Step 1: Proximity Observation (load source 350px before entering viewport)
   useEffect(() => {
+    if (shouldLoadSource) return;
+
+    const container = containerRef.current;
+    if (!container || !('IntersectionObserver' in window)) {
+      setShouldLoadSource(true);
+      return;
+    }
+
+    const proximityObserver = new IntersectionObserver(
+      (entries) => {
+        if (entries[0]?.isIntersecting) {
+          setShouldLoadSource(true);
+          proximityObserver.disconnect();
+        }
+      },
+      { rootMargin: '350px 0px 350px 0px' }
+    );
+
+    proximityObserver.observe(container);
+    return () => proximityObserver.disconnect();
+  }, [shouldLoadSource]);
+
+  // Step 2: Viewport Playback Observer & Rate Control
+  useEffect(() => {
+    if (!shouldLoadSource) return;
+
     const video = videoRef.current;
     if (!video) return;
 
-    const enforcePlaybackRate = () => {
+    // Respect prefers-reduced-motion
+    const isReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (isReducedMotion) {
+      video.pause();
+      return;
+    }
+
+    const applyPlaybackRate = () => {
       if (video && typeof playbackRate === 'number' && playbackRate > 0) {
         if (video.playbackRate !== playbackRate) {
           video.playbackRate = playbackRate;
@@ -41,52 +85,114 @@ export const BrandedVideo: React.FC<BrandedVideoProps> = ({
       }
     };
 
-    // Apply on initial mount
-    enforcePlaybackRate();
+    applyPlaybackRate();
+    video.addEventListener('play', applyPlaybackRate);
+    video.addEventListener('loadedmetadata', applyPlaybackRate);
 
-    // Re-enforce whenever the video plays, loops, or metadata loads
-    video.addEventListener('play', enforcePlaybackRate);
-    video.addEventListener('loadedmetadata', enforcePlaybackRate);
-    video.addEventListener('canplay', enforcePlaybackRate);
-    video.addEventListener('seeking', enforcePlaybackRate);
+    // Track active playback state for smooth poster transitions
+    const handlePlaying = () => setIsVideoPlaying(true);
+    const handleError = () => setHasError(true);
+    video.addEventListener('playing', handlePlaying);
+    video.addEventListener('error', handleError);
 
-    // Safely trigger muted autoplay if requested
-    if (autoPlay && video.paused) {
-      video.play().catch(() => {
-        // Fallback gracefully on strict browser power-saver modes
-      });
+    // Active Viewport IntersectionObserver:
+    // Only decodes and plays when in active view; pauses immediately when scrolled away
+    let playbackObserver: IntersectionObserver | null = null;
+    if ('IntersectionObserver' in window) {
+      playbackObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              if (autoPlay && video.paused) {
+                video.play().catch(() => {
+                  // Catch browser autoplay policies gracefully
+                });
+              }
+            } else {
+              if (!video.paused) {
+                video.pause();
+              }
+            }
+          });
+        },
+        { threshold: 0.15, rootMargin: '80px 0px 80px 0px' }
+      );
+      playbackObserver.observe(video);
+    } else {
+      if (autoPlay && video.paused) {
+        video.play().catch(() => {});
+      }
     }
 
     return () => {
-      video.removeEventListener('play', enforcePlaybackRate);
-      video.removeEventListener('loadedmetadata', enforcePlaybackRate);
-      video.removeEventListener('canplay', enforcePlaybackRate);
-      video.removeEventListener('seeking', enforcePlaybackRate);
+      if (playbackObserver) playbackObserver.disconnect();
+      video.removeEventListener('play', applyPlaybackRate);
+      video.removeEventListener('loadedmetadata', applyPlaybackRate);
+      video.removeEventListener('playing', handlePlaying);
+      video.removeEventListener('error', handleError);
+      // Clean up buffers on unmount
+      if (!video.paused) video.pause();
     };
-  }, [src, playbackRate, autoPlay]);
+  }, [shouldLoadSource, playbackRate, autoPlay]);
 
   return (
-    <video
-      ref={videoRef}
-      src={src}
-      poster={poster}
-      autoPlay={autoPlay}
-      muted={muted}
-      loop={loop}
-      playsInline={playsInline}
-      preload={preload}
-      className={className}
+    <div
+      ref={containerRef}
+      className={`branded-video-container ${className}`}
       style={{
-        display: 'block',
+        position: 'relative',
         width: '100%',
         height: '100%',
-        objectFit: 'cover',
+        overflow: 'hidden',
+        backgroundColor: '#0A2540',
         ...style,
       }}
-      aria-label={ariaLabel}
     >
-      <source src={src} type="video/mp4" />
-      Your browser does not support HTML5 video playback.
-    </video>
+      {/* Poster Image / Static Fallback (Always visible until video actively streams frames) */}
+      {poster && (
+        <img
+          src={poster}
+          alt={ariaLabel}
+          loading={priority ? 'eager' : 'lazy'}
+          decoding="async"
+          style={{
+            position: 'absolute',
+            inset: 0,
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+            opacity: isVideoPlaying && !hasError ? 0 : 1,
+            transition: 'opacity 0.45s ease',
+            zIndex: 1,
+            pointerEvents: 'none',
+          }}
+          aria-hidden={isVideoPlaying}
+        />
+      )}
+
+      {/* Video Element */}
+      <video
+        ref={videoRef}
+        poster={poster}
+        autoPlay={autoPlay}
+        muted={muted}
+        loop={loop}
+        playsInline={playsInline}
+        preload={effectivePreload}
+        style={{
+          display: 'block',
+          width: '100%',
+          height: '100%',
+          objectFit: 'cover',
+          position: 'relative',
+          zIndex: 0,
+        }}
+        aria-label={ariaLabel}
+      >
+        {shouldLoadSource && !hasError && (
+          <source src={src} type="video/mp4" />
+        )}
+      </video>
+    </div>
   );
 };

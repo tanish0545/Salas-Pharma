@@ -18,10 +18,12 @@ import {
 import { MEDIA_CONFIG, VIDEO_ASSETS } from '../config/assets';
 import { BrandedVideo } from '../components/common/BrandedVideo';
 import { QualitySeal } from '../components/common/QualitySeal';
+import { ScientificParticles } from '../components/common/ScientificParticles';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 
 interface HomePageProps {
   onNavigate: (route: string) => void;
+  isLoaderComplete?: boolean;
 }
 
 export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
@@ -118,7 +120,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
         className="hero-section"
         style={{
           position: 'relative',
-          minHeight: 'calc(100vh - var(--header-height))',
+          minHeight: 'clamp(680px, calc(100vh - var(--header-height)), 780px)',
           display: 'flex',
           alignItems: 'center',
           marginTop: 'var(--header-height)',
@@ -142,6 +144,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
             muted={true}
             loop={true}
             playsInline={true}
+            priority={true}
             ariaLabel={VIDEO_ASSETS.hero.alt}
             style={{
               width: '100%',
@@ -157,66 +160,86 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
             style={{
               position: 'absolute',
               inset: 0,
-              background: 'linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0) 48%, rgba(255, 255, 255, 0.18) 62%, rgba(255, 255, 255, 0.75) 80%, rgba(255, 255, 255, 0.96) 94%, #FFFFFF 100%)',
+              background: 'linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0) 52%, rgba(255, 255, 255, 0.22) 65%, rgba(255, 255, 255, 0.82) 84%, #FFFFFF 100%)',
               pointerEvents: 'none',
             }}
           />
         </div>
 
+        {/* Layered Scientific Molecular Particles (Subtle drifting nodes & connecting lines, pointer-events: none) */}
+        <ScientificParticles
+          particleCount={18}
+          interactive={true}
+          style={{
+            position: 'absolute',
+            inset: 0,
+            zIndex: 2,
+            pointerEvents: 'none',
+          }}
+        />
+
         {/* Hero Content Overlay (Positioned on the right / middle-right white area for pristine readability) */}
-        <div className="container" style={{ position: 'relative', zIndex: 2, padding: '4.5rem 1.5rem', width: '100%' }}>
-          <div className="hero-grid-layout" style={{ display: 'grid', gridTemplateColumns: '1fr minmax(320px, 660px)', gap: '2rem', alignItems: 'center' }}>
+        <div className="container" style={{ position: 'relative', zIndex: 3, padding: '3.5rem 1.5rem', width: '100%' }}>
+          <div className="hero-grid-layout" style={{ display: 'grid', gridTemplateColumns: '1fr minmax(320px, 680px)', gap: '2rem', alignItems: 'center' }}>
             {/* Left Spacer Column so the laboratory cleanroom video is completely visible */}
             <div className="hero-video-window" style={{ minHeight: '1px' }} />
 
             {/* Right Content Panel sitting on clean white background */}
-            <div className="hero-text-content" style={{ padding: '1rem 0' }}>
+            <div className="hero-text-content" style={{ padding: '1rem 0', textAlign: 'left' }}>
               <div
-                className="reveal-left"
                 style={{
                   display: 'inline-flex',
                   alignItems: 'center',
                   gap: '0.5rem',
-                  backgroundColor: 'rgba(10, 77, 158, 0.08)',
+                  backgroundColor: 'rgba(20, 86, 160, 0.08)',
                   padding: '0.45rem 1.15rem',
                   borderRadius: 'var(--radius-full)',
-                  color: 'var(--color-primary)',
+                  color: '#1456A0',
                   fontSize: '0.8125rem',
                   fontWeight: 700,
                   letterSpacing: '0.1em',
                   textTransform: 'uppercase',
-                  marginBottom: '1.25rem',
-                  border: '1px solid rgba(10, 77, 158, 0.16)',
+                  marginBottom: '1.5rem',
+                  border: '1px solid rgba(20, 86, 160, 0.18)',
                 }}
               >
-                <ShieldCheck size={16} style={{ color: 'var(--color-accent)' }} />
+                <ShieldCheck size={16} style={{ color: '#D32F2F' }} />
                 <span>Salas Pharmaceuticals Pvt. Ltd.</span>
               </div>
 
+              {/* Main Heading: "Welcome to SALAS" (Always 100% visible, robust typography) */}
               <h1
-                className="reveal-left delay-100"
+                className="hero-main-heading hero-animate-entrance"
                 style={{
-                  color: 'var(--color-navy)',
                   marginBottom: '1.25rem',
                   lineHeight: 1.15,
-                  fontSize: 'clamp(2.5rem, 4.5vw, 3.8rem)',
                   fontWeight: 900,
                 }}
               >
-                Welcome to <span style={{ color: 'var(--color-primary)', position: 'relative' }}>
+                <span style={{ color: '#24364B' }}>Welcome to </span>
+                <span style={{ color: '#1456A0', position: 'relative', display: 'inline-block' }}>
                   SALAS
-                  <span style={{ position: 'absolute', bottom: '-4px', left: 0, right: 0, height: '4px', backgroundColor: 'var(--color-accent)', borderRadius: '2px' }} />
+                  <span
+                    style={{
+                      position: 'absolute',
+                      bottom: '-4px',
+                      left: 0,
+                      right: 0,
+                      height: '4px',
+                      backgroundColor: '#D32F2F',
+                      borderRadius: '2px',
+                    }}
+                  />
                 </span>
               </h1>
 
               <p
-                className="reveal-left delay-200"
                 style={{
-                  color: 'var(--color-text-body)',
-                  fontSize: 'clamp(1.05rem, 1.8vw, 1.25rem)',
-                  lineHeight: 1.7,
-                  marginBottom: '2.25rem',
-                  maxWidth: '620px',
+                  color: '#34445A',
+                  fontSize: 'clamp(1.05rem, 1.6vw, 1.2rem)',
+                  lineHeight: 1.65,
+                  marginBottom: '2rem',
+                  maxWidth: '600px',
                   fontWeight: 500,
                 }}
               >
@@ -260,6 +283,14 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
               </div>
             </div>
           </div>
+        </div>
+
+        {/* Subtle Ambient Scroll Indicator */}
+        <div className="hero-scroll-indicator" aria-hidden="true">
+          <div className="hero-scroll-pill">
+            <div className="hero-scroll-dot" />
+          </div>
+          <span>Scroll to explore</span>
         </div>
       </section>
 
@@ -322,6 +353,10 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
                 <img
                   src={MEDIA_CONFIG.quality.image}
                   alt={MEDIA_CONFIG.quality.alt}
+                  loading="lazy"
+                  decoding="async"
+                  width={640}
+                  height={480}
                   style={{ width: '100%', height: '480px', objectFit: 'cover' }}
                 />
               </div>
@@ -533,6 +568,10 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
                 <img
                   src={MEDIA_CONFIG.manufacturing.image}
                   alt={MEDIA_CONFIG.manufacturing.alt}
+                  loading="lazy"
+                  decoding="async"
+                  width={640}
+                  height={320}
                   style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                 />
               </div>
@@ -681,6 +720,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
           </div>
 
           <div
+            className="reveal-stagger"
             style={{
               display: 'grid',
               gridTemplateColumns: 'repeat(auto-fit, minmax(270px, 1fr))',
@@ -692,32 +732,19 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
               return (
                 <div
                   key={seg.id}
-                  className="reveal-up"
-                  style={{
-                    backgroundColor: 'var(--color-bg-light)',
-                    border: '1px solid var(--color-border)',
-                    borderRadius: 'var(--radius-md)',
-                    padding: '2rem 1.75rem',
-                    transition: 'all 0.3s ease',
-                    cursor: 'pointer',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    justifyContent: 'space-between',
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.backgroundColor = '#FFFFFF';
-                    e.currentTarget.style.transform = 'translateY(-6px)';
-                    e.currentTarget.style.boxShadow = 'var(--shadow-lg)';
-                    e.currentTarget.style.borderColor = 'var(--color-primary-light)';
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.backgroundColor = 'var(--color-bg-light)';
-                    e.currentTarget.style.transform = 'translateY(0)';
-                    e.currentTarget.style.boxShadow = 'none';
-                    e.currentTarget.style.borderColor = 'var(--color-border)';
-                  }}
+                  className="interactive-card"
+                  role="button"
+                  tabIndex={0}
+                  aria-label={`View formulations for ${seg.title}`}
                   onClick={() => onNavigate('products')}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      e.preventDefault();
+                      onNavigate('products');
+                    }
+                  }}
                 >
+                  <span className="card-animated-underline" aria-hidden="true" />
                   <div>
                     <div
                       style={{
@@ -857,6 +884,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
           </div>
 
           <div
+            className="reveal-stagger"
             style={{
               display: 'grid',
               gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',

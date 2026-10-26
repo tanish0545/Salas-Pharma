@@ -16,10 +16,12 @@ import {
 import { VIDEO_ASSETS, MEDIA_CONFIG } from '../config/assets';
 import { BrandedVideo } from '../components/common/BrandedVideo';
 import { QualitySeal } from '../components/common/QualitySeal';
+import { ScientificParticles } from '../components/common/ScientificParticles';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 
 interface LaboratoriesPageProps {
   onNavigate: (route: string) => void;
+  isLoaderComplete?: boolean;
 }
 
 export const LaboratoriesPage: React.FC<LaboratoriesPageProps> = ({ onNavigate }) => {
@@ -73,7 +75,7 @@ export const LaboratoriesPage: React.FC<LaboratoriesPageProps> = ({ onNavigate }
         className="laboratory-hero-section"
         style={{
           position: 'relative',
-          minHeight: 'calc(100vh - var(--header-height))',
+          minHeight: 'clamp(680px, calc(100vh - var(--header-height)), 780px)',
           display: 'flex',
           alignItems: 'center',
           marginTop: 'var(--header-height)',
@@ -97,6 +99,7 @@ export const LaboratoriesPage: React.FC<LaboratoriesPageProps> = ({ onNavigate }
             muted={true}
             loop={true}
             playsInline={true}
+            priority={true}
             ariaLabel={VIDEO_ASSETS.laboratoryHero.alt}
             style={{
               width: '100%',
@@ -105,26 +108,38 @@ export const LaboratoriesPage: React.FC<LaboratoriesPageProps> = ({ onNavigate }
               objectPosition: 'center 42%',
             }}
           />
-          {/* Natural Footage Visibility with Narrow Right-Side White Fade:
-              Video remains at natural contrast & 95%+ clarity across left/center, smoothly blending to white on the right */}
+          {/* Natural Footage Clarity: Left & Center (0-65%) remain completely clear and unwashed;
+              Gradual right-side white fade begins at ~65% to guarantee crisp text legibility */}
           <div
             className="hero-gradient-mask"
             style={{
               position: 'absolute',
               inset: 0,
-              background: 'linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0) 48%, rgba(255, 255, 255, 0.18) 62%, rgba(255, 255, 255, 0.75) 80%, rgba(255, 255, 255, 0.96) 94%, #FFFFFF 100%)',
+              background: 'linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0) 65%, rgba(255, 255, 255, 0.35) 75%, rgba(255, 255, 255, 0.85) 88%, #FFFFFF 100%)',
               pointerEvents: 'none',
             }}
           />
         </div>
 
-        {/* Hero Content Overlay */}
-        <div className="container" style={{ position: 'relative', zIndex: 2, padding: '4.5rem 1.5rem', width: '100%' }}>
+        {/* Layered Scientific Molecular Particles (Subtle drifting nodes & connecting lines, pointer-events: none) */}
+        <ScientificParticles
+          particleCount={18}
+          interactive={true}
+          style={{
+            position: 'absolute',
+            inset: 0,
+            zIndex: 2,
+            pointerEvents: 'none',
+          }}
+        />
+
+        {/* Hero Content Overlay (Aligned to centered max-width container, stable stacking order) */}
+        <div className="container" style={{ position: 'relative', zIndex: 3, padding: '3.5rem 1.5rem', width: '100%' }}>
           <div
             className="hero-grid-layout"
             style={{
               display: 'grid',
-              gridTemplateColumns: '1fr minmax(320px, 660px)',
+              gridTemplateColumns: '1fr minmax(320px, 680px)',
               gap: '2rem',
               alignItems: 'center'
             }}
@@ -133,42 +148,42 @@ export const LaboratoriesPage: React.FC<LaboratoriesPageProps> = ({ onNavigate }
             <div className="hero-video-window" style={{ minHeight: '1px' }} />
 
             {/* Right Content Panel sitting on clean white background */}
-            <div className="hero-text-content" style={{ padding: '1rem 0' }}>
+            <div className="hero-text-content" style={{ padding: '1rem 0', textAlign: 'left' }}>
               <div
-                className="reveal-left"
                 style={{
                   display: 'inline-flex',
                   alignItems: 'center',
                   gap: '0.5rem',
-                  backgroundColor: 'rgba(10, 77, 158, 0.08)',
+                  backgroundColor: 'rgba(20, 86, 160, 0.08)',
                   padding: '0.45rem 1.15rem',
                   borderRadius: 'var(--radius-full)',
-                  color: 'var(--color-primary)',
+                  color: '#1456A0',
                   fontSize: '0.8125rem',
                   fontWeight: 700,
                   letterSpacing: '0.12em',
                   textTransform: 'uppercase',
-                  marginBottom: '1.25rem',
-                  border: '1px solid rgba(10, 77, 158, 0.18)',
+                  marginBottom: '1.5rem',
+                  border: '1px solid rgba(20, 86, 160, 0.18)',
                 }}
               >
-                <Sparkles size={15} style={{ color: 'var(--color-accent)' }} />
+                <Sparkles size={15} style={{ color: '#D32F2F' }} />
                 <span>SCIENCE & PRECISION</span>
               </div>
 
+              {/* Main Heading: "Advancing Science Through Precision" (Always 100% visible, robust typography) */}
               <h1
-                className="reveal-left delay-100"
+                className="hero-main-heading hero-animate-entrance"
                 style={{
-                  color: 'var(--color-navy)',
                   marginBottom: '1.25rem',
                   lineHeight: 1.15,
-                  fontSize: 'clamp(2.4rem, 4.2vw, 3.8rem)',
                   fontWeight: 900,
                 }}
               >
-                Advancing Science <br />
-                <span style={{ color: 'var(--color-primary)', position: 'relative' }}>
-                  Through Precision
+                <span style={{ color: '#24364B' }}>Advancing Science </span>
+                <br className="hero-heading-br" />
+                <span style={{ color: '#24364B' }}>Through </span>
+                <span style={{ color: '#1456A0', position: 'relative', display: 'inline-block' }}>
+                  Precision
                   <span
                     style={{
                       position: 'absolute',
@@ -176,21 +191,20 @@ export const LaboratoriesPage: React.FC<LaboratoriesPageProps> = ({ onNavigate }
                       left: 0,
                       right: 0,
                       height: '4px',
-                      backgroundColor: 'var(--color-accent)',
-                      borderRadius: '2px'
+                      backgroundColor: '#D32F2F',
+                      borderRadius: '2px',
                     }}
                   />
                 </span>
               </h1>
 
               <p
-                className="reveal-left delay-200"
                 style={{
-                  color: 'var(--color-text-body)',
-                  fontSize: 'clamp(1.05rem, 1.7vw, 1.25rem)',
-                  lineHeight: 1.7,
-                  marginBottom: '2.25rem',
-                  maxWidth: '620px',
+                  color: '#34445A',
+                  fontSize: 'clamp(1.05rem, 1.6vw, 1.2rem)',
+                  lineHeight: 1.65,
+                  marginBottom: '2rem',
+                  maxWidth: '600px',
                   fontWeight: 500,
                 }}
               >
@@ -239,6 +253,14 @@ export const LaboratoriesPage: React.FC<LaboratoriesPageProps> = ({ onNavigate }
               </div>
             </div>
           </div>
+        </div>
+
+        {/* Subtle Ambient Scroll Indicator */}
+        <div className="hero-scroll-indicator" aria-hidden="true">
+          <div className="hero-scroll-pill">
+            <div className="hero-scroll-dot" />
+          </div>
+          <span>Scroll to explore</span>
         </div>
       </section>
 
@@ -317,6 +339,10 @@ export const LaboratoriesPage: React.FC<LaboratoriesPageProps> = ({ onNavigate }
                 <img
                   src={MEDIA_CONFIG.laboratory.environmentImage}
                   alt="Modern clean pharmaceutical laboratory testing environment"
+                  loading="lazy"
+                  decoding="async"
+                  width={640}
+                  height={480}
                   style={{ width: '100%', height: '480px', objectFit: 'cover' }}
                 />
               </div>
@@ -490,6 +516,10 @@ export const LaboratoriesPage: React.FC<LaboratoriesPageProps> = ({ onNavigate }
                 <img
                   src={MEDIA_CONFIG.laboratory.analyticalImage}
                   alt="Scientists in protective lab coats performing analytical chemistry testing"
+                  loading="lazy"
+                  decoding="async"
+                  width={400}
+                  height={240}
                   style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                 />
               </div>
@@ -527,6 +557,10 @@ export const LaboratoriesPage: React.FC<LaboratoriesPageProps> = ({ onNavigate }
                 <img
                   src={MEDIA_CONFIG.laboratory.microscopeImage}
                   alt="Laboratory scientist examining pharmaceutical samples using a precision binocular microscope"
+                  loading="lazy"
+                  decoding="async"
+                  width={400}
+                  height={240}
                   style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                 />
               </div>
@@ -564,6 +598,10 @@ export const LaboratoriesPage: React.FC<LaboratoriesPageProps> = ({ onNavigate }
                 <img
                   src={MEDIA_CONFIG.quality.image}
                   alt="Laboratory glassware and pharmaceutical quality control testing"
+                  loading="lazy"
+                  decoding="async"
+                  width={400}
+                  height={240}
                   style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                 />
               </div>
@@ -596,41 +634,28 @@ export const LaboratoriesPage: React.FC<LaboratoriesPageProps> = ({ onNavigate }
           </div>
 
           <div
+            className="reveal-stagger"
             style={{
               display: 'grid',
               gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
               gap: '2rem',
             }}
           >
-            {capabilities.map((cap, idx) => {
+            {capabilities.map((cap) => {
               const IconComp = cap.icon;
               return (
                 <div
                   key={cap.id}
-                  className={`reveal-up delay-${(idx + 1) * 100}`}
+                  className="interactive-card"
+                  tabIndex={0}
+                  role="region"
+                  aria-label={cap.title}
                   style={{
-                    backgroundColor: 'var(--color-bg-light)',
-                    border: '1px solid var(--color-border)',
                     borderRadius: 'var(--radius-lg)',
                     padding: '2.25rem 2rem',
-                    transition: 'all 0.3s ease',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    justifyContent: 'space-between',
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.backgroundColor = '#FFFFFF';
-                    e.currentTarget.style.transform = 'translateY(-6px)';
-                    e.currentTarget.style.boxShadow = 'var(--shadow-xl)';
-                    e.currentTarget.style.borderColor = 'var(--color-primary-light)';
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.backgroundColor = 'var(--color-bg-light)';
-                    e.currentTarget.style.transform = 'translateY(0)';
-                    e.currentTarget.style.boxShadow = 'none';
-                    e.currentTarget.style.borderColor = 'var(--color-border)';
                   }}
                 >
+                  <span className="card-animated-underline" aria-hidden="true" />
                   <div>
                     <div
                       style={{

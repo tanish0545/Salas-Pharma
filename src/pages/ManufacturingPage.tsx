@@ -100,6 +100,7 @@ export const ManufacturingPage: React.FC<ManufacturingPageProps> = ({ onNavigate
           </div>
 
           <div 
+            className="reveal-stagger"
             style={{
               display: 'grid',
               gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
@@ -130,50 +131,41 @@ export const ManufacturingPage: React.FC<ManufacturingPageProps> = ({ onNavigate
             ].map((p, idx) => (
               <div 
                 key={idx}
-                className="reveal-up"
+                className="interactive-card"
+                tabIndex={0}
+                role="region"
+                aria-label={p.title}
                 style={{
                   padding: '2.25rem',
-                  backgroundColor: 'var(--color-bg-light)',
                   borderRadius: 'var(--radius-md)',
-                  border: '1px solid var(--color-border)',
-                  boxShadow: 'var(--shadow-xs)',
-                  transition: 'all 0.25s ease',
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.backgroundColor = '#FFFFFF';
-                  e.currentTarget.style.borderColor = 'var(--color-primary-light)';
-                  e.currentTarget.style.transform = 'translateY(-4px)';
-                  e.currentTarget.style.boxShadow = 'var(--shadow-md)';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.backgroundColor = 'var(--color-bg-light)';
-                  e.currentTarget.style.borderColor = 'var(--color-border)';
-                  e.currentTarget.style.transform = 'translateY(0)';
-                  e.currentTarget.style.boxShadow = 'var(--shadow-xs)';
                 }}
               >
-                <div 
-                  style={{
-                    width: '48px',
-                    height: '48px',
-                    borderRadius: 'var(--radius-sm)',
-                    backgroundColor: '#FFFFFF',
-                    color: 'var(--color-primary)',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    marginBottom: '1.25rem',
-                    border: '1px solid var(--color-border)',
-                  }}
-                >
-                  <p.icon size={24} />
+                <span className="card-animated-underline" aria-hidden="true" />
+                <div>
+                  <div 
+                    style={{
+                      width: '48px',
+                      height: '48px',
+                      borderRadius: 'var(--radius-sm)',
+                      backgroundColor: '#FFFFFF',
+                      color: 'var(--color-primary)',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      marginBottom: '1.25rem',
+                      border: '1px solid var(--color-border)',
+                      boxShadow: 'var(--shadow-xs)',
+                    }}
+                  >
+                    <p.icon size={24} />
+                  </div>
+                  <h3 style={{ fontSize: '1.2rem', color: 'var(--color-navy)', marginBottom: '0.65rem' }}>
+                    {p.title}
+                  </h3>
+                  <p style={{ color: 'var(--color-text-body)', fontSize: '0.925rem', lineHeight: 1.65, margin: 0 }}>
+                    {p.desc}
+                  </p>
                 </div>
-                <h3 style={{ fontSize: '1.2rem', color: 'var(--color-navy)', marginBottom: '0.65rem' }}>
-                  {p.title}
-                </h3>
-                <p style={{ color: 'var(--color-text-body)', fontSize: '0.925rem', lineHeight: 1.65, margin: 0 }}>
-                  {p.desc}
-                </p>
               </div>
             ))}
           </div>

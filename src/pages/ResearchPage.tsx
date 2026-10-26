@@ -117,6 +117,7 @@ export const ResearchPage: React.FC<ResearchPageProps> = ({ onNavigate }) => {
           </div>
 
           <div 
+            className="reveal-stagger"
             style={{
               display: 'grid',
               gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
@@ -143,34 +144,28 @@ export const ResearchPage: React.FC<ResearchPageProps> = ({ onNavigate }) => {
             ].map((p, idx) => (
               <div 
                 key={idx}
-                className="reveal-up"
+                className="interactive-card"
+                tabIndex={0}
+                role="region"
+                aria-label={p.title}
                 style={{
                   padding: '2.25rem',
                   backgroundColor: 'rgba(255, 255, 255, 0.95)',
-                  backdropFilter: 'blur(6px)',
                   borderRadius: 'var(--radius-md)',
-                  border: '1px solid var(--color-border)',
-                  boxShadow: 'var(--shadow-sm)',
-                  transition: 'transform 0.3s ease, box-shadow 0.3s ease',
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.transform = 'translateY(-4px)';
-                  e.currentTarget.style.boxShadow = 'var(--shadow-lg)';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.transform = 'translateY(0)';
-                  e.currentTarget.style.boxShadow = 'var(--shadow-sm)';
                 }}
               >
-                <div style={{ fontSize: '1.25rem', fontWeight: 800, color: 'var(--color-accent)', marginBottom: '0.5rem' }}>
-                  0{idx + 1}.
+                <span className="card-animated-underline" aria-hidden="true" />
+                <div>
+                  <div style={{ fontSize: '1.25rem', fontWeight: 800, color: 'var(--color-accent)', marginBottom: '0.5rem' }}>
+                    0{idx + 1}.
+                  </div>
+                  <h3 style={{ fontSize: '1.2rem', color: 'var(--color-navy)', marginBottom: '0.75rem' }}>
+                    {p.title}
+                  </h3>
+                  <p style={{ color: 'var(--color-text-body)', fontSize: '0.925rem', lineHeight: 1.65, margin: 0 }}>
+                    {p.desc}
+                  </p>
                 </div>
-                <h3 style={{ fontSize: '1.2rem', color: 'var(--color-navy)', marginBottom: '0.75rem' }}>
-                  {p.title}
-                </h3>
-                <p style={{ color: 'var(--color-text-body)', fontSize: '0.925rem', lineHeight: 1.65, margin: 0 }}>
-                  {p.desc}
-                </p>
               </div>
             ))}
           </div>

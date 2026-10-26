@@ -1,15 +1,17 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, lazy, Suspense } from 'react';
 import { CinematicLoader } from './components/common/CinematicLoader';
 import { Navbar } from './components/layout/Navbar';
 import { Footer } from './components/layout/Footer';
-import { HomePage } from './pages/HomePage';
-import { AboutPage } from './pages/AboutPage';
-import { ProductsPage } from './pages/ProductsPage';
-import { LaboratoriesPage } from './pages/LaboratoriesPage';
-import { ManufacturingPage } from './pages/ManufacturingPage';
-import { ResearchPage } from './pages/ResearchPage';
-import { CareersPage } from './pages/CareersPage';
-import { ContactPage } from './pages/ContactPage';
+
+// Code-split page route modules for faster initial payload and optimized network performance
+const HomePage = lazy(() => import('./pages/HomePage').then(m => ({ default: m.HomePage })));
+const AboutPage = lazy(() => import('./pages/AboutPage').then(m => ({ default: m.AboutPage })));
+const ProductsPage = lazy(() => import('./pages/ProductsPage').then(m => ({ default: m.ProductsPage })));
+const LaboratoriesPage = lazy(() => import('./pages/LaboratoriesPage').then(m => ({ default: m.LaboratoriesPage })));
+const ManufacturingPage = lazy(() => import('./pages/ManufacturingPage').then(m => ({ default: m.ManufacturingPage })));
+const ResearchPage = lazy(() => import('./pages/ResearchPage').then(m => ({ default: m.ResearchPage })));
+const CareersPage = lazy(() => import('./pages/CareersPage').then(m => ({ default: m.CareersPage })));
+const ContactPage = lazy(() => import('./pages/ContactPage').then(m => ({ default: m.ContactPage })));
 
 export function App() {
   // Determine initial route from URL hash or pathname
@@ -81,14 +83,16 @@ export function App() {
 
       {/* Main Page Stage (Already loaded & live beneath loader curtains) */}
       <main style={{ flex: '1 0 auto' }}>
-        {currentRoute === 'home' && <HomePage onNavigate={handleNavigate} />}
-        {currentRoute === 'about' && <AboutPage onNavigate={handleNavigate} />}
-        {currentRoute === 'products' && <ProductsPage onNavigate={handleNavigate} />}
-        {currentRoute === 'laboratories' && <LaboratoriesPage onNavigate={handleNavigate} />}
-        {currentRoute === 'manufacturing' && <ManufacturingPage onNavigate={handleNavigate} />}
-        {currentRoute === 'research' && <ResearchPage onNavigate={handleNavigate} />}
-        {currentRoute === 'careers' && <CareersPage />}
-        {currentRoute === 'contact' && <ContactPage />}
+        <Suspense fallback={<div style={{ minHeight: '80vh', backgroundColor: 'var(--color-bg-white)' }} />}>
+          {currentRoute === 'home' && <HomePage onNavigate={handleNavigate} />}
+          {currentRoute === 'about' && <AboutPage onNavigate={handleNavigate} />}
+          {currentRoute === 'products' && <ProductsPage onNavigate={handleNavigate} />}
+          {currentRoute === 'laboratories' && <LaboratoriesPage onNavigate={handleNavigate} />}
+          {currentRoute === 'manufacturing' && <ManufacturingPage onNavigate={handleNavigate} />}
+          {currentRoute === 'research' && <ResearchPage onNavigate={handleNavigate} />}
+          {currentRoute === 'careers' && <CareersPage />}
+          {currentRoute === 'contact' && <ContactPage />}
+        </Suspense>
       </main>
 
       {/* Corporate Footer */}

@@ -190,6 +190,11 @@ export const CinematicLoader: React.FC<CinematicLoaderProps> = ({ onComplete }) 
               src={BRAND_ASSETS.faviconSvg}
               srcSet={`${BRAND_ASSETS.favicon} 64w, /assets/brand/favicon.png 192w, ${BRAND_ASSETS.emblem512} 512w`}
               sizes="(max-width: 768px) 150px, 180px"
+              width="180"
+              height="180"
+              // @ts-expect-error fetchpriority standard attribute in React 18+
+              fetchpriority="high"
+              decoding="async"
               alt="SALAS Pharma Symbol" 
               className="loader-master-logo"
             />

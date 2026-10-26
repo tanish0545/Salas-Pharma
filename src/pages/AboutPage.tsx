@@ -1,5 +1,5 @@
 import React from 'react';
-import { Award, Target, Eye, Compass, ArrowRight } from 'lucide-react';
+import { Award, Target, Eye, Compass, ArrowRight, Calendar } from 'lucide-react';
 import { MEDIA_CONFIG } from '../config/assets';
 import { AmbientVideoBackground } from '../components/common/AmbientVideoBackground';
 import { useScrollReveal } from '../hooks/useScrollReveal';
@@ -91,6 +91,10 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
                 <img 
                   src={MEDIA_CONFIG.hero.image} 
                   alt="Salas Pharma laboratory cleanroom" 
+                  loading="lazy"
+                  decoding="async"
+                  width={640}
+                  height={480}
                   style={{ width: '100%', height: '480px', objectFit: 'cover' }}
                 />
               </div>
@@ -130,8 +134,91 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
         </div>
       </section>
 
-      {/* Vision & Mission */}
+      {/* Editorial Company Timeline */}
       <section className="section-spacing" style={{ backgroundColor: 'var(--color-bg-light)', borderTop: '1px solid var(--color-border)' }}>
+        <div className="container">
+          <div className="section-header">
+            <span className="section-eyebrow">
+              <Calendar size={14} /> Chronological Heritage
+            </span>
+            <h2 className="section-title">Milestones in Pharmaceutical Excellence</h2>
+            <p className="section-description">
+              Tracing the disciplined growth, manufacturing expansion, and healthcare partnerships of Salas Pharma.
+            </p>
+          </div>
+
+          <div className="timeline-track">
+            <div className="timeline-spine" />
+
+            {/* Milestone 1: 2009 */}
+            <div className="timeline-item timeline-node-left reveal-left">
+              <div className="timeline-dot" />
+              <div className="timeline-content">
+                <span style={{ fontSize: '0.8125rem', fontWeight: 800, color: 'var(--color-primary)', letterSpacing: '0.08em', textTransform: 'uppercase' }}>
+                  2009 • Corporate Founding
+                </span>
+                <h3 style={{ fontSize: '1.25rem', color: 'var(--color-navy)', marginTop: '0.25rem', marginBottom: '0.5rem', fontWeight: 700 }}>
+                  Establishment of Salas Pharmaceuticals
+                </h3>
+                <p style={{ fontSize: '0.9rem', color: 'var(--color-text-body)', lineHeight: 1.6, margin: 0 }}>
+                  Incorporated with a definitive mission: delivering high-integrity pharmaceutical manufacturing, ethical corporate governance, and collaborative healthcare delivery across India.
+                </p>
+              </div>
+            </div>
+
+            {/* Milestone 2: Multi-Therapeutic Expansion */}
+            <div className="timeline-item timeline-node-right reveal-right accent">
+              <div className="timeline-dot" />
+              <div className="timeline-content">
+                <span style={{ fontSize: '0.8125rem', fontWeight: 800, color: 'var(--color-accent)', letterSpacing: '0.08em', textTransform: 'uppercase' }}>
+                  Therapeutic Depth
+                </span>
+                <h3 style={{ fontSize: '1.25rem', color: 'var(--color-navy)', marginTop: '0.25rem', marginBottom: '0.5rem', fontWeight: 700 }}>
+                  Portfolio Across 8 Specialties
+                </h3>
+                <p style={{ fontSize: '0.9rem', color: 'var(--color-text-body)', lineHeight: 1.6, margin: 0 }}>
+                  Strategic diversification into core clinical sectors including Neurology, Psychiatry, Orthopaedics, Gynaecology, Pain Management, and Gastroenterology.
+                </p>
+              </div>
+            </div>
+
+            {/* Milestone 3: Manufacturing Facility */}
+            <div className="timeline-item timeline-node-left reveal-left">
+              <div className="timeline-dot" />
+              <div className="timeline-content">
+                <span style={{ fontSize: '0.8125rem', fontWeight: 800, color: 'var(--color-primary)', letterSpacing: '0.08em', textTransform: 'uppercase' }}>
+                  Facility Infrastructure
+                </span>
+                <h3 style={{ fontSize: '1.25rem', color: 'var(--color-navy)', marginTop: '0.25rem', marginBottom: '0.5rem', fontWeight: 700 }}>
+                  Sikkim Production Plant
+                </h3>
+                <p style={{ fontSize: '0.9rem', color: 'var(--color-text-body)', lineHeight: 1.6, margin: 0 }}>
+                  Dedicated cleanroom infrastructure in South Sikkim equipped for high-precision tablet and capsule compression, analytical quality checks, and automated packaging.
+                </p>
+              </div>
+            </div>
+
+            {/* Milestone 4: Pan-India Alliances */}
+            <div className="timeline-item timeline-node-right reveal-right accent">
+              <div className="timeline-dot" />
+              <div className="timeline-content">
+                <span style={{ fontSize: '0.8125rem', fontWeight: 800, color: 'var(--color-accent)', letterSpacing: '0.08em', textTransform: 'uppercase' }}>
+                  Nationwide Distribution
+                </span>
+                <h3 style={{ fontSize: '1.25rem', color: 'var(--color-navy)', marginTop: '0.25rem', marginBottom: '0.5rem', fontWeight: 700 }}>
+                  Pan-India Healthcare Reach
+                </h3>
+                <p style={{ fontSize: '0.9rem', color: 'var(--color-text-body)', lineHeight: 1.6, margin: 0 }}>
+                  Building trusted collaborative distribution alliances and marketing networks ensuring uninterrupted supply of essential finished dosages nationwide.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Vision & Mission */}
+      <section className="section-spacing" style={{ backgroundColor: '#FFFFFF', borderTop: '1px solid var(--color-border)' }}>
         <div className="container">
           <div 
             style={{

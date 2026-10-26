@@ -614,6 +614,7 @@ button, input, textarea, select {
   animation: rotateClockwise 22s linear infinite;
   transform-origin: center center;
   pointer-events: none;
+  will-change: transform;
 }
 
 @keyframes rotateClockwise {
@@ -694,6 +695,313 @@ button, input, textarea, select {
 }
 
 /* ==========================================================================
+   ADVANCED MOTION & REVEAL SYSTEM
+   Restrained, high-performance editorial animations
+   ========================================================================== */
+
+/* ==========================================================================
+   HERO HEADINGS & ADVANCED MOTION SYSTEM
+   Guaranteed visibility, responsive typography, and restrained editorial motion
+   ========================================================================== */
+
+/* Hero Main Headings — Pristine Contrast & Robust Visibility */
+.hero-main-heading {
+  font-family: var(--font-heading, inherit);
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  color: #24364B;
+  opacity: 1 !important;
+  visibility: visible !important;
+  display: block !important;
+  margin-top: 0;
+  text-align: left;
+}
+
+@media (min-width: 993px) {
+  .hero-main-heading {
+    font-size: clamp(3.25rem, 4.5vw, 4.25rem); /* 52px to 68px */
+  }
+}
+
+@media (max-width: 992px) {
+  .hero-main-heading {
+    font-size: clamp(2.125rem, 6.5vw, 2.625rem); /* 34px to 42px */
+    line-height: 1.2;
+  }
+}
+
+/* Subtle, dependable entrance motion with guaranteed 100% visible end-state */
+@keyframes heroEntranceFade {
+  from {
+    opacity: 0.3;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-animate-entrance {
+  animation: heroEntranceFade 0.75s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  will-change: opacity, transform;
+}
+
+/* Word-by-Word Reveal (Always defaults to visible so content is NEVER hidden) */
+.word-reveal-group {
+  display: inline;
+  opacity: 1 !important;
+}
+
+.word-reveal-span {
+  display: inline-block;
+  opacity: 1;
+  transform: translateY(0);
+  will-change: opacity, transform;
+}
+
+.words-revealed .word-reveal-span {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Hero Subtle Scroll Indicator */
+.hero-scroll-indicator {
+  position: absolute;
+  bottom: 1.75rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--color-primary);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  z-index: 4;
+  pointer-events: none;
+  opacity: 0.85;
+  transition: opacity 0.4s ease;
+}
+
+.hero-scroll-pill {
+  width: 20px;
+  height: 32px;
+  border: 1.5px solid rgba(10, 77, 158, 0.65);
+  border-radius: var(--radius-full);
+  position: relative;
+  background-color: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(4px);
+}
+
+.hero-scroll-dot {
+  position: absolute;
+  top: 5px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 3px;
+  height: 6px;
+  background-color: var(--color-accent);
+  border-radius: 2px;
+  animation: scrollDotMotion 1.8s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+}
+
+@keyframes scrollDotMotion {
+  0% { transform: translate(-50%, 0); opacity: 1; }
+  50% { transform: translate(-50%, 8px); opacity: 0.25; }
+  100% { transform: translate(-50%, 0); opacity: 1; }
+}
+
+/* Interactive Card System (Therapeutic, Analytical, and Service Cards) */
+.interactive-card {
+  position: relative;
+  background-color: var(--color-bg-light);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 2rem 1.75rem;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.3s ease,
+              background-color 0.25s ease;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+  text-align: left;
+}
+
+.interactive-card:hover {
+  background-color: #FFFFFF;
+  transform: translateY(-5px);
+  box-shadow: 0 16px 36px -6px rgba(6, 29, 56, 0.10);
+  border-color: rgba(10, 77, 158, 0.35);
+}
+
+.interactive-card:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 3px;
+}
+
+/* Card Animated Accent Underline */
+.card-animated-underline {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--color-primary) 0%, var(--color-accent) 100%);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.interactive-card:hover .card-animated-underline {
+  transform: scaleX(1);
+}
+
+/* Staggered Children Reveal */
+.reveal-stagger > * {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1), transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+  transition-delay: calc(var(--stagger-index, 0) * 0.08s);
+  will-change: opacity, transform;
+}
+
+.reveal-stagger.is-revealed > * {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Button Focus & Icon Slide */
+.btn:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 3px;
+}
+
+.btn svg {
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn:hover svg {
+  transform: translateX(4px);
+}
+
+/* Form Inputs Focus Ring */
+.form-input-field {
+  width: 100%;
+  padding: 0.85rem 1.15rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-border);
+  background-color: #FFFFFF;
+  color: var(--color-text-heading);
+  font-size: 0.95rem;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.form-input-field:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(10, 77, 158, 0.12);
+}
+
+/* Timeline Layout */
+.timeline-track {
+  position: relative;
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 1rem 0;
+}
+
+.timeline-spine {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 2px;
+  background: linear-gradient(180deg, rgba(10, 77, 158, 0.1) 0%, rgba(10, 77, 158, 0.5) 50%, rgba(10, 77, 158, 0.1) 100%);
+  transform: translateX(-50%);
+}
+
+@media (max-width: 768px) {
+  .timeline-spine {
+    left: 20px;
+  }
+}
+
+.timeline-item {
+  position: relative;
+  margin-bottom: 2.75rem;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.timeline-item:last-child {
+  margin-bottom: 0;
+}
+
+.timeline-node-left {
+  justify-content: flex-start;
+}
+
+.timeline-node-right {
+  justify-content: flex-end;
+}
+
+.timeline-content {
+  width: calc(50% - 36px);
+  background: var(--color-bg-white);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 1.75rem 2rem;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.timeline-content:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+  border-color: rgba(10, 77, 158, 0.35);
+}
+
+.timeline-dot {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--color-bg-white);
+  border: 3px solid var(--color-primary);
+  box-shadow: 0 0 0 4px rgba(10, 77, 158, 0.15);
+  z-index: 2;
+}
+
+.timeline-item.accent .timeline-dot {
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 4px rgba(229, 45, 39, 0.15);
+}
+
+@media (max-width: 768px) {
+  .timeline-item {
+    justify-content: flex-start;
+    padding-left: 48px;
+  }
+  .timeline-content {
+    width: 100%;
+  }
+  .timeline-dot {
+    left: 20px;
+  }
+}
+
+/* ==========================================================================
    ACCESSIBILITY & REDUCED MOTION
    ========================================================================== */
 
@@ -709,7 +1017,8 @@ button, input, textarea, select {
     display: none !important;
   }
   
-  .reveal-left, .reveal-right, .reveal-up, .reveal-zoom {
+  .reveal-left, .reveal-right, .reveal-up, .reveal-zoom,
+  .word-reveal-span, .reveal-stagger > * {
     opacity: 1 !important;
     transform: none !important;
   }

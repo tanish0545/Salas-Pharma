@@ -278,6 +278,7 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({ onNavigate }) => {
           </div>
 
           <div 
+            className="reveal-stagger"
             style={{
               display: 'grid',
               gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))',
@@ -287,29 +288,17 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({ onNavigate }) => {
             {filteredProducts.map((prod) => (
               <div
                 key={prod.id}
-                className="reveal-up"
+                className="interactive-card"
+                tabIndex={0}
+                role="region"
+                aria-label={prod.formulationType}
                 style={{
                   backgroundColor: '#FFFFFF',
                   borderRadius: 'var(--radius-md)',
-                  border: '1px solid var(--color-border)',
-                  boxShadow: 'var(--shadow-sm)',
                   padding: '2rem',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  justifyContent: 'space-between',
-                  transition: 'all 0.25s ease',
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.borderColor = 'var(--color-primary-light)';
-                  e.currentTarget.style.boxShadow = 'var(--shadow-lg)';
-                  e.currentTarget.style.transform = 'translateY(-4px)';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.borderColor = 'var(--color-border)';
-                  e.currentTarget.style.boxShadow = 'var(--shadow-sm)';
-                  e.currentTarget.style.transform = 'translateY(0)';
                 }}
               >
+                <span className="card-animated-underline" aria-hidden="true" />
                 <div>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
                     <span 

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Users, BookOpen, Send, CheckCircle2, ShieldCheck, HeartHandshake } from 'lucide-react';
+import { Users, BookOpen, Send, CheckCircle2, ShieldCheck, HeartHandshake, Copy, Check, ExternalLink, AlertCircle } from 'lucide-react';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 
 export const CareersPage: React.FC = () => {
@@ -16,15 +16,56 @@ export const CareersPage: React.FC = () => {
 
   const [submitted, setSubmitted] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
+  const [copied, setCopied] = useState(false);
+
+  const getApplicationSummary = () => {
+    return `SALAS PHARMACEUTICALS TALENT APPLICATION\nName: ${formData.name.trim()}\nEmail: ${formData.email.trim()}\nPhone: ${formData.phone.trim()}\nArea of Expertise: ${formData.department}\n\nQualifications & Summary:\n${formData.message.trim() || 'Please see attached resume / contact details.'}\n\nRecipient: info@salaspharma.co.in`;
+  };
+
+  const getMailtoUri = () => {
+    const subject = `[SALAS Career Application] ${formData.department} — ${formData.name.trim()}`;
+    const body = `Dear Salas Pharmaceuticals HR Team,\n\nI am expressing interest in career opportunities with Salas Pharma.\n\nApplicant Details:\n- Name: ${formData.name.trim()}\n- Email: ${formData.email.trim()}\n- Phone: ${formData.phone.trim()}\n- Area of Expertise: ${formData.department}\n\nQualifications & Background Summary:\n${formData.message.trim() || 'Attached / Provided upon request'}\n\n---\nTransmitted via Salas Pharma Careers portal.`;
+    return `mailto:info@salaspharma.co.in?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  };
+
+  const validateForm = () => {
+    if (!formData.name.trim() || formData.name.trim().length < 2) {
+      return 'Please enter your full name (minimum 2 characters).';
+    }
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(formData.email.trim())) {
+      return 'Please enter a valid email address.';
+    }
+    if (!formData.phone.trim() || !/^[0-9+()-\s]{7,20}$/.test(formData.phone.trim())) {
+      return 'Please enter a valid contact phone number.';
+    }
+    return null;
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!formData.name.trim() || !formData.email.trim() || !formData.phone.trim()) {
-      setErrorMsg('Please complete all required fields.');
+    const error = validateForm();
+    if (error) {
+      setErrorMsg(error);
       return;
     }
     setErrorMsg('');
+    try {
+      window.location.href = getMailtoUri();
+    } catch {
+      // Browser mail fallback
+    }
     setSubmitted(true);
+  };
+
+  const handleCopyDetails = async () => {
+    try {
+      await navigator.clipboard.writeText(getApplicationSummary());
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2500);
+    } catch {
+      // Fallback
+    }
   };
 
   return (
@@ -48,6 +89,7 @@ export const CareersPage: React.FC = () => {
       <section style={{ backgroundColor: 'var(--color-bg-light)', borderTop: '1px solid var(--color-border)', borderBottom: '1px solid var(--color-border)', padding: '4rem 0' }}>
         <div className="container">
           <div 
+            className="reveal-stagger"
             style={{
               display: 'grid',
               gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
@@ -73,36 +115,41 @@ export const CareersPage: React.FC = () => {
             ].map((c, idx) => (
               <div 
                 key={idx}
-                className="reveal-up"
+                className="interactive-card"
+                tabIndex={0}
+                role="region"
+                aria-label={c.title}
                 style={{
                   backgroundColor: '#FFFFFF',
                   borderRadius: 'var(--radius-lg)',
                   padding: '2.5rem',
-                  border: '1px solid var(--color-border)',
-                  boxShadow: 'var(--shadow-sm)',
                 }}
               >
-                <div 
-                  style={{
-                    width: '50px',
-                    height: '50px',
-                    borderRadius: 'var(--radius-sm)',
-                    backgroundColor: 'var(--color-primary-subtle)',
-                    color: 'var(--color-primary)',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    marginBottom: '1.5rem',
-                  }}
-                >
-                  <c.icon size={26} />
+                <span className="card-animated-underline" aria-hidden="true" />
+                <div>
+                  <div 
+                    style={{
+                      width: '50px',
+                      height: '50px',
+                      borderRadius: 'var(--radius-sm)',
+                      backgroundColor: 'var(--color-primary-subtle)',
+                      color: 'var(--color-primary)',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      marginBottom: '1.5rem',
+                      boxShadow: 'var(--shadow-xs)',
+                    }}
+                  >
+                    <c.icon size={26} />
+                  </div>
+                  <h3 style={{ fontSize: '1.25rem', color: 'var(--color-navy)', marginBottom: '0.75rem' }}>
+                    {c.title}
+                  </h3>
+                  <p style={{ color: 'var(--color-text-body)', fontSize: '0.925rem', lineHeight: 1.65, margin: 0 }}>
+                    {c.desc}
+                  </p>
                 </div>
-                <h3 style={{ fontSize: '1.25rem', color: 'var(--color-navy)', marginBottom: '0.75rem' }}>
-                  {c.title}
-                </h3>
-                <p style={{ color: 'var(--color-text-body)', fontSize: '0.925rem', lineHeight: 1.65, margin: 0 }}>
-                  {c.desc}
-                </p>
               </div>
             ))}
           </div>
@@ -146,24 +193,82 @@ export const CareersPage: React.FC = () => {
                 }}
               >
                 <CheckCircle2 size={48} style={{ color: 'var(--color-primary)', margin: '0 auto 1rem auto' }} />
-                <h3 style={{ color: 'var(--color-navy)', marginBottom: '0.5rem' }}>Application Profile Received</h3>
-                <p style={{ color: 'var(--color-text-body)', fontSize: '0.95rem', margin: 0 }}>
-                  Thank you, <strong>{formData.name}</strong>. Your profile has been logged for our Human Resources team. We will contact you at <strong>{formData.email}</strong> when suitable opportunities arise.
+                <h3 style={{ color: 'var(--color-navy)', marginBottom: '0.5rem', fontSize: '1.5rem', fontWeight: 800 }}>
+                  Application Profile Prepared
+                </h3>
+                <p style={{ color: 'var(--color-text-body)', fontSize: '1rem', lineHeight: 1.65, maxWidth: '600px', margin: '0 auto 1.5rem auto' }}>
+                  Thank you, <strong>{formData.name}</strong>. Your candidate summary for <em>"{formData.department}"</em> has been formatted for our Human Resources team at <strong>info@salaspharma.co.in</strong>. Your default email client was prompted to send your application.
                 </p>
-                <button
-                  type="button"
-                  onClick={() => setSubmitted(false)}
-                  className="btn btn-secondary"
-                  style={{ marginTop: '1.5rem' }}
-                >
-                  Submit Another Profile
-                </button>
+
+                <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', flexWrap: 'wrap', marginBottom: '1.5rem' }}>
+                  <a
+                    href={getMailtoUri()}
+                    className="btn btn-primary"
+                    style={{ textDecoration: 'none' }}
+                  >
+                    <span>Open in Email App</span>
+                    <ExternalLink size={16} />
+                  </a>
+
+                  <button
+                    type="button"
+                    onClick={handleCopyDetails}
+                    className="btn btn-secondary"
+                    style={{ backgroundColor: '#FFFFFF' }}
+                  >
+                    {copied ? (
+                      <>
+                        <Check size={16} style={{ color: '#16A34A' }} />
+                        <span style={{ color: '#16A34A', fontWeight: 700 }}>Profile Copied!</span>
+                      </>
+                    ) : (
+                      <>
+                        <Copy size={16} />
+                        <span>Copy Profile Summary</span>
+                      </>
+                    )}
+                  </button>
+                </div>
+
+                <div style={{ borderTop: '1px solid #DBEAFE', paddingTop: '1.25rem' }}>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setFormData({ name: '', email: '', phone: '', department: 'Manufacturing & QC', experience: '1-3 years', message: '' });
+                      setSubmitted(false);
+                    }}
+                    style={{
+                      background: 'none',
+                      border: 'none',
+                      color: 'var(--color-text-muted)',
+                      fontSize: '0.875rem',
+                      cursor: 'pointer',
+                      textDecoration: 'underline',
+                    }}
+                  >
+                    Submit another application
+                  </button>
+                </div>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+              <form onSubmit={handleSubmit} noValidate style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
                 {errorMsg && (
-                  <div style={{ padding: '0.75rem 1rem', backgroundColor: '#FEE2E2', border: '1px solid #FCA5A5', color: '#991B1B', borderRadius: 'var(--radius-sm)', fontSize: '0.875rem' }}>
-                    {errorMsg}
+                  <div 
+                    role="alert"
+                    style={{ 
+                      padding: '0.85rem 1.15rem', 
+                      backgroundColor: '#FEE2E2', 
+                      border: '1px solid #FCA5A5', 
+                      color: '#991B1B', 
+                      borderRadius: 'var(--radius-sm)', 
+                      fontSize: '0.875rem', 
+                      display: 'flex', 
+                      alignItems: 'center', 
+                      gap: '0.5rem' 
+                    }}
+                  >
+                    <AlertCircle size={18} style={{ flexShrink: 0 }} />
+                    <span style={{ fontWeight: 600 }}>{errorMsg}</span>
                   </div>
                 )}
 
