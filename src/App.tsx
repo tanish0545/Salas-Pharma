@@ -1,4 +1,4 @@
-import { useState, useEffect, lazy, Suspense } from 'react';
+import { useState, useEffect, useCallback, lazy, Suspense } from 'react';
 import { CinematicLoader } from './components/common/CinematicLoader';
 import { Navbar } from './components/layout/Navbar';
 import { Footer } from './components/layout/Footer';
@@ -28,7 +28,21 @@ export function App() {
   };
 
   const [currentRoute, setCurrentRoute] = useState<string>(getInitialRoute);
-  const [showCinematicLoader, setShowCinematicLoader] = useState<boolean>(true);
+
+  // Single intro experience: runs exactly once on initial load, never restarts on re-renders or navigation
+  const [showCinematicLoader, setShowCinematicLoader] = useState<boolean>(() => {
+    if (typeof window !== 'undefined') {
+      return sessionStorage.getItem('salas_intro_played') !== 'true';
+    }
+    return true;
+  });
+
+  const handleLoaderComplete = useCallback(() => {
+    setShowCinematicLoader(false);
+    if (typeof window !== 'undefined') {
+      sessionStorage.setItem('salas_intro_played', 'true');
+    }
+  }, []);
 
   // Sync route changes with URL and SEO document titles
   useEffect(() => {
@@ -64,13 +78,9 @@ export function App() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  const handleLoaderComplete = () => {
-    setShowCinematicLoader(false);
-  };
-
   return (
     <div className="salas-pharma-app" style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
-      {/* Stage A-E: Automatic Cinematic Capsule Opening Experience */}
+      {/* Exactly ONE initial intro/loading experience */}
       {showCinematicLoader && (
         <CinematicLoader onComplete={handleLoaderComplete} />
       )}

@@ -1,11 +1,13 @@
-import React, { useState, useEffect } from 'react';
-import { BRAND_ASSETS } from '../../config/assets';
+import React, { useState, useEffect, useRef } from 'react';
 
 interface CinematicLoaderProps {
   onComplete?: () => void;
 }
 
 export const CinematicLoader: React.FC<CinematicLoaderProps> = ({ onComplete }) => {
+  const onCompleteRef = useRef(onComplete);
+  onCompleteRef.current = onComplete;
+
   const [stage, setStage] = useState<'intro' | 'opening' | 'scientific' | 'logo' | 'parting' | 'finished'>(() => {
     if (typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       return 'finished';
@@ -16,37 +18,38 @@ export const CinematicLoader: React.FC<CinematicLoaderProps> = ({ onComplete }) 
   useEffect(() => {
     const isReduced = typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (isReduced) {
-      if (onComplete) onComplete();
+      if (onCompleteRef.current) onCompleteRef.current();
       return;
     }
 
-    // Sequence Choreography (~4.4s total duration)
-    // Stage A: 0.0s - 0.7s  Hollow thin white capsule outline on uniform royal-blue screen
-    // Stage B: 0.7s - 1.8s  Capsule halves open, DNA double helix and molecular elements emerge
-    // Stage C: 1.8s - 3.3s  SALAS logo reveal with transparent background & specular shine sweep
-    // Stage D: 3.3s - 4.4s  Curtain split begins, left and right panels glide outward
-    // Stage E: 4.4s+        Overlay unmounted, zero leftover lines or DOM blocking
+    // Sequence Choreography (~2.6s total duration, snappy and elegant):
+    // 0.0s - 0.5s: Stage 1 — Solid royal blue intro screen & thin white hollow capsule outline
+    // 0.5s - 0.75s: Stage 2 — Capsule halves open from center
+    // 0.75s - 1.25s: Stage 3 — Scientific elements (DNA double helix & molecular nodes) emerge
+    // 1.25s - 1.95s: Stage 4 — Original SALAS Pharma logo with its crisp opaque white square background appears + specular shine sweep
+    // 1.95s - 2.55s: Stage 5 — Theatre curtain split reveals the live website underneath
+    // 2.6s:          Finished — Complete unmount, interactive immediately
 
     const tOpening = setTimeout(() => {
       setStage('opening');
-    }, 700);
+    }, 500);
 
     const tScientific = setTimeout(() => {
       setStage('scientific');
-    }, 1050);
+    }, 750);
 
     const tLogo = setTimeout(() => {
       setStage('logo');
-    }, 1900);
+    }, 1250);
 
     const tParting = setTimeout(() => {
       setStage('parting');
-    }, 3300);
+    }, 1950);
 
     const tFinished = setTimeout(() => {
       setStage('finished');
-      if (onComplete) onComplete();
-    }, 4400);
+      if (onCompleteRef.current) onCompleteRef.current();
+    }, 2600);
 
     return () => {
       clearTimeout(tOpening);
@@ -55,7 +58,7 @@ export const CinematicLoader: React.FC<CinematicLoaderProps> = ({ onComplete }) 
       clearTimeout(tParting);
       clearTimeout(tFinished);
     };
-  }, [onComplete]);
+  }, []);
 
   if (stage === 'finished') {
     return null;
@@ -183,23 +186,22 @@ export const CinematicLoader: React.FC<CinematicLoaderProps> = ({ onComplete }) 
           </svg>
         </div>
 
-        {/* Stage C: SALAS Pharma Favicon Symbol Reveal (Floating cleanly, zero rectangular card) */}
+        {/* Stage 4: Original SALAS Pharma Logo with Crisp Opaque White Square Background */}
         <div className={`loader-logo-presentation ${showLogo ? 'logo-active' : ''}`}>
-          <div className="loader-logo-wrap">
+          <div className="loader-logo-square-card">
             <img 
-              src={BRAND_ASSETS.faviconSvg}
-              srcSet={`${BRAND_ASSETS.favicon} 64w, /assets/brand/favicon.png 192w, ${BRAND_ASSETS.emblem512} 512w`}
-              sizes="(max-width: 768px) 150px, 180px"
-              width="180"
-              height="180"
+              src="/assets/brand/salas-pharma-logo.png"
+              srcSet="/assets/brand/salas-pharma-logo.webp 1x, /assets/brand/salas-pharma-logo.png 1x"
+              alt="Salas Pharmaceuticals Pvt. Ltd." 
+              className="loader-original-logo-img"
+              width="260"
+              height="214"
               // @ts-expect-error fetchpriority standard attribute in React 18+
               fetchpriority="high"
               decoding="async"
-              alt="SALAS Pharma Symbol" 
-              className="loader-master-logo"
             />
-            {/* White Specular Beam Sweeping Directly Across Logo Symbol Artwork */}
-            <div className="loader-specular-sweep" aria-hidden="true" />
+            {/* Elegant Specular Shine Across Logo Card */}
+            <div className="loader-card-shine" aria-hidden="true" />
           </div>
         </div>
 
