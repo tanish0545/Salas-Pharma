@@ -3,6 +3,7 @@ import { Award, Target, Eye, Calendar, MapPin, Building2, Copy, Check } from 'lu
 import { MEDIA_CONFIG, PAGE_HERO_IMAGES } from '../config/assets';
 import { AnimatedCounter } from '../components/common/AnimatedCounter';
 import { ScientificNetworkArtwork } from '../components/common/ScientificNetworkArtwork';
+import { MolecularBackground } from '../components/common/MolecularBackground';
 import { ScrollWordReveal } from '../components/common/ScrollWordReveal';
 import { SignatureClosingStatement } from '../components/common/SignatureClosingStatement';
 import { useScrollReveal } from '../hooks/useScrollReveal';
@@ -108,7 +109,55 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
         </div>
       </section>
 
-      {/* 2. DEDICATED SCROLL-CONTROLLED STORYTELLING SECTION (PINNED ON DESKTOP) */}
+      {/* 2. RESTORED CORE PHILOSOPHY SECTION (Directly below About Hero) */}
+      <section 
+        className="about-philosophy-section"
+        aria-label="SALAS Pharma Core Philosophy"
+      >
+        {/* Softly blurred abstract laboratory/scientific background */}
+        <img
+          src={MEDIA_CONFIG.research.formulationImage || "/assets/images/research/laboratory-research.webp"}
+          alt=""
+          aria-hidden="true"
+          className="about-philosophy-bg-media"
+          loading="lazy"
+          decoding="async"
+        />
+
+        {/* High-key translucent white overlay */}
+        <div className="about-philosophy-overlay" aria-hidden="true" />
+
+        {/* Subtle Cyclopentane Molecular Linework in Margins */}
+        <MolecularBackground variant="section" theme="light" opacity={0.28} position="split" />
+
+        <div className="container" style={{ position: 'relative', zIndex: 1, padding: '0 1.5rem' }}>
+          <div className="about-philosophy-card reveal-up">
+            <div className="about-philosophy-grid">
+              
+              {/* Left Column: Eyebrow + Primary Statement */}
+              <div className="about-philosophy-left">
+                <span className="about-philosophy-eyebrow">
+                  <span className="about-philosophy-eyebrow-dot" aria-hidden="true" />
+                  OUR CORE PHILOSOPHY
+                </span>
+                <h2 className="about-philosophy-statement">
+                  &ldquo;Success Lies in Commitment.&rdquo;
+                </h2>
+              </div>
+
+              {/* Right Column: Supporting Mission Statement */}
+              <div className="about-philosophy-right">
+                <p className="about-philosophy-desc">
+                  Founded on the belief that enduring success stems from an uncompromising dedication to patient wellness, therapeutic quality, and professional integrity.
+                </p>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 3. DEDICATED SCROLL-CONTROLLED STORYTELLING SECTION (PINNED ON DESKTOP) */}
       <ScrollWordReveal
         pinnedStorytelling={true}
         eyebrow="Our Foundational Ethos"
@@ -116,7 +165,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
         highlightWords={['Salas', 'Pharma', 'commitment', 'cGMP', 'analytical', 'accessible', 'reliable']}
       />
 
-      {/* 3. CORPORATE HERITAGE & INFRASTRUCTURE SHOWCASE */}
+      {/* 4. CORPORATE HERITAGE & INFRASTRUCTURE SHOWCASE */}
       <section className="section-spacing">
         <div className="container">
           <div 
