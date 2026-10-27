@@ -192,35 +192,43 @@ export const MEDIA_CONFIG = {
  */
 export const PAGE_HERO_IMAGES = {
   home: {
-    image: "/assets/images/hero/hero-home.jpg",
+    image: "/assets/images/hero/hero-home.webp",
+    fallback: "/assets/images/hero/hero-home.jpg",
     alt: "Salas Pharma modern pharmaceutical manufacturing cleanroom facility",
   },
   about: {
-    image: "/assets/images/hero/hero-about.jpg",
+    image: "/assets/images/hero/hero-about.webp",
+    fallback: "/assets/images/hero/hero-about.jpg",
     alt: "Salas Pharma pharmaceutical researchers collaborating in modern facility",
   },
   products: {
-    image: "/assets/images/hero/hero-products.jpg",
+    image: "/assets/images/hero/hero-products.webp",
+    fallback: "/assets/images/hero/hero-products.jpg",
     alt: "Salas Pharma finished pharmaceutical formulations, tablets and capsules",
   },
   laboratories: {
-    image: "/assets/images/hero/hero-laboratories.jpg",
+    image: "/assets/images/hero/hero-laboratories.webp",
+    fallback: "/assets/images/hero/hero-laboratories.jpg",
     alt: "Salas Pharma analytical testing laboratory with precision instrumentation",
   },
   manufacturing: {
-    image: "/assets/images/hero/hero-manufacturing.jpg",
+    image: "/assets/images/hero/hero-manufacturing.webp",
+    fallback: "/assets/images/hero/hero-manufacturing.jpg",
     alt: "Salas Pharma automated pharmaceutical production cleanroom",
   },
   research: {
-    image: "/assets/images/hero/hero-research.jpg",
+    image: "/assets/images/hero/hero-research.webp",
+    fallback: "/assets/images/hero/hero-research.jpg",
     alt: "Salas Pharma formulation development and dissolution research laboratory",
   },
   careers: {
-    image: "/assets/images/hero/hero-careers.jpg",
+    image: "/assets/images/hero/hero-careers.webp",
+    fallback: "/assets/images/hero/hero-careers.jpg",
     alt: "Salas Pharma pharmaceutical specialists collaborating in corporate workplace",
   },
   contact: {
-    image: "/assets/images/hero/hero-contact.jpg",
+    image: "/assets/images/hero/hero-contact.webp",
+    fallback: "/assets/images/hero/hero-contact.jpg",
     alt: "Salas Pharma modern corporate headquarters and pharmaceutical campus",
   },
 };

@@ -12,7 +12,6 @@ import {
   Zap,
   Sparkles,
   CheckCircle2,
-  Users,
   Compass,
   Building2,
   Globe,
@@ -20,7 +19,7 @@ import {
   FileCheck,
   HeartHandshake
 } from 'lucide-react';
-import { MEDIA_CONFIG, VIDEO_ASSETS } from '../config/assets';
+import { MEDIA_CONFIG, VIDEO_ASSETS, PAGE_HERO_IMAGES } from '../config/assets';
 import { BrandedVideo } from '../components/common/BrandedVideo';
 import { QualitySeal } from '../components/common/QualitySeal';
 import { AnimatedCounter } from '../components/common/AnimatedCounter';
@@ -437,55 +436,9 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, isLoaderComplete
       </section>
 
       {/* ====================================================================
-          SECTION A: COMMITMENT (SECTION 6.A)
-          Large editorial headline, white background, company motto,
-          molecular linework and restrained entrance transition.
-          ==================================================================== */}
-      <section className="editorial-commitment-section" aria-label="Commitment to Healthcare">
-        <div className="container">
-          <div className="editorial-commitment-inner reveal-up">
-            <div className="editorial-commitment-eyebrow">
-              <ShieldCheck size={15} />
-              <span>Our Operating Philosophy</span>
-            </div>
-            
-            <h2 className="editorial-commitment-title">
-              Committed to Quality. Focused on Healthcare.
-            </h2>
-
-            <div className="editorial-commitment-motto">
-              “Success Lies in Commitment.”
-            </div>
-
-            <p className="editorial-commitment-lead">
-              At Salas Pharmaceuticals, our commitment begins in the laboratory and extends through every stage of sterile manufacturing, quality compliance, and pan-India distribution. We build trust by delivering dependable medicine that supports clinicians and transforms patient lives.
-            </p>
-
-            <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', flexWrap: 'wrap' }}>
-              <button
-                type="button"
-                onClick={() => onNavigate('about')}
-                className="btn btn-primary"
-              >
-                <span>Read Our Corporate Journey</span>
-                <ArrowRight size={16} />
-              </button>
-              <button
-                type="button"
-                onClick={() => onNavigate('laboratories')}
-                className="btn btn-secondary"
-              >
-                <span>Explore Laboratory Testing</span>
-              </button>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ====================================================================
-          SECTION B: THE COMPANY (SECTION 6.B)
-          Split layout, verified corporate heritage (Est. 2009), Sikkim facility
-          imagery with coordinated reveal sequence.
+          SECTION 2: COMPANY INTRODUCTION (SECTION 5.2)
+          Editorial statement with image group 1 entering from the LEFT.
+          Alternating sequence step 1: LEFT
           ==================================================================== */}
       <section className="section-spacing" style={{ backgroundColor: 'var(--color-bg-light)', borderBottom: '1px solid var(--color-border)' }}>
         <div className="container">
@@ -497,45 +450,8 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, isLoaderComplete
               alignItems: 'center',
             }}
           >
-            {/* Left Content Column */}
+            {/* Image Group 1: Enters from LEFT */}
             <div className="reveal-left">
-              <span className="section-eyebrow">
-                <Compass size={14} /> Corporate Heritage
-              </span>
-              <h2 className="section-title" style={{ marginBottom: '1.5rem' }}>
-                Salas Pharmaceuticals Pvt. Ltd.
-              </h2>
-
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem', fontSize: '1.0625rem', color: 'var(--color-text-body)', lineHeight: 1.75 }}>
-                <p>
-                  Established in 2009, Salas Pharma has developed its presence in the pharmaceutical industry through service, collaborative partnerships, scientific innovation, and corporate responsibility.
-                </p>
-                <p>
-                  With our corporate office located in Vadodara, Gujarat, and our dedicated manufacturing plant situated in Mamring, South Sikkim, we formulate and manufacture oral solid and liquid dosage forms adhering to applicable Indian regulatory standards.
-                </p>
-                <p>
-                  Our extensive distribution network enables reliable product availability across institutions, pharmacies, and healthcare professionals throughout India.
-                </p>
-              </div>
-
-              <div style={{ marginTop: '2.25rem', display: 'flex', gap: '1.5rem', flexWrap: 'wrap', alignItems: 'center' }}>
-                <button
-                  type="button"
-                  onClick={() => onNavigate('about')}
-                  className="btn btn-primary"
-                >
-                  <span>Explore Company Profile</span>
-                  <ArrowRight size={16} />
-                </button>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-                  <CheckCircle2 size={20} style={{ color: 'var(--color-primary)' }} />
-                  <span style={{ fontWeight: 600, color: 'var(--color-navy)', fontSize: '0.95rem' }}>Pan-India Supply Network</span>
-                </div>
-              </div>
-            </div>
-
-            {/* Right Facility Imagery */}
-            <div className="reveal-right">
               <div
                 className="img-zoom-wrapper"
                 style={{
@@ -545,8 +461,8 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, isLoaderComplete
                 }}
               >
                 <img
-                  src={MEDIA_CONFIG.about.image}
-                  alt={MEDIA_CONFIG.about.alt}
+                  src={PAGE_HERO_IMAGES.home.image}
+                  alt={PAGE_HERO_IMAGES.home.alt}
                   loading="lazy"
                   decoding="async"
                   width={640}
@@ -591,8 +507,62 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, isLoaderComplete
                     South Sikkim Production Plant
                   </h4>
                   <p style={{ fontSize: '0.8125rem', color: 'var(--color-text-muted)', margin: 0 }}>
-                    Modern formulation facility in Mamring, South Sikkim (PIN: 737132)
+                    Modern formulation facility in Mamring, South Sikkim (PIN: 737132) · Est. 2009
                   </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Editorial Statement: Enters from RIGHT */}
+            <div className="reveal-right">
+              <span className="section-eyebrow">
+                <Compass size={14} /> Corporate Heritage & Purpose
+              </span>
+              <h2 className="section-title" style={{ marginBottom: '1.25rem' }}>
+                Committed to Quality. <br />
+                <span style={{ color: 'var(--color-primary)' }}>Focused on Healthcare.</span>
+              </h2>
+
+              <div
+                style={{
+                  padding: '0.75rem 1.25rem',
+                  borderLeft: '3px solid var(--color-accent)',
+                  backgroundColor: 'rgba(229, 36, 42, 0.04)',
+                  borderRadius: '0 var(--radius-sm) var(--radius-sm) 0',
+                  marginBottom: '1.5rem',
+                  fontSize: '1.05rem',
+                  fontStyle: 'italic',
+                  fontWeight: 600,
+                  color: 'var(--color-navy)',
+                }}
+              >
+                “Success Lies in Commitment.”
+              </div>
+
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '1.15rem', fontSize: '1.05rem', color: 'var(--color-text-body)', lineHeight: 1.75 }}>
+                <p>
+                  Established in 2009, Salas Pharma has established its identity through reliable service, collaborative partnerships, and disciplined compliance across India.
+                </p>
+                <p>
+                  With our corporate office in Vadodara, Gujarat, and our dedicated manufacturing plant situated in Mamring, South Sikkim, we formulate and manufacture oral solid and liquid dosage forms adhering strictly to applicable Indian regulatory standards.
+                </p>
+                <p>
+                  Our robust distribution network ensures that high-quality therapeutic formulations remain reliably accessible to clinicians, institutions, and pharmacies nationwide.
+                </p>
+              </div>
+
+              <div style={{ marginTop: '2.25rem', display: 'flex', gap: '1.5rem', flexWrap: 'wrap', alignItems: 'center' }}>
+                <button
+                  type="button"
+                  onClick={() => onNavigate('about')}
+                  className="btn btn-primary"
+                >
+                  <span>Read Our Corporate Journey</span>
+                  <ArrowRight size={16} />
+                </button>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                  <CheckCircle2 size={20} style={{ color: 'var(--color-primary)' }} />
+                  <span style={{ fontWeight: 600, color: 'var(--color-navy)', fontSize: '0.95rem' }}>Pan-India Supply Network</span>
                 </div>
               </div>
             </div>
@@ -601,15 +571,15 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, isLoaderComplete
       </section>
 
       {/* ====================================================================
-          SECTION C: THERAPEUTIC AREAS (SECTION 6.C)
-          Interactive therapeutic area showcase with the 8 approved categories
-          and card-level interactions linking to products.
+          SECTION 3: THERAPEUTIC AREAS & PRODUCTS (SECTION 5.3)
+          Distinct image-led composition entering from the RIGHT.
+          Alternating sequence step 2: RIGHT
           ==================================================================== */}
-      <section className="section-spacing" style={{ backgroundColor: 'var(--color-bg-white)' }}>
+      <section className="section-spacing" style={{ backgroundColor: 'var(--color-bg-white)', borderBottom: '1px solid var(--color-border)' }}>
         <div className="container">
           <div className="section-header">
             <span className="section-eyebrow">
-              <Pill size={14} /> Medical Specialties
+              <Pill size={14} /> Medical Specialties & Formulations
             </span>
             <h2 className="section-title">Supporting Diverse Healthcare Needs</h2>
             <p className="section-description">
@@ -617,33 +587,50 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, isLoaderComplete
             </p>
           </div>
 
-          {/* Interactive Category Selector (Section C Interactive Feature) */}
-          <div className="therapeutic-interactive-container reveal-up">
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-              <span style={{ fontSize: '0.8125rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--color-text-muted)', marginBottom: '0.5rem' }}>
-                Select Therapeutic Area
-              </span>
-              {therapeuticSegments.map((seg) => (
-                <button
-                  key={seg.id}
-                  type="button"
-                  onClick={() => setActiveCategory(seg.id)}
-                  className={`therapeutic-tab-btn ${activeCategory === seg.id ? 'is-active' : ''}`}
-                  aria-pressed={activeCategory === seg.id}
-                >
-                  <span>{seg.title}</span>
-                  <ArrowRight size={14} style={{ opacity: activeCategory === seg.id ? 1 : 0.4 }} />
-                </button>
-              ))}
-            </div>
+          <div
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
+              gap: '4.5rem',
+              alignItems: 'center',
+              marginBottom: '4rem',
+            }}
+          >
+            {/* Left Interactive Category Selector */}
+            <div className="reveal-left">
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', marginBottom: '1.5rem' }}>
+                <span style={{ fontSize: '0.8125rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--color-text-muted)' }}>
+                  Select Therapeutic Specialty
+                </span>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(140px, 1fr))', gap: '0.5rem' }}>
+                  {therapeuticSegments.map((seg) => (
+                    <button
+                      key={seg.id}
+                      type="button"
+                      onClick={() => setActiveCategory(seg.id)}
+                      className={`therapeutic-tab-btn ${activeCategory === seg.id ? 'is-active' : ''}`}
+                      aria-pressed={activeCategory === seg.id}
+                      style={{ padding: '0.65rem 0.85rem', fontSize: '0.85rem' }}
+                    >
+                      <span>{seg.title}</span>
+                    </button>
+                  ))}
+                </div>
+              </div>
 
-            <div className="therapeutic-active-panel">
-              <div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1.25rem' }}>
+              <div
+                style={{
+                  padding: '1.75rem',
+                  backgroundColor: 'var(--color-bg-light)',
+                  borderRadius: 'var(--radius-lg)',
+                  border: '1px solid var(--color-border)',
+                }}
+              >
+                <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1rem' }}>
                   <div
                     style={{
-                      width: '54px',
-                      height: '54px',
+                      width: '48px',
+                      height: '48px',
                       borderRadius: 'var(--radius-md)',
                       backgroundColor: '#FFFFFF',
                       border: '1px solid var(--color-border)',
@@ -654,46 +641,93 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, isLoaderComplete
                       boxShadow: 'var(--shadow-xs)'
                     }}
                   >
-                    <CurrentSegmentIcon size={28} />
+                    <CurrentSegmentIcon size={24} />
                   </div>
                   <div>
                     <span style={{ fontSize: '0.75rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.1em', color: 'var(--color-accent)' }}>
-                      Therapeutic Segment
+                      Active Segment Profile
                     </span>
-                    <h3 style={{ fontSize: '1.45rem', fontWeight: 800, color: 'var(--color-navy)', margin: 0 }}>
+                    <h3 style={{ fontSize: '1.35rem', fontWeight: 800, color: 'var(--color-navy)', margin: 0 }}>
                       {currentSegment.title}
                     </h3>
                   </div>
                 </div>
 
-                <p style={{ fontSize: '1.05rem', color: 'var(--color-text-body)', lineHeight: 1.7, marginBottom: '1.25rem' }}>
+                <p style={{ fontSize: '1.025rem', color: 'var(--color-text-body)', lineHeight: 1.65, marginBottom: '0.75rem' }}>
                   {currentSegment.description}
                 </p>
 
-                <p style={{ fontSize: '0.95rem', color: 'var(--color-text-muted)', lineHeight: 1.6, marginBottom: '2rem' }}>
+                <p style={{ fontSize: '0.9rem', color: 'var(--color-text-muted)', lineHeight: 1.6, marginBottom: '1.5rem' }}>
                   {currentSegment.detail}
                 </p>
-              </div>
 
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1rem', paddingTop: '1.5rem', borderTop: '1px solid var(--color-border)' }}>
-                <span style={{ fontSize: '0.85rem', color: 'var(--color-text-muted)', fontWeight: 600 }}>
-                  Approved Formulations in {currentSegment.title}
-                </span>
                 <button
                   type="button"
                   onClick={() => onNavigate('products')}
                   className="btn btn-primary"
-                  style={{ padding: '0.75rem 1.5rem', fontSize: '0.9rem' }}
+                  style={{ width: '100%', justifyContent: 'center' }}
                 >
-                  <span>View Product Formulations</span>
+                  <span>Explore {currentSegment.title} Formulations</span>
                   <ArrowRight size={15} />
                 </button>
+              </div>
+            </div>
+
+            {/* Image Group 2: Enters from RIGHT */}
+            <div className="reveal-right">
+              <div
+                className="img-zoom-wrapper"
+                style={{
+                  borderRadius: 'var(--radius-lg)',
+                  boxShadow: 'var(--shadow-xl)',
+                  border: '1px solid var(--color-border)',
+                  marginBottom: '1.5rem',
+                }}
+              >
+                <img
+                  src={PAGE_HERO_IMAGES.products.image}
+                  alt={PAGE_HERO_IMAGES.products.alt}
+                  loading="lazy"
+                  decoding="async"
+                  width={640}
+                  height={380}
+                  style={{ width: '100%', height: '380px', objectFit: 'cover' }}
+                />
+              </div>
+
+              {/* Staggered Capability Badges */}
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
+                {[
+                  { label: 'Solid Oral Tablets', detail: 'Precision immediate & sustained release coated/uncoated tablets' },
+                  { label: 'Hard Gelatin Capsules', detail: 'Multi-particulate micro-pellet encapsulation & precision dosing' },
+                  { label: 'Sterile Formulations', detail: 'Aseptically filled liquids and terminal sterilization lines' }
+                ].map((item, idx) => (
+                  <div
+                    key={idx}
+                    className={`delay-${(idx + 1) * 100}`}
+                    style={{
+                      display: 'flex',
+                      gap: '0.85rem',
+                      alignItems: 'flex-start',
+                      padding: '0.85rem 1.15rem',
+                      backgroundColor: 'var(--color-bg-light)',
+                      borderRadius: 'var(--radius-sm)',
+                      border: '1px solid var(--color-border)',
+                    }}
+                  >
+                    <CheckCircle2 size={18} style={{ color: 'var(--color-primary)', flexShrink: 0, marginTop: '0.15rem' }} />
+                    <div>
+                      <span style={{ fontWeight: 700, color: 'var(--color-navy)', fontSize: '0.925rem' }}>{item.label}</span>
+                      <p style={{ fontSize: '0.8125rem', color: 'var(--color-text-muted)', margin: 0 }}>{item.detail}</p>
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
           </div>
 
           {/* 8-Card Grid Layout */}
-          <div className="therapeutic-grid reveal-stagger" style={{ marginTop: '3.5rem' }}>
+          <div className="therapeutic-grid reveal-stagger">
             {therapeuticSegments.map((seg) => {
               const IconComp = seg.icon;
               return (
@@ -762,89 +796,11 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, isLoaderComplete
       </section>
 
       {/* ====================================================================
-          SECTION D: PRODUCTS (SECTION 6.D)
-          Dosage-form presentation with verified assets (salas3.mp4 encapsulation)
-          and clean dosage categorization.
+          SECTION 4: LABORATORIES (SECTION 5.4)
+          Professional laboratory imagery entering from the LEFT.
+          Alternating sequence step 3: LEFT
           ==================================================================== */}
-      <section className="section-spacing" style={{ backgroundColor: 'var(--color-bg-light)', borderTop: '1px solid var(--color-border)' }}>
-        <div className="container">
-          <div
-            style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-              gap: '4.5rem',
-              alignItems: 'center',
-            }}
-          >
-            {/* Left Encapsulation Video Showcase */}
-            <div className="reveal-left">
-              <div
-                className="img-zoom-wrapper"
-                style={{
-                  borderRadius: 'var(--radius-lg)',
-                  boxShadow: 'var(--shadow-xl)',
-                  border: '1px solid var(--color-border)',
-                }}
-              >
-                <BrandedVideo
-                  src={VIDEO_ASSETS.products.video}
-                  poster={VIDEO_ASSETS.products.poster}
-                  playbackRate={VIDEO_ASSETS.products.playbackRate}
-                  autoPlay={true}
-                  muted={true}
-                  loop={true}
-                  playsInline={true}
-                  ariaLabel={VIDEO_ASSETS.products.alt}
-                  style={{ width: '100%', height: '420px', objectFit: 'cover' }}
-                />
-              </div>
-            </div>
-
-            {/* Right Information */}
-            <div className="reveal-right">
-              <span className="section-eyebrow">
-                <Pill size={14} /> Finished Dosage Forms
-              </span>
-              <h2 className="section-title">Explore Our Pharmaceutical Portfolio</h2>
-              <p style={{ fontSize: '1.0625rem', color: 'var(--color-text-body)', lineHeight: 1.7, marginBottom: '2rem' }}>
-                We produce a diverse portfolio of pharmaceutical products across multiple dosage forms and therapeutic segments, manufactured to meet rigorous quality, dissolution, and stability standards.
-              </p>
-
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', marginBottom: '2.5rem' }}>
-                {[
-                  { label: 'Solid Oral Dosages: Precision coated and uncoated tablets', detail: 'Immediate and sustained release formulations' },
-                  { label: 'Hard Gelatin Capsules: Filled under precise environmental parameters', detail: 'Micro-pellet technology for optimal disintegration and absorption' },
-                  { label: 'Sterile Injectables & Liquid Formulations', detail: 'Aseptically filled and terminal sterilization options' }
-                ].map((item, idx) => (
-                  <div key={idx} style={{ display: 'flex', gap: '0.85rem' }}>
-                    <CheckCircle2 size={20} style={{ color: 'var(--color-primary)', flexShrink: 0, marginTop: '0.15rem' }} />
-                    <div>
-                      <span style={{ fontWeight: 700, color: 'var(--color-navy)', fontSize: '0.95rem' }}>{item.label}</span>
-                      <p style={{ fontSize: '0.825rem', color: 'var(--color-text-muted)', margin: 0 }}>{item.detail}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-
-              <button
-                type="button"
-                onClick={() => onNavigate('products')}
-                className="btn btn-primary"
-              >
-                <span>Browse Product Catalogue</span>
-                <ArrowRight size={16} />
-              </button>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ====================================================================
-          SECTION E: LABORATORIES (SECTION 6.E)
-          Cinematic laboratory introduction featuring Lab2.mp4, analytical
-          testing imagery, and rigorous scientific testing narrative.
-          ==================================================================== */}
-      <section className="section-spacing" style={{ backgroundColor: '#FFFFFF', borderTop: '1px solid var(--color-border)' }}>
+      <section className="section-spacing" style={{ backgroundColor: '#FFFFFF', borderBottom: '1px solid var(--color-border)' }}>
         <div className="container">
           <div className="section-header">
             <span className="section-eyebrow">
@@ -862,10 +818,9 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, isLoaderComplete
               gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
               gap: '4rem',
               alignItems: 'center',
-              marginBottom: '3.5rem',
             }}
           >
-            {/* Left 4K Laboratory Testing Video (Lab2.mp4) */}
+            {/* Image Group 3: Enters from LEFT */}
             <div className="reveal-left">
               <div
                 className="img-zoom-wrapper"
@@ -876,22 +831,44 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, isLoaderComplete
                 }}
               >
                 <BrandedVideo
-                  src={VIDEO_ASSETS.laboratoryEditorial.video}
-                  poster={VIDEO_ASSETS.laboratoryEditorial.poster}
-                  playbackRate={VIDEO_ASSETS.laboratoryEditorial.playbackRate}
+                  src={VIDEO_ASSETS.laboratoryHero.video}
+                  poster={VIDEO_ASSETS.laboratoryHero.poster}
+                  playbackRate={VIDEO_ASSETS.laboratoryHero.playbackRate}
                   autoPlay={true}
                   muted={true}
                   loop={true}
                   playsInline={true}
-                  ariaLabel={VIDEO_ASSETS.laboratoryEditorial.alt}
+                  ariaLabel={VIDEO_ASSETS.laboratoryHero.alt}
                   style={{ width: '100%', height: '440px', objectFit: 'cover' }}
                 />
               </div>
+              <div
+                style={{
+                  backgroundColor: 'var(--color-bg-light)',
+                  border: '1px solid var(--color-border)',
+                  borderRadius: 'var(--radius-md)',
+                  padding: '1rem 1.25rem',
+                  marginTop: '-1.5rem',
+                  marginLeft: '1.5rem',
+                  marginRight: '1.5rem',
+                  position: 'relative',
+                  zIndex: 2,
+                  boxShadow: 'var(--shadow-sm)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '0.85rem',
+                }}
+              >
+                <FlaskConical size={20} style={{ color: 'var(--color-primary)', flexShrink: 0 }} />
+                <span style={{ fontSize: '0.85rem', color: 'var(--color-navy)', fontWeight: 600 }}>
+                  Assay Potency & Dissolution Kinetics: Continuous chromatographic validation across batches
+                </span>
+              </div>
             </div>
 
-            {/* Right Analytical Laboratory Pillars */}
+            {/* Right Analytical Laboratory Pillars: Enters from RIGHT */}
             <div className="reveal-right">
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
                 {[
                   {
                     title: 'Active Dissolution & In-Vitro Kinetics',
@@ -900,7 +877,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, isLoaderComplete
                   },
                   {
                     title: 'Analytical Chemistry & HPLC Characterization',
-                    desc: 'Systematic chromatographic quantification to confirm assay potency, chemical purity, and degradation thresholds.',
+                    desc: 'Systematic chromatographic quantification confirming assay potency, chemical purity, and degradation thresholds.',
                     icon: Microscope
                   },
                   {
@@ -918,8 +895,8 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, isLoaderComplete
                     key={idx}
                     style={{
                       display: 'flex',
-                      gap: '1.25rem',
-                      padding: '1.25rem',
+                      gap: '1.15rem',
+                      padding: '1.15rem 1.25rem',
                       backgroundColor: 'var(--color-bg-light)',
                       borderRadius: 'var(--radius-md)',
                       border: '1px solid var(--color-border)',
@@ -927,8 +904,8 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, isLoaderComplete
                   >
                     <div
                       style={{
-                        width: '44px',
-                        height: '44px',
+                        width: '42px',
+                        height: '42px',
                         borderRadius: 'var(--radius-sm)',
                         backgroundColor: '#FFFFFF',
                         border: '1px solid var(--color-border)',
@@ -939,13 +916,13 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, isLoaderComplete
                         flexShrink: 0,
                       }}
                     >
-                      <labPillar.icon size={22} />
+                      <labPillar.icon size={20} />
                     </div>
                     <div>
-                      <h4 style={{ fontSize: '1.05rem', fontWeight: 700, marginBottom: '0.35rem', color: 'var(--color-navy)' }}>
+                      <h4 style={{ fontSize: '1rem', fontWeight: 700, marginBottom: '0.25rem', color: 'var(--color-navy)' }}>
                         {labPillar.title}
                       </h4>
-                      <p style={{ fontSize: '0.9rem', color: 'var(--color-text-body)', margin: 0, lineHeight: 1.6 }}>
+                      <p style={{ fontSize: '0.875rem', color: 'var(--color-text-body)', margin: 0, lineHeight: 1.55 }}>
                         {labPillar.desc}
                       </p>
                     </div>
@@ -969,11 +946,11 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, isLoaderComplete
       </section>
 
       {/* ====================================================================
-          SECTION F: MANUFACTURING AND QUALITY (SECTION 6.F)
-          Visual transition into manufacturing imagery, compression presses,
-          and rotating Quality Seal.
+          SECTION 5: MANUFACTURING & QUALITY (SECTION 5.5)
+          Production image group 4 entering from the RIGHT.
+          Alternating sequence step 4: RIGHT
           ==================================================================== */}
-      <section className="section-spacing" style={{ backgroundColor: 'var(--color-bg-light)', borderTop: '1px solid var(--color-border)' }}>
+      <section className="section-spacing" style={{ backgroundColor: 'var(--color-bg-light)', borderBottom: '1px solid var(--color-border)' }}>
         <div className="container">
           <div className="section-header">
             <span className="section-eyebrow">
@@ -988,161 +965,126 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, isLoaderComplete
           <div
             style={{
               display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-              gap: '2rem',
-              marginBottom: '3.5rem',
-            }}
-          >
-            {/* Manufacturing Line Visual Card */}
-            <div
-              className="pharma-card reveal-up"
-              onClick={() => onNavigate('manufacturing')}
-              role="button"
-              tabIndex={0}
-              onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') onNavigate('manufacturing'); }}
-            >
-              <div className="pharma-card-img-wrap" style={{ height: '260px' }}>
-                <img
-                  src={MEDIA_CONFIG.manufacturing.image}
-                  alt={MEDIA_CONFIG.manufacturing.alt}
-                  loading="lazy"
-                  decoding="async"
-                  width={640}
-                  height={260}
-                />
-              </div>
-              <div className="pharma-card-seam" />
-              <div className="pharma-card-body">
-                <span className="pharma-card-badge">Compression Technology</span>
-                <h3 className="pharma-card-title">
-                  Tablet & Capsule Production Lines
-                </h3>
-                <p className="pharma-card-text">
-                  Equipped with stainless-steel rotary tablet presses and automated capsule filling machinery, maintaining strict environmental temperature and humidity control.
-                </p>
-                <div className="pharma-card-action">
-                  <span>View Production Lines</span>
-                  <ArrowRight size={15} />
-                </div>
-              </div>
-            </div>
-
-            {/* Sterile Cleanroom & Formulation Reactors Card */}
-            <div
-              className="pharma-card reveal-up delay-100"
-              onClick={() => onNavigate('manufacturing')}
-              role="button"
-              tabIndex={0}
-              onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') onNavigate('manufacturing'); }}
-            >
-              <div className="pharma-card-img-wrap" style={{ height: '260px' }}>
-                <img
-                  src={MEDIA_CONFIG.manufacturing.cleanroomImage}
-                  alt="Salas Pharma sterile bioprocess formulation vessels and AHU cleanrooms"
-                  loading="lazy"
-                  decoding="async"
-                  width={640}
-                  height={260}
-                />
-              </div>
-              <div className="pharma-card-seam" />
-              <div className="pharma-card-body">
-                <span className="pharma-card-badge">Cleanroom Architecture</span>
-                <h3 className="pharma-card-title">
-                  Bioprocess Vessels & Air Handling
-                </h3>
-                <p className="pharma-card-text">
-                  Multi-stage HEPA air filtration and positive-pressure cleanroom suites ensure uncompromised aseptic environments for sensitive active ingredients.
-                </p>
-                <div className="pharma-card-action">
-                  <span>Explore Cleanroom Facility</span>
-                  <ArrowRight size={15} />
-                </div>
-              </div>
-            </div>
-
-            {/* Packaging & Optical Inspection Card */}
-            <div
-              className="pharma-card reveal-up delay-200"
-              onClick={() => onNavigate('manufacturing')}
-              role="button"
-              tabIndex={0}
-              onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') onNavigate('manufacturing'); }}
-            >
-              <div className="pharma-card-img-wrap" style={{ height: '260px' }}>
-                <img
-                  src={MEDIA_CONFIG.packaging.image}
-                  alt="Salas Pharma automated blister packaging lines and inline optical inspection"
-                  loading="lazy"
-                  decoding="async"
-                  width={640}
-                  height={260}
-                />
-              </div>
-              <div className="pharma-card-seam" />
-              <div className="pharma-card-body">
-                <span className="pharma-card-badge">Packaging Integrity</span>
-                <h3 className="pharma-card-title">
-                  Automated Cleanroom Packaging
-                </h3>
-                <p className="pharma-card-text">
-                  High-speed blister packaging lines coupled with inline optical inspection ensure intact product sealing, accurate batch coding, and tamper-evident cartoning.
-                </p>
-                <div className="pharma-card-action">
-                  <span>Inspect Packaging Standards</span>
-                  <ArrowRight size={15} />
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Quality Seal Feature Strip */}
-          <div
-            style={{
-              display: 'grid',
               gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-              gap: '4rem',
+              gap: '4.5rem',
               alignItems: 'center',
-              backgroundColor: '#FFFFFF',
-              border: '1px solid var(--color-border)',
-              borderRadius: 'var(--radius-xl)',
-              padding: 'clamp(2rem, 4vw, 3.5rem)',
-              boxShadow: 'var(--shadow-md)',
             }}
           >
-            {/* Rotating Quality Seal */}
-            <div className="reveal-left" style={{ display: 'flex', justifyContent: 'center' }}>
-              <QualitySeal size={240} />
-            </div>
+            {/* Left Narrative & Quality Seal: Enters from LEFT */}
+            <div className="reveal-left">
+              <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '2rem' }}>
+                <QualitySeal size={220} />
+              </div>
 
-            {/* Quality Commitment Text */}
-            <div className="reveal-right">
-              <span className="section-eyebrow">
-                <ShieldCheck size={14} /> Strict Standards
-              </span>
-              <h3 style={{ fontSize: '1.75rem', fontWeight: 800, color: 'var(--color-navy)', marginBottom: '1rem' }}>
+              <h3 style={{ fontSize: '1.65rem', fontWeight: 800, color: 'var(--color-navy)', marginBottom: '1rem', textAlign: 'center' }}>
                 Quality Assured at Every Phase
               </h3>
-              <p style={{ fontSize: '1.025rem', color: 'var(--color-text-body)', lineHeight: 1.7, marginBottom: '1.75rem' }}>
+              <p style={{ fontSize: '1rem', color: 'var(--color-text-body)', lineHeight: 1.7, marginBottom: '1.75rem', textAlign: 'center' }}>
                 Quality assurance at Salas Pharma is an active operational discipline embedded within every phase of raw material qualification, blending, compression, and final release.
               </p>
 
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem' }}>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '0.85rem', marginBottom: '2rem' }}>
                 {[
                   { title: 'Raw Material Testing', desc: 'Pre-production identification and assay testing' },
                   { title: 'In-Process Checks', desc: 'Hardness, friability, and dissolution profiling' },
                   { title: 'Batch Traceability', desc: 'Complete batch manufacturing records for every lot' },
                   { title: 'Stability Testing', desc: 'Climate-controlled multi-zone shelf-life validation' }
                 ].map((item, idx) => (
-                  <div key={idx} style={{ padding: '0.85rem', backgroundColor: 'var(--color-bg-light)', borderRadius: 'var(--radius-sm)', border: '1px solid var(--color-border)' }}>
-                    <h4 style={{ fontSize: '0.9rem', fontWeight: 700, color: 'var(--color-navy)', margin: '0 0 0.25rem' }}>
+                  <div key={idx} style={{ padding: '0.85rem', backgroundColor: '#FFFFFF', borderRadius: 'var(--radius-sm)', border: '1px solid var(--color-border)' }}>
+                    <h4 style={{ fontSize: '0.875rem', fontWeight: 700, color: 'var(--color-navy)', margin: '0 0 0.25rem' }}>
                       {item.title}
                     </h4>
-                    <p style={{ fontSize: '0.8125rem', color: 'var(--color-text-muted)', margin: 0 }}>
+                    <p style={{ fontSize: '0.785rem', color: 'var(--color-text-muted)', margin: 0 }}>
                       {item.desc}
                     </p>
                   </div>
                 ))}
+              </div>
+
+              <div style={{ display: 'flex', justifyContent: 'center' }}>
+                <button
+                  type="button"
+                  onClick={() => onNavigate('manufacturing')}
+                  className="btn btn-primary"
+                >
+                  <span>View Manufacturing Standards</span>
+                  <ArrowRight size={16} />
+                </button>
+              </div>
+            </div>
+
+            {/* Image Group 4: Enters from RIGHT */}
+            <div className="reveal-right">
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '1.75rem' }}>
+                {/* Visual Card 1: Compression Machinery */}
+                <div
+                  className="img-zoom-wrapper delay-100"
+                  style={{
+                    borderRadius: 'var(--radius-lg)',
+                    boxShadow: 'var(--shadow-lg)',
+                    border: '1px solid var(--color-border)',
+                    position: 'relative',
+                  }}
+                >
+                  <img
+                    src={PAGE_HERO_IMAGES.manufacturing.image}
+                    alt={PAGE_HERO_IMAGES.manufacturing.alt}
+                    loading="lazy"
+                    decoding="async"
+                    width={640}
+                    height={260}
+                    style={{ width: '100%', height: '240px', objectFit: 'cover' }}
+                  />
+                  <div
+                    style={{
+                      position: 'absolute',
+                      bottom: 0,
+                      insetInline: 0,
+                      padding: '0.85rem 1.25rem',
+                      background: 'linear-gradient(to top, rgba(7, 29, 54, 0.92) 0%, rgba(7, 29, 54, 0) 100%)',
+                      color: '#FFFFFF',
+                    }}
+                  >
+                    <span style={{ fontSize: '0.875rem', fontWeight: 700 }}>
+                      Rotary Tablet Compression & High-Speed Tooling
+                    </span>
+                  </div>
+                </div>
+
+                {/* Visual Card 2: Cleanroom Architecture */}
+                <div
+                  className="img-zoom-wrapper delay-200"
+                  style={{
+                    borderRadius: 'var(--radius-lg)',
+                    boxShadow: 'var(--shadow-lg)',
+                    border: '1px solid var(--color-border)',
+                    position: 'relative',
+                  }}
+                >
+                  <img
+                    src={MEDIA_CONFIG.manufacturing.cleanroomImage}
+                    alt="Salas Pharma sterile bioprocess formulation vessels and AHU cleanrooms"
+                    loading="lazy"
+                    decoding="async"
+                    width={640}
+                    height={260}
+                    style={{ width: '100%', height: '240px', objectFit: 'cover' }}
+                  />
+                  <div
+                    style={{
+                      position: 'absolute',
+                      bottom: 0,
+                      insetInline: 0,
+                      padding: '0.85rem 1.25rem',
+                      background: 'linear-gradient(to top, rgba(7, 29, 54, 0.92) 0%, rgba(7, 29, 54, 0) 100%)',
+                      color: '#FFFFFF',
+                    }}
+                  >
+                    <span style={{ fontSize: '0.875rem', fontWeight: 700 }}>
+                      Positive-Pressure HEPA Cleanroom Suites & Bioprocess Vessels
+                    </span>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -1150,11 +1092,11 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, isLoaderComplete
       </section>
 
       {/* ====================================================================
-          SECTION G: R&D AND INNOVATION (SECTION 6.G)
-          Formulation science, dissolution kinetics video (salas4.mp4),
-          and analytical chromatography imagery.
+          SECTION 6: R&D AND INNOVATION (SECTION 5.6)
+          Scientific imagery group 5 entering from the LEFT.
+          Alternating sequence step 5: LEFT
           ==================================================================== */}
-      <section className="section-spacing" style={{ backgroundColor: '#FFFFFF', borderTop: '1px solid var(--color-border)' }}>
+      <section className="section-spacing" style={{ backgroundColor: '#FFFFFF', borderBottom: '1px solid var(--color-border)' }}>
         <div className="container">
           <div className="section-header">
             <span className="section-eyebrow">
@@ -1174,13 +1116,13 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, isLoaderComplete
               alignItems: 'center',
             }}
           >
-            {/* Left Dissolution Video Showcase (salas4.mp4) */}
+            {/* Image Group 5: Enters from LEFT */}
             <div className="reveal-left">
               <div
                 className="img-zoom-wrapper"
                 style={{
                   borderRadius: 'var(--radius-lg)',
-                  boxShadow: 'var(--shadow-lg)',
+                  boxShadow: 'var(--shadow-xl)',
                   border: '1px solid var(--color-border)',
                 }}
               >
@@ -1193,14 +1135,36 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, isLoaderComplete
                   loop={true}
                   playsInline={true}
                   ariaLabel={VIDEO_ASSETS.research.alt}
-                  style={{ width: '100%', height: '480px', objectFit: 'cover' }}
+                  style={{ width: '100%', height: '460px', objectFit: 'cover' }}
                 />
+              </div>
+              <div
+                style={{
+                  backgroundColor: 'var(--color-bg-light)',
+                  border: '1px solid var(--color-border)',
+                  borderRadius: 'var(--radius-md)',
+                  padding: '1rem 1.25rem',
+                  marginTop: '-1.5rem',
+                  marginLeft: '1.5rem',
+                  marginRight: '1.5rem',
+                  position: 'relative',
+                  zIndex: 2,
+                  boxShadow: 'var(--shadow-sm)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '0.85rem',
+                }}
+              >
+                <FlaskConical size={20} style={{ color: 'var(--color-primary)', flexShrink: 0 }} />
+                <span style={{ fontSize: '0.85rem', color: 'var(--color-navy)', fontWeight: 600 }}>
+                  Formulation Science: Bioequivalent dosage forms engineered for targeted bioavailability
+                </span>
               </div>
             </div>
 
-            {/* Right Detailed Scientific Focus Areas */}
+            {/* Right Detailed Scientific Focus Areas: Enters from RIGHT */}
             <div className="reveal-right">
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
                 {[
                   {
                     title: 'Laboratory Research & Analytical Chemistry',
@@ -1227,7 +1191,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, isLoaderComplete
                     key={idx}
                     style={{
                       display: 'flex',
-                      gap: '1.25rem',
+                      gap: '1.15rem',
                       padding: '1.15rem 1.25rem',
                       backgroundColor: 'var(--color-bg-light)',
                       borderRadius: 'var(--radius-md)',
@@ -1251,7 +1215,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, isLoaderComplete
                       <item.icon size={20} />
                     </div>
                     <div>
-                      <h4 style={{ fontSize: '1.025rem', fontWeight: 700, marginBottom: '0.25rem', color: 'var(--color-navy)' }}>
+                      <h4 style={{ fontSize: '1rem', fontWeight: 700, marginBottom: '0.25rem', color: 'var(--color-navy)' }}>
                         {item.title}
                       </h4>
                       <p style={{ fontSize: '0.875rem', color: 'var(--color-text-body)', margin: 0, lineHeight: 1.55 }}>
@@ -1278,9 +1242,11 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, isLoaderComplete
       </section>
 
       {/* ====================================================================
-          SECTION 8: COMPANY HIGHLIGHTS (QUALITATIVE MILESTONES)
+          SECTION 7: COMPANY CAPABILITIES & VERIFIED MILESTONES (SECTION 5.7)
+          Balanced row of useful features and verified figures entering from RIGHT.
+          Alternating sequence step 6: RIGHT
           ==================================================================== */}
-      <section className="section-spacing" style={{ backgroundColor: 'var(--color-bg-light)', borderTop: '1px solid var(--color-border)' }}>
+      <section className="section-spacing" style={{ backgroundColor: 'var(--color-bg-light)', borderBottom: '1px solid var(--color-border)' }}>
         <div className="container">
           <div className="section-header">
             <span className="section-eyebrow">
@@ -1293,7 +1259,6 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, isLoaderComplete
           </div>
 
           <div
-            className="reveal-stagger"
             style={{
               display: 'grid',
               gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
@@ -1305,7 +1270,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, isLoaderComplete
               return (
                 <div
                   key={idx}
-                  className="stat-card reveal-up"
+                  className={`stat-card reveal-right delay-${(idx + 1) * 100}`}
                 >
                   <div className="stat-card-icon-wrap">
                     <IconComp size={24} />
@@ -1345,109 +1310,8 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, isLoaderComplete
       </section>
 
       {/* ====================================================================
-          SECTION H: CAREERS (SECTION 6.H)
-          Preserve career and culture functionality with team imagery.
-          ==================================================================== */}
-      <section className="section-spacing" style={{ backgroundColor: '#FFFFFF', borderTop: '1px solid var(--color-border)' }}>
-        <div className="container">
-          <div
-            style={{
-              backgroundColor: 'var(--color-bg-light)',
-              borderRadius: 'var(--radius-xl)',
-              border: '1px solid var(--color-border)',
-              padding: 'clamp(2.5rem, 5vw, 4.5rem)',
-              boxShadow: 'var(--shadow-md)',
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-              gap: '3.5rem',
-              alignItems: 'center',
-            }}
-          >
-            <div className="reveal-left">
-              <span className="section-eyebrow">
-                <Users size={14} /> People & Culture
-              </span>
-              <h2 style={{ fontSize: '2.2rem', marginBottom: '1.25rem', color: 'var(--color-navy)' }}>
-                Grow With SALAS
-              </h2>
-              <p style={{ color: 'var(--color-text-body)', fontSize: '1.05rem', lineHeight: 1.7, marginBottom: '2rem' }}>
-                At Salas Pharma, we believe our people are the driving force behind our commitment to healthcare. We foster an environment of continuous learning, mutual respect, professional integrity, and collaborative problem-solving.
-              </p>
-
-              <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
-                <button
-                  type="button"
-                  onClick={() => onNavigate('careers')}
-                  className="btn btn-primary"
-                >
-                  <span>Explore Opportunities</span>
-                  <ArrowRight size={16} />
-                </button>
-                <button
-                  type="button"
-                  onClick={() => onNavigate('contact')}
-                  className="btn btn-secondary"
-                >
-                  <span>Contact HR Team</span>
-                </button>
-              </div>
-            </div>
-
-            <div className="reveal-right">
-              <div 
-                className="pharma-card"
-                onClick={() => onNavigate('careers')}
-                role="button"
-                tabIndex={0}
-                onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') onNavigate('careers'); }}
-              >
-                <div className="pharma-card-img-wrap" style={{ height: '240px' }}>
-                  <img
-                    src={MEDIA_CONFIG.careers.image}
-                    alt={MEDIA_CONFIG.careers.alt}
-                    loading="lazy"
-                    decoding="async"
-                    width={600}
-                    height={240}
-                  />
-                </div>
-                <div className="pharma-card-seam" />
-                <div style={{ padding: '1.5rem', backgroundColor: '#FFFFFF' }}>
-                  <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '0.85rem' }}>
-                    {[
-                      { title: 'Continuous Professional Learning', desc: 'Engage with updated GMP methodologies, analytical instrumentation, and industry practices.' },
-                      { title: 'Collaborative Environment', desc: 'Work alongside experienced professionals in formulation, quality control, and distribution management.' },
-                      { title: 'Purpose-Driven Work', desc: 'Contribute directly to expanding healthcare accessibility through dependable pharmaceutical products.' }
-                    ].map((item, idx) => (
-                      <div
-                        key={idx}
-                        style={{
-                          padding: '0.85rem 1.15rem',
-                          backgroundColor: 'var(--color-bg-light)',
-                          borderRadius: 'var(--radius-sm)',
-                          borderLeft: '3px solid var(--color-primary)',
-                        }}
-                      >
-                        <h4 style={{ fontSize: '0.9rem', fontWeight: 700, color: 'var(--color-navy)', marginBottom: '0.15rem' }}>
-                          {item.title}
-                        </h4>
-                        <p style={{ fontSize: '0.8125rem', color: 'var(--color-text-body)', margin: 0, lineHeight: 1.5 }}>
-                          {item.desc}
-                        </p>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ====================================================================
-          SECTION 7 (PRIORITY FEATURE): SIGNATURE BOTTOM-OF-PAGE EXPERIENCE
-          High-end editorial stage, bold memorable typography:
-          "Better Healthcare. Built on Commitment."
+          SECTION 8: SIGNATURE CLOSING EXPERIENCE & CONTACT CTA (SECTION 5.8)
+          High-end editorial stage: "Better Healthcare. Built on Commitment."
           ==================================================================== */}
       <SignatureClosingStatement onNavigate={onNavigate} />
     </div>
