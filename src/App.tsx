@@ -74,10 +74,10 @@ export function App() {
     return () => window.removeEventListener('hashchange', handleHashChange);
   }, []);
 
-  const handleNavigate = (route: string) => {
+  const handleNavigate = useCallback((route: string) => {
     setCurrentRoute(route);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <div className="salas-pharma-app" style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
@@ -98,7 +98,12 @@ export function App() {
       {/* Main Page Stage (Already loaded & live beneath loader curtains) */}
       <main style={{ flex: '1 0 auto' }}>
         <Suspense fallback={<div style={{ minHeight: '80vh', backgroundColor: 'var(--color-bg-white)' }} />}>
-          {currentRoute === 'home' && <HomePage onNavigate={handleNavigate} />}
+          {currentRoute === 'home' && (
+            <HomePage 
+              onNavigate={handleNavigate} 
+              isLoaderComplete={!showCinematicLoader} 
+            />
+          )}
           {currentRoute === 'about' && <AboutPage onNavigate={handleNavigate} />}
           {currentRoute === 'products' && <ProductsPage onNavigate={handleNavigate} />}
           {currentRoute === 'laboratories' && <LaboratoriesPage onNavigate={handleNavigate} />}

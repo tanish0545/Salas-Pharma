@@ -1,183 +1,126 @@
-import React, { useEffect, useState, useRef, useCallback } from 'react';
-
-interface Particle {
-  id: number;
-  x: number;
-  y: number;
-  color: string;
-  size: number;
-  createdAt: number;
-}
+import React, { useEffect, useRef } from 'react';
 
 /**
  * CapsuleCursor Component
  * 
- * Implements the official SALAS Pharma custom cursor (Concept Board Panel 3):
- * - Tilted 45-degree miniature pharmaceutical capsule (Red upper half, Blue lower half)
- * - Concentric subtle aura ring on interactive element hover
- * - Expanding wave ripple on click
- * - Ephemeral molecular particle trail over interactive links
- * - Strictly desktop-only (pointer: fine and hover: hover)
- * - Non-blocking (pointer-events: none)
- * - Disables gracefully when prefers-reduced-motion is active
+ * High-performance, zero-re-render custom capsule cursor for desktop devices:
+ * - Direct DOM manipulation for butter-smooth 60/120fps tracking with zero React re-renders.
+ * - Precision-engineered 45° tilted pharmaceutical capsule (Brand Red upper half, Corporate Blue lower half).
+ * - Restrained interactive halo aura over links and buttons.
+ * - Crisp click tactile scale response.
+ * - Strictly desktop-only (pointer: fine and hover: hover).
+ * - Fully non-blocking (pointer-events: none).
+ * - Completely disabled when prefers-reduced-motion is active.
+ * - Preserves native accessibility, keyboard navigation, and form inputs.
  */
 export const CapsuleCursor: React.FC = () => {
-  const [isEnabled] = useState<boolean>(() => {
-    if (typeof window === 'undefined') return false;
+  const containerRef = useRef<HTMLDivElement>(null);
+  const cursorRef = useRef<HTMLDivElement>(null);
+  const auraRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+
+    // Check media queries
     const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    return finePointer && !reducedMotion;
-  });
 
-  const [isVisible, setIsVisible] = useState<boolean>(false);
-  const [isHovered, setIsHovered] = useState<boolean>(false);
-  const [isClicked, setIsClicked] = useState<boolean>(false);
-  const [particles, setParticles] = useState<Particle[]>([]);
+    if (!finePointer || reducedMotion) {
+      return;
+    }
 
-  // Smooth lerp coordinates for cursor follower
-  const mousePos = useRef({ x: -100, y: -100 });
-  const currentPos = useRef({ x: -100, y: -100 });
-  const cursorRef = useRef<HTMLDivElement>(null);
-  const particleIdCounter = useRef(0);
-  const lastTrailTime = useRef(0);
+    const container = containerRef.current;
+    const cursor = cursorRef.current;
+    if (!container || !cursor) return;
 
-  // Sync class on body
-  useEffect(() => {
-    if (!isEnabled) return;
     document.body.classList.add('has-capsule-cursor');
+
+    // Smooth lerp coordinates
+    const mouse = { x: -100, y: -100 };
+    const pos = { x: -100, y: -100 };
+    let isVisible = false;
+    let animId: number;
+
+    const onMouseMove = (e: MouseEvent) => {
+      mouse.x = e.clientX;
+      mouse.y = e.clientY;
+
+      if (!isVisible) {
+        isVisible = true;
+        container.classList.add('is-visible');
+      }
+
+      // Check for interactive targets directly without React state
+      const target = e.target as HTMLElement | null;
+      const isInteractive = !!target?.closest(
+        'a, button, input, textarea, select, [role="button"], .pharma-card, .therapeutic-card, .nav-link-item, .interactive-card, .clickable'
+      );
+
+      if (isInteractive) {
+        cursor.classList.add('cursor-hovered');
+      } else {
+        cursor.classList.remove('cursor-hovered');
+      }
+    };
+
+    const onMouseDown = () => {
+      cursor.classList.add('cursor-clicked');
+    };
+
+    const onMouseUp = () => {
+      cursor.classList.remove('cursor-clicked');
+    };
+
+    const onMouseLeave = () => {
+      isVisible = false;
+      container.classList.remove('is-visible');
+    };
+
+    const onMouseEnter = () => {
+      isVisible = true;
+      container.classList.add('is-visible');
+    };
+
+    window.addEventListener('mousemove', onMouseMove, { passive: true });
+    window.addEventListener('mousedown', onMouseDown, { passive: true });
+    window.addEventListener('mouseup', onMouseUp, { passive: true });
+    document.addEventListener('mouseleave', onMouseLeave);
+    document.addEventListener('mouseenter', onMouseEnter);
+
+    // Ultra-smooth 60/120fps RAF loop
+    const render = () => {
+      // 0.35 factor ensures crisp instant responsiveness without drag delay
+      const ease = 0.35;
+      pos.x += (mouse.x - pos.x) * ease;
+      pos.y += (mouse.y - pos.y) * ease;
+
+      cursor.style.transform = `translate3d(${pos.x}px, ${pos.y}px, 0)`;
+
+      animId = requestAnimationFrame(render);
+    };
+
+    animId = requestAnimationFrame(render);
 
     return () => {
       document.body.classList.remove('has-capsule-cursor');
+      window.removeEventListener('mousemove', onMouseMove);
+      window.removeEventListener('mousedown', onMouseDown);
+      window.removeEventListener('mouseup', onMouseUp);
+      document.removeEventListener('mouseleave', onMouseLeave);
+      document.removeEventListener('mouseenter', onMouseEnter);
+      cancelAnimationFrame(animId);
     };
-  }, [isEnabled]);
-
-  // Update hover detection on elements
-  const checkInteractiveTarget = useCallback((target: EventTarget | null) => {
-    if (!(target instanceof HTMLElement)) return false;
-    return !!target.closest('a, button, input, textarea, select, [role="button"], .pharma-card, .therapeutic-card, .nav-link-item, .interactive-card');
   }, []);
-
-  useEffect(() => {
-    if (!isEnabled) return;
-
-    const handleMouseMove = (e: MouseEvent) => {
-      mousePos.current = { x: e.clientX, y: e.clientY };
-      if (!isVisible) setIsVisible(true);
-
-      const hoveringInteractive = checkInteractiveTarget(e.target);
-      setIsHovered(hoveringInteractive);
-
-      // Spawn ephemeral molecular trail particle when hovering interactive elements
-      const now = performance.now();
-      if (hoveringInteractive && now - lastTrailTime.current > 45) {
-        lastTrailTime.current = now;
-        const colors = ['#20AEEA', '#E5242A', '#1456A0', '#60A5FA'];
-        const randomColor = colors[Math.floor(Math.random() * colors.length)];
-        const newParticle: Particle = {
-          id: particleIdCounter.current++,
-          x: e.clientX + (Math.random() * 8 - 4),
-          y: e.clientY + (Math.random() * 8 - 4),
-          color: randomColor,
-          size: Math.random() * 2.5 + 2,
-          createdAt: now,
-        };
-
-        setParticles((prev) => [...prev.slice(-6), newParticle]);
-      }
-    };
-
-    const handleMouseDown = () => {
-      setIsClicked(true);
-    };
-
-    const handleMouseUp = () => {
-      setIsClicked(false);
-    };
-
-    const handleMouseLeave = () => {
-      setIsVisible(false);
-    };
-
-    const handleMouseEnter = () => {
-      setIsVisible(true);
-    };
-
-    window.addEventListener('mousemove', handleMouseMove, { passive: true });
-    window.addEventListener('mousedown', handleMouseDown, { passive: true });
-    window.addEventListener('mouseup', handleMouseUp, { passive: true });
-    document.addEventListener('mouseleave', handleMouseLeave);
-    document.addEventListener('mouseenter', handleMouseEnter);
-
-    return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
-      window.removeEventListener('mousedown', handleMouseDown);
-      window.removeEventListener('mouseup', handleMouseUp);
-      document.removeEventListener('mouseleave', handleMouseLeave);
-      document.removeEventListener('mouseenter', handleMouseEnter);
-    };
-  }, [isEnabled, isVisible, checkInteractiveTarget]);
-
-  // Animation frame loop for smooth cursor tracking & particle fading
-  useEffect(() => {
-    if (!isEnabled) return;
-
-    let animFrameId: number;
-
-    const animate = () => {
-      // Smooth lerp (0.35 factor for ultra-crisp responsive feel)
-      const ease = 0.35;
-      currentPos.current.x += (mousePos.current.x - currentPos.current.x) * ease;
-      currentPos.current.y += (mousePos.current.y - currentPos.current.y) * ease;
-
-      if (cursorRef.current) {
-        cursorRef.current.style.transform = `translate3d(${currentPos.current.x}px, ${currentPos.current.y}px, 0)`;
-      }
-
-      // Purge old trail particles (> 400ms)
-      const now = performance.now();
-      setParticles((prev) => {
-        const fresh = prev.filter((p) => now - p.createdAt < 400);
-        return fresh.length !== prev.length ? fresh : prev;
-      });
-
-      animFrameId = requestAnimationFrame(animate);
-    };
-
-    animFrameId = requestAnimationFrame(animate);
-    return () => cancelAnimationFrame(animFrameId);
-  }, [isEnabled]);
-
-  if (!isEnabled) return null;
 
   return (
     <div 
-      className={`capsule-cursor-portal ${isVisible ? 'is-visible' : ''}`}
+      ref={containerRef} 
+      className="capsule-cursor-portal" 
       aria-hidden="true"
     >
-      {/* Ephemeral Molecular Trail Particles */}
-      {particles.map((p) => (
-        <span
-          key={p.id}
-          className="cursor-trail-dot"
-          style={{
-            transform: `translate3d(${p.x}px, ${p.y}px, 0)`,
-            backgroundColor: p.color,
-            width: `${p.size}px`,
-            height: `${p.size}px`,
-          }}
-        />
-      ))}
-
-      {/* Main Cursor Anchor */}
-      <div 
-        ref={cursorRef} 
-        className={`capsule-cursor-body ${isHovered ? 'cursor-hovered' : ''} ${isClicked ? 'cursor-clicked' : ''}`}
-      >
+      <div ref={cursorRef} className="capsule-cursor-body">
         {/* Subtle Interactive Aura Glow Ring */}
-        <div className="cursor-aura-ring" />
-
-        {/* Click Shockwave Ripple */}
-        {isClicked && <div className="cursor-ripple-wave" />}
+        <div ref={auraRef} className="cursor-aura-ring" />
 
         {/* 45-Degree Angled Pharmaceutical Bicolored Capsule */}
         <svg 
