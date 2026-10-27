@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { FlaskConical, Microscope, Sparkles, CheckCircle2, ArrowRight, Atom } from 'lucide-react';
 import { VIDEO_ASSETS, MEDIA_CONFIG, PAGE_HERO_IMAGES } from '../config/assets';
 import { BrandedVideo } from '../components/common/BrandedVideo';
+import { ScientificNetworkArtwork } from '../components/common/ScientificNetworkArtwork';
 import { ScrollWordReveal } from '../components/common/ScrollWordReveal';
 import { SignatureClosingStatement } from '../components/common/SignatureClosingStatement';
 import { useScrollReveal } from '../hooks/useScrollReveal';
@@ -89,19 +90,8 @@ export const ResearchPage: React.FC<ResearchPageProps> = ({ onNavigate }) => {
             zIndex: 2,
           }}
         />
-        {/* Subtle Molecular Linework SVG */}
-        <div style={{ position: 'absolute', right: '40px', top: '20px', opacity: 0.15, pointerEvents: 'none', zIndex: 3 }} aria-hidden="true">
-          <svg width="380" height="380" viewBox="0 0 200 200" fill="none">
-            <polygon points="100,20 170,60 170,140 100,180 30,140 30,60" stroke="#FFFFFF" strokeWidth="1.5" />
-            <polygon points="100,50 145,75 145,125 100,150 55,125 55,75" stroke="#E5242A" strokeWidth="1.5" />
-            <circle cx="100" cy="20" r="5" fill="#38BDF8" />
-            <circle cx="170" cy="60" r="5" fill="#FFFFFF" />
-            <circle cx="170" cy="140" r="5" fill="#38BDF8" />
-            <circle cx="100" cy="180" r="5" fill="#E5242A" />
-            <circle cx="30" cy="140" r="5" fill="#38BDF8" />
-            <circle cx="30" cy="60" r="5" fill="#FFFFFF" />
-          </svg>
-        </div>
+        {/* Restrained Molecular Network Graphic along edge */}
+        <ScientificNetworkArtwork position="right" variant="combined" opacity={0.6} />
         <div className="container" style={{ position: 'relative', zIndex: 4, padding: '4.5rem 1.5rem', width: '100%' }}>
           <div style={{ maxWidth: '820px' }}>
             <span className="section-eyebrow" style={{ color: 'var(--color-teal)' }}>

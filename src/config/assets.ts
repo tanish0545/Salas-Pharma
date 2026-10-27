@@ -98,6 +98,16 @@ export const VIDEO_ASSETS: Record<string, VideoMediaAsset> = {
     description: "3D molecular DNA double helix rotating in ambient scientific lighting.",
     alt: "Ambient scientific 3D molecular DNA background visualization",
   },
+  capsuleSorting: {
+    id: "capsuleSorting",
+    title: "Automated Capsule Sorting & Orientation Mechanics",
+    subtitle: "High-speed centrifugal sorting, dual-color capsule alignment, and precision counting",
+    video: "/assets/videos/salas5.mp4",
+    poster: "/assets/videos/posters/salas5-poster.webp",
+    playbackRate: 1.0,
+    description: "3D visualization of dual-color pharmaceutical capsule orientation and centrifugal drum sorting.",
+    alt: "Salas Pharma automated capsule sorting and orientation technology",
+  },
 };
 
 export const MEDIA_CONFIG = {

@@ -17,7 +17,8 @@ import {
   Building2,
   Globe,
   Microscope,
-  FileCheck
+  FileCheck,
+  HeartHandshake
 } from 'lucide-react';
 import { MEDIA_CONFIG, VIDEO_ASSETS, PAGE_HERO_IMAGES } from '../config/assets';
 import { BrandedVideo } from '../components/common/BrandedVideo';
@@ -285,6 +286,39 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, isLoaderComplete
               <p className="hero-option5-description">
                 An Indian pharmaceutical enterprise engaged in the manufacture and marketing of high-precision formulations, dedicated to quality compliance, scientific integrity, and accessible healthcare across India.
               </p>
+
+              {/* Three Compact Verified Highlights */}
+              <div className="hero-option5-highlights">
+                <div className="hero-option5-highlight-item">
+                  <div className="hero-option5-highlight-icon">
+                    <ShieldCheck size={16} />
+                  </div>
+                  <div>
+                    <h4 className="hero-option5-highlight-title">Quality Compliance</h4>
+                    <p className="hero-option5-highlight-desc">Schedule M & cGMP cleanroom manufacturing</p>
+                  </div>
+                </div>
+
+                <div className="hero-option5-highlight-item">
+                  <div className="hero-option5-highlight-icon">
+                    <FlaskConical size={16} />
+                  </div>
+                  <div>
+                    <h4 className="hero-option5-highlight-title">Scientific Rigor</h4>
+                    <p className="hero-option5-highlight-desc">HPLC assay testing & dissolution profiling</p>
+                  </div>
+                </div>
+
+                <div className="hero-option5-highlight-item">
+                  <div className="hero-option5-highlight-icon">
+                    <HeartHandshake size={16} />
+                  </div>
+                  <div>
+                    <h4 className="hero-option5-highlight-title">Healthcare Reach</h4>
+                    <p className="hero-option5-highlight-desc">Ethical formulations for patient accessibility</p>
+                  </div>
+                </div>
+              </div>
 
               {/* Two Clearly Differentiated CTAs */}
               <div className="hero-option5-ctas">

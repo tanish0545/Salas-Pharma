@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { MapPin, Mail, Send, CheckCircle2, AlertCircle, Building2, Factory, Copy, Check } from 'lucide-react';
+import { MapPin, Mail, Phone, Send, CheckCircle2, AlertCircle, Building2, Factory, Copy, Check } from 'lucide-react';
 import { PAGE_HERO_IMAGES } from '../config/assets';
+import { ScientificNetworkArtwork } from '../components/common/ScientificNetworkArtwork';
 import { ScrollWordReveal } from '../components/common/ScrollWordReveal';
 import { SignatureClosingStatement } from '../components/common/SignatureClosingStatement';
 import { useScrollReveal } from '../hooks/useScrollReveal';
@@ -89,8 +90,8 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
   return (
     <div className="contact-page" style={{ marginTop: 'var(--header-height)', backgroundColor: '#FFFFFF' }}>
       
-      {/* 1. HERO SHOWCASE WITH STATIC HERO PHOTOGRAPHY */}
-      <section className="page-hero-banner" style={{ position: 'relative', overflow: 'hidden', backgroundColor: 'var(--color-navy)', color: '#FFFFFF', minHeight: '440px', display: 'flex', alignItems: 'center' }}>
+      {/* 1. HERO SHOWCASE WITH CORPORATE FACILITY PHOTOGRAPHY */}
+      <section className="page-hero-banner" style={{ position: 'relative', overflow: 'hidden', backgroundColor: 'var(--color-navy)', color: '#FFFFFF', minHeight: '480px', display: 'flex', alignItems: 'center' }}>
         <img
           src={PAGE_HERO_IMAGES.contact.image}
           alt={PAGE_HERO_IMAGES.contact.alt}
@@ -115,18 +116,67 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
             zIndex: 2,
           }}
         />
+
+        {/* Restrained Molecular Network Linework along edge */}
+        <ScientificNetworkArtwork position="right" variant="combined" opacity={0.6} />
+
         <div className="container" style={{ position: 'relative', zIndex: 3, padding: '4.5rem 1.5rem', width: '100%' }}>
           <div style={{ maxWidth: '820px' }}>
             <span className="section-eyebrow" style={{ color: 'var(--color-teal)' }}>
-              <Mail size={14} /> Corporate Liaison
+              <Mail size={14} /> Corporate Liaison & Institutional Dialogue
             </span>
             <h1 style={{ fontSize: 'clamp(2.5rem, 5vw, 3.8rem)', marginBottom: '1.25rem', color: '#FFFFFF', letterSpacing: '-0.02em', lineHeight: 1.18 }}>
               Open Communication. <br />
               <span style={{ color: '#60A5FA' }}>Direct Corporate Dialogue.</span>
             </h1>
-            <p style={{ fontSize: '1.25rem', color: '#CBD5E1', lineHeight: 1.7, fontWeight: 400 }}>
+            <p style={{ fontSize: '1.25rem', color: '#CBD5E1', lineHeight: 1.7, fontWeight: 400, marginBottom: '2rem' }}>
               We welcome formal inquiries from licensed healthcare practitioners, institutional procurement officers, distribution alliances, and regulatory authorities.
             </p>
+
+            {/* Direct Communication Quick Badges */}
+            <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+              <a
+                href="mailto:info@salaspharma.co.in"
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '0.6rem',
+                  padding: '0.65rem 1.25rem',
+                  backgroundColor: 'rgba(255, 255, 255, 0.1)',
+                  borderRadius: 'var(--radius-full)',
+                  border: '1px solid rgba(255, 255, 255, 0.25)',
+                  color: '#FFFFFF',
+                  textDecoration: 'none',
+                  fontSize: '0.9375rem',
+                  fontWeight: 600,
+                  transition: 'background-color 0.2s ease',
+                }}
+              >
+                <Mail size={16} style={{ color: '#38BDF8' }} />
+                <span>info@salaspharma.co.in</span>
+              </a>
+
+              <a
+                href="tel:06122323212"
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '0.6rem',
+                  padding: '0.65rem 1.25rem',
+                  backgroundColor: 'rgba(255, 255, 255, 0.1)',
+                  borderRadius: 'var(--radius-full)',
+                  border: '1px solid rgba(255, 255, 255, 0.25)',
+                  color: '#FFFFFF',
+                  textDecoration: 'none',
+                  fontSize: '0.9375rem',
+                  fontWeight: 600,
+                  transition: 'background-color 0.2s ease',
+                }}
+              >
+                <Phone size={16} style={{ color: '#38BDF8' }} />
+                <span>0612-2323212</span>
+              </a>
+            </div>
           </div>
         </div>
       </section>
@@ -198,10 +248,21 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
                     </span>
                   </div>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', paddingTop: '0.65rem', borderTop: '1px dashed var(--color-border)' }}>
-                    <Mail size={16} style={{ color: 'var(--color-primary-blue)' }} />
-                    <span style={{ fontSize: '0.875rem', color: 'var(--color-navy)', fontWeight: 600 }}>
+                    <Mail size={16} style={{ color: 'var(--color-primary-blue)', flexShrink: 0 }} />
+                    <a href="mailto:info@salaspharma.co.in" style={{ fontSize: '0.875rem', color: 'var(--color-primary-blue)', fontWeight: 600, textDecoration: 'none' }}>
                       info@salaspharma.co.in
-                    </span>
+                    </a>
+                  </div>
+                  <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.75rem', paddingTop: '0.65rem', borderTop: '1px dashed var(--color-border)' }}>
+                    <Phone size={16} style={{ color: 'var(--color-primary-blue)', flexShrink: 0, marginTop: '2px' }} />
+                    <div>
+                      <a href="tel:06122323212" style={{ fontSize: '0.875rem', color: 'var(--color-navy)', fontWeight: 600, textDecoration: 'none' }}>
+                        0612-2323212
+                      </a>
+                      <span style={{ display: 'block', fontSize: '0.75rem', color: 'var(--color-text-muted)', lineHeight: 1.4, marginTop: '2px' }}>
+                        * Advisory: 0612 STD code belongs to Patna; please confirm Vadodara HQ direct line.
+                      </span>
+                    </div>
                   </div>
                 </div>
               </div>

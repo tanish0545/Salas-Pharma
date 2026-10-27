@@ -3,6 +3,7 @@ import { Factory, ShieldCheck, MapPin, CheckCircle2, Cpu, ArrowRight } from 'luc
 import { VIDEO_ASSETS, MEDIA_CONFIG, PAGE_HERO_IMAGES } from '../config/assets';
 import { BrandedVideo } from '../components/common/BrandedVideo';
 import { QualitySeal } from '../components/common/QualitySeal';
+import { ScientificNetworkArtwork } from '../components/common/ScientificNetworkArtwork';
 import { ScrollWordReveal } from '../components/common/ScrollWordReveal';
 import { SignatureClosingStatement } from '../components/common/SignatureClosingStatement';
 import { useScrollReveal } from '../hooks/useScrollReveal';
@@ -111,6 +112,8 @@ export const ManufacturingPage: React.FC<ManufacturingPageProps> = ({ onNavigate
             zIndex: 2,
           }}
         />
+        {/* Restrained Molecular Network Graphic along edge */}
+        <ScientificNetworkArtwork position="right" variant="combined" opacity={0.5} />
         <div className="container" style={{ position: 'relative', zIndex: 3, padding: '4.5rem 1.5rem', width: '100%' }}>
           <div style={{ maxWidth: '820px' }}>
             <span className="section-eyebrow" style={{ color: 'var(--color-teal)' }}>

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Award, Target, Eye, Compass, Calendar, MapPin, Building2, Copy, Check } from 'lucide-react';
 import { MEDIA_CONFIG, PAGE_HERO_IMAGES } from '../config/assets';
 import { AnimatedCounter } from '../components/common/AnimatedCounter';
+import { ScientificNetworkArtwork } from '../components/common/ScientificNetworkArtwork';
 import { ScrollWordReveal } from '../components/common/ScrollWordReveal';
 import { SignatureClosingStatement } from '../components/common/SignatureClosingStatement';
 import { useScrollReveal } from '../hooks/useScrollReveal';
@@ -77,6 +78,8 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
             zIndex: 2,
           }}
         />
+        {/* Restrained Molecular Network Graphic along edge */}
+        <ScientificNetworkArtwork position="right" variant="combined" opacity={0.5} />
         <div className="container" style={{ position: 'relative', zIndex: 3, padding: '4.5rem 1.5rem', width: '100%' }}>
           <div style={{ maxWidth: '820px' }}>
             <span className="section-eyebrow" style={{ color: 'var(--color-teal)' }}>

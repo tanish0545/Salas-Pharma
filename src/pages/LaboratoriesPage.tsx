@@ -10,12 +10,13 @@ import {
   FileCheck,
   Sparkles,
   ClipboardList,
-  TestTube2
+  TestTube2,
+  Activity
 } from 'lucide-react';
 import { VIDEO_ASSETS, MEDIA_CONFIG, PAGE_HERO_IMAGES } from '../config/assets';
 import { BrandedVideo } from '../components/common/BrandedVideo';
 import { QualitySeal } from '../components/common/QualitySeal';
-import { ScientificParticles } from '../components/common/ScientificParticles';
+import { ScientificNetworkArtwork } from '../components/common/ScientificNetworkArtwork';
 import { ScrollWordReveal } from '../components/common/ScrollWordReveal';
 import { SignatureClosingStatement } from '../components/common/SignatureClosingStatement';
 import { useScrollReveal } from '../hooks/useScrollReveal';
@@ -112,18 +113,18 @@ export const LaboratoriesPage: React.FC<LaboratoriesPageProps> = ({ onNavigate }
   return (
     <div className="laboratories-page" style={{ backgroundColor: '#FFFFFF' }}>
       {/* ====================================================================
-          SECTION A: LABORATORY HERO WITH Lab2.mp4
+          SECTION A: IMMERSIVE LABORATORY HERO
           ==================================================================== */}
       <section
         className="laboratory-hero-section"
         style={{
           position: 'relative',
-          minHeight: 'clamp(680px, calc(100vh - var(--header-height)), 780px)',
+          minHeight: 'clamp(740px, calc(100vh - var(--header-height)), 860px)',
           display: 'flex',
           alignItems: 'center',
           marginTop: 'var(--header-height)',
           overflow: 'hidden',
-          backgroundColor: '#FFFFFF',
+          backgroundColor: '#07182C',
         }}
       >
         {/* Full-width Dedicated Laboratory Hero Static Image Background */}
@@ -144,153 +145,156 @@ export const LaboratoriesPage: React.FC<LaboratoriesPageProps> = ({ onNavigate }
               width: '100%',
               height: '100%',
               objectFit: 'cover',
-              objectPosition: 'center 42%',
+              objectPosition: 'center 38%',
               display: 'block',
             }}
           />
-          {/* Natural Footage Clarity: Left & Center remain clear; gradual right-side white fade ensures text legibility */}
+          {/* Deep Navy Cinematic Gradient Overlay preserving rich laboratory visual depth */}
           <div
-            className="hero-gradient-mask"
             style={{
               position: 'absolute',
               inset: 0,
-              background: 'linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.4) 55%, rgba(255, 255, 255, 0.88) 78%, #FFFFFF 100%)',
+              background: 'linear-gradient(to right, rgba(7, 24, 44, 0.95) 0%, rgba(7, 24, 44, 0.88) 45%, rgba(7, 24, 44, 0.55) 75%, rgba(7, 24, 44, 0.35) 100%)',
               pointerEvents: 'none',
             }}
           />
         </div>
 
-        {/* Layered Scientific Molecular Particles (Subtle drifting nodes & connecting lines, pointer-events: none) */}
-        <ScientificParticles
-          particleCount={18}
-          interactive={true}
-          style={{
-            position: 'absolute',
-            inset: 0,
-            zIndex: 2,
-            pointerEvents: 'none',
-          }}
-        />
+        {/* Reusable Scientific Network Artwork (Bonds, Nodes & Fine Helices, pointer-events: none) */}
+        <ScientificNetworkArtwork position="both" variant="combined" opacity={0.65} />
 
-        {/* Hero Content Overlay (Aligned to centered max-width container, stable stacking order) */}
-        <div className="container" style={{ position: 'relative', zIndex: 3, padding: '3.5rem 1.5rem', width: '100%' }}>
-          <div
-            className="hero-grid-layout"
-            style={{
-              display: 'grid',
-              gridTemplateColumns: '1fr minmax(320px, 680px)',
-              gap: '2rem',
-              alignItems: 'center'
-            }}
-          >
-            {/* Left Spacer Column so the 4K dissolution beaker footage is clearly visible */}
-            <div className="hero-video-window" style={{ minHeight: '1px' }} />
+        {/* Hero Content Overlay */}
+        <div className="container" style={{ position: 'relative', zIndex: 3, padding: '4.5rem 1.5rem', width: '100%' }}>
+          <div style={{ maxWidth: '960px' }}>
+            <div
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '0.55rem',
+                backgroundColor: 'rgba(56, 189, 248, 0.1)',
+                padding: '0.45rem 1.15rem',
+                borderRadius: 'var(--radius-full)',
+                color: '#7DD3FC',
+                fontSize: '0.8125rem',
+                fontWeight: 700,
+                letterSpacing: '0.12em',
+                textTransform: 'uppercase',
+                marginBottom: '1.5rem',
+                border: '1px solid rgba(56, 189, 248, 0.22)',
+              }}
+            >
+              <Sparkles size={15} style={{ color: '#E5242A' }} />
+              <span>SCIENCE & ANALYTICAL PRECISION</span>
+            </div>
 
-            {/* Right Content Panel sitting on clean white background */}
-            <div className="hero-text-content" style={{ padding: '1rem 0', textAlign: 'left' }}>
-              <div
+            {/* Bold Heading with Highlighted Words in SALAS Blue */}
+            <h1
+              className="hero-main-heading"
+              style={{
+                fontSize: 'clamp(2.4rem, 5.2vw, 3.8rem)',
+                lineHeight: 1.15,
+                fontWeight: 900,
+                color: '#FFFFFF',
+                marginBottom: '1.5rem',
+                letterSpacing: '-0.025em',
+              }}
+            >
+              Advancing Science <br />
+              Through <span style={{ color: '#38BDF8', position: 'relative', display: 'inline-block' }}>Precision & Rigor</span>
+            </h1>
+
+            <p
+              style={{
+                color: '#CBD5E1',
+                fontSize: 'clamp(1.05rem, 1.5vw, 1.25rem)',
+                lineHeight: 1.7,
+                marginBottom: '2.5rem',
+                maxWidth: '720px',
+                fontWeight: 400,
+              }}
+            >
+              Dedicated analytical testing and quality control laboratories in Sikkim operating under Schedule M cGMP discipline, conducting HPLC assays, in-vitro dissolution kinetics, and continuous stability validation.
+            </p>
+
+            {/* Two Clear Calls to Action */}
+            <div
+              style={{
+                display: 'flex',
+                flexWrap: 'wrap',
+                gap: '1rem',
+                alignItems: 'center',
+                marginBottom: '3rem',
+              }}
+            >
+              <a
+                href="#lab-overview"
+                onClick={handleScrollToOverview}
+                className="btn btn-primary"
                 style={{
+                  fontSize: '1rem',
+                  padding: '0.9rem 2rem',
+                  fontWeight: 700,
+                  textDecoration: 'none',
                   display: 'inline-flex',
                   alignItems: 'center',
-                  gap: '0.5rem',
-                  backgroundColor: 'rgba(20, 86, 160, 0.08)',
-                  padding: '0.45rem 1.15rem',
-                  borderRadius: 'var(--radius-full)',
-                  color: '#1456A0',
-                  fontSize: '0.8125rem',
-                  fontWeight: 700,
-                  letterSpacing: '0.12em',
-                  textTransform: 'uppercase',
-                  marginBottom: '1.5rem',
-                  border: '1px solid rgba(20, 86, 160, 0.18)',
+                  gap: '0.6rem',
                 }}
               >
-                <Sparkles size={15} style={{ color: '#D32F2F' }} />
-                <span>SCIENCE & PRECISION</span>
+                <span>Explore Laboratory Capabilities</span>
+                <ArrowDown size={18} />
+              </a>
+
+              <button
+                type="button"
+                onClick={() => onNavigate('contact')}
+                className="btn btn-secondary"
+                style={{
+                  fontSize: '1rem',
+                  padding: '0.9rem 2rem',
+                  backgroundColor: 'rgba(255, 255, 255, 0.08)',
+                  color: '#FFFFFF',
+                  borderColor: 'rgba(255, 255, 255, 0.25)',
+                }}
+              >
+                <span>Connect With Quality Team</span>
+              </button>
+            </div>
+
+            {/* Row of Four Compact Capability Highlights */}
+            <div className="lab-hero-highlights">
+              <div className="lab-hero-highlight-card">
+                <div className="lab-hero-highlight-icon">
+                  <FlaskConical size={20} />
+                </div>
+                <h4 className="lab-hero-highlight-title">Analytical HPLC Assay</h4>
+                <p className="lab-hero-highlight-desc">Chromatographic purity testing & active constituent assay</p>
               </div>
 
-              {/* Main Heading: "Advancing Science Through Precision" (Always 100% visible, robust typography) */}
-              <h1
-                className="hero-main-heading hero-animate-entrance"
-                style={{
-                  marginBottom: '1.25rem',
-                  lineHeight: 1.15,
-                  fontWeight: 900,
-                }}
-              >
-                <span style={{ color: '#24364B' }}>Advancing Science </span>
-                <br className="hero-heading-br" />
-                <span style={{ color: '#24364B' }}>Through </span>
-                <span style={{ color: '#1456A0', position: 'relative', display: 'inline-block' }}>
-                  Precision
-                  <span
-                    style={{
-                      position: 'absolute',
-                      bottom: '-4px',
-                      left: 0,
-                      right: 0,
-                      height: '4px',
-                      backgroundColor: '#D32F2F',
-                      borderRadius: '2px',
-                    }}
-                  />
-                </span>
-              </h1>
+              <div className="lab-hero-highlight-card">
+                <div className="lab-hero-highlight-icon">
+                  <Activity size={20} />
+                </div>
+                <h4 className="lab-hero-highlight-title">Dissolution Kinetics</h4>
+                <p className="lab-hero-highlight-desc">Pharmacopeial release rate profiling & in-vitro absorption</p>
+              </div>
 
-              <p
-                style={{
-                  color: '#34445A',
-                  fontSize: 'clamp(1.05rem, 1.6vw, 1.2rem)',
-                  lineHeight: 1.65,
-                  marginBottom: '2rem',
-                  maxWidth: '600px',
-                  fontWeight: 500,
-                }}
-              >
-                Discover our commitment to laboratory research, analytical testing and quality-focused pharmaceutical processes.
-              </p>
+              <div className="lab-hero-highlight-card">
+                <div className="lab-hero-highlight-icon">
+                  <ShieldCheck size={20} />
+                </div>
+                <h4 className="lab-hero-highlight-title">Dosage Form Integrity</h4>
+                <p className="lab-hero-highlight-desc">Batch uniformity, friability, hardness & disintegration</p>
+              </div>
 
-              <div
-                className="reveal-left delay-300"
-                style={{
-                  display: 'flex',
-                  flexWrap: 'wrap',
-                  gap: '1rem',
-                  alignItems: 'center',
-                }}
-              >
-                <a
-                  href="#lab-overview"
-                  onClick={handleScrollToOverview}
-                  className="btn btn-primary"
-                  style={{
-                    fontSize: '1rem',
-                    padding: '0.9rem 2rem',
-                    fontWeight: 700,
-                    textDecoration: 'none',
-                    display: 'inline-flex',
-                    alignItems: 'center',
-                    gap: '0.6rem',
-                  }}
-                >
-                  <span>Explore Our Laboratories</span>
-                  <ArrowDown size={18} />
-                </a>
-
-                <button
-                  type="button"
-                  onClick={() => onNavigate('contact')}
-                  className="btn btn-secondary"
-                  style={{
-                    fontSize: '1rem',
-                    padding: '0.9rem 2rem',
-                    backgroundColor: '#FFFFFF',
-                  }}
-                >
-                  <span>Connect With Our Team</span>
-                </button>
+              <div className="lab-hero-highlight-card">
+                <div className="lab-hero-highlight-icon">
+                  <Layers size={20} />
+                </div>
+                <h4 className="lab-hero-highlight-title">Stability & Climatic Control</h4>
+                <p className="lab-hero-highlight-desc">Zone IVb sample retention & accelerated shelf-life studies</p>
               </div>
             </div>
+
           </div>
         </div>
 
@@ -300,6 +304,32 @@ export const LaboratoriesPage: React.FC<LaboratoriesPageProps> = ({ onNavigate }
             <div className="hero-scroll-dot" />
           </div>
           <span>Scroll to explore</span>
+        </div>
+      </section>
+
+      {/* ====================================================================
+          SEPARATE METRICS STRIP: VERIFIED LABORATORY FIGURES
+          ==================================================================== */}
+      <section className="lab-metrics-strip" aria-label="Laboratory Quality Standards & Verified Metrics">
+        <div className="container">
+          <div className="lab-metrics-grid">
+            <div className="lab-metric-item">
+              <span className="lab-metric-val">Schedule M</span>
+              <span className="lab-metric-label">cGMP Facility Standards</span>
+            </div>
+            <div className="lab-metric-item">
+              <span className="lab-metric-val">100% In-Process</span>
+              <span className="lab-metric-label">Pre-Release Batch Testing</span>
+            </div>
+            <div className="lab-metric-item">
+              <span className="lab-metric-val">Zone IVb</span>
+              <span className="lab-metric-label">High-Humidity Stability Protocols</span>
+            </div>
+            <div className="lab-metric-item">
+              <span className="lab-metric-val">ISO Class 5</span>
+              <span className="lab-metric-label">Laminar Airflow Clean Sampling</span>
+            </div>
+          </div>
         </div>
       </section>
 

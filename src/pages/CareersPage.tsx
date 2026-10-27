@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Users, Send, CheckCircle2, Copy, Check, AlertCircle, ArrowRight, MapPin, Briefcase } from 'lucide-react';
 import { PAGE_HERO_IMAGES } from '../config/assets';
+import { ScientificNetworkArtwork } from '../components/common/ScientificNetworkArtwork';
 import { ScrollWordReveal } from '../components/common/ScrollWordReveal';
 import { SignatureClosingStatement } from '../components/common/SignatureClosingStatement';
 import { useScrollReveal } from '../hooks/useScrollReveal';
@@ -135,6 +136,8 @@ export const CareersPage: React.FC<CareersPageProps> = ({ onNavigate }) => {
             zIndex: 2,
           }}
         />
+        {/* Restrained Molecular Network Graphic along edge */}
+        <ScientificNetworkArtwork position="right" variant="combined" opacity={0.5} />
         <div className="container" style={{ position: 'relative', zIndex: 3, padding: '4.5rem 1.5rem', width: '100%' }}>
           <div style={{ maxWidth: '820px' }}>
             <span className="section-eyebrow" style={{ color: 'var(--color-teal)' }}>

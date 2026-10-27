@@ -1,7 +1,9 @@
 import React, { useState, useMemo } from 'react';
-import { Search, Pill, X, ArrowRight, Filter, ShieldCheck, AlertCircle } from 'lucide-react';
+import { Search, Pill, X, ArrowRight, Filter, ShieldCheck, AlertCircle, Cpu } from 'lucide-react';
 import { useScrollReveal } from '../hooks/useScrollReveal';
-import { PAGE_HERO_IMAGES } from '../config/assets';
+import { PAGE_HERO_IMAGES, VIDEO_ASSETS } from '../config/assets';
+import { BrandedVideo } from '../components/common/BrandedVideo';
+import { ScientificNetworkArtwork } from '../components/common/ScientificNetworkArtwork';
 import { ScrollWordReveal } from '../components/common/ScrollWordReveal';
 import { SignatureClosingStatement } from '../components/common/SignatureClosingStatement';
 
@@ -296,6 +298,8 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({ onNavigate }) => {
             zIndex: 2,
           }}
         />
+        {/* Restrained Molecular Network Graphic along edge */}
+        <ScientificNetworkArtwork position="right" variant="combined" opacity={0.5} />
         <div className="container" style={{ position: 'relative', zIndex: 3, padding: '4.5rem 1.5rem', width: '100%' }}>
           <div style={{ maxWidth: '820px' }}>
             <span className="section-eyebrow" style={{ color: 'var(--color-teal)' }}>
@@ -579,6 +583,82 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({ onNavigate }) => {
               ))}
             </div>
           )}
+        </div>
+      </section>
+
+      {/* 4B. ENCAPSULATION & CAPSULE SORTING MECHANICS (FEATURING salas5.mp4) */}
+      <section className="section-spacing" style={{ backgroundColor: 'var(--color-bg-light)', borderTop: '1px solid var(--color-border)', borderBottom: '1px solid var(--color-border)' }}>
+        <div className="container">
+          <div
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
+              gap: '4rem',
+              alignItems: 'center',
+            }}
+          >
+            {/* Left Footage: salas5.mp4 (Automated Capsule Sorting Drum) */}
+            <div className="reveal-left">
+              <div
+                className="img-zoom-wrapper"
+                style={{
+                  borderRadius: 'var(--radius-xl)',
+                  boxShadow: 'var(--shadow-xl)',
+                  border: '1px solid var(--color-border)',
+                  overflow: 'hidden',
+                  backgroundColor: '#05182C',
+                }}
+              >
+                <BrandedVideo
+                  src={VIDEO_ASSETS.capsuleSorting.video}
+                  poster={VIDEO_ASSETS.capsuleSorting.poster}
+                  playbackRate={VIDEO_ASSETS.capsuleSorting.playbackRate}
+                  autoPlay={true}
+                  muted={true}
+                  loop={true}
+                  playsInline={true}
+                  ariaLabel={VIDEO_ASSETS.capsuleSorting.alt}
+                  style={{ width: '100%', height: '420px', objectFit: 'cover' }}
+                />
+              </div>
+            </div>
+
+            {/* Right Information Column */}
+            <div className="reveal-right">
+              <span className="section-eyebrow">
+                <Cpu size={14} /> Solid Oral Technology
+              </span>
+              <h2 className="section-title" style={{ marginBottom: '1.25rem' }}>
+                High-Speed Capsule Encapsulation & Sorting
+              </h2>
+              <p style={{ color: 'var(--color-text-body)', fontSize: '1.05rem', lineHeight: 1.75, marginBottom: '1.75rem' }}>
+                Our automated encapsulation suites utilize high-speed centrifugal drum sorters and precision tamping pins to achieve micro-gram dosage accuracy across hard gelatin and multi-particulate pellet formulations.
+              </p>
+
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem', marginBottom: '2rem' }}>
+                {[
+                  'Centrifugal dual-color capsule orientation and alignment',
+                  'Precision volumetric micro-pellet dosing with minimal fill weight variation (< 1%)',
+                  'Automated optical detection and rejection of deformed or unclosed capsules',
+                  'Positive-pressure cleanroom suites maintaining controlled relative humidity (RH < 40%)'
+                ].map((item, idx) => (
+                  <div key={idx} style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                    <ShieldCheck size={18} style={{ color: 'var(--color-primary-blue)', flexShrink: 0 }} />
+                    <span style={{ fontSize: '0.9375rem', color: 'var(--color-navy)', fontWeight: 600 }}>{item}</span>
+                  </div>
+                ))}
+              </div>
+
+              <button
+                type="button"
+                onClick={() => onNavigate('manufacturing')}
+                className="btn btn-primary"
+              >
+                <span>View Manufacturing Process</span>
+                <ArrowRight size={16} />
+              </button>
+            </div>
+          </div>
         </div>
       </section>
 
