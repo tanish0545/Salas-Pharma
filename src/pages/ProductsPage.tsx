@@ -242,6 +242,11 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({ onNavigate }) => {
   const [selectedDosage, setSelectedDosage] = useState<string>('all');
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [selectedProduct, setSelectedProduct] = useState<ProductItem | null>(null);
+  const [capsuleVideoMode, setCapsuleVideoMode] = useState<'sorting' | 'pellet'>('sorting');
+
+  const activeCapsuleVideo = capsuleVideoMode === 'sorting'
+    ? VIDEO_ASSETS.capsuleSorting
+    : VIDEO_ASSETS.pelletEncapsulation;
 
   // Filter logic
   const filteredProducts = useMemo(() => {
@@ -597,8 +602,52 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({ onNavigate }) => {
               alignItems: 'center',
             }}
           >
-            {/* Left Footage: salas5.mp4 (Automated Capsule Sorting Drum) */}
+            {/* Left Footage: salas5.mp4 (Sorting Drum) & salas3.mp4 (Pellet Encapsulation) */}
             <div className="reveal-left">
+              {/* Interactive Video Switcher */}
+              <div
+                style={{
+                  display: 'flex',
+                  gap: '0.5rem',
+                  marginBottom: '1rem',
+                  backgroundColor: '#FFFFFF',
+                  padding: '0.4rem',
+                  borderRadius: 'var(--radius-lg)',
+                  border: '1px solid var(--color-border)',
+                }}
+                role="tablist"
+                aria-label="Encapsulation 3D technical views"
+              >
+                {[
+                  { id: 'sorting', label: 'Centrifugal Sorter (3D)' },
+                  { id: 'pellet', label: 'Pellet Encapsulation (3D)' },
+                ].map((mode) => (
+                  <button
+                    key={mode.id}
+                    type="button"
+                    role="tab"
+                    aria-selected={capsuleVideoMode === mode.id}
+                    onClick={() => setCapsuleVideoMode(mode.id as 'sorting' | 'pellet')}
+                    style={{
+                      flex: '1 1 auto',
+                      padding: '0.45rem 0.85rem',
+                      borderRadius: 'var(--radius-md)',
+                      fontSize: '0.8125rem',
+                      fontWeight: 700,
+                      border: 'none',
+                      backgroundColor: capsuleVideoMode === mode.id ? 'var(--color-primary-blue)' : 'transparent',
+                      color: capsuleVideoMode === mode.id ? '#FFFFFF' : 'var(--color-navy)',
+                      cursor: 'pointer',
+                      transition: 'all 0.2s ease',
+                      textAlign: 'center',
+                      boxShadow: capsuleVideoMode === mode.id ? 'var(--shadow-sm)' : 'none',
+                    }}
+                  >
+                    {mode.label}
+                  </button>
+                ))}
+              </div>
+
               <div
                 className="img-zoom-wrapper"
                 style={{
@@ -610,16 +659,39 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({ onNavigate }) => {
                 }}
               >
                 <BrandedVideo
-                  src={VIDEO_ASSETS.capsuleSorting.video}
-                  poster={VIDEO_ASSETS.capsuleSorting.poster}
-                  playbackRate={VIDEO_ASSETS.capsuleSorting.playbackRate}
+                  key={activeCapsuleVideo.id}
+                  src={activeCapsuleVideo.video}
+                  poster={activeCapsuleVideo.poster}
+                  playbackRate={activeCapsuleVideo.playbackRate}
                   autoPlay={true}
                   muted={true}
                   loop={true}
                   playsInline={true}
-                  ariaLabel={VIDEO_ASSETS.capsuleSorting.alt}
+                  ariaLabel={activeCapsuleVideo.alt}
                   style={{ width: '100%', height: '420px', objectFit: 'cover' }}
                 />
+              </div>
+
+              {/* Feed Metadata Badge */}
+              <div
+                style={{
+                  marginTop: '0.75rem',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                  padding: '0.5rem 1rem',
+                  backgroundColor: '#FFFFFF',
+                  border: '1px solid var(--color-border)',
+                  borderRadius: 'var(--radius-md)',
+                  fontSize: '0.8125rem',
+                }}
+              >
+                <span style={{ fontWeight: 700, color: 'var(--color-navy)' }}>
+                  {activeCapsuleVideo.title}
+                </span>
+                <span style={{ color: 'var(--color-text-muted)', fontSize: '0.75rem', fontWeight: 600 }}>
+                  3D Engineering Simulation
+                </span>
               </div>
             </div>
 

@@ -25,6 +25,13 @@ interface ProcessStage {
 export const ManufacturingPage: React.FC<ManufacturingPageProps> = ({ onNavigate }) => {
   useScrollReveal();
   const [activeStageId, setActiveStageId] = useState<number>(1);
+  const [videoFeed, setVideoFeed] = useState<'packaging' | 'cleanroom' | 'terminal'>('packaging');
+
+  const currentManufacturingVideo = videoFeed === 'packaging'
+    ? VIDEO_ASSETS.manufacturing
+    : videoFeed === 'cleanroom'
+      ? VIDEO_ASSETS.cleanroomReactors
+      : VIDEO_ASSETS.digitalTerminal;
 
   const processStages: ProcessStage[] = [
     {
@@ -362,6 +369,52 @@ export const ManufacturingPage: React.FC<ManufacturingPageProps> = ({ onNavigate
             </div>
 
             <div className="reveal-right">
+              {/* Interactive Video Feed Selector Tabs */}
+              <div 
+                style={{ 
+                  display: 'flex', 
+                  gap: '0.5rem', 
+                  marginBottom: '1rem', 
+                  flexWrap: 'wrap',
+                  backgroundColor: 'var(--color-bg-light)',
+                  padding: '0.4rem',
+                  borderRadius: 'var(--radius-lg)',
+                  border: '1px solid var(--color-border)',
+                }}
+                role="tablist"
+                aria-label="Manufacturing footage feeds"
+              >
+                {[
+                  { id: 'packaging', label: 'Packaging Line', desc: 'Conveyor & Vision Sensors' },
+                  { id: 'cleanroom', label: 'Cleanroom Bioprocess', desc: 'Formulation Reactors' },
+                  { id: 'terminal', label: 'SCADA Terminal', desc: 'Process Control' },
+                ].map((feed) => (
+                  <button
+                    key={feed.id}
+                    type="button"
+                    role="tab"
+                    aria-selected={videoFeed === feed.id}
+                    onClick={() => setVideoFeed(feed.id as 'packaging' | 'cleanroom' | 'terminal')}
+                    style={{
+                      flex: '1 1 auto',
+                      padding: '0.5rem 0.85rem',
+                      borderRadius: 'var(--radius-md)',
+                      fontSize: '0.8125rem',
+                      fontWeight: 700,
+                      border: 'none',
+                      backgroundColor: videoFeed === feed.id ? 'var(--color-primary-blue)' : 'transparent',
+                      color: videoFeed === feed.id ? '#FFFFFF' : 'var(--color-navy)',
+                      cursor: 'pointer',
+                      transition: 'all 0.2s ease',
+                      textAlign: 'center',
+                      boxShadow: videoFeed === feed.id ? 'var(--shadow-sm)' : 'none',
+                    }}
+                  >
+                    {feed.label}
+                  </button>
+                ))}
+              </div>
+
               <div 
                 className="img-zoom-wrapper"
                 style={{
@@ -370,19 +423,43 @@ export const ManufacturingPage: React.FC<ManufacturingPageProps> = ({ onNavigate
                   border: '1px solid var(--color-border)',
                   overflow: 'hidden',
                   backgroundColor: '#000000',
+                  position: 'relative',
                 }}
               >
                 <BrandedVideo
-                  src={VIDEO_ASSETS.manufacturing.video}
-                  poster={VIDEO_ASSETS.manufacturing.poster}
-                  playbackRate={VIDEO_ASSETS.manufacturing.playbackRate}
+                  key={currentManufacturingVideo.id}
+                  src={currentManufacturingVideo.video}
+                  poster={currentManufacturingVideo.poster}
+                  playbackRate={currentManufacturingVideo.playbackRate}
                   autoPlay={true}
                   muted={true}
                   loop={true}
                   playsInline={true}
-                  ariaLabel={VIDEO_ASSETS.manufacturing.alt}
+                  ariaLabel={currentManufacturingVideo.alt}
                   style={{ width: '100%', height: '420px', objectFit: 'cover' }}
                 />
+              </div>
+
+              {/* Feed Metadata Badge */}
+              <div
+                style={{
+                  marginTop: '0.85rem',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                  padding: '0.6rem 1rem',
+                  backgroundColor: 'var(--color-bg-light)',
+                  border: '1px solid var(--color-border)',
+                  borderRadius: 'var(--radius-md)',
+                  fontSize: '0.8125rem',
+                }}
+              >
+                <span style={{ fontWeight: 700, color: 'var(--color-navy)' }}>
+                  {currentManufacturingVideo.title}
+                </span>
+                <span style={{ color: 'var(--color-text-muted)', fontSize: '0.75rem', fontWeight: 600 }}>
+                  Live Facility Archive
+                </span>
               </div>
             </div>
           </div>

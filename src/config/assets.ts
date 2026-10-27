@@ -30,13 +30,13 @@ export const BRAND_ASSETS = {
 export const VIDEO_ASSETS: Record<string, VideoMediaAsset> = {
   hero: {
     id: "hero",
-    title: "Precision Cleanroom Formulation & Processing",
-    subtitle: "Sterile bioprocessing vessels, stainless-steel formulation lines, and automated cleanrooms",
+    title: "High-Speed Automated Packaging & Conveyor Lines",
+    subtitle: "Continuous automated bottle filling, labeling, and inline optical quality inspection",
     video: "/assets/videos/salas1.mp4",
     poster: "/assets/videos/posters/salas1.mp4_f50.webp",
-    playbackRate: 1.0, // salas2.mp4 accelerated playback (1.5x - 2.0x recommended speed)
-    description: "Full sterile cleanroom facility with high-capacity stainless-steel formulation reactors and cleanroom operator.",
-    alt: "Technician in sterile cleanroom attire operating pharmaceutical bioprocess formulation vessels",
+    playbackRate: 1.0,
+    description: "Automated high-speed packaging conveyor line with inline optical inspection and monitoring.",
+    alt: "Salas Pharma automated pharmaceutical manufacturing and packaging line",
   },
   manufacturing: {
     id: "manufacturing",
@@ -58,6 +58,26 @@ export const VIDEO_ASSETS: Record<string, VideoMediaAsset> = {
     description: "Automated high-speed packaging conveyor line with inline optical inspection and monitoring.",
     alt: "Pharmaceutical production specialists operating automated bottle packaging and conveyor line",
   },
+  cleanroomReactors: {
+    id: "cleanroomReactors",
+    title: "Sterile Cleanroom Formulation & Bioprocessing Reactors",
+    subtitle: "High-capacity stainless-steel formulation vessels and sterile atmospheric cleanroom",
+    video: "/assets/videos/salas2.mp4",
+    poster: "/assets/videos/posters/salas2.mp4_f50.webp",
+    playbackRate: 1.25,
+    description: "Sterile cleanroom facility with high-capacity stainless-steel formulation reactors and cleanroom operator in protective gown.",
+    alt: "Cleanroom technician operating pharmaceutical bioprocess formulation vessels and stainless reactors",
+  },
+  digitalTerminal: {
+    id: "digitalTerminal",
+    title: "Cleanroom Automation & SCADA Control Terminal",
+    subtitle: "Digital touchscreen batch monitoring, formulation telemetry, and closed-loop process control",
+    video: "/assets/videos/salas6.mp4",
+    poster: "/assets/videos/posters/salas6-poster.webp",
+    playbackRate: 1.0,
+    description: "Cleanroom operator managing batch formulation and secondary packaging line via digital terminal interface.",
+    alt: "Pharmaceutical cleanroom specialist monitoring bioprocess controls at computerized production terminal",
+  },
   research: {
     id: "research",
     title: "Formulation Dissolution & Bioavailability",
@@ -70,6 +90,16 @@ export const VIDEO_ASSETS: Record<string, VideoMediaAsset> = {
   },
   products: {
     id: "products",
+    title: "Capsule Formulation & Micro-Pellet Encapsulation",
+    subtitle: "Precision dosing, multi-particulate pellet filling, and gelatin capsule sealing",
+    video: "/assets/videos/salas3.mp4",
+    poster: "/assets/videos/posters/salas3.mp4_f50.webp",
+    playbackRate: 1.0,
+    description: "3D visualization of pharmaceutical pellet filling and capsule assembly mechanics.",
+    alt: "3D rendered visualization of pharmaceutical capsule filling and sealing technology",
+  },
+  pelletEncapsulation: {
+    id: "pelletEncapsulation",
     title: "Capsule Formulation & Micro-Pellet Encapsulation",
     subtitle: "Precision dosing, multi-particulate pellet filling, and gelatin capsule sealing",
     video: "/assets/videos/salas3.mp4",
