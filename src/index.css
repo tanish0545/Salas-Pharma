@@ -667,135 +667,167 @@ button, input, textarea, select {
    45-degree bicolored capsule with hover aura, click ripple & trail particles
    ========================================================================== */
 
+/* ==========================================================================
+   CUSTOM CAPSULE CURSOR SYSTEM (SALAS PHARMA)
+   Hides native cursor strictly on desktop pointer devices when custom cursor is active.
+   ========================================================================== */
+
+@media (hover: hover) and (pointer: fine) {
+  html.has-capsule-cursor,
+  html.has-capsule-cursor body,
+  html.has-capsule-cursor a,
+  html.has-capsule-cursor button,
+  html.has-capsule-cursor [role="button"],
+  html.has-capsule-cursor .btn,
+  html.has-capsule-cursor .clickable,
+  html.has-capsule-cursor .pharma-card,
+  html.has-capsule-cursor .interactive-card,
+  html.has-capsule-cursor .therapeutic-card,
+  html.has-capsule-cursor .nav-link-item,
+  html.has-capsule-cursor select,
+  html.has-capsule-cursor summary {
+    cursor: none !important;
+  }
+
+  /* Preserve native I-beam cursor inside form text inputs and textareas */
+  html.has-capsule-cursor input[type="text"],
+  html.has-capsule-cursor input[type="email"],
+  html.has-capsule-cursor input[type="tel"],
+  html.has-capsule-cursor input[type="search"],
+  html.has-capsule-cursor input[type="password"],
+  html.has-capsule-cursor textarea {
+    cursor: text !important;
+  }
+}
+
 .capsule-cursor-portal {
   position: fixed;
   inset: 0;
   pointer-events: none;
-  z-index: 99999;
+  z-index: 999999;
   opacity: 0;
-  transition: opacity 0.25s ease;
+  transition: opacity 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow: hidden;
 }
 
 .capsule-cursor-portal.is-visible {
   opacity: 1;
 }
 
+.capsule-cursor-portal.is-text-mode {
+  opacity: 0;
+}
+
 .capsule-cursor-body {
   position: absolute;
   top: 0;
   left: 0;
-  width: 32px;
-  height: 32px;
-  margin-top: -16px;
-  margin-left: -16px;
+  width: 36px;
+  height: 36px;
+  margin-top: -9px;
+  margin-left: -9px;
   pointer-events: none;
   display: flex;
   align-items: center;
   justify-content: center;
   will-change: transform;
+  transform-origin: 9px 9px;
 }
 
 .capsule-cursor-svg {
   display: block;
-  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-  transform-origin: center;
+  overflow: visible;
+  transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  transform-origin: 18px 18px;
 }
 
+/* Hover state over interactive targets: slight scale up */
 .capsule-cursor-body.cursor-hovered .capsule-cursor-svg {
-  transform: scale(1.18);
+  transform: scale(1.15);
 }
 
+/* Click state: tactile spring compression */
 .capsule-cursor-body.cursor-clicked .capsule-cursor-svg {
-  transform: scale(0.92);
+  transform: scale(0.88);
+  transition: transform 0.08s ease-out;
 }
 
-/* Concentric Aura Glow Ring on Hover (Panel 3) */
-.cursor-aura-ring {
-  position: absolute;
-  width: 38px;
-  height: 38px;
-  border-radius: 50%;
-  border: 1.5px solid rgba(32, 174, 234, 0.65);
-  box-shadow: 0 0 14px rgba(32, 174, 234, 0.35);
+/* Concentric Molecular Orbit Ring */
+.cursor-orbit-ring {
   opacity: 0;
   transform: scale(0.65);
+  transform-origin: 0 0;
+  transition: opacity 0.22s ease, transform 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+}
+
+.capsule-cursor-body.cursor-hovered .cursor-orbit-ring {
+  opacity: 1;
+  transform: scale(1);
+  animation: cursorOrbitRotate 12s linear infinite;
+}
+
+@keyframes cursorOrbitRotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Scientific Hero Hover Nodes */
+.cursor-hero-nodes {
+  opacity: 0;
+  transform: scale(0.6);
+  transform-origin: 0 0;
   transition: opacity 0.25s ease, transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   pointer-events: none;
 }
 
-.capsule-cursor-body.cursor-hovered .cursor-aura-ring {
-  opacity: 1;
-  transform: scale(1.15);
-  animation: cursorAuraPulse 1.8s infinite ease-in-out;
+.capsule-cursor-body.cursor-hero-hover .cursor-hero-nodes {
+  opacity: 0.85;
+  transform: scale(1);
 }
 
-@keyframes cursorAuraPulse {
-  0%, 100% {
-    transform: scale(1.15);
-    border-color: rgba(32, 174, 234, 0.65);
-    box-shadow: 0 0 14px rgba(32, 174, 234, 0.35);
-  }
-  50% {
-    transform: scale(1.32);
-    border-color: rgba(229, 36, 42, 0.65);
-    box-shadow: 0 0 18px rgba(229, 36, 42, 0.35);
-  }
-}
-
-/* Expanding Click Ripple Wave (Panel 3) */
-.cursor-ripple-wave {
+/* Click Tactile Ripple Wave */
+.cursor-click-wave {
   position: absolute;
-  width: 48px;
-  height: 48px;
+  top: 50%;
+  left: 50%;
+  width: 32px;
+  height: 32px;
+  margin-top: -16px;
+  margin-left: -16px;
   border-radius: 50%;
-  border: 2px solid rgba(229, 36, 42, 0.85);
-  animation: cursorRipple 0.45s ease-out forwards;
+  border: 1.5px solid rgba(56, 189, 248, 0.7);
   pointer-events: none;
+  opacity: 0;
+  transform: scale(0.5);
+  animation: cursorClickRipple 0.36s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-@keyframes cursorRipple {
+@keyframes cursorClickRipple {
   0% {
-    transform: scale(0.35);
-    opacity: 1;
-  }
-  100% {
-    transform: scale(1.7);
-    opacity: 0;
-  }
-}
-
-/* Molecular Trail Micro-Dots (Panel 3) */
-.cursor-trail-dot {
-  position: absolute;
-  top: 0;
-  left: 0;
-  border-radius: 50%;
-  pointer-events: none;
-  box-shadow: 0 0 6px currentColor;
-  will-change: transform, opacity;
-  animation: cursorTrailFade 0.4s ease-out forwards;
-}
-
-@keyframes cursorTrailFade {
-  0% {
-    opacity: 0.95;
+    opacity: 0.85;
+    transform: scale(0.4);
+    border-color: rgba(229, 36, 42, 0.8);
   }
   100% {
     opacity: 0;
+    transform: scale(1.6);
+    border-color: rgba(56, 189, 248, 0.1);
   }
 }
 
-/* On desktop with capsule cursor, customize pointer behavior */
-@media (hover: hover) and (pointer: fine) {
-  body.has-capsule-cursor {
-    cursor: default;
+/* Respect prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  .cursor-orbit-ring {
+    animation: none !important;
   }
-  body.has-capsule-cursor a,
-  body.has-capsule-cursor button,
-  body.has-capsule-cursor [role="button"],
-  body.has-capsule-cursor input,
-  body.has-capsule-cursor select {
-    cursor: pointer;
+  .capsule-cursor-svg,
+  .capsule-cursor-body {
+    transition: none !important;
   }
 }
 
