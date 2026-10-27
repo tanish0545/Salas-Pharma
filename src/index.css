@@ -903,6 +903,486 @@ button, input, textarea, select {
 }
 
 /* ==========================================================================
+   SECTION 1: HERO — HYBRID CINEMATIC + ASYMMETRIC GALLERY (OPTION 1 + OPTION 3)
+   Full-width cinematic pharmaceutical manufacturing video with deep navy gradient overlay,
+   combined with right-side 3-panel asymmetric angled gallery and responsive layout.
+   ========================================================================== */
+
+.hero-hybrid-section {
+  position: relative;
+  min-height: clamp(680px, calc(100vh - var(--header-height)), 860px);
+  margin-top: var(--header-height);
+  overflow: hidden;
+  background-color: #041424;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Background Layer: Full-Width Cinematic Video */
+.hero-hybrid-video-layer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.hero-hybrid-video-layer .branded-video-container {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.hero-hybrid-video-layer video,
+.hero-hybrid-video-layer img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  object-position: center center !important;
+  display: block;
+}
+
+/* Deep Navy Gradient Overlay: Strongest behind left text, lighter toward right gallery */
+.hero-hybrid-video-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background:
+    linear-gradient(90deg,
+      rgba(4, 18, 33, 0.96) 0%,
+      rgba(4, 18, 33, 0.90) 45%,
+      rgba(5, 24, 44, 0.65) 75%,
+      rgba(5, 24, 44, 0.50) 100%
+    ),
+    linear-gradient(180deg,
+      rgba(4, 18, 33, 0.45) 0%,
+      transparent 25%,
+      transparent 75%,
+      rgba(4, 18, 33, 0.85) 100%
+    );
+  pointer-events: none;
+}
+
+/* Main Hero Content Container */
+.hero-hybrid-container {
+  position: relative;
+  z-index: 3;
+  display: grid;
+  grid-template-columns: 1.15fr 0.95fr;
+  gap: clamp(2rem, 4vw, 4rem);
+  align-items: center;
+  padding-top: clamp(2.5rem, 5vh, 4.5rem);
+  padding-bottom: clamp(2.5rem, 5vh, 4.5rem);
+  width: 100%;
+}
+
+/* Left Content Column */
+.hero-hybrid-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  max-width: 620px;
+}
+
+/* Eyebrow badge */
+.hero-hybrid-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #38BDF8;
+  margin-bottom: 1.25rem;
+  padding: 0.35rem 0.9rem;
+  background: rgba(56, 189, 248, 0.1);
+  border: 1px solid rgba(56, 189, 248, 0.28);
+  border-radius: 9999px;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.hero-hybrid-eyebrow-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: #E5242A;
+  box-shadow: 0 0 8px #E5242A;
+}
+
+/* Headline */
+.hero-hybrid-heading {
+  font-family: var(--font-heading, "Plus Jakarta Sans", sans-serif);
+  font-size: clamp(2.25rem, 3.8vw, 3.5rem);
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+  color: #FFFFFF;
+  margin: 0 0 1.25rem 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.hero-hybrid-highlight {
+  color: #38BDF8;
+  display: inline-block;
+  text-shadow: 0 2px 20px rgba(56, 189, 248, 0.35);
+}
+
+/* Description */
+.hero-hybrid-description {
+  font-size: clamp(1rem, 1.2vw, 1.125rem);
+  line-height: 1.68;
+  color: #CBD5E1;
+  margin: 0 0 2rem 0;
+  max-width: 540px;
+}
+
+/* Call to Action Buttons */
+.hero-hybrid-ctas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: center;
+  margin-bottom: 2.5rem;
+}
+
+.hero-hybrid-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  background: linear-gradient(135deg, #0A4D9E 0%, #073B75 100%);
+  color: #FFFFFF;
+  font-size: 0.95rem;
+  font-weight: 700;
+  padding: 0.85rem 1.85rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(56, 189, 248, 0.4);
+  box-shadow: 0 8px 24px -4px rgba(10, 77, 158, 0.55), 0 0 0 1px rgba(255, 255, 255, 0.1) inset;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  text-decoration: none;
+}
+
+.hero-hybrid-btn-primary:hover {
+  background: linear-gradient(135deg, #0C58B3 0%, #09458A 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px -4px rgba(10, 77, 158, 0.7), 0 0 16px rgba(56, 189, 248, 0.35);
+}
+
+.hero-hybrid-btn-primary svg {
+  transition: transform 0.25s ease;
+}
+
+.hero-hybrid-btn-primary:hover svg {
+  transform: translateX(4px);
+}
+
+.hero-hybrid-btn-primary:focus-visible {
+  outline: 2px solid #38BDF8;
+  outline-offset: 3px;
+}
+
+.hero-hybrid-btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.08);
+  color: #FFFFFF;
+  font-size: 0.95rem;
+  font-weight: 600;
+  padding: 0.85rem 1.85rem;
+  border-radius: var(--radius-sm);
+  border: 1.5px solid rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  text-decoration: none;
+}
+
+.hero-hybrid-btn-secondary:hover {
+  background: #FFFFFF;
+  color: #061D38;
+  border-color: #FFFFFF;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+.hero-hybrid-btn-secondary:focus-visible {
+  outline: 2px solid #38BDF8;
+  outline-offset: 3px;
+}
+
+/* Bottom Company Highlights */
+.hero-hybrid-highlights {
+  display: flex;
+  align-items: center;
+  gap: clamp(1rem, 2vw, 1.75rem);
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.14);
+  width: 100%;
+  max-width: 540px;
+}
+
+.hero-hybrid-highlight-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.hero-hybrid-highlight-value {
+  font-family: var(--font-heading, "Plus Jakarta Sans", sans-serif);
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: #FFFFFF;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+}
+
+.hero-hybrid-highlight-label {
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #94A3B8;
+}
+
+.hero-hybrid-highlight-divider {
+  width: 1px;
+  height: 32px;
+  background: rgba(255, 255, 255, 0.16);
+}
+
+/* Right Asymmetric Gallery: 3 Angled Panels */
+.hero-hybrid-gallery {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.15rem;
+  perspective: 1000px;
+  padding: 1.5rem 0.5rem;
+}
+
+.hero-hybrid-panel {
+  position: relative;
+  height: 390px;
+  border-radius: 14px;
+  overflow: hidden;
+  transform: skewX(-8deg);
+  border: 1px solid rgba(56, 189, 248, 0.35);
+  box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.65), 0 0 16px -2px rgba(56, 189, 248, 0.15);
+  background-color: #061D38;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+}
+
+.hero-hybrid-panel:hover {
+  transform: skewX(-8deg) translateY(-10px) scale(1.04);
+  border-color: rgba(56, 189, 248, 0.75);
+  box-shadow: 0 26px 50px -10px rgba(0, 0, 0, 0.8), 0 0 28px rgba(56, 189, 248, 0.4);
+  z-index: 5;
+}
+
+.hero-hybrid-panel-1 {
+  margin-top: -22px;
+}
+
+.hero-hybrid-panel-2 {
+  margin-top: 22px;
+}
+
+.hero-hybrid-panel-3 {
+  margin-top: -6px;
+}
+
+.hero-hybrid-panel-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform: skewX(8deg) scale(1.24);
+  transform-origin: center center;
+}
+
+.hero-hybrid-panel-inner img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), filter 0.5s ease;
+}
+
+.hero-hybrid-panel:hover .hero-hybrid-panel-inner img {
+  transform: scale(1.08);
+  filter: brightness(1.08);
+}
+
+.hero-hybrid-panel-scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(4, 18, 33, 0.05) 0%,
+    rgba(4, 18, 33, 0.35) 50%,
+    rgba(4, 18, 33, 0.92) 100%
+  );
+  pointer-events: none;
+}
+
+.hero-hybrid-panel-caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 1.25rem 0.85rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.hero-hybrid-panel-tag {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #38BDF8;
+}
+
+.hero-hybrid-panel-title {
+  font-size: 0.925rem;
+  font-weight: 700;
+  color: #FFFFFF;
+  line-height: 1.25;
+}
+
+/* Tablet & Intermediate Viewports (769px – 1100px) */
+@media (max-width: 1100px) {
+  .hero-hybrid-container {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+  .hero-hybrid-content {
+    max-width: 100%;
+  }
+  .hero-hybrid-gallery {
+    max-width: 680px;
+    margin: 0 auto;
+    width: 100%;
+  }
+  .hero-hybrid-panel {
+    height: 330px;
+  }
+}
+
+/* Mobile Devices (<= 768px) */
+@media (max-width: 768px) {
+  .hero-hybrid-section {
+    min-height: auto;
+    padding-top: 1rem;
+  }
+  .hero-hybrid-video-overlay {
+    background: linear-gradient(
+      180deg,
+      rgba(4, 18, 33, 0.96) 0%,
+      rgba(4, 18, 33, 0.92) 50%,
+      rgba(4, 18, 33, 0.98) 100%
+    );
+  }
+  .hero-hybrid-container {
+    padding-top: 2rem;
+    padding-bottom: 2.5rem;
+    gap: 2.25rem;
+  }
+  .hero-hybrid-heading {
+    font-size: clamp(2rem, 6.5vw, 2.5rem);
+  }
+  .hero-hybrid-ctas {
+    flex-direction: column;
+    width: 100%;
+    gap: 0.75rem;
+  }
+  .hero-hybrid-btn-primary,
+  .hero-hybrid-btn-secondary {
+    width: 100%;
+    justify-content: center;
+  }
+  .hero-hybrid-highlights {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.75rem;
+  }
+  .hero-hybrid-highlight-divider {
+    display: none;
+  }
+  .hero-hybrid-highlight-value {
+    font-size: 1.15rem;
+  }
+  .hero-hybrid-highlight-label {
+    font-size: 0.6875rem;
+  }
+  .hero-hybrid-gallery {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.65rem;
+    width: 100%;
+    padding: 0.5rem 0;
+  }
+  .hero-hybrid-panel {
+    height: 200px;
+    transform: skewX(-4deg);
+    border-radius: 8px;
+  }
+  .hero-hybrid-panel:hover {
+    transform: skewX(-4deg);
+  }
+  .hero-hybrid-panel-1,
+  .hero-hybrid-panel-2,
+  .hero-hybrid-panel-3 {
+    margin-top: 0;
+  }
+  .hero-hybrid-panel-inner {
+    transform: skewX(4deg) scale(1.18);
+  }
+  .hero-hybrid-panel-caption {
+    padding: 0.65rem 0.4rem;
+  }
+  .hero-hybrid-panel-tag {
+    font-size: 0.6rem;
+  }
+  .hero-hybrid-panel-title {
+    font-size: 0.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-hybrid-panel {
+    height: 165px;
+  }
+  .hero-hybrid-panel-title {
+    font-size: 0.7rem;
+  }
+}
+
+/* Reduced Motion Overrides */
+@media (prefers-reduced-motion: reduce) {
+  .hero-hybrid-panel {
+    transition: none !important;
+    transform: none !important;
+  }
+  .hero-hybrid-panel:hover {
+    transform: none !important;
+  }
+  .hero-hybrid-panel-inner {
+    transform: none !important;
+  }
+}
+
+/* ==========================================================================
    OPTION 5: OFFSET LAYERED COMPOSITION (DYNAMIC & PREMIUM)
    High-end pharmaceutical corporate hero with two visually connected layers:
    Deep navy-blue scientific panel on left, natural manufacturing video on right,

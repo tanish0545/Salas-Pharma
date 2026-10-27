@@ -16,8 +16,7 @@ import {
   Building2,
   Globe,
   Microscope,
-  FileCheck,
-  HeartHandshake
+  FileCheck
 } from 'lucide-react';
 import { MEDIA_CONFIG, VIDEO_ASSETS, PAGE_HERO_IMAGES } from '../config/assets';
 import { BrandedVideo } from '../components/common/BrandedVideo';
@@ -144,16 +143,16 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, isLoaderComplete
   return (
     <div className="homepage-wrapper">
       {/* ====================================================================
-          SECTION 1: HERO — CINEMATIC PHARMACEUTICAL OPENING (SECTION 5)
-          Bold editorial headline, compact eyebrow, differentiated CTAs,
-          natural cleanroom manufacturing footage with angled red-accent seam.
+          SECTION 1: HERO — HYBRID CINEMATIC + ASYMMETRIC GALLERY (OPTION 1 + OPTION 3)
+          Combines full-width pharmaceutical manufacturing video (salas1.mp4) with dark
+          navy gradient overlay and a right-side 3-panel asymmetric angled gallery.
           ==================================================================== */}
       <section
-        className="hero-option5-section"
+        className="hero-hybrid-section"
         aria-label="SALAS Pharmaceuticals Home Hero"
       >
-        {/* RIGHT LAYER: Pharmaceutical Manufacturing Video (salas1.mp4) with Fallback Poster */}
-        <div className="hero-option5-video-layer">
+        {/* BACKGROUND LAYER: Full-Width Cinematic Pharmaceutical Manufacturing Video (salas1.mp4) */}
+        <div className="hero-hybrid-video-layer">
           <BrandedVideo
             src={VIDEO_ASSETS.manufacturing.video}
             poster={VIDEO_ASSETS.manufacturing.poster}
@@ -165,225 +164,127 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, isLoaderComplete
             priority={true}
             isReadyToPlay={_isLoaderComplete}
             ariaLabel="Salas Pharma automated pharmaceutical manufacturing and packaging line"
-            style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: '75% center' }}
+            style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center center' }}
           />
-          {/* Subtle localized boundary overlay (preserves natural video contrast and seam transition) */}
-          <div className="hero-option5-video-overlay" />
+          {/* Deep Navy Gradient Overlay: Strongest behind left text, lighter toward right */}
+          <div className="hero-hybrid-video-overlay" />
         </div>
 
-        {/* LEFT LAYER: Deep Navy Scientific Panel Stage with Left-to-Right Reveal */}
-        <div className="hero-option5-panel-stage">
-          <div className="hero-option5-navy-panel">
-            {/* Scientific Decorative Background: Thin bonds, connected nodes & molecular structures */}
-            <div className="hero-option5-chemistry-bg" aria-hidden="true">
-              <svg
-                className="hero-option5-chemistry-art"
-                viewBox="0 0 650 800"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <defs>
-                  <linearGradient id="bondGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stopColor="#38BDF8" stopOpacity="0.45" />
-                    <stop offset="100%" stopColor="#60A5FA" stopOpacity="0.18" />
-                  </linearGradient>
-                  <linearGradient id="bondGrad2" x1="0%" y1="100%" x2="100%" y2="0%">
-                    <stop offset="0%" stopColor="#60A5FA" stopOpacity="0.38" />
-                    <stop offset="100%" stopColor="#38BDF8" stopOpacity="0.14" />
-                  </linearGradient>
-                </defs>
-
-                {/* Ambient Particle Nodes */}
-                <circle cx="120" cy="180" r="2.5" fill="#38BDF8" opacity="0.45" />
-                <circle cx="280" cy="120" r="2" fill="#60A5FA" opacity="0.40" />
-                <circle cx="210" cy="680" r="2.5" fill="#38BDF8" opacity="0.35" />
-                <circle cx="360" cy="740" r="2" fill="#60A5FA" opacity="0.40" />
-                <circle cx="80" cy="420" r="1.5" fill="#38BDF8" opacity="0.30" />
-
-                {/* Hexagonal Molecular Cluster (Upper Right / Angled Region) */}
-                <g transform="translate(400, 130)">
-                  <polygon
-                    points="60,0 120,34.6 120,103.9 60,138.6 0,103.9 0,34.6"
-                    stroke="url(#bondGrad1)"
-                    strokeWidth="1.5"
-                    fill="rgba(56, 189, 248, 0.04)"
-                  />
-                  <circle
-                    cx="60"
-                    cy="69.3"
-                    r="28"
-                    stroke="#38BDF8"
-                    strokeWidth="1"
-                    strokeDasharray="4 4"
-                    opacity="0.25"
-                  />
-                  <circle cx="60" cy="0" r="3.5" fill="#38BDF8" opacity="0.6" />
-                  <circle cx="120" cy="34.6" r="3.5" fill="#38BDF8" opacity="0.6" />
-                  <circle cx="120" cy="103.9" r="3.5" fill="#38BDF8" opacity="0.6" />
-                  <circle cx="60" cy="138.6" r="3.5" fill="#38BDF8" opacity="0.6" />
-                  <circle cx="0" cy="103.9" r="3.5" fill="#38BDF8" opacity="0.6" />
-                  <circle cx="0" cy="34.6" r="3.5" fill="#38BDF8" opacity="0.6" />
-
-                  <polygon
-                    points="120,34.6 180,0 240,34.6 240,103.9 180,138.6 120,103.9"
-                    stroke="url(#bondGrad1)"
-                    strokeWidth="1.5"
-                    fill="none"
-                    opacity="0.65"
-                  />
-                  <circle cx="180" cy="0" r="3" fill="#60A5FA" opacity="0.5" />
-                  <circle cx="240" cy="34.6" r="3" fill="#60A5FA" opacity="0.5" />
-                  <circle cx="240" cy="103.9" r="3.5" fill="#60A5FA" opacity="0.5" />
-                  <circle cx="180" cy="138.6" r="3" fill="#60A5FA" opacity="0.5" />
-
-                  <line x1="60" y1="138.6" x2="60" y2="190" stroke="#38BDF8" strokeWidth="1.5" opacity="0.4" />
-                  <circle cx="60" cy="190" r="4" fill="#38BDF8" opacity="0.7" />
-                  <line x1="60" y1="190" x2="18" y2="215" stroke="#38BDF8" strokeWidth="1.2" opacity="0.3" />
-                  <circle cx="18" cy="215" r="3" fill="#60A5FA" opacity="0.5" />
-                  <line x1="60" y1="190" x2="102" y2="215" stroke="#38BDF8" strokeWidth="1.2" opacity="0.3" />
-                  <circle cx="102" cy="215" r="3" fill="#60A5FA" opacity="0.5" />
-                </g>
-
-                {/* Lower Region Subtle Cluster */}
-                <g transform="translate(320, 520)">
-                  <polygon
-                    points="50,0 100,28.9 100,86.6 50,115.5 0,86.6 0,28.9"
-                    stroke="url(#bondGrad2)"
-                    strokeWidth="1.2"
-                    fill="none"
-                    opacity="0.45"
-                  />
-                  <circle cx="50" cy="0" r="3" fill="#38BDF8" opacity="0.45" />
-                  <circle cx="100" cy="28.9" r="3" fill="#38BDF8" opacity="0.45" />
-                  <circle cx="100" cy="86.6" r="3" fill="#38BDF8" opacity="0.45" />
-                  <circle cx="50" cy="115.5" r="3" fill="#38BDF8" opacity="0.45" />
-                  <circle cx="0" cy="86.6" r="3" fill="#38BDF8" opacity="0.45" />
-                  <circle cx="0" cy="28.9" r="3" fill="#38BDF8" opacity="0.45" />
-                </g>
-              </svg>
+        {/* FOREGROUND CONTAINER: 2-Column Split Layout */}
+        <div className="container hero-hybrid-container">
+          {/* LEFT CONTENT COLUMN */}
+          <div className="hero-hybrid-content">
+            {/* Eyebrow */}
+            <div className="hero-hybrid-eyebrow">
+              <span className="hero-hybrid-eyebrow-dot" aria-hidden="true" />
+              <span>SCIENCE · QUALITY · COMMITMENT</span>
             </div>
 
-            {/* Left Content Column */}
-            <div className="hero-option5-content-inner">
-              {/* Eyebrow Label */}
-              <div className="hero-option5-badge">
-                <ShieldCheck size={16} style={{ color: '#E5242A' }} />
-                <span>Salas Pharmaceuticals Pvt. Ltd. · Est. 2009</span>
+            {/* Headline with Cyan Highlight */}
+            <h1 className="hero-hybrid-heading">
+              <span>Advancing Healthcare.</span>
+              <span className="hero-hybrid-highlight">With Every Commitment.</span>
+            </h1>
+
+            {/* Description */}
+            <p className="hero-hybrid-description">
+              Driven by pharmaceutical excellence, we manufacture and deliver high-quality finished dosage products for a healthier tomorrow.
+            </p>
+
+            {/* Two Differentiated Call to Action Buttons */}
+            <div className="hero-hybrid-ctas">
+              <button
+                type="button"
+                onClick={() => onNavigate('about')}
+                className="hero-hybrid-btn-primary"
+                aria-label="Explore Salas Pharma"
+              >
+                <span>Explore Salas Pharma</span>
+                <ArrowRight size={17} />
+              </button>
+
+              <button
+                type="button"
+                onClick={() => onNavigate('manufacturing')}
+                className="hero-hybrid-btn-secondary"
+                aria-label="Our Capabilities"
+              >
+                <span>Our Capabilities</span>
+              </button>
+            </div>
+
+            {/* Bottom Company Highlights */}
+            <div className="hero-hybrid-highlights">
+              <div className="hero-hybrid-highlight-item">
+                <span className="hero-hybrid-highlight-value">2009</span>
+                <span className="hero-hybrid-highlight-label">Established</span>
               </div>
-
-              {/* Bold 3-line Editorial Headline */}
-              <h1 className="hero-option5-heading">
-                <span>Committed to Quality.</span>
-                <span style={{ display: 'block' }}>Focused on Healthcare.</span>
-                <span className="heading-salas-brand">
-                  SALAS Pharma
-                  <span className="heading-salas-underline" />
-                </span>
-              </h1>
-
-              {/* Concise, accurate company description */}
-              <p className="hero-option5-description">
-                An Indian pharmaceutical enterprise engaged in the manufacture and marketing of high-precision formulations, dedicated to quality compliance, scientific integrity, and accessible healthcare across India.
-              </p>
-
-              {/* Three Compact Verified Highlights */}
-              <div className="hero-option5-highlights">
-                <div className="hero-option5-highlight-item">
-                  <div className="hero-option5-highlight-icon">
-                    <ShieldCheck size={16} />
-                  </div>
-                  <div>
-                    <h4 className="hero-option5-highlight-title">Quality Compliance</h4>
-                    <p className="hero-option5-highlight-desc">Schedule M & cGMP cleanroom manufacturing</p>
-                  </div>
-                </div>
-
-                <div className="hero-option5-highlight-item">
-                  <div className="hero-option5-highlight-icon">
-                    <FlaskConical size={16} />
-                  </div>
-                  <div>
-                    <h4 className="hero-option5-highlight-title">Scientific Rigor</h4>
-                    <p className="hero-option5-highlight-desc">HPLC assay testing & dissolution profiling</p>
-                  </div>
-                </div>
-
-                <div className="hero-option5-highlight-item">
-                  <div className="hero-option5-highlight-icon">
-                    <HeartHandshake size={16} />
-                  </div>
-                  <div>
-                    <h4 className="hero-option5-highlight-title">Healthcare Reach</h4>
-                    <p className="hero-option5-highlight-desc">Ethical formulations for patient accessibility</p>
-                  </div>
-                </div>
+              <div className="hero-hybrid-highlight-divider" aria-hidden="true" />
+              <div className="hero-hybrid-highlight-item">
+                <span className="hero-hybrid-highlight-value">Vadodara</span>
+                <span className="hero-hybrid-highlight-label">Corporate Office</span>
               </div>
-
-              {/* Two Clearly Differentiated CTAs */}
-              <div className="hero-option5-ctas">
-                <button
-                  type="button"
-                  onClick={() => onNavigate('products')}
-                  className="hero-option5-btn-primary"
-                  aria-label="Explore our pharmaceutical products portfolio"
-                >
-                  <span>Explore Products</span>
-                  <ArrowRight size={17} />
-                </button>
-
-                <button
-                  type="button"
-                  onClick={() => onNavigate('manufacturing')}
-                  className="hero-option5-btn-secondary"
-                  aria-label="Learn about our manufacturing capabilities"
-                >
-                  <span>Manufacturing & Quality</span>
-                </button>
+              <div className="hero-hybrid-highlight-divider" aria-hidden="true" />
+              <div className="hero-hybrid-highlight-item">
+                <span className="hero-hybrid-highlight-value">Sikkim</span>
+                <span className="hero-hybrid-highlight-label">Manufacturing Location</span>
               </div>
             </div>
           </div>
 
-          {/* Crisp Angled Seam with Restrained Red Accent */}
-          <svg
-            className="hero-option5-seam-svg"
-            viewBox="0 0 1000 1000"
-            preserveAspectRatio="none"
-            aria-hidden="true"
-          >
-            <defs>
-              <linearGradient id="salasSeamGlow" x1="0%" y1="0%" x2="0%" y2="1">
-                <stop offset="0%" stopColor="#E5242A" stopOpacity="0" />
-                <stop offset="12%" stopColor="#E5242A" stopOpacity="0.45" />
-                <stop offset="50%" stopColor="#E5242A" stopOpacity="0.75" />
-                <stop offset="85%" stopColor="#E5242A" stopOpacity="0.45" />
-                <stop offset="100%" stopColor="#E5242A" stopOpacity="0" />
-              </linearGradient>
-              <linearGradient id="salasSeamCore" x1="0%" y1="0%" x2="0%" y2="1">
-                <stop offset="0%" stopColor="#FF4D47" stopOpacity="0.3" />
-                <stop offset="10%" stopColor="#E5242A" stopOpacity="1" />
-                <stop offset="85%" stopColor="#E5242A" stopOpacity="1" />
-                <stop offset="100%" stopColor="#C51D22" stopOpacity="0.3" />
-              </linearGradient>
-            </defs>
-            <line
-              x1="1000"
-              y1="0"
-              x2="850"
-              y2="1000"
-              stroke="url(#salasSeamGlow)"
-              strokeWidth="7"
-              vectorEffect="non-scaling-stroke"
-            />
-            <line
-              x1="1000"
-              y1="0"
-              x2="850"
-              y2="1000"
-              stroke="url(#salasSeamCore)"
-              strokeWidth="2.5"
-              vectorEffect="non-scaling-stroke"
-            />
-          </svg>
+          {/* RIGHT ASYMMETRIC GALLERY: 3 Angled Panels */}
+          <div className="hero-hybrid-gallery" aria-label="Pharmaceutical Operations Gallery">
+            {/* Panel 1: Laboratory Research */}
+            <div className="hero-hybrid-panel hero-hybrid-panel-1">
+              <div className="hero-hybrid-panel-inner">
+                <img
+                  src="/assets/images/research/rnd-laboratory-research.webp"
+                  alt="Pharmaceutical laboratory research and formulation development"
+                  loading="eager"
+                  decoding="async"
+                />
+                <div className="hero-hybrid-panel-scrim" />
+                <div className="hero-hybrid-panel-caption">
+                  <span className="hero-hybrid-panel-tag">R&D</span>
+                  <span className="hero-hybrid-panel-title">Laboratory Research</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Panel 2: Manufacturing Equipment */}
+            <div className="hero-hybrid-panel hero-hybrid-panel-2">
+              <div className="hero-hybrid-panel-inner">
+                <img
+                  src="/assets/images/manufacturing/manufacturing-cleanroom.webp"
+                  alt="Pharmaceutical manufacturing equipment and cleanroom facility"
+                  loading="eager"
+                  decoding="async"
+                />
+                <div className="hero-hybrid-panel-scrim" />
+                <div className="hero-hybrid-panel-caption">
+                  <span className="hero-hybrid-panel-tag">cGMP</span>
+                  <span className="hero-hybrid-panel-title">Cleanroom Facility</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Panel 3: Quality Control */}
+            <div className="hero-hybrid-panel hero-hybrid-panel-3">
+              <div className="hero-hybrid-panel-inner">
+                <img
+                  src="/assets/images/quality/quality-control.webp"
+                  alt="Scientist performing quality-control testing and assay analysis"
+                  loading="eager"
+                  decoding="async"
+                />
+                <div className="hero-hybrid-panel-scrim" />
+                <div className="hero-hybrid-panel-caption">
+                  <span className="hero-hybrid-panel-tag">Assurance</span>
+                  <span className="hero-hybrid-panel-title">Quality Testing</span>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
