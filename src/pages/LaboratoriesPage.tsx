@@ -8,7 +8,6 @@ import {
   Search,
   Layers,
   FileCheck,
-  Sparkles,
   ClipboardList,
   TestTube2,
   Activity
@@ -167,27 +166,6 @@ export const LaboratoriesPage: React.FC<LaboratoriesPageProps> = ({ onNavigate }
         {/* Hero Content Overlay */}
         <div className="container" style={{ position: 'relative', zIndex: 3, padding: '4.5rem 1.5rem', width: '100%' }}>
           <div style={{ maxWidth: '960px' }}>
-            <div
-              style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '0.55rem',
-                backgroundColor: 'rgba(56, 189, 248, 0.1)',
-                padding: '0.45rem 1.15rem',
-                borderRadius: 'var(--radius-full)',
-                color: '#7DD3FC',
-                fontSize: '0.8125rem',
-                fontWeight: 700,
-                letterSpacing: '0.12em',
-                textTransform: 'uppercase',
-                marginBottom: '1.5rem',
-                border: '1px solid rgba(56, 189, 248, 0.22)',
-              }}
-            >
-              <Sparkles size={15} style={{ color: '#E5242A' }} />
-              <span>SCIENCE & ANALYTICAL PRECISION</span>
-            </div>
-
             {/* Bold Heading with Highlighted Words in SALAS Blue */}
             <h1
               className="hero-main-heading"
@@ -196,6 +174,7 @@ export const LaboratoriesPage: React.FC<LaboratoriesPageProps> = ({ onNavigate }
                 lineHeight: 1.15,
                 fontWeight: 900,
                 color: '#FFFFFF',
+                marginTop: 0,
                 marginBottom: '1.5rem',
                 letterSpacing: '-0.025em',
               }}

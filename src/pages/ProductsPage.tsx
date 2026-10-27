@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react';
-import { Search, Pill, X, ArrowRight, Filter, ShieldCheck, AlertCircle, Cpu } from 'lucide-react';
+import { Search, X, ArrowRight, Filter, ShieldCheck, AlertCircle, Cpu } from 'lucide-react';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 import { PAGE_HERO_IMAGES, VIDEO_ASSETS } from '../config/assets';
 import { BrandedVideo } from '../components/common/BrandedVideo';
@@ -307,10 +307,7 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({ onNavigate }) => {
         <ScientificNetworkArtwork position="right" variant="combined" opacity={0.5} />
         <div className="container" style={{ position: 'relative', zIndex: 3, padding: '4.5rem 1.5rem', width: '100%' }}>
           <div style={{ maxWidth: '820px' }}>
-            <span className="section-eyebrow" style={{ color: 'var(--color-teal)' }}>
-              <Pill size={14} /> Comprehensive Finished Dosages
-            </span>
-            <h1 style={{ fontSize: 'clamp(2.4rem, 4.5vw, 3.6rem)', color: '#FFFFFF', letterSpacing: '-0.02em', lineHeight: 1.18, marginBottom: '1.25rem', fontWeight: 800 }}>
+            <h1 style={{ fontSize: 'clamp(2.4rem, 4.5vw, 3.6rem)', color: '#FFFFFF', letterSpacing: '-0.02em', lineHeight: 1.18, marginTop: 0, marginBottom: '1.25rem', fontWeight: 800 }}>
               Therapeutic Breadth. <br />
               <span style={{ color: '#38BDF8' }}>Formulation Discipline.</span>
             </h1>

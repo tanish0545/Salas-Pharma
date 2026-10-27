@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Users, Send, CheckCircle2, Copy, Check, AlertCircle, ArrowRight, MapPin, Briefcase } from 'lucide-react';
+import { Send, CheckCircle2, Copy, Check, AlertCircle, ArrowRight, MapPin, Briefcase } from 'lucide-react';
 import { PAGE_HERO_IMAGES } from '../config/assets';
 import { ScientificNetworkArtwork } from '../components/common/ScientificNetworkArtwork';
 import { ScrollWordReveal } from '../components/common/ScrollWordReveal';
@@ -140,10 +140,7 @@ export const CareersPage: React.FC<CareersPageProps> = ({ onNavigate }) => {
         <ScientificNetworkArtwork position="right" variant="combined" opacity={0.5} />
         <div className="container" style={{ position: 'relative', zIndex: 3, padding: '4.5rem 1.5rem', width: '100%' }}>
           <div style={{ maxWidth: '820px' }}>
-            <span className="section-eyebrow" style={{ color: 'var(--color-teal)' }}>
-              <Users size={14} /> Career Opportunities
-            </span>
-            <h1 style={{ fontSize: 'clamp(2.4rem, 4.5vw, 3.6rem)', marginBottom: '1.25rem', color: '#FFFFFF', letterSpacing: '-0.02em', lineHeight: 1.18, fontWeight: 800 }}>
+            <h1 style={{ fontSize: 'clamp(2.4rem, 4.5vw, 3.6rem)', marginTop: 0, marginBottom: '1.25rem', color: '#FFFFFF', letterSpacing: '-0.02em', lineHeight: 1.18, fontWeight: 800 }}>
               Build Your Purpose. <br />
               <span style={{ color: '#38BDF8' }}>Advance Everyday Healthcare.</span>
             </h1>

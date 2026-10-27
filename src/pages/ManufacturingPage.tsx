@@ -124,10 +124,7 @@ export const ManufacturingPage: React.FC<ManufacturingPageProps> = ({ onNavigate
         <ScientificNetworkArtwork position="right" variant="combined" opacity={0.5} />
         <div className="container" style={{ position: 'relative', zIndex: 3, padding: '4.5rem 1.5rem', width: '100%' }}>
           <div style={{ maxWidth: '820px' }}>
-            <span className="section-eyebrow" style={{ color: 'var(--color-teal)' }}>
-              <Factory size={14} /> Production Infrastructure
-            </span>
-            <h1 style={{ fontSize: 'clamp(2.4rem, 4.5vw, 3.6rem)', marginBottom: '1.25rem', color: '#FFFFFF', letterSpacing: '-0.02em', lineHeight: 1.18, fontWeight: 800 }}>
+            <h1 style={{ fontSize: 'clamp(2.4rem, 4.5vw, 3.6rem)', marginTop: 0, marginBottom: '1.25rem', color: '#FFFFFF', letterSpacing: '-0.02em', lineHeight: 1.18, fontWeight: 800 }}>
               Engineering Precision. <br />
               <span style={{ color: '#38BDF8' }}>Manufacturing Excellence.</span>
             </h1>

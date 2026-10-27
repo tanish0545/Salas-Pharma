@@ -122,10 +122,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
 
         <div className="container" style={{ position: 'relative', zIndex: 3, padding: '4.5rem 1.5rem', width: '100%' }}>
           <div style={{ maxWidth: '820px' }}>
-            <span className="section-eyebrow" style={{ color: 'var(--color-teal)' }}>
-              <Mail size={14} /> Corporate Liaison & Institutional Dialogue
-            </span>
-            <h1 style={{ fontSize: 'clamp(2.5rem, 5vw, 3.8rem)', marginBottom: '1.25rem', color: '#FFFFFF', letterSpacing: '-0.02em', lineHeight: 1.18 }}>
+            <h1 style={{ fontSize: 'clamp(2.5rem, 5vw, 3.8rem)', marginTop: 0, marginBottom: '1.25rem', color: '#FFFFFF', letterSpacing: '-0.02em', lineHeight: 1.18 }}>
               Open Communication. <br />
               <span style={{ color: '#60A5FA' }}>Direct Corporate Dialogue.</span>
             </h1>

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Award, Target, Eye, Compass, Calendar, MapPin, Building2, Copy, Check } from 'lucide-react';
+import { Award, Target, Eye, Calendar, MapPin, Building2, Copy, Check } from 'lucide-react';
 import { MEDIA_CONFIG, PAGE_HERO_IMAGES } from '../config/assets';
 import { AnimatedCounter } from '../components/common/AnimatedCounter';
 import { ScientificNetworkArtwork } from '../components/common/ScientificNetworkArtwork';
@@ -82,10 +82,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
         <ScientificNetworkArtwork position="right" variant="combined" opacity={0.5} />
         <div className="container" style={{ position: 'relative', zIndex: 3, padding: '4.5rem 1.5rem', width: '100%' }}>
           <div style={{ maxWidth: '820px' }}>
-            <span className="section-eyebrow" style={{ color: 'var(--color-teal)' }}>
-              <Compass size={14} /> Corporate Heritage & Identity
-            </span>
-            <h1 style={{ fontSize: 'clamp(2.4rem, 4.5vw, 3.6rem)', marginBottom: '1.25rem', color: '#FFFFFF', letterSpacing: '-0.02em', lineHeight: 1.18, fontWeight: 800 }}>
+            <h1 style={{ fontSize: 'clamp(2.4rem, 4.5vw, 3.6rem)', marginTop: 0, marginBottom: '1.25rem', color: '#FFFFFF', letterSpacing: '-0.02em', lineHeight: 1.18, fontWeight: 800 }}>
               Precision Formulation. <br />
               <span style={{ color: '#38BDF8' }}>Unwavering Commitment.</span>
             </h1>

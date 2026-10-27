@@ -525,3 +525,4 @@ export const MolecularBackground: React.FC<MolecularBackgroundProps> = ({
     </div>
   );
 };
+

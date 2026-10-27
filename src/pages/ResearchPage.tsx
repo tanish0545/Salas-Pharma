@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FlaskConical, Microscope, Sparkles, CheckCircle2, ArrowRight, Atom } from 'lucide-react';
+import { Microscope, Sparkles, CheckCircle2, ArrowRight, Atom } from 'lucide-react';
 import { VIDEO_ASSETS, MEDIA_CONFIG, PAGE_HERO_IMAGES } from '../config/assets';
 import { BrandedVideo } from '../components/common/BrandedVideo';
 import { ScientificNetworkArtwork } from '../components/common/ScientificNetworkArtwork';
@@ -95,10 +95,7 @@ export const ResearchPage: React.FC<ResearchPageProps> = ({ onNavigate }) => {
         <ScientificNetworkArtwork position="right" variant="combined" opacity={0.6} />
         <div className="container" style={{ position: 'relative', zIndex: 4, padding: '4.5rem 1.5rem', width: '100%' }}>
           <div style={{ maxWidth: '820px' }}>
-            <span className="section-eyebrow" style={{ color: 'var(--color-teal)' }}>
-              <FlaskConical size={14} /> Pharmaceutical Science & Formulation
-            </span>
-            <h1 style={{ fontSize: 'clamp(2.4rem, 4.5vw, 3.6rem)', marginBottom: '1.25rem', color: '#FFFFFF', letterSpacing: '-0.02em', lineHeight: 1.18, fontWeight: 800 }}>
+            <h1 style={{ fontSize: 'clamp(2.4rem, 4.5vw, 3.6rem)', marginTop: 0, marginBottom: '1.25rem', color: '#FFFFFF', letterSpacing: '-0.02em', lineHeight: 1.18, fontWeight: 800 }}>
               Formulation Science. <br />
               <span style={{ color: '#38BDF8' }}>Predictable Release Kinetics.</span>
             </h1>
