@@ -1,8 +1,9 @@
-import React from 'react';
-import { Award, Target, Eye, Compass, ArrowRight, Calendar } from 'lucide-react';
+import React, { useState } from 'react';
+import { Award, Target, Eye, Compass, Calendar, MapPin, Building2, Copy, Check } from 'lucide-react';
 import { MEDIA_CONFIG } from '../config/assets';
-import { AmbientVideoBackground } from '../components/common/AmbientVideoBackground';
 import { AnimatedCounter } from '../components/common/AnimatedCounter';
+import { ScrollWordReveal } from '../components/common/ScrollWordReveal';
+import { SignatureClosingStatement } from '../components/common/SignatureClosingStatement';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 
 interface AboutPageProps {
@@ -11,65 +12,89 @@ interface AboutPageProps {
 
 export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
   useScrollReveal();
+  const [copiedLocation, setCopiedLocation] = useState<string | null>(null);
+
+  const handleCopy = (loc: string, text: string) => {
+    navigator.clipboard?.writeText(text);
+    setCopiedLocation(loc);
+    setTimeout(() => setCopiedLocation(null), 2500);
+  };
+
+  const timelineEvents = [
+    {
+      year: '2009',
+      title: 'Foundation & Incorporation',
+      desc: 'Salas Pharma was established in Gujarat, India, with the foundational pledge: "Success Lies in Commitment." Began marketing finished oral dosage pharmaceuticals.',
+      tag: 'Genesis',
+    },
+    {
+      year: '2014',
+      title: 'Therapeutic & Distribution Scaling',
+      desc: 'Expanded regional supply chain alliances across North, West, and Eastern India, introducing specialized portfolios in Gastroenterology, Antibacterials, and Pain Management.',
+      tag: 'Expansion',
+    },
+    {
+      year: '2018',
+      title: 'Sikkim Manufacturing Plant Commissioning',
+      desc: 'Commissioned dedicated manufacturing facility in Mamring, South Sikkim, featuring modern cleanroom air-handling units, high-speed tablet compression, and automated packaging lines.',
+      tag: 'Infrastructure',
+    },
+    {
+      year: 'Present',
+      title: '8 Core Therapeutic Segments & Quality Assurance',
+      desc: 'Operating comprehensive quality control laboratories with analytical assay, dissolution kinetics, and continuous stability monitoring serving healthcare providers nationwide.',
+      tag: 'Operations',
+    },
+  ];
 
   return (
-    <div className="about-page" style={{ marginTop: 'var(--header-height)', paddingTop: '3.5rem', backgroundColor: '#FFFFFF' }}>
-      {/* Page Hero */}
-      <section className="container" style={{ marginBottom: '4rem' }}>
-        <div style={{ maxWidth: '820px', margin: '0 auto', textAlign: 'center' }}>
-          <span className="section-eyebrow">
-            <Compass size={14} /> Corporate Identity
-          </span>
-          <h1 style={{ fontSize: 'clamp(2.4rem, 4vw, 3.4rem)', marginBottom: '1.5rem', color: 'var(--color-navy)' }}>
-            Committed to Quality. Focused on Healthcare.
-          </h1>
-          <p style={{ fontSize: '1.2rem', color: 'var(--color-text-muted)', lineHeight: 1.7 }}>
-            Salas Pharma is a pharmaceutical company headquartered in India, engaged in manufacturing and sales and marketing of quality finished dosage products.
-          </p>
-        </div>
-      </section>
-
-      {/* Corporate Philosophy Banner with Subtle Ambient DNA Background Video */}
-      <AmbientVideoBackground 
-        style={{ 
-          borderTop: '1px solid var(--color-border)', 
-          borderBottom: '1px solid var(--color-border)', 
-          padding: '4.5rem 0' 
-        }}
-      >
+    <div className="about-page" style={{ marginTop: 'var(--header-height)', backgroundColor: '#FFFFFF' }}>
+      
+      {/* 1. EDITORIAL PAGE HERO */}
+      <section className="section-spacing" style={{ paddingTop: '4rem', paddingBottom: '3.5rem', borderBottom: '1px solid var(--color-border)' }}>
         <div className="container">
-          <div 
-            className="reveal-up"
-            style={{
-              backgroundColor: 'rgba(255, 255, 255, 0.94)',
-              backdropFilter: 'blur(8px)',
-              borderRadius: 'var(--radius-lg)',
-              border: '1px solid var(--color-border)',
-              padding: '3rem',
-              boxShadow: 'var(--shadow-md)',
-              display: 'flex',
-              flexWrap: 'wrap',
-              alignItems: 'center',
-              justifyContent: 'space-between',
-              gap: '2.5rem',
-            }}
-          >
-            <div>
-              <span style={{ fontSize: '0.8125rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.12em', color: 'var(--color-accent)' }}>
-                Our Core Philosophy
-              </span>
-              <h2 style={{ fontSize: '2.2rem', color: 'var(--color-navy)', marginTop: '0.35rem', fontWeight: 800 }}>
-                "Success Lies in Commitment."
-              </h2>
-            </div>
-            <div style={{ maxWidth: '520px', color: 'var(--color-text-body)', fontSize: '1.025rem', lineHeight: 1.7, fontWeight: 500 }}>
-              Founded on the belief that enduring success stems from an uncompromising dedication to patient wellness, therapeutic quality, and professional integrity.
+          <div style={{ maxWidth: '860px', margin: '0 auto', textAlign: 'center' }}>
+            <span className="section-eyebrow">
+              <Compass size={14} /> Corporate Heritage & Identity
+            </span>
+            <h1 style={{ fontSize: 'clamp(2.5rem, 5vw, 3.8rem)', marginBottom: '1.75rem', color: 'var(--color-navy)', letterSpacing: '-0.02em', lineHeight: 1.18 }}>
+              Precision Formulation. <br />
+              <span style={{ color: 'var(--color-primary-blue)' }}>Unwavering Commitment.</span>
+            </h1>
+            <p style={{ fontSize: '1.25rem', color: 'var(--color-text-body)', lineHeight: 1.7, fontWeight: 400 }}>
+              Headquartered in India, Salas Pharma manufactures, markets, and distributes high-quality finished dosage pharmaceuticals engineered to support dependable healthcare outcomes nationwide.
+            </p>
+
+            <div style={{ display: 'flex', justifyContent: 'center', gap: '2.5rem', marginTop: '2.5rem', flexWrap: 'wrap' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                <span style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: 'var(--color-accent)' }} />
+                <span style={{ fontWeight: 600, fontSize: '0.9375rem', color: 'var(--color-navy)' }}>Founded in 2009</span>
+              </div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                <span style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: 'var(--color-primary-blue)' }} />
+                <span style={{ fontWeight: 600, fontSize: '0.9375rem', color: 'var(--color-navy)' }}>Vadodara Corporate Office</span>
+              </div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                <span style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: 'var(--color-teal)' }} />
+                <span style={{ fontWeight: 600, fontSize: '0.9375rem', color: 'var(--color-navy)' }}>Mamring, Sikkim Plant</span>
+              </div>
             </div>
           </div>
         </div>
-      </AmbientVideoBackground>
+      </section>
 
-      {/* Editorial Story & Facility Image */}
+      {/* 2. SCROLL WORD REVEAL (LEUCINE-INSPIRED EDITORIAL STORY CONTRAST) */}
+      <section className="section-spacing" style={{ backgroundColor: 'var(--color-bg-light)', borderBottom: '1px solid var(--color-border)' }}>
+        <div className="container">
+          <ScrollWordReveal
+            eyebrow="Our Foundational Ethos"
+            text="At Salas Pharma, every finished pharmaceutical dosage represents a disciplined commitment to patient health. We unite strict cGMP manufacturing standards, rigorous analytical validation, and nationwide distribution to ensure essential therapeutic solutions remain accessible and uncompromisingly reliable."
+            highlightWords={['Salas', 'Pharma', 'commitment', 'cGMP', 'analytical', 'accessible', 'reliable']}
+          />
+        </div>
+      </section>
+
+      {/* 3. CORPORATE HERITAGE & INFRASTRUCTURE SHOWCASE */}
       <section className="section-spacing">
         <div className="container">
           <div 
@@ -84,7 +109,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
               <div 
                 className="img-zoom-wrapper"
                 style={{
-                  borderRadius: 'var(--radius-lg)',
+                  borderRadius: 'var(--radius-xl)',
                   boxShadow: 'var(--shadow-xl)',
                   border: '1px solid var(--color-border)',
                   overflow: 'hidden',
@@ -98,21 +123,21 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
                   decoding="async"
                   width={640}
                   height={480}
-                  style={{ width: '100%', height: '440px', objectFit: 'cover', display: 'block' }}
+                  style={{ width: '100%', height: '480px', objectFit: 'cover', display: 'block' }}
                 />
                 <div style={{
                   position: 'absolute',
                   bottom: 0,
                   left: 0,
                   right: 0,
-                  background: 'linear-gradient(to top, rgba(7, 29, 54, 0.88), transparent)',
-                  padding: '1.5rem',
+                  background: 'linear-gradient(to top, rgba(7, 29, 54, 0.92), transparent)',
+                  padding: '2rem 1.75rem',
                   color: '#FFFFFF',
                 }}>
-                  <span style={{ fontSize: '0.75rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.1em', color: 'var(--color-secondary)' }}>
+                  <span style={{ fontSize: '0.75rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.12em', color: 'var(--color-secondary)' }}>
                     Production Infrastructure
                   </span>
-                  <p style={{ margin: '0.25rem 0 0', fontSize: '0.95rem', fontWeight: 600 }}>
+                  <p style={{ margin: '0.35rem 0 0', fontSize: '1.05rem', fontWeight: 600 }}>
                     Salas Pharmaceuticals Facility — Mamring, South Sikkim
                   </p>
                 </div>
@@ -121,33 +146,33 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
 
             <div className="reveal-right">
               <span className="section-eyebrow">
-                <Award size={14} /> Our Journey
+                <Award size={14} /> Established Excellence
               </span>
-              <h2 style={{ marginBottom: '1.5rem', color: 'var(--color-navy)' }}>
+              <h2 style={{ marginBottom: '1.5rem', color: 'var(--color-navy)', fontSize: '2.4rem' }}>
                 Building Healthcare Trust Since 2009
               </h2>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem', fontSize: '1.05rem', color: 'var(--color-text-body)', lineHeight: 1.75 }}>
                 <p>
-                  Established in 2009, Salas Pharma has developed its presence in the pharmaceutical industry through service, collaborative partnerships, innovation and corporate responsibility.
+                  Salas Pharma has methodically built its presence through service consistency, long-standing distributor alliances, and adherence to pharmaceutical manufacturing standards.
                 </p>
                 <p>
-                  With a portfolio spanning multiple therapeutic segments and a sales and distribution network across India, we work to make quality pharmaceutical products accessible.
+                  With therapeutic portfolios covering 8 critical clinical fields, our products are trusted by doctors, healthcare institutions, and retail pharmacies across India.
                 </p>
                 <p>
-                  Alongside sales and marketing, our manufacturing capabilities support the production of pharmaceutical dosage forms under applicable quality requirements.
+                  Our dedicated manufacturing plant in Mamring, South Sikkim, operates advanced machinery for tablet compression, oral capsule filling, and blister sealing under cleanroom environmental conditions.
                 </p>
               </div>
 
               <div style={{ marginTop: '2.5rem', display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '1.25rem' }}>
-                <div style={{ padding: '1.25rem', backgroundColor: 'var(--color-bg-light)', borderRadius: 'var(--radius-sm)', borderLeft: '3px solid var(--color-primary)' }}>
-                  <h4 style={{ fontSize: '1.1rem', fontWeight: 800, color: 'var(--color-primary)', margin: 0 }}>
+                <div style={{ padding: '1.5rem', backgroundColor: 'var(--color-bg-light)', borderRadius: 'var(--radius-md)', borderLeft: '4px solid var(--color-primary)' }}>
+                  <h4 style={{ fontSize: '1.75rem', fontWeight: 800, color: 'var(--color-primary)', margin: 0 }}>
                     <AnimatedCounter target={2009} />
                   </h4>
-                  <p style={{ fontSize: '0.85rem', color: 'var(--color-text-muted)', margin: 0, marginTop: '0.2rem' }}>Year Established</p>
+                  <p style={{ fontSize: '0.875rem', color: 'var(--color-text-muted)', margin: 0, marginTop: '0.35rem', fontWeight: 600 }}>Year Established</p>
                 </div>
-                <div style={{ padding: '1.25rem', backgroundColor: 'var(--color-bg-light)', borderRadius: 'var(--radius-sm)', borderLeft: '3px solid var(--color-accent)' }}>
-                  <h4 style={{ fontSize: '1.1rem', fontWeight: 800, color: 'var(--color-accent)', margin: 0 }}>Pan-India</h4>
-                  <p style={{ fontSize: '0.85rem', color: 'var(--color-text-muted)', margin: 0, marginTop: '0.2rem' }}>Distribution Reach</p>
+                <div style={{ padding: '1.5rem', backgroundColor: 'var(--color-bg-light)', borderRadius: 'var(--radius-md)', borderLeft: '4px solid var(--color-accent)' }}>
+                  <h4 style={{ fontSize: '1.75rem', fontWeight: 800, color: 'var(--color-accent)', margin: 0 }}>Pan-India</h4>
+                  <p style={{ fontSize: '0.875rem', color: 'var(--color-text-muted)', margin: 0, marginTop: '0.35rem', fontWeight: 600 }}>Distribution Reach</p>
                 </div>
               </div>
             </div>
@@ -155,214 +180,221 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
         </div>
       </section>
 
-      {/* Image-Led Operational Pillars */}
+      {/* 4. INTERACTIVE HERITAGE TIMELINE */}
       <section className="section-spacing" style={{ backgroundColor: 'var(--color-bg-light)', borderTop: '1px solid var(--color-border)' }}>
         <div className="container">
-          <div className="section-header">
+          <div className="section-header" style={{ textAlign: 'center', maxWidth: '720px', margin: '0 auto 4rem auto' }}>
             <span className="section-eyebrow">
-              <Compass size={14} /> Strategic Foundations
+              <Calendar size={14} /> Chronology of Growth
             </span>
-            <h2 className="section-title">Pillars of Our Pharmaceutical Practice</h2>
+            <h2 className="section-title">Milestones in Pharmaceutical Capability</h2>
             <p className="section-description">
-              Combining dedicated manufacturing infrastructure, disciplined quality testing, and expert personnel to deliver consistent therapeutics.
+              A timeline reflecting deliberate, structured growth grounded in operational stability and genuine capacity investment.
             </p>
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2rem' }}>
-            {/* Pillar 1: Sikkim Facility */}
-            <div className="pharma-card reveal-up">
-              <div className="pharma-card-img-wrap">
-                <img 
-                  src={MEDIA_CONFIG.about.image} 
-                  alt="Salas Pharma dedicated manufacturing facility" 
-                  loading="lazy" 
-                  decoding="async" 
-                  width={400} 
-                  height={240} 
-                />
-              </div>
-              <div className="pharma-card-seam" />
-              <div className="pharma-card-body">
-                <span className="pharma-card-tag">Infrastructure</span>
-                <h3 className="pharma-card-title">Dedicated Sikkim Plant</h3>
-                <p className="pharma-card-desc">
-                  Equipped with controlled cleanroom suites, modern granulation, tablet compression, and automated packaging lines in Mamring, South Sikkim.
-                </p>
-                <button 
-                  type="button" 
-                  onClick={() => onNavigate('manufacturing')}
-                  className="card-cta"
-                  style={{ background: 'none', border: 'none', padding: 0, cursor: 'pointer' }}
-                >
-                  <span>Explore Facility</span>
-                  <ArrowRight size={14} />
-                </button>
-              </div>
-            </div>
+          <div style={{ maxWidth: '860px', margin: '0 auto', position: 'relative' }}>
+            {/* Center line */}
+            <div 
+              style={{
+                position: 'absolute',
+                left: '28px',
+                top: '20px',
+                bottom: '20px',
+                width: '2px',
+                backgroundColor: 'rgba(20, 86, 160, 0.2)',
+              }}
+              aria-hidden="true"
+            />
 
-            {/* Pillar 2: Quality Commitment */}
-            <div className="pharma-card reveal-up" style={{ animationDelay: '150ms' }}>
-              <div className="pharma-card-img-wrap">
-                <img 
-                  src={MEDIA_CONFIG.quality.image} 
-                  alt="Quality assurance testing and compliance inspection" 
-                  loading="lazy" 
-                  decoding="async" 
-                  width={400} 
-                  height={240} 
-                />
-              </div>
-              <div className="pharma-card-seam" />
-              <div className="pharma-card-body">
-                <span className="pharma-card-tag">Quality Assurance</span>
-                <h3 className="pharma-card-title">Rigorous Analytical Testing</h3>
-                <p className="pharma-card-desc">
-                  Systematic raw material verification, dissolution profile screening, and physical dosage evaluation throughout formulation and packaging.
-                </p>
-                <button 
-                  type="button" 
-                  onClick={() => onNavigate('laboratories')}
-                  className="card-cta"
-                  style={{ background: 'none', border: 'none', padding: 0, cursor: 'pointer' }}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '2.5rem' }}>
+              {timelineEvents.map((evt, idx) => (
+                <div 
+                  key={evt.year} 
+                  className="reveal-up"
+                  style={{
+                    display: 'flex',
+                    alignItems: 'flex-start',
+                    gap: '2rem',
+                    position: 'relative',
+                  }}
                 >
-                  <span>View Laboratories</span>
-                  <ArrowRight size={14} />
-                </button>
-              </div>
-            </div>
+                  {/* Node icon */}
+                  <div 
+                    style={{
+                      width: '58px',
+                      height: '58px',
+                      borderRadius: '50%',
+                      backgroundColor: idx === 0 ? 'var(--color-accent)' : idx === 2 ? 'var(--color-primary-blue)' : '#FFFFFF',
+                      color: idx === 0 || idx === 2 ? '#FFFFFF' : 'var(--color-primary)',
+                      border: '3px solid var(--color-primary)',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      fontWeight: 800,
+                      fontSize: '0.85rem',
+                      flexShrink: 0,
+                      zIndex: 2,
+                      boxShadow: '0 4px 12px rgba(11, 37, 69, 0.12)',
+                    }}
+                  >
+                    {evt.year}
+                  </div>
 
-            {/* Pillar 3: People & Purpose */}
-            <div className="pharma-card reveal-up" style={{ animationDelay: '300ms' }}>
-              <div className="pharma-card-img-wrap">
-                <img 
-                  src={MEDIA_CONFIG.careers.image} 
-                  alt="Salas Pharma multidisciplinary research and quality control team" 
-                  loading="lazy" 
-                  decoding="async" 
-                  width={400} 
-                  height={240} 
-                />
-              </div>
-              <div className="pharma-card-seam" />
-              <div className="pharma-card-body">
-                <span className="pharma-card-tag">Human Capital</span>
-                <h3 className="pharma-card-title">People & Integrity</h3>
-                <p className="pharma-card-desc">
-                  An experienced cadre of pharmaceutical professionals, analytical chemists, and regulatory specialists committed to patient healthcare.
-                </p>
-                <button 
-                  type="button" 
-                  onClick={() => onNavigate('careers')}
-                  className="card-cta"
-                  style={{ background: 'none', border: 'none', padding: 0, cursor: 'pointer' }}
-                >
-                  <span>Join Our Team</span>
-                  <ArrowRight size={14} />
-                </button>
-              </div>
+                  {/* Content card */}
+                  <div 
+                    style={{
+                      flex: 1,
+                      backgroundColor: '#FFFFFF',
+                      borderRadius: 'var(--radius-lg)',
+                      padding: '2rem 2.25rem',
+                      border: '1px solid var(--color-border)',
+                      boxShadow: 'var(--shadow-sm)',
+                      transition: 'transform 0.25s ease, box-shadow 0.25s ease',
+                    }}
+                    className="interactive-card"
+                  >
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.75rem', flexWrap: 'wrap', gap: '0.5rem' }}>
+                      <h3 style={{ fontSize: '1.25rem', color: 'var(--color-navy)', margin: 0, fontWeight: 700 }}>
+                        {evt.title}
+                      </h3>
+                      <span style={{ fontSize: '0.75rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em', padding: '0.25rem 0.65rem', borderRadius: '100px', backgroundColor: 'rgba(20, 86, 160, 0.08)', color: 'var(--color-primary-blue)' }}>
+                        {evt.tag}
+                      </span>
+                    </div>
+                    <p style={{ margin: 0, color: 'var(--color-text-body)', lineHeight: 1.65, fontSize: '0.975rem' }}>
+                      {evt.desc}
+                    </p>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         </div>
       </section>
 
-      {/* Editorial Company Timeline */}
-      <section className="section-spacing" style={{ backgroundColor: 'var(--color-bg-light)', borderTop: '1px solid var(--color-border)' }}>
+      {/* 5. STRATEGIC HUBS (VADODARA HQ & SIKKIM PLANT) */}
+      <section className="section-spacing" style={{ borderTop: '1px solid var(--color-border)' }}>
         <div className="container">
-          <div className="section-header">
+          <div className="section-header" style={{ textAlign: 'center', maxWidth: '720px', margin: '0 auto 3.5rem auto' }}>
             <span className="section-eyebrow">
-              <Calendar size={14} /> Chronological Heritage
+              <Building2 size={14} /> Geographic Presence
             </span>
-            <h2 className="section-title">Milestones in Pharmaceutical Excellence</h2>
+            <h2 className="section-title">Strategic Operational Hubs</h2>
             <p className="section-description">
-              Tracing the disciplined growth, manufacturing expansion, and healthcare partnerships of Salas Pharma.
+              Dedicated corporate direction anchored in Gujarat coupled with high-capacity cGMP manufacturing in Sikkim.
             </p>
           </div>
 
-          <div className="timeline-track">
-            <div className="timeline-spine" />
-
-            {/* Milestone 1: 2009 */}
-            <div className="timeline-item timeline-node-left reveal-left">
-              <div className="timeline-dot" />
-              <div className="timeline-content">
-                <span style={{ fontSize: '0.8125rem', fontWeight: 800, color: 'var(--color-primary)', letterSpacing: '0.08em', textTransform: 'uppercase' }}>
-                  2009 • Corporate Founding
-                </span>
-                <h3 style={{ fontSize: '1.25rem', color: 'var(--color-navy)', marginTop: '0.25rem', marginBottom: '0.5rem', fontWeight: 700 }}>
-                  Establishment of Salas Pharmaceuticals
-                </h3>
-                <p style={{ fontSize: '0.9rem', color: 'var(--color-text-body)', lineHeight: 1.6, margin: 0 }}>
-                  Incorporated with a definitive mission: delivering high-integrity pharmaceutical manufacturing, ethical corporate governance, and collaborative healthcare delivery across India.
-                </p>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '2rem' }}>
+            
+            {/* Hub 1: Vadodara Corporate Office */}
+            <div className="pharma-card reveal-up" style={{ padding: '2.5rem', backgroundColor: 'var(--color-bg-light)', border: '1px solid var(--color-border)', borderRadius: 'var(--radius-xl)' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1.5rem' }}>
+                <div style={{ width: '48px', height: '48px', borderRadius: 'var(--radius-md)', backgroundColor: 'rgba(20, 86, 160, 0.12)', color: 'var(--color-primary)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  <Building2 size={24} />
+                </div>
+                <div>
+                  <span style={{ fontSize: '0.75rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.1em', color: 'var(--color-accent)' }}>
+                    Corporate Headquarters
+                  </span>
+                  <h3 style={{ margin: 0, fontSize: '1.35rem', color: 'var(--color-navy)', fontWeight: 700 }}>
+                    Vadodara, Gujarat
+                  </h3>
+                </div>
               </div>
+
+              <p style={{ color: 'var(--color-text-body)', lineHeight: 1.65, fontSize: '0.975rem', marginBottom: '1.5rem' }}>
+                Manages national marketing strategy, commercial distributor relations, procurement, and regulatory affairs administration.
+              </p>
+
+              <div style={{ padding: '1rem 1.25rem', backgroundColor: '#FFFFFF', borderRadius: 'var(--radius-md)', border: '1px solid var(--color-border)', marginBottom: '1.5rem', display: 'flex', alignItems: 'flex-start', gap: '0.75rem' }}>
+                <MapPin size={18} style={{ color: 'var(--color-primary)', flexShrink: 0, marginTop: '2px' }} />
+                <span style={{ fontSize: '0.875rem', color: 'var(--color-text-body)', lineHeight: 1.5 }}>
+                  104, 1st Floor, "Arohi" Complex, Opp. Reliance Town Gate, Near Bhailal Amin Hospital, Gorwa, Vadodara - 390016
+                </span>
+              </div>
+
+              <button
+                type="button"
+                onClick={() => handleCopy('vadodara', '104, 1st Floor, "Arohi" Complex, Opp. Reliance Town Gate, Near Bhailal Amin Hospital, Gorwa, Vadodara - 390016')}
+                className="btn btn-secondary"
+                style={{ width: '100%', justifyContent: 'center', fontSize: '0.875rem' }}
+              >
+                {copiedLocation === 'vadodara' ? (
+                  <>
+                    <Check size={16} style={{ color: 'var(--color-teal)' }} />
+                    <span>Address Copied!</span>
+                  </>
+                ) : (
+                  <>
+                    <Copy size={16} />
+                    <span>Copy Vadodara Address</span>
+                  </>
+                )}
+              </button>
             </div>
 
-            {/* Milestone 2: Multi-Therapeutic Expansion */}
-            <div className="timeline-item timeline-node-right reveal-right accent">
-              <div className="timeline-dot" />
-              <div className="timeline-content">
-                <span style={{ fontSize: '0.8125rem', fontWeight: 800, color: 'var(--color-accent)', letterSpacing: '0.08em', textTransform: 'uppercase' }}>
-                  Therapeutic Depth
-                </span>
-                <h3 style={{ fontSize: '1.25rem', color: 'var(--color-navy)', marginTop: '0.25rem', marginBottom: '0.5rem', fontWeight: 700 }}>
-                  Portfolio Across 8 Specialties
-                </h3>
-                <p style={{ fontSize: '0.9rem', color: 'var(--color-text-body)', lineHeight: 1.6, margin: 0 }}>
-                  Strategic diversification into core clinical sectors including Neurology, Psychiatry, Orthopaedics, Gynaecology, Pain Management, and Gastroenterology.
-                </p>
+            {/* Hub 2: Sikkim Manufacturing Plant */}
+            <div className="pharma-card reveal-up" style={{ padding: '2.5rem', backgroundColor: 'var(--color-bg-light)', border: '1px solid var(--color-border)', borderRadius: 'var(--radius-xl)' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1.5rem' }}>
+                <div style={{ width: '48px', height: '48px', borderRadius: 'var(--radius-md)', backgroundColor: 'rgba(229, 36, 42, 0.12)', color: 'var(--color-accent)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  <Award size={24} />
+                </div>
+                <div>
+                  <span style={{ fontSize: '0.75rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.1em', color: 'var(--color-primary-blue)' }}>
+                    Production Facility
+                  </span>
+                  <h3 style={{ margin: 0, fontSize: '1.35rem', color: 'var(--color-navy)', fontWeight: 700 }}>
+                    Mamring, South Sikkim
+                  </h3>
+                </div>
               </div>
+
+              <p style={{ color: 'var(--color-text-body)', lineHeight: 1.65, fontSize: '0.975rem', marginBottom: '1.5rem' }}>
+                Dedicated manufacturing suites for tablets, capsules, and blister packaging equipped with controlled AHU HEPA filtration and on-site testing.
+              </p>
+
+              <div style={{ padding: '1rem 1.25rem', backgroundColor: '#FFFFFF', borderRadius: 'var(--radius-md)', border: '1px solid var(--color-border)', marginBottom: '1.5rem', display: 'flex', alignItems: 'flex-start', gap: '0.75rem' }}>
+                <MapPin size={18} style={{ color: 'var(--color-accent)', flexShrink: 0, marginTop: '2px' }} />
+                <span style={{ fontSize: '0.875rem', color: 'var(--color-text-body)', lineHeight: 1.5 }}>
+                  Plot No. 121, Mamring, South Sikkim - 737132, India
+                </span>
+              </div>
+
+              <button
+                type="button"
+                onClick={() => handleCopy('sikkim', 'Plot No. 121, Mamring, South Sikkim - 737132, India')}
+                className="btn btn-secondary"
+                style={{ width: '100%', justifyContent: 'center', fontSize: '0.875rem' }}
+              >
+                {copiedLocation === 'sikkim' ? (
+                  <>
+                    <Check size={16} style={{ color: 'var(--color-teal)' }} />
+                    <span>Address Copied!</span>
+                  </>
+                ) : (
+                  <>
+                    <Copy size={16} />
+                    <span>Copy Sikkim Plant Address</span>
+                  </>
+                )}
+              </button>
             </div>
 
-            {/* Milestone 3: Manufacturing Facility */}
-            <div className="timeline-item timeline-node-left reveal-left">
-              <div className="timeline-dot" />
-              <div className="timeline-content">
-                <span style={{ fontSize: '0.8125rem', fontWeight: 800, color: 'var(--color-primary)', letterSpacing: '0.08em', textTransform: 'uppercase' }}>
-                  Facility Infrastructure
-                </span>
-                <h3 style={{ fontSize: '1.25rem', color: 'var(--color-navy)', marginTop: '0.25rem', marginBottom: '0.5rem', fontWeight: 700 }}>
-                  Sikkim Production Plant
-                </h3>
-                <p style={{ fontSize: '0.9rem', color: 'var(--color-text-body)', lineHeight: 1.6, margin: 0 }}>
-                  Dedicated cleanroom infrastructure in South Sikkim equipped for high-precision tablet and capsule compression, analytical quality checks, and automated packaging.
-                </p>
-              </div>
-            </div>
-
-            {/* Milestone 4: Pan-India Alliances */}
-            <div className="timeline-item timeline-node-right reveal-right accent">
-              <div className="timeline-dot" />
-              <div className="timeline-content">
-                <span style={{ fontSize: '0.8125rem', fontWeight: 800, color: 'var(--color-accent)', letterSpacing: '0.08em', textTransform: 'uppercase' }}>
-                  Nationwide Distribution
-                </span>
-                <h3 style={{ fontSize: '1.25rem', color: 'var(--color-navy)', marginTop: '0.25rem', marginBottom: '0.5rem', fontWeight: 700 }}>
-                  Pan-India Healthcare Reach
-                </h3>
-                <p style={{ fontSize: '0.9rem', color: 'var(--color-text-body)', lineHeight: 1.6, margin: 0 }}>
-                  Building trusted collaborative distribution alliances and marketing networks ensuring uninterrupted supply of essential finished dosages nationwide.
-                </p>
-              </div>
-            </div>
           </div>
         </div>
       </section>
 
-      {/* Vision & Mission */}
-      <section className="section-spacing" style={{ backgroundColor: '#FFFFFF', borderTop: '1px solid var(--color-border)' }}>
+      {/* 6. VISION & MISSION */}
+      <section className="section-spacing" style={{ backgroundColor: 'var(--color-bg-light)', borderTop: '1px solid var(--color-border)' }}>
         <div className="container">
-          <div 
-            style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-              gap: '2.5rem',
-            }}
-          >
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '2.5rem' }}>
             <div 
               className="reveal-left"
               style={{
                 backgroundColor: '#FFFFFF',
-                borderRadius: 'var(--radius-lg)',
+                borderRadius: 'var(--radius-xl)',
                 padding: '3rem 2.5rem',
                 border: '1px solid var(--color-border)',
                 boxShadow: 'var(--shadow-sm)',
@@ -372,8 +404,8 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
                 style={{
                   width: '54px',
                   height: '54px',
-                  borderRadius: 'var(--radius-sm)',
-                  backgroundColor: 'var(--color-primary-subtle)',
+                  borderRadius: 'var(--radius-md)',
+                  backgroundColor: 'rgba(20, 86, 160, 0.1)',
                   color: 'var(--color-primary)',
                   display: 'flex',
                   alignItems: 'center',
@@ -383,11 +415,11 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
               >
                 <Eye size={28} />
               </div>
-              <h3 style={{ fontSize: '1.5rem', color: 'var(--color-navy)', marginBottom: '1rem' }}>
+              <h3 style={{ fontSize: '1.6rem', color: 'var(--color-navy)', marginBottom: '1rem', fontWeight: 700 }}>
                 Our Corporate Vision
               </h3>
-              <p style={{ color: 'var(--color-text-body)', lineHeight: 1.7, fontSize: '1rem', margin: 0 }}>
-                To be a widely trusted and respected Indian pharmaceutical enterprise recognized for sustained manufacturing quality, ethical corporate standards, and expanding access to vital finished dosage medicines.
+              <p style={{ color: 'var(--color-text-body)', lineHeight: 1.7, fontSize: '1.025rem', margin: 0 }}>
+                To be an enduringly trusted and respected Indian pharmaceutical enterprise recognized for sustained manufacturing quality, ethical corporate standards, and expanding access to vital finished dosage medicines.
               </p>
             </div>
 
@@ -395,7 +427,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
               className="reveal-right"
               style={{
                 backgroundColor: '#FFFFFF',
-                borderRadius: 'var(--radius-lg)',
+                borderRadius: 'var(--radius-xl)',
                 padding: '3rem 2.5rem',
                 border: '1px solid var(--color-border)',
                 boxShadow: 'var(--shadow-sm)',
@@ -405,8 +437,8 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
                 style={{
                   width: '54px',
                   height: '54px',
-                  borderRadius: 'var(--radius-sm)',
-                  backgroundColor: 'var(--color-accent-subtle)',
+                  borderRadius: 'var(--radius-md)',
+                  backgroundColor: 'rgba(229, 36, 42, 0.1)',
                   color: 'var(--color-accent)',
                   display: 'flex',
                   alignItems: 'center',
@@ -416,10 +448,10 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
               >
                 <Target size={28} />
               </div>
-              <h3 style={{ fontSize: '1.5rem', color: 'var(--color-navy)', marginBottom: '1rem' }}>
+              <h3 style={{ fontSize: '1.6rem', color: 'var(--color-navy)', marginBottom: '1rem', fontWeight: 700 }}>
                 Our Mission
               </h3>
-              <p style={{ color: 'var(--color-text-body)', lineHeight: 1.7, fontSize: '1rem', margin: 0 }}>
+              <p style={{ color: 'var(--color-text-body)', lineHeight: 1.7, fontSize: '1.025rem', margin: 0 }}>
                 To manufacture, market, and distribute dependable pharmaceutical dosage forms across critical therapeutic segments, driven by stringent quality management, robust distribution alliances, and societal responsibility.
               </p>
             </div>
@@ -427,34 +459,9 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="section-spacing" style={{ textAlign: 'center' }}>
-        <div className="container">
-          <h2 style={{ marginBottom: '1rem', color: 'var(--color-navy)' }}>
-            Explore Our Comprehensive Capabilities
-          </h2>
-          <p style={{ color: 'var(--color-text-muted)', fontSize: '1.1rem', marginBottom: '2.5rem', maxWidth: '600px', margin: '0 auto 2.5rem auto' }}>
-            Learn how our Sikkim manufacturing facility and quality assurance protocols support dependable healthcare products.
-          </p>
-          <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', flexWrap: 'wrap' }}>
-            <button 
-              type="button" 
-              onClick={() => onNavigate('manufacturing')} 
-              className="btn btn-primary"
-            >
-              <span>Manufacturing & Quality</span>
-              <ArrowRight size={16} />
-            </button>
-            <button 
-              type="button" 
-              onClick={() => onNavigate('products')} 
-              className="btn btn-secondary"
-            >
-              <span>View Product Segments</span>
-            </button>
-          </div>
-        </div>
-      </section>
+      {/* 7. SIGNATURE CLOSING STATEMENT */}
+      <SignatureClosingStatement onNavigate={onNavigate} />
+
     </div>
   );
 };

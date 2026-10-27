@@ -1,9 +1,15 @@
 import React, { useState } from 'react';
-import { Users, BookOpen, Send, CheckCircle2, ShieldCheck, HeartHandshake, Copy, Check, ExternalLink, AlertCircle, ArrowRight } from 'lucide-react';
+import { Users, Send, CheckCircle2, Copy, Check, AlertCircle, ArrowRight, MapPin, Briefcase } from 'lucide-react';
 import { MEDIA_CONFIG } from '../config/assets';
+import { ScrollWordReveal } from '../components/common/ScrollWordReveal';
+import { SignatureClosingStatement } from '../components/common/SignatureClosingStatement';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 
-export const CareersPage: React.FC = () => {
+interface CareersPageProps {
+  onNavigate?: (route: string) => void;
+}
+
+export const CareersPage: React.FC<CareersPageProps> = ({ onNavigate }) => {
   useScrollReveal();
 
   const [formData, setFormData] = useState({
@@ -69,285 +75,274 @@ export const CareersPage: React.FC = () => {
     }
   };
 
-  return (
-    <div className="careers-page" style={{ marginTop: 'var(--header-height)', paddingTop: '3.5rem', backgroundColor: '#FFFFFF' }}>
-      {/* Hero Showcase with Team Photography */}
-      <section className="container" style={{ marginBottom: '3.5rem' }}>
-        <div 
-          style={{ 
-            display: 'grid', 
-            gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', 
-            gap: '3.5rem', 
-            alignItems: 'center',
-            backgroundColor: 'var(--color-bg-light)',
-            padding: '3rem',
-            borderRadius: 'var(--radius-lg)',
-            border: '1px solid var(--color-border)',
-          }}
-        >
-          <div className="reveal-left">
-            <span className="section-eyebrow">
-              <Users size={14} /> Career Opportunities
-            </span>
-            <h1 style={{ fontSize: 'clamp(2.4rem, 4vw, 3.4rem)', marginBottom: '1.25rem', color: 'var(--color-navy)' }}>
-              Grow Your Career With SALAS Pharma
-            </h1>
-            <p style={{ fontSize: '1.15rem', color: 'var(--color-text-body)', lineHeight: 1.7, marginBottom: '2rem' }}>
-              At Salas Pharma, we believe our people are central to our pharmaceutical mission. We provide an environment built on continuous learning, ethical values, collaborative innovation, and purposeful healthcare work.
-            </p>
-            <a 
-              href="#apply-form" 
-              className="btn btn-primary"
-              style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', textDecoration: 'none' }}
-            >
-              <span>Submit Your Profile</span>
-              <ArrowRight size={16} />
-            </a>
-          </div>
+  const departments = [
+    {
+      title: 'Manufacturing & Cleanroom Production',
+      location: 'Mamring, South Sikkim Plant',
+      type: 'On-site cGMP Facility',
+      description: 'Granulation machine operators, compression technicians, blister packing line supervisors, and facility maintenance engineers.',
+      disciplines: ['D.Pharm / B.Pharm / Diploma Mechanical', 'cGMP & Cleanroom Protocol Knowledge', 'Machine Operation Experience']
+    },
+    {
+      title: 'Quality Assurance & Quality Control',
+      location: 'Sikkim Quality Control Labs',
+      type: 'On-site Laboratory',
+      description: 'Analytical chemists for HPLC assay, dissolution kinetics testing, microbiological sample incubation, and stability testing documentation.',
+      disciplines: ['B.Pharm / M.Pharm / M.Sc Chemistry', 'HPLC & Dissolution Instrument Proficiency', 'Schedule M & GLP Compliance']
+    },
+    {
+      title: 'Regulatory Affairs & Documentation',
+      location: 'Vadodara Corporate Office',
+      type: 'Headquarters / Hybrid',
+      description: 'Product dossier compilation, brand registration liaison with regulatory authorities, variation filings, and Certificate of Analysis auditing.',
+      disciplines: ['B.Pharm / M.Pharm Regulatory Affairs', 'CTD/ACTD Dossier Formatting', 'State Licensing & Tender Documentation']
+    },
+    {
+      title: 'Sales & Field Distribution Management',
+      location: 'Pan-India Territory Hubs',
+      type: 'Field Operations',
+      description: 'Regional sales managers, medical representatives, and stockist network liaisons driving ethical relationships with medical professionals.',
+      disciplines: ['Science / Pharmacy Graduate (B.Sc / B.Pharm)', 'Territory Medical Network Knowledge', 'Strong Communication Skills']
+    }
+  ];
 
-          <div className="reveal-right">
-            <div 
-              className="img-zoom-wrapper"
-              style={{
-                borderRadius: 'var(--radius-md)',
-                boxShadow: 'var(--shadow-xl)',
-                border: '1px solid var(--color-border)',
-                overflow: 'hidden',
-                position: 'relative',
-              }}
-            >
-              <img 
-                src={MEDIA_CONFIG.careers.image} 
-                alt="Salas Pharma multidisciplinary research and quality control team collaborating" 
-                loading="lazy" 
-                decoding="async" 
-                width={640} 
-                height={400} 
-                style={{ width: '100%', height: '360px', objectFit: 'cover', display: 'block' }}
-              />
-              <div style={{
-                position: 'absolute',
-                bottom: 0,
-                left: 0,
-                right: 0,
-                background: 'linear-gradient(to top, rgba(7, 29, 54, 0.9), transparent)',
-                padding: '1.25rem 1.5rem',
-                color: '#FFFFFF',
-              }}>
-                <span style={{ fontSize: '0.75rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--color-secondary)' }}>
-                  Our Team
-                </span>
-                <p style={{ margin: '0.2rem 0 0', fontSize: '0.9rem', fontWeight: 600 }}>
-                  Collaborative Science, Quality Oversight & Professional Integrity
-                </p>
+  return (
+    <div className="careers-page" style={{ marginTop: 'var(--header-height)', backgroundColor: '#FFFFFF' }}>
+      
+      {/* 1. HERO SHOWCASE */}
+      <section className="section-spacing" style={{ paddingTop: '4rem', paddingBottom: '3.5rem', borderBottom: '1px solid var(--color-border)' }}>
+        <div className="container">
+          <div 
+            style={{ 
+              display: 'grid', 
+              gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', 
+              gap: '4rem', 
+              alignItems: 'center',
+            }}
+          >
+            <div className="reveal-left">
+              <span className="section-eyebrow">
+                <Users size={14} /> Career Opportunities
+              </span>
+              <h1 style={{ fontSize: 'clamp(2.4rem, 4.5vw, 3.6rem)', marginBottom: '1.5rem', color: 'var(--color-navy)', letterSpacing: '-0.02em', lineHeight: 1.18 }}>
+                Build Your Purpose. <br />
+                <span style={{ color: 'var(--color-primary-blue)' }}>Advance Everyday Healthcare.</span>
+              </h1>
+              <p style={{ fontSize: '1.2rem', color: 'var(--color-text-body)', lineHeight: 1.7, marginBottom: '2rem' }}>
+                At Salas Pharma, our people transform pharmaceutical science into dependable therapies. We cultivate an ethical, safety-first culture where analytical curiosity, operational discipline, and integrity thrive.
+              </p>
+              
+              <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+                <a href="#talent-application" className="btn btn-primary">
+                  <span>Submit Talent Application</span>
+                  <ArrowRight size={16} />
+                </a>
+              </div>
+            </div>
+
+            <div className="reveal-right">
+              <div 
+                className="img-zoom-wrapper"
+                style={{
+                  borderRadius: 'var(--radius-xl)',
+                  boxShadow: 'var(--shadow-xl)',
+                  border: '1px solid var(--color-border)',
+                  overflow: 'hidden',
+                  position: 'relative',
+                }}
+              >
+                <img 
+                  src={MEDIA_CONFIG.careers.image} 
+                  alt="Salas Pharma pharmaceutical professionals collaborating in modern corporate environment" 
+                  loading="lazy"
+                  decoding="async"
+                  width={640}
+                  height={420}
+                  style={{ width: '100%', height: '400px', objectFit: 'cover', display: 'block' }}
+                />
+                <div style={{
+                  position: 'absolute',
+                  bottom: 0,
+                  left: 0,
+                  right: 0,
+                  background: 'linear-gradient(to top, rgba(7, 29, 54, 0.92), transparent)',
+                  padding: '1.75rem 2rem',
+                  color: '#FFFFFF',
+                }}>
+                  <span style={{ fontSize: '0.75rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.1em', color: 'var(--color-secondary)' }}>
+                    Professional Growth
+                  </span>
+                  <p style={{ margin: '0.25rem 0 0', fontSize: '1rem', fontWeight: 600 }}>
+                    Collaborative Workspaces in Gujarat & Sikkim
+                  </p>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Workplace Culture Pillars */}
-      <section style={{ backgroundColor: '#FFFFFF', borderTop: '1px solid var(--color-border)', borderBottom: '1px solid var(--color-border)', padding: '4rem 0' }}>
+      {/* 2. SCROLL WORD REVEAL (LEUCINE-INSPIRED CONTRAST STORYTELLING) */}
+      <section className="section-spacing" style={{ backgroundColor: 'var(--color-bg-light)', borderBottom: '1px solid var(--color-border)' }}>
         <div className="container">
-          <div 
-            className="reveal-stagger"
-            style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-              gap: '2.5rem',
-            }}
-          >
-            {[
-              {
-                title: 'Professional Learning & Advancement',
-                desc: 'Continuous exposure to current GMP guidelines, advanced analytical instrumentation, and modern pharmaceutical workflows.',
-                icon: BookOpen
-              },
-              {
-                title: 'Collaborative & Respectful Culture',
-                desc: 'A dynamic, transparent workplace where cross-functional ideas in manufacturing, quality, and marketing are actively encouraged.',
-                icon: HeartHandshake
-              },
-              {
-                title: 'Purpose-Driven Healthcare Impact',
-                desc: 'Experience the direct reward of producing and distributing affordable, dependable finished medicines for millions of patients across India.',
-                icon: ShieldCheck
-              }
-            ].map((c, idx) => (
+          <ScrollWordReveal
+            eyebrow="Our People & Culture"
+            text="Every medicine that leaves our Sikkim facility carries the dedication of our pharmacists, chemists, and operators. We invest in technical training, rigorous safety standards, and merit-based career progression so our talent can build lasting pharmaceutical careers."
+            highlightWords={['Sikkim', 'pharmacists', 'chemists', 'training', 'safety', 'merit-based', 'careers']}
+          />
+        </div>
+      </section>
+
+      {/* 3. DEPARTMENTAL OPPORTUNITIES GRID */}
+      <section className="section-spacing">
+        <div className="container">
+          <div className="section-header" style={{ textAlign: 'center', maxWidth: '780px', margin: '0 auto 3.5rem auto' }}>
+            <span className="section-eyebrow">
+              <Briefcase size={14} /> Functional Verticals
+            </span>
+            <h2 className="section-title">Open Departmental Talent Pools</h2>
+            <p className="section-description">
+              We continually welcome qualified candidates across our primary operational divisions in Gujarat and Sikkim.
+            </p>
+          </div>
+
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '2rem' }}>
+            {departments.map((dept, idx) => (
               <div 
                 key={idx}
                 className="interactive-card"
-                tabIndex={0}
-                role="region"
-                aria-label={c.title}
                 style={{
-                  backgroundColor: '#FFFFFF',
-                  borderRadius: 'var(--radius-lg)',
-                  padding: '2.5rem',
+                  backgroundColor: 'var(--color-bg-light)',
+                  borderRadius: 'var(--radius-xl)',
+                  padding: '2.5rem 2rem',
+                  border: '1px solid var(--color-border)',
+                  boxShadow: 'var(--shadow-sm)',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'space-between',
+                  transition: 'transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.28s cubic-bezier(0.16, 1, 0.3, 1)',
                 }}
               >
-                <span className="card-animated-underline" aria-hidden="true" />
                 <div>
-                  <div 
-                    style={{
-                      width: '50px',
-                      height: '50px',
-                      borderRadius: 'var(--radius-sm)',
-                      backgroundColor: 'var(--color-primary-subtle)',
-                      color: 'var(--color-primary)',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      marginBottom: '1.5rem',
-                      boxShadow: 'var(--shadow-xs)',
-                    }}
-                  >
-                    <c.icon size={26} />
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.25rem', flexWrap: 'wrap', gap: '0.5rem' }}>
+                    <span style={{ fontSize: '0.75rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.08em', padding: '0.25rem 0.65rem', borderRadius: '100px', backgroundColor: 'rgba(20, 86, 160, 0.08)', color: 'var(--color-primary-blue)' }}>
+                      {dept.type}
+                    </span>
+                    <span style={{ fontSize: '0.8125rem', color: 'var(--color-text-muted)', display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
+                      <MapPin size={13} style={{ color: 'var(--color-accent)' }} />
+                      {dept.location}
+                    </span>
                   </div>
-                  <h3 style={{ fontSize: '1.25rem', color: 'var(--color-navy)', marginBottom: '0.75rem' }}>
-                    {c.title}
+
+                  <h3 style={{ fontSize: '1.35rem', color: 'var(--color-navy)', marginBottom: '0.85rem', fontWeight: 700 }}>
+                    {dept.title}
                   </h3>
-                  <p style={{ color: 'var(--color-text-body)', fontSize: '0.925rem', lineHeight: 1.65, margin: 0 }}>
-                    {c.desc}
+
+                  <p style={{ color: 'var(--color-text-body)', lineHeight: 1.65, fontSize: '0.95rem', marginBottom: '1.5rem' }}>
+                    {dept.description}
                   </p>
+
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', marginBottom: '1.5rem' }}>
+                    {dept.disciplines.map((d, dIdx) => (
+                      <div key={dIdx} style={{ display: 'flex', alignItems: 'center', gap: '0.65rem' }}>
+                        <CheckCircle2 size={15} style={{ color: 'var(--color-teal)', flexShrink: 0 }} />
+                        <span style={{ fontSize: '0.875rem', color: 'var(--color-navy)', fontWeight: 500 }}>{d}</span>
+                      </div>
+                    ))}
+                  </div>
                 </div>
+
+                <a 
+                  href="#talent-application" 
+                  onClick={() => setFormData(prev => ({ ...prev, department: dept.title }))}
+                  className="card-cta"
+                  style={{ textDecoration: 'none', color: 'var(--color-accent)', fontWeight: 700, fontSize: '0.875rem', display: 'flex', alignItems: 'center', gap: '0.35rem' }}
+                >
+                  <span>Apply for this Vertical</span>
+                  <ArrowRight size={14} />
+                </a>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Application / Talent Form Section */}
-      <section id="apply-form" className="section-spacing" style={{ scrollMarginTop: 'var(--header-height)' }}>
+      {/* 4. APPLICATION FORM */}
+      <section id="talent-application" className="section-spacing" style={{ backgroundColor: 'var(--color-bg-light)', borderTop: '1px solid var(--color-border)' }}>
         <div className="container">
-          <div 
-            style={{
-              maxWidth: '820px',
-              margin: '0 auto',
-              backgroundColor: '#FFFFFF',
-              borderRadius: 'var(--radius-xl)',
-              border: '1px solid var(--color-border)',
-              padding: 'clamp(2rem, 5vw, 3.5rem)',
-              boxShadow: 'var(--shadow-lg)',
-            }}
-          >
+          <div style={{ maxWidth: '780px', margin: '0 auto', backgroundColor: '#FFFFFF', padding: '3.5rem', borderRadius: 'var(--radius-xl)', border: '1px solid var(--color-border)', boxShadow: 'var(--shadow-md)' }}>
             <div style={{ textAlign: 'center', marginBottom: '2.5rem' }}>
               <span className="section-eyebrow">
-                <Send size={14} /> Submit Your Profile
+                <Send size={14} /> Direct HR Channel
               </span>
-              <h2 style={{ fontSize: '2rem', color: 'var(--color-navy)', marginBottom: '0.75rem' }}>
-                Join Our Talent Community
+              <h2 style={{ fontSize: '2.2rem', color: 'var(--color-navy)', marginBottom: '0.75rem', fontWeight: 800 }}>
+                Submit Your Talent Profile
               </h2>
-              <p style={{ color: 'var(--color-text-muted)', fontSize: '0.95rem' }}>
-                Whether your expertise lies in pharmaceutical manufacturing, quality assurance, regulatory affairs, sales, or administration, we welcome expressions of interest.
+              <p style={{ color: 'var(--color-text-muted)', fontSize: '1.05rem', lineHeight: 1.6, margin: 0 }}>
+                Send your qualifications and background directly to the Salas Pharmaceuticals human resources review panel.
               </p>
             </div>
 
             {submitted ? (
-              <div 
-                style={{
-                  padding: '2.5rem',
-                  backgroundColor: 'var(--color-primary-subtle)',
-                  borderRadius: 'var(--radius-md)',
-                  textAlign: 'center',
-                  border: '1px solid #BFDBFE',
-                }}
-              >
-                <CheckCircle2 size={48} style={{ color: 'var(--color-primary)', margin: '0 auto 1rem auto' }} />
-                <h3 style={{ color: 'var(--color-navy)', marginBottom: '0.5rem', fontSize: '1.5rem', fontWeight: 800 }}>
-                  Application Profile Prepared
+              <div style={{ padding: '2.5rem', backgroundColor: 'rgba(20, 86, 160, 0.05)', borderRadius: 'var(--radius-lg)', border: '1px solid rgba(20, 86, 160, 0.2)', textAlign: 'center' }}>
+                <CheckCircle2 size={48} style={{ color: 'var(--color-teal)', margin: '0 auto 1.25rem auto' }} />
+                <h3 style={{ fontSize: '1.5rem', color: 'var(--color-navy)', marginBottom: '0.75rem', fontWeight: 700 }}>
+                  Application Dispatched
                 </h3>
-                <p style={{ color: 'var(--color-text-body)', fontSize: '1rem', lineHeight: 1.65, maxWidth: '600px', margin: '0 auto 1.5rem auto' }}>
-                  Thank you, <strong>{formData.name}</strong>. Your candidate summary for <em>"{formData.department}"</em> has been formatted for our Human Resources team at <strong>info@salaspharma.co.in</strong>. Your default email client was prompted to send your application.
+                <p style={{ color: 'var(--color-text-body)', lineHeight: 1.65, fontSize: '1rem', marginBottom: '2rem' }}>
+                  Your profile has been formulated for dispatch to <strong>info@salaspharma.co.in</strong>. You can copy the application summary to your clipboard below.
                 </p>
-
-                <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', flexWrap: 'wrap', marginBottom: '1.5rem' }}>
-                  <a
-                    href={getMailtoUri()}
-                    className="btn btn-primary"
-                    style={{ textDecoration: 'none' }}
-                  >
-                    <span>Open in Email App</span>
-                    <ExternalLink size={16} />
-                  </a>
-
+                <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', flexWrap: 'wrap' }}>
                   <button
                     type="button"
                     onClick={handleCopyDetails}
                     className="btn btn-secondary"
-                    style={{ backgroundColor: '#FFFFFF' }}
                   >
                     {copied ? (
                       <>
-                        <Check size={16} style={{ color: '#16A34A' }} />
-                        <span style={{ color: '#16A34A', fontWeight: 700 }}>Profile Copied!</span>
+                        <Check size={16} style={{ color: 'var(--color-teal)' }} />
+                        <span>Summary Copied!</span>
                       </>
                     ) : (
                       <>
                         <Copy size={16} />
-                        <span>Copy Profile Summary</span>
+                        <span>Copy Application Summary</span>
                       </>
                     )}
                   </button>
-                </div>
-
-                <div style={{ borderTop: '1px solid #DBEAFE', paddingTop: '1.25rem' }}>
                   <button
                     type="button"
-                    onClick={() => {
-                      setFormData({ name: '', email: '', phone: '', department: 'Manufacturing & QC', experience: '1-3 years', message: '' });
-                      setSubmitted(false);
-                    }}
-                    style={{
-                      background: 'none',
-                      border: 'none',
-                      color: 'var(--color-text-muted)',
-                      fontSize: '0.875rem',
-                      cursor: 'pointer',
-                      textDecoration: 'underline',
-                    }}
+                    onClick={() => setSubmitted(false)}
+                    className="btn btn-primary"
                   >
-                    Submit another application
+                    <span>Submit Another Application</span>
                   </button>
                 </div>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} noValidate style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+              <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
                 {errorMsg && (
-                  <div 
-                    role="alert"
-                    style={{ 
-                      padding: '0.85rem 1.15rem', 
-                      backgroundColor: '#FEE2E2', 
-                      border: '1px solid #FCA5A5', 
-                      color: '#991B1B', 
-                      borderRadius: 'var(--radius-sm)', 
-                      fontSize: '0.875rem', 
-                      display: 'flex', 
-                      alignItems: 'center', 
-                      gap: '0.5rem' 
-                    }}
-                  >
+                  <div style={{ padding: '1rem', backgroundColor: 'rgba(229, 36, 42, 0.08)', borderRadius: 'var(--radius-sm)', border: '1px solid rgba(229, 36, 42, 0.3)', color: 'var(--color-accent)', display: 'flex', alignItems: 'center', gap: '0.75rem', fontSize: '0.9375rem' }}>
                     <AlertCircle size={18} style={{ flexShrink: 0 }} />
-                    <span style={{ fontWeight: 600 }}>{errorMsg}</span>
+                    <span>{errorMsg}</span>
                   </div>
                 )}
 
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '1.25rem' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '1.5rem' }}>
                   <div>
-                    <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: 600, color: 'var(--color-navy)', marginBottom: '0.4rem' }}>
+                    <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: 700, color: 'var(--color-navy)', marginBottom: '0.4rem' }}>
                       Full Name *
                     </label>
                     <input
                       type="text"
                       required
-                      placeholder="e.g. Dr. Rajesh Sharma"
+                      placeholder="e.g. Dr. Ramesh Patel"
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                       style={{
                         width: '100%',
-                        padding: '0.75rem 1rem',
-                        borderRadius: 'var(--radius-sm)',
+                        padding: '0.85rem 1rem',
+                        borderRadius: 'var(--radius-md)',
                         border: '1px solid var(--color-border)',
                         fontSize: '0.9375rem',
                         outline: 'none',
@@ -356,19 +351,19 @@ export const CareersPage: React.FC = () => {
                   </div>
 
                   <div>
-                    <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: 600, color: 'var(--color-navy)', marginBottom: '0.4rem' }}>
+                    <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: 700, color: 'var(--color-navy)', marginBottom: '0.4rem' }}>
                       Email Address *
                     </label>
                     <input
                       type="email"
                       required
-                      placeholder="e.g. rajesh@example.com"
+                      placeholder="e.g. ramesh.patel@example.com"
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                       style={{
                         width: '100%',
-                        padding: '0.75rem 1rem',
-                        borderRadius: 'var(--radius-sm)',
+                        padding: '0.85rem 1rem',
+                        borderRadius: 'var(--radius-md)',
                         border: '1px solid var(--color-border)',
                         fontSize: '0.9375rem',
                         outline: 'none',
@@ -377,21 +372,21 @@ export const CareersPage: React.FC = () => {
                   </div>
                 </div>
 
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '1.25rem' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '1.5rem' }}>
                   <div>
-                    <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: 600, color: 'var(--color-navy)', marginBottom: '0.4rem' }}>
-                      Contact Number *
+                    <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: 700, color: 'var(--color-navy)', marginBottom: '0.4rem' }}>
+                      Contact Phone *
                     </label>
                     <input
                       type="tel"
                       required
-                      placeholder="e.g. +91 98765 43210"
+                      placeholder="e.g. +91 98250 12345"
                       value={formData.phone}
                       onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                       style={{
                         width: '100%',
-                        padding: '0.75rem 1rem',
-                        borderRadius: 'var(--radius-sm)',
+                        padding: '0.85rem 1rem',
+                        borderRadius: 'var(--radius-md)',
                         border: '1px solid var(--color-border)',
                         fontSize: '0.9375rem',
                         outline: 'none',
@@ -400,45 +395,45 @@ export const CareersPage: React.FC = () => {
                   </div>
 
                   <div>
-                    <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: 600, color: 'var(--color-navy)', marginBottom: '0.4rem' }}>
-                      Area of Expertise
+                    <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: 700, color: 'var(--color-navy)', marginBottom: '0.4rem' }}>
+                      Target Department Vertical
                     </label>
                     <select
                       value={formData.department}
                       onChange={(e) => setFormData({ ...formData, department: e.target.value })}
                       style={{
                         width: '100%',
-                        padding: '0.75rem 1rem',
-                        borderRadius: 'var(--radius-sm)',
+                        padding: '0.85rem 1rem',
+                        borderRadius: 'var(--radius-md)',
                         border: '1px solid var(--color-border)',
                         fontSize: '0.9375rem',
                         outline: 'none',
                         backgroundColor: '#FFFFFF',
                       }}
                     >
-                      <option value="Manufacturing & Production">Manufacturing & Production (Sikkim)</option>
-                      <option value="Quality Assurance & QC">Quality Assurance & QC</option>
-                      <option value="Formulation & R&D">Formulation & R&D</option>
-                      <option value="Sales & Field Distribution">Sales & Field Distribution</option>
-                      <option value="Regulatory Affairs & Documentation">Regulatory Affairs & Documentation</option>
-                      <option value="Finance & Administration">Finance & Administration (Vadodara)</option>
+                      <option value="Manufacturing & Cleanroom Production">Manufacturing & Cleanroom Production (Sikkim)</option>
+                      <option value="Quality Assurance & Quality Control">Quality Assurance & Quality Control (Sikkim)</option>
+                      <option value="Regulatory Affairs & Documentation">Regulatory Affairs & Documentation (Vadodara)</option>
+                      <option value="Sales & Field Distribution Management">Sales & Field Distribution Management (Pan-India)</option>
+                      <option value="General Corporate Application">General Corporate Application</option>
                     </select>
                   </div>
                 </div>
 
                 <div>
-                  <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: 600, color: 'var(--color-navy)', marginBottom: '0.4rem' }}>
-                    Relevant Experience & Qualifications Summary
+                  <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: 700, color: 'var(--color-navy)', marginBottom: '0.4rem' }}>
+                    Qualifications, Experience & Summary Notes *
                   </label>
                   <textarea
                     rows={4}
-                    placeholder="Briefly describe your pharmaceutical background, qualifications (e.g. B.Pharm, M.Pharm, M.Sc), and career aspirations..."
+                    required
+                    placeholder="Briefly describe your degree (e.g. B.Pharm, M.Pharm, B.Sc), years of relevant experience, and specific areas of pharmaceutical interest..."
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                     style={{
                       width: '100%',
-                      padding: '0.75rem 1rem',
-                      borderRadius: 'var(--radius-sm)',
+                      padding: '0.85rem 1rem',
+                      borderRadius: 'var(--radius-md)',
                       border: '1px solid var(--color-border)',
                       fontSize: '0.9375rem',
                       outline: 'none',
@@ -447,9 +442,9 @@ export const CareersPage: React.FC = () => {
                   />
                 </div>
 
-                <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-                  <button type="submit" className="btn btn-primary" style={{ padding: '0.85rem 2.25rem' }}>
-                    <span>Submit Application</span>
+                <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '1rem' }}>
+                  <button type="submit" className="btn btn-primary" style={{ padding: '0.85rem 2.5rem' }}>
+                    <span>Submit Talent Profile</span>
                     <Send size={16} />
                   </button>
                 </div>
@@ -458,6 +453,10 @@ export const CareersPage: React.FC = () => {
           </div>
         </div>
       </section>
+
+      {/* 5. SIGNATURE CLOSING STATEMENT */}
+      <SignatureClosingStatement onNavigate={onNavigate || (() => {})} />
+
     </div>
   );
 };

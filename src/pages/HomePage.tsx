@@ -349,46 +349,6 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, isLoaderComplete
               vectorEffect="non-scaling-stroke"
             />
           </svg>
-
-          {/* Floating Capsule Badge along Seam */}
-          <div className="hero-seam-capsule-badge" aria-hidden="true">
-            <div className="hero-capsule-glow-aura" />
-            <svg className="hero-seam-capsule-svg" viewBox="0 0 100 100" fill="none">
-              <defs>
-                <linearGradient id="seamCapRed" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stopColor="#FF4D47" />
-                  <stop offset="100%" stopColor="#B31217" />
-                </linearGradient>
-                <linearGradient id="seamCapBlue" x1="0%" y1="100%" x2="100%" y2="0%">
-                  <stop offset="0%" stopColor="#20AEEA" />
-                  <stop offset="100%" stopColor="#071D36" />
-                </linearGradient>
-                <linearGradient id="seamCapGloss" x1="0%" y1="0%" x2="0%" y2="100%">
-                  <stop offset="0%" stopColor="#FFFFFF" stopOpacity="0.85" />
-                  <stop offset="45%" stopColor="#FFFFFF" stopOpacity="0.2" />
-                  <stop offset="100%" stopColor="#000000" stopOpacity="0.1" />
-                </linearGradient>
-                <filter id="seamGlowFilter" x="-30%" y="-30%" width="160%" height="160%">
-                  <feGaussianBlur stdDeviation="3.5" result="blur" />
-                  <feMerge>
-                    <feMergeNode in="blur" />
-                    <feMergeNode in="SourceGraphic" />
-                  </feMerge>
-                </filter>
-              </defs>
-              <circle cx="50" cy="50" r="38" stroke="#20AEEA" strokeWidth="1" strokeDasharray="3 4" opacity="0.5" />
-              <circle cx="50" cy="12" r="2.8" fill="#20AEEA" opacity="0.8" />
-              <circle cx="82" cy="68" r="2.8" fill="#E5242A" opacity="0.8" />
-              <circle cx="18" cy="62" r="2.2" fill="#60A5FA" opacity="0.7" />
-              <g transform="rotate(-40 50 50)" filter="url(#seamGlowFilter)">
-                <path d="M 38 50 A 12 12 0 0 1 62 50 L 62 36 A 12 12 0 0 0 38 36 Z" fill="url(#seamCapRed)" />
-                <path d="M 38 50 A 12 12 0 0 1 62 50 L 62 36 A 12 12 0 0 0 38 36 Z" fill="url(#seamCapGloss)" />
-                <path d="M 38 50 L 62 50 L 62 64 A 12 12 0 0 1 38 64 Z" fill="url(#seamCapBlue)" />
-                <path d="M 38 50 L 62 50 L 62 64 A 12 12 0 0 1 38 64 Z" fill="url(#seamCapGloss)" />
-                <line x1="37.5" y1="50" x2="62.5" y2="50" stroke="#FFFFFF" strokeWidth="2" />
-              </g>
-            </svg>
-          </div>
         </div>
       </section>
 

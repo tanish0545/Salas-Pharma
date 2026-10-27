@@ -109,8 +109,8 @@ export function App() {
           {currentRoute === 'laboratories' && <LaboratoriesPage onNavigate={handleNavigate} />}
           {currentRoute === 'manufacturing' && <ManufacturingPage onNavigate={handleNavigate} />}
           {currentRoute === 'research' && <ResearchPage onNavigate={handleNavigate} />}
-          {currentRoute === 'careers' && <CareersPage />}
-          {currentRoute === 'contact' && <ContactPage />}
+          {currentRoute === 'careers' && <CareersPage onNavigate={handleNavigate} />}
+          {currentRoute === 'contact' && <ContactPage onNavigate={handleNavigate} />}
         </Suspense>
       </main>
 

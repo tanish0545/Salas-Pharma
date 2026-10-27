@@ -1,9 +1,14 @@
 import React, { useState } from 'react';
-import { MapPin, Mail, Phone, Send, CheckCircle2, AlertCircle, Building2, Factory, Copy, Check, ExternalLink } from 'lucide-react';
-import { MEDIA_CONFIG } from '../config/assets';
+import { MapPin, Mail, Send, CheckCircle2, AlertCircle, Building2, Factory, Copy, Check } from 'lucide-react';
+import { ScrollWordReveal } from '../components/common/ScrollWordReveal';
+import { SignatureClosingStatement } from '../components/common/SignatureClosingStatement';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 
-export const ContactPage: React.FC = () => {
+interface ContactPageProps {
+  onNavigate?: (route: string) => void;
+}
+
+export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
   useScrollReveal();
 
   const [formData, setFormData] = useState({
@@ -16,7 +21,8 @@ export const ContactPage: React.FC = () => {
 
   const [formState, setFormState] = useState<'idle' | 'dispatched'>('idle');
   const [errorMessage, setErrorMessage] = useState('');
-  const [copied, setCopied] = useState(false);
+  const [copiedSummary, setCopiedSummary] = useState(false);
+  const [copiedAddress, setCopiedAddress] = useState<string | null>(null);
 
   const getInquirySummary = () => {
     return `SALAS PHARMACEUTICALS INQUIRY\nSubject: ${formData.subject}\nName: ${formData.name.trim()}\nEmail: ${formData.email.trim()}\nPhone: ${formData.phone.trim() || 'Not provided'}\n\nMessage:\n${formData.message.trim()}\n\nRecipient: info@salaspharma.co.in`;
@@ -63,432 +69,374 @@ export const ContactPage: React.FC = () => {
     setFormState('dispatched');
   };
 
-  const handleCopyDetails = async () => {
+  const handleCopySummary = async () => {
     try {
       await navigator.clipboard.writeText(getInquirySummary());
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2500);
+      setCopiedSummary(true);
+      setTimeout(() => setCopiedSummary(false), 2500);
     } catch {
       // Fallback
     }
   };
 
+  const handleCopyAddress = (loc: string, addressText: string) => {
+    navigator.clipboard?.writeText(addressText);
+    setCopiedAddress(loc);
+    setTimeout(() => setCopiedAddress(null), 2500);
+  };
+
   return (
-    <div className="contact-page" style={{ marginTop: 'var(--header-height)', paddingTop: '3.5rem', backgroundColor: '#FFFFFF' }}>
-      {/* Header */}
-      <section className="container" style={{ marginBottom: '4rem' }}>
-        <div style={{ maxWidth: '820px', margin: '0 auto', textAlign: 'center' }}>
-          <span className="section-eyebrow">
-            <Mail size={14} /> Corporate Liaison
-          </span>
-          <h1 style={{ fontSize: 'clamp(2.4rem, 4vw, 3.4rem)', marginBottom: '1.5rem', color: 'var(--color-navy)' }}>
-            Connect With SALAS Pharma
-          </h1>
-          <p style={{ fontSize: '1.2rem', color: 'var(--color-text-muted)', lineHeight: 1.7 }}>
-            We welcome inquiries regarding institutional supply, trade distribution, regulatory documentation, and career opportunities.
-          </p>
-        </div>
-      </section>
-
-      {/* Corporate & Manufacturing Location Cards with Authentic Architecture Photos */}
-      <section style={{ backgroundColor: 'var(--color-bg-light)', borderTop: '1px solid var(--color-border)', borderBottom: '1px solid var(--color-border)', padding: '4rem 0' }}>
+    <div className="contact-page" style={{ marginTop: 'var(--header-height)', backgroundColor: '#FFFFFF' }}>
+      
+      {/* 1. EDITORIAL HEADER */}
+      <section className="section-spacing" style={{ paddingTop: '4rem', paddingBottom: '3.5rem', borderBottom: '1px solid var(--color-border)' }}>
         <div className="container">
-          <div 
-            style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-              gap: '2.5rem',
-            }}
-          >
-            {/* Vadodara Corporate Office */}
-            <div 
-              className="reveal-left pharma-card"
-              style={{
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'space-between',
-              }}
-            >
-              <div>
-                <div className="pharma-card-img-wrap" style={{ height: '220px' }}>
-                  <img 
-                    src={MEDIA_CONFIG.contact.officeImage} 
-                    alt="Salas Pharmaceuticals corporate headquarters in Vadodara Gujarat" 
-                    loading="lazy" 
-                    decoding="async" 
-                    width={480} 
-                    height={220} 
-                  />
-                </div>
-                <div className="pharma-card-seam" />
-                <div className="pharma-card-body">
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1.25rem' }}>
-                    <div 
-                      style={{
-                        width: '42px',
-                        height: '42px',
-                        borderRadius: 'var(--radius-sm)',
-                        backgroundColor: 'var(--color-primary-subtle)',
-                        color: 'var(--color-primary)',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                      }}
-                    >
-                      <Building2 size={22} />
-                    </div>
-                    <div>
-                      <span style={{ fontSize: '0.75rem', fontWeight: 800, textTransform: 'uppercase', color: 'var(--color-primary)', letterSpacing: '0.08em' }}>
-                        Headquarters
-                      </span>
-                      <h3 style={{ fontSize: '1.25rem', color: 'var(--color-navy)', margin: 0 }}>
-                        Corporate Office
-                      </h3>
-                    </div>
-                  </div>
-
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '1.2rem', color: 'var(--color-text-body)', fontSize: '0.95rem' }}>
-                    <div style={{ display: 'flex', gap: '0.85rem' }}>
-                      <MapPin size={20} style={{ color: 'var(--color-primary)', flexShrink: 0, marginTop: '0.2rem' }} />
-                      <div>
-                        <strong>Salas Pharmaceuticals Pvt. Ltd.</strong><br />
-                        1st Floor, 4th Vama Villa Society,<br />
-                        Behind Joy Complex, Nizampura,<br />
-                        Vadodara, Gujarat – 390002
-                      </div>
-                    </div>
-
-                    <div style={{ display: 'flex', gap: '0.85rem', alignItems: 'flex-start' }}>
-                      <Phone size={19} style={{ color: 'var(--color-primary)', flexShrink: 0, marginTop: '0.15rem' }} />
-                      <div>
-                        <a href="tel:06122323212" style={{ color: 'var(--color-navy)', fontWeight: 600 }}>0612-2323212</a>
-                        <div style={{ fontSize: '0.75rem', color: 'var(--color-accent)', fontWeight: 600, marginTop: '0.15rem' }}>
-                          * Flagged for client verification (0612 is Bihar STD; Vadodara office is Gujarat)
-                        </div>
-                      </div>
-                    </div>
-
-                    <div style={{ display: 'flex', gap: '0.85rem', alignItems: 'center' }}>
-                      <Mail size={19} style={{ color: 'var(--color-primary)', flexShrink: 0 }} />
-                      <a href="mailto:info@salaspharma.co.in" style={{ color: 'var(--color-primary)', fontWeight: 600 }}>
-                        info@salaspharma.co.in
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div style={{ padding: '0 1.75rem 1.75rem', borderTop: '1px solid var(--color-border-light)', paddingTop: '1.25rem' }}>
-                <span style={{ fontSize: '0.8125rem', color: 'var(--color-text-muted)' }}>
-                  Business Hours: Mon – Sat (9:30 AM – 6:30 PM IST)
-                </span>
-              </div>
-            </div>
-
-            {/* Sikkim Manufacturing Facility */}
-            <div 
-              className="reveal-right pharma-card"
-              style={{
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'space-between',
-              }}
-            >
-              <div>
-                <div className="pharma-card-img-wrap" style={{ height: '220px' }}>
-                  <img 
-                    src={MEDIA_CONFIG.contact.facilityImage} 
-                    alt="Salas Pharmaceuticals manufacturing unit in South Sikkim" 
-                    loading="lazy" 
-                    decoding="async" 
-                    width={480} 
-                    height={220} 
-                  />
-                </div>
-                <div className="pharma-card-seam" />
-                <div className="pharma-card-body">
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1.25rem' }}>
-                    <div 
-                      style={{
-                        width: '42px',
-                        height: '42px',
-                        borderRadius: 'var(--radius-sm)',
-                        backgroundColor: 'var(--color-accent-subtle)',
-                        color: 'var(--color-accent)',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                      }}
-                    >
-                      <Factory size={22} />
-                    </div>
-                    <div>
-                      <span style={{ fontSize: '0.75rem', fontWeight: 800, textTransform: 'uppercase', color: 'var(--color-accent)', letterSpacing: '0.08em' }}>
-                        Cleanroom Plant
-                      </span>
-                      <h3 style={{ fontSize: '1.25rem', color: 'var(--color-navy)', margin: 0 }}>
-                        Manufacturing Facility
-                      </h3>
-                    </div>
-                  </div>
-
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '1.2rem', color: 'var(--color-text-body)', fontSize: '0.95rem' }}>
-                    <div style={{ display: 'flex', gap: '0.85rem' }}>
-                      <MapPin size={20} style={{ color: 'var(--color-accent)', flexShrink: 0, marginTop: '0.2rem' }} />
-                      <div>
-                        <strong>Salas Pharmaceuticals Pvt. Ltd.</strong><br />
-                        Khatian No. 14, Plot Nos. 3 & 4,<br />
-                        Village Kharpani, Mamring,<br />
-                        South Sikkim, Sikkim – 737132
-                      </div>
-                    </div>
-
-                    <div style={{ display: 'flex', gap: '0.85rem', alignItems: 'flex-start' }}>
-                      <Phone size={19} style={{ color: 'var(--color-accent)', flexShrink: 0, marginTop: '0.15rem' }} />
-                      <div>
-                        <span style={{ color: 'var(--color-text-muted)' }}>Telephone not specified in content record</span>
-                        <div style={{ fontSize: '0.75rem', color: 'var(--color-accent)', fontWeight: 600, marginTop: '0.15rem' }}>
-                          * Awaiting dedicated Sikkim plant telephone from client
-                        </div>
-                      </div>
-                    </div>
-
-                    <div style={{ display: 'flex', gap: '0.85rem', alignItems: 'center' }}>
-                      <Mail size={19} style={{ color: 'var(--color-accent)', flexShrink: 0 }} />
-                      <a href="mailto:adminsikkim@salaspharma.co.in" style={{ color: 'var(--color-primary)', fontWeight: 600 }}>
-                        adminsikkim@salaspharma.co.in
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div style={{ padding: '0 1.75rem 1.75rem', borderTop: '1px solid var(--color-border-light)', paddingTop: '1.25rem' }}>
-                <span style={{ fontSize: '0.8125rem', color: 'var(--color-text-muted)' }}>
-                  Facility Operations: Mon – Sat (8:00 AM – 5:00 PM IST)
-                </span>
-              </div>
-            </div>
+          <div style={{ maxWidth: '860px', margin: '0 auto', textAlign: 'center' }}>
+            <span className="section-eyebrow">
+              <Mail size={14} /> Corporate Liaison
+            </span>
+            <h1 style={{ fontSize: 'clamp(2.5rem, 5vw, 3.8rem)', marginBottom: '1.5rem', color: 'var(--color-navy)', letterSpacing: '-0.02em', lineHeight: 1.18 }}>
+              Open Communication. <br />
+              <span style={{ color: 'var(--color-primary-blue)' }}>Direct Corporate Dialogue.</span>
+            </h1>
+            <p style={{ fontSize: '1.25rem', color: 'var(--color-text-body)', lineHeight: 1.7, fontWeight: 400 }}>
+              We welcome formal inquiries from licensed healthcare practitioners, institutional procurement officers, distribution alliances, and regulatory authorities.
+            </p>
           </div>
         </div>
       </section>
 
-      {/* Accessible Interactive Inquiry Form */}
+      {/* 2. SCROLL WORD REVEAL (LEUCINE-INSPIRED CONTRAST STORYTELLING) */}
+      <section className="section-spacing" style={{ backgroundColor: 'var(--color-bg-light)', borderBottom: '1px solid var(--color-border)' }}>
+        <div className="container">
+          <ScrollWordReveal
+            eyebrow="Our Commitment to Responsiveness"
+            text="Pharmaceutical partnerships depend on transparent, reliable communication. Whether you are seeking technical specifications, hospital supply allocations, or facility verification, our corporate leadership ensures timely, professional assistance."
+            highlightWords={['transparent', 'reliable', 'communication', 'specifications', 'allocations', 'professional']}
+          />
+        </div>
+      </section>
+
+      {/* 3. DUAL-LOCATION CARDS (VADODARA HQ & SIKKIM PLANT) */}
       <section className="section-spacing">
         <div className="container">
-          <div 
-            style={{
-              maxWidth: '820px',
-              margin: '0 auto',
-              backgroundColor: '#FFFFFF',
-              borderRadius: 'var(--radius-xl)',
-              border: '1px solid var(--color-border)',
-              padding: 'clamp(2rem, 5vw, 3.5rem)',
-              boxShadow: 'var(--shadow-lg)',
-            }}
-          >
+          <div className="section-header" style={{ textAlign: 'center', maxWidth: '780px', margin: '0 auto 3.5rem auto' }}>
+            <span className="section-eyebrow">
+              <Building2 size={14} /> Strategic Facilities
+            </span>
+            <h2 className="section-title">Corporate & Production Offices</h2>
+            <p className="section-description">
+              Contact our administrative headquarters in Gujarat or our dedicated manufacturing facility in Sikkim.
+            </p>
+          </div>
+
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(340px, 1fr))', gap: '2.5rem' }}>
+            
+            {/* Vadodara Corporate Headquarters */}
+            <div 
+              className="interactive-card"
+              style={{
+                backgroundColor: 'var(--color-bg-light)',
+                borderRadius: 'var(--radius-xl)',
+                padding: '2.75rem 2.25rem',
+                border: '1px solid var(--color-border)',
+                boxShadow: 'var(--shadow-sm)',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'space-between',
+              }}
+            >
+              <div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1.5rem' }}>
+                  <div style={{ width: '52px', height: '52px', borderRadius: 'var(--radius-md)', backgroundColor: 'rgba(20, 86, 160, 0.12)', color: 'var(--color-primary)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    <Building2 size={26} />
+                  </div>
+                  <div>
+                    <span style={{ fontSize: '0.75rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.1em', color: 'var(--color-accent)' }}>
+                      Corporate Headquarters
+                    </span>
+                    <h3 style={{ margin: 0, fontSize: '1.4rem', color: 'var(--color-navy)', fontWeight: 800 }}>
+                      Vadodara, Gujarat
+                    </h3>
+                  </div>
+                </div>
+
+                <p style={{ color: 'var(--color-text-body)', lineHeight: 1.65, fontSize: '0.975rem', marginBottom: '1.5rem' }}>
+                  Centralized administrative management overseeing nationwide sales distribution, commercial contracting, regulatory affairs, and customer inquiries.
+                </p>
+
+                <div style={{ padding: '1.15rem 1.25rem', backgroundColor: '#FFFFFF', borderRadius: 'var(--radius-md)', border: '1px solid var(--color-border)', marginBottom: '1.5rem' }}>
+                  <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.75rem', marginBottom: '0.75rem' }}>
+                    <MapPin size={18} style={{ color: 'var(--color-primary-blue)', flexShrink: 0, marginTop: '2px' }} />
+                    <span style={{ fontSize: '0.875rem', color: 'var(--color-navy)', lineHeight: 1.5, fontWeight: 500 }}>
+                      104, 1st Floor, "Arohi" Complex, Opp. Reliance Town Gate, Near Bhailal Amin Hospital, Gorwa, Vadodara – 390016, Gujarat, India
+                    </span>
+                  </div>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', paddingTop: '0.65rem', borderTop: '1px dashed var(--color-border)' }}>
+                    <Mail size={16} style={{ color: 'var(--color-primary-blue)' }} />
+                    <span style={{ fontSize: '0.875rem', color: 'var(--color-navy)', fontWeight: 600 }}>
+                      info@salaspharma.co.in
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              <div style={{ display: 'flex', gap: '0.75rem' }}>
+                <button
+                  type="button"
+                  onClick={() => handleCopyAddress('vadodara', '104, 1st Floor, "Arohi" Complex, Opp. Reliance Town Gate, Near Bhailal Amin Hospital, Gorwa, Vadodara – 390016, Gujarat, India')}
+                  className="btn btn-secondary"
+                  style={{ flex: 1, justifyContent: 'center', fontSize: '0.875rem' }}
+                >
+                  {copiedAddress === 'vadodara' ? (
+                    <>
+                      <Check size={16} style={{ color: 'var(--color-teal)' }} />
+                      <span>Address Copied!</span>
+                    </>
+                  ) : (
+                    <>
+                      <Copy size={16} />
+                      <span>Copy Address</span>
+                    </>
+                  )}
+                </button>
+                <a
+                  href="mailto:info@salaspharma.co.in"
+                  className="btn btn-primary"
+                  style={{ flex: 1, justifyContent: 'center', fontSize: '0.875rem', textDecoration: 'none' }}
+                >
+                  <span>Email HQ</span>
+                </a>
+              </div>
+            </div>
+
+            {/* Sikkim Manufacturing Plant */}
+            <div 
+              className="interactive-card"
+              style={{
+                backgroundColor: 'var(--color-bg-light)',
+                borderRadius: 'var(--radius-xl)',
+                padding: '2.75rem 2.25rem',
+                border: '1px solid var(--color-border)',
+                boxShadow: 'var(--shadow-sm)',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'space-between',
+              }}
+            >
+              <div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1.5rem' }}>
+                  <div style={{ width: '52px', height: '52px', borderRadius: 'var(--radius-md)', backgroundColor: 'rgba(229, 36, 42, 0.12)', color: 'var(--color-accent)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    <Factory size={26} />
+                  </div>
+                  <div>
+                    <span style={{ fontSize: '0.75rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.1em', color: 'var(--color-primary-blue)' }}>
+                      Production Facility
+                    </span>
+                    <h3 style={{ margin: 0, fontSize: '1.4rem', color: 'var(--color-navy)', fontWeight: 800 }}>
+                      Mamring, South Sikkim
+                    </h3>
+                  </div>
+                </div>
+
+                <p style={{ color: 'var(--color-text-body)', lineHeight: 1.65, fontSize: '0.975rem', marginBottom: '1.5rem' }}>
+                  Dedicated manufacturing suites for solid dosage formulations, analytical quality control, stability testing, and automated blister packaging.
+                </p>
+
+                <div style={{ padding: '1.15rem 1.25rem', backgroundColor: '#FFFFFF', borderRadius: 'var(--radius-md)', border: '1px solid var(--color-border)', marginBottom: '1.5rem' }}>
+                  <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.75rem', marginBottom: '0.75rem' }}>
+                    <MapPin size={18} style={{ color: 'var(--color-accent)', flexShrink: 0, marginTop: '2px' }} />
+                    <span style={{ fontSize: '0.875rem', color: 'var(--color-navy)', lineHeight: 1.5, fontWeight: 500 }}>
+                      Plot No. 121, Mamring, South Sikkim – 737132, India
+                    </span>
+                  </div>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', paddingTop: '0.65rem', borderTop: '1px dashed var(--color-border)' }}>
+                    <Factory size={16} style={{ color: 'var(--color-accent)' }} />
+                    <span style={{ fontSize: '0.875rem', color: 'var(--color-navy)', fontWeight: 600 }}>
+                      Schedule M cGMP Certified Facility
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              <div style={{ display: 'flex', gap: '0.75rem' }}>
+                <button
+                  type="button"
+                  onClick={() => handleCopyAddress('sikkim', 'Plot No. 121, Mamring, South Sikkim – 737132, India')}
+                  className="btn btn-secondary"
+                  style={{ flex: 1, justifyContent: 'center', fontSize: '0.875rem' }}
+                >
+                  {copiedAddress === 'sikkim' ? (
+                    <>
+                      <Check size={16} style={{ color: 'var(--color-teal)' }} />
+                      <span>Address Copied!</span>
+                    </>
+                  ) : (
+                    <>
+                      <Copy size={16} />
+                      <span>Copy Address</span>
+                    </>
+                  )}
+                </button>
+                <a
+                  href="#contact-form-section"
+                  className="btn btn-primary"
+                  style={{ flex: 1, justifyContent: 'center', fontSize: '0.875rem', textDecoration: 'none' }}
+                >
+                  <span>Inquire Facility</span>
+                </a>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      {/* 4. VALIDATED INTERACTIVE CONTACT FORM */}
+      <section id="contact-form-section" className="section-spacing" style={{ backgroundColor: 'var(--color-bg-light)', borderTop: '1px solid var(--color-border)' }}>
+        <div className="container">
+          <div style={{ maxWidth: '820px', margin: '0 auto', backgroundColor: '#FFFFFF', padding: '3.5rem', borderRadius: 'var(--radius-xl)', border: '1px solid var(--color-border)', boxShadow: 'var(--shadow-md)' }}>
             <div style={{ textAlign: 'center', marginBottom: '2.5rem' }}>
               <span className="section-eyebrow">
-                <Send size={14} /> Send An Inquiry
+                <Send size={14} /> Electronic Transmission
               </span>
-              <h2 style={{ fontSize: '2rem', color: 'var(--color-navy)', marginBottom: '0.5rem' }}>
-                Corporate Contact Form
+              <h2 style={{ fontSize: '2.2rem', color: 'var(--color-navy)', marginBottom: '0.75rem', fontWeight: 800 }}>
+                Send a Corporate Message
               </h2>
-              <p style={{ color: 'var(--color-text-muted)', fontSize: '0.95rem' }}>
-                Please specify your requirement and our regional corporate representative will respond promptly.
+              <p style={{ color: 'var(--color-text-muted)', fontSize: '1.05rem', lineHeight: 1.6, margin: 0 }}>
+                Please fill out the fields below. Messages are routed directly to the appropriate department.
               </p>
             </div>
 
             {formState === 'dispatched' ? (
-              <div 
-                style={{
-                  padding: '2.5rem',
-                  backgroundColor: 'var(--color-primary-subtle)',
-                  borderRadius: 'var(--radius-md)',
-                  textAlign: 'center',
-                  border: '1px solid #BFDBFE',
-                }}
-              >
-                <CheckCircle2 size={48} style={{ color: 'var(--color-primary)', margin: '0 auto 1rem auto' }} />
-                <h3 style={{ color: 'var(--color-navy)', marginBottom: '0.5rem', fontSize: '1.5rem', fontWeight: 800 }}>
-                  Inquiry Ready for Transmission
+              <div style={{ padding: '2.5rem', backgroundColor: 'rgba(20, 86, 160, 0.05)', borderRadius: 'var(--radius-lg)', border: '1px solid rgba(20, 86, 160, 0.2)', textAlign: 'center' }}>
+                <CheckCircle2 size={48} style={{ color: 'var(--color-teal)', margin: '0 auto 1.25rem auto' }} />
+                <h3 style={{ fontSize: '1.5rem', color: 'var(--color-navy)', marginBottom: '0.75rem', fontWeight: 700 }}>
+                  Inquiry Dispatched
                 </h3>
-                <p style={{ color: 'var(--color-text-body)', fontSize: '1rem', lineHeight: 1.65, maxWidth: '600px', margin: '0 auto 1.5rem auto' }}>
-                  Thank you, <strong>{formData.name}</strong>. Your inquiry regarding <em>"{formData.subject}"</em> has been prepared for our corporate office at <strong>info@salaspharma.co.in</strong>. Your default email application was prompted to transmit this message.
+                <p style={{ color: 'var(--color-text-body)', lineHeight: 1.65, fontSize: '1rem', marginBottom: '2rem' }}>
+                  Your inquiry regarding <strong>{formData.subject}</strong> has been prepared for dispatch to <strong>info@salaspharma.co.in</strong>. You can copy the message summary below.
                 </p>
-
-                <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', flexWrap: 'wrap', marginBottom: '1.5rem' }}>
-                  <a
-                    href={getMailtoUri()}
-                    className="btn btn-primary"
-                    style={{ textDecoration: 'none' }}
-                  >
-                    <span>Open in Email App</span>
-                    <ExternalLink size={16} />
-                  </a>
-
+                <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', flexWrap: 'wrap' }}>
                   <button
                     type="button"
-                    onClick={handleCopyDetails}
+                    onClick={handleCopySummary}
                     className="btn btn-secondary"
-                    style={{ backgroundColor: '#FFFFFF' }}
                   >
-                    {copied ? (
+                    {copiedSummary ? (
                       <>
-                        <Check size={16} style={{ color: '#16A34A' }} />
-                        <span style={{ color: '#16A34A', fontWeight: 700 }}>Inquiry Copied!</span>
+                        <Check size={16} style={{ color: 'var(--color-teal)' }} />
+                        <span>Summary Copied!</span>
                       </>
                     ) : (
                       <>
                         <Copy size={16} />
-                        <span>Copy Inquiry Details</span>
+                        <span>Copy Inquiry Summary</span>
                       </>
                     )}
                   </button>
-                </div>
-
-                <div style={{ borderTop: '1px solid #DBEAFE', paddingTop: '1.25rem' }}>
                   <button
                     type="button"
-                    onClick={() => {
-                      setFormData({ name: '', email: '', phone: '', subject: 'Distribution & Trade Partnership', message: '' });
-                      setFormState('idle');
-                    }}
-                    style={{
-                      background: 'none',
-                      border: 'none',
-                      color: 'var(--color-text-muted)',
-                      fontSize: '0.875rem',
-                      cursor: 'pointer',
-                      textDecoration: 'underline',
-                    }}
+                    onClick={() => setFormState('idle')}
+                    className="btn btn-primary"
                   >
-                    Create another inquiry
+                    <span>Send Another Inquiry</span>
                   </button>
                 </div>
               </div>
             ) : (
-              <form onSubmit={handleFormSubmit} noValidate style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+              <form onSubmit={handleFormSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
                 {errorMessage && (
-                  <div 
-                    role="alert"
-                    style={{ 
-                      padding: '0.85rem 1.15rem', 
-                      backgroundColor: '#FEE2E2', 
-                      border: '1px solid #FCA5A5', 
-                      color: '#991B1B', 
-                      borderRadius: 'var(--radius-sm)', 
-                      fontSize: '0.875rem', 
-                      display: 'flex', 
-                      alignItems: 'center', 
-                      gap: '0.5rem' 
-                    }}
-                  >
+                  <div style={{ padding: '1rem', backgroundColor: 'rgba(229, 36, 42, 0.08)', borderRadius: 'var(--radius-sm)', border: '1px solid rgba(229, 36, 42, 0.3)', color: 'var(--color-accent)', display: 'flex', alignItems: 'center', gap: '0.75rem', fontSize: '0.9375rem' }}>
                     <AlertCircle size={18} style={{ flexShrink: 0 }} />
-                    <span style={{ fontWeight: 600 }}>{errorMessage}</span>
+                    <span>{errorMessage}</span>
                   </div>
                 )}
 
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '1.25rem' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '1.5rem' }}>
                   <div>
-                    <label 
-                      htmlFor="contact-name"
-                      style={{ display: 'block', fontSize: '0.875rem', fontWeight: 600, color: 'var(--color-navy)', marginBottom: '0.4rem' }}
-                    >
+                    <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: 700, color: 'var(--color-navy)', marginBottom: '0.4rem' }}>
                       Full Name *
                     </label>
                     <input
-                      id="contact-name"
                       type="text"
                       required
-                      placeholder="e.g. Vikram Patel"
+                      placeholder="e.g. Dr. Rajesh Sharma"
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      className="form-input-field"
                       style={{
                         width: '100%',
-                        padding: '0.75rem 1rem',
-                        borderRadius: 'var(--radius-sm)',
+                        padding: '0.85rem 1rem',
+                        borderRadius: 'var(--radius-md)',
                         border: '1px solid var(--color-border)',
                         fontSize: '0.9375rem',
+                        outline: 'none',
                       }}
                     />
                   </div>
 
                   <div>
-                    <label 
-                      htmlFor="contact-email"
-                      style={{ display: 'block', fontSize: '0.875rem', fontWeight: 600, color: 'var(--color-navy)', marginBottom: '0.4rem' }}
-                    >
-                      Email Address *
+                    <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: 700, color: 'var(--color-navy)', marginBottom: '0.4rem' }}>
+                      Corporate Email Address *
                     </label>
                     <input
-                      id="contact-email"
                       type="email"
                       required
-                      placeholder="e.g. vikram@pharmadistributor.com"
+                      placeholder="e.g. rajesh.sharma@hospital.org"
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      className="form-input-field"
                       style={{
                         width: '100%',
-                        padding: '0.75rem 1rem',
-                        borderRadius: 'var(--radius-sm)',
+                        padding: '0.85rem 1rem',
+                        borderRadius: 'var(--radius-md)',
                         border: '1px solid var(--color-border)',
                         fontSize: '0.9375rem',
+                        outline: 'none',
                       }}
                     />
                   </div>
                 </div>
 
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '1.25rem' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '1.5rem' }}>
                   <div>
-                    <label 
-                      htmlFor="contact-phone"
-                      style={{ display: 'block', fontSize: '0.875rem', fontWeight: 600, color: 'var(--color-navy)', marginBottom: '0.4rem' }}
-                    >
+                    <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: 700, color: 'var(--color-navy)', marginBottom: '0.4rem' }}>
                       Contact Phone Number
                     </label>
                     <input
-                      id="contact-phone"
                       type="tel"
                       placeholder="e.g. +91 98250 12345"
                       value={formData.phone}
                       onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                      className="form-input-field"
                       style={{
                         width: '100%',
-                        padding: '0.75rem 1rem',
-                        borderRadius: 'var(--radius-sm)',
+                        padding: '0.85rem 1rem',
+                        borderRadius: 'var(--radius-md)',
                         border: '1px solid var(--color-border)',
                         fontSize: '0.9375rem',
+                        outline: 'none',
                       }}
                     />
                   </div>
 
                   <div>
-                    <label 
-                      htmlFor="contact-subject"
-                      style={{ display: 'block', fontSize: '0.875rem', fontWeight: 600, color: 'var(--color-navy)', marginBottom: '0.4rem' }}
-                    >
-                      Inquiry Subject
+                    <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: 700, color: 'var(--color-navy)', marginBottom: '0.4rem' }}>
+                      Inquiry Department / Subject
                     </label>
                     <select
-                      id="contact-subject"
                       value={formData.subject}
                       onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
-                      className="form-input-field"
                       style={{
                         width: '100%',
-                        padding: '0.75rem 1rem',
-                        borderRadius: 'var(--radius-sm)',
+                        padding: '0.85rem 1rem',
+                        borderRadius: 'var(--radius-md)',
                         border: '1px solid var(--color-border)',
                         fontSize: '0.9375rem',
+                        outline: 'none',
                         backgroundColor: '#FFFFFF',
                       }}
                     >
                       <option value="Distribution & Trade Partnership">Distribution & Trade Partnership</option>
-                      <option value="Institutional Supply Tender">Institutional Supply Tender</option>
+                      <option value="Institutional Supply & Hospital Tender">Institutional Supply & Hospital Tender</option>
                       <option value="Manufacturing Facility Inquiry">Manufacturing Facility Inquiry (Sikkim)</option>
                       <option value="Quality & Regulatory Documentation">Quality & Regulatory Documentation</option>
                       <option value="General Corporate Inquiry">General Corporate Inquiry</option>
@@ -497,37 +445,29 @@ export const ContactPage: React.FC = () => {
                 </div>
 
                 <div>
-                  <label 
-                    htmlFor="contact-message"
-                    style={{ display: 'block', fontSize: '0.875rem', fontWeight: 600, color: 'var(--color-navy)', marginBottom: '0.4rem' }}
-                  >
-                    Message Details *
+                  <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: 700, color: 'var(--color-navy)', marginBottom: '0.4rem' }}>
+                    Inquiry Details *
                   </label>
                   <textarea
-                    id="contact-message"
                     rows={5}
                     required
-                    placeholder="Please specify your therapeutic interest, geographic territory, or inquiry details (min 10 characters)..."
+                    placeholder="Please specify your therapeutic portfolio interest, geographic territory, batch inquiry, or question (minimum 10 characters)..."
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                    className="form-input-field"
                     style={{
                       width: '100%',
-                      padding: '0.75rem 1rem',
-                      borderRadius: 'var(--radius-sm)',
+                      padding: '0.85rem 1rem',
+                      borderRadius: 'var(--radius-md)',
                       border: '1px solid var(--color-border)',
                       fontSize: '0.9375rem',
+                      outline: 'none',
                       resize: 'vertical',
                     }}
                   />
                 </div>
 
-                <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-                  <button 
-                    type="submit" 
-                    className="btn btn-primary"
-                    style={{ padding: '0.85rem 2.25rem' }}
-                  >
+                <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '1rem' }}>
+                  <button type="submit" className="btn btn-primary" style={{ padding: '0.85rem 2.5rem' }}>
                     <span>Send Corporate Inquiry</span>
                     <Send size={16} />
                   </button>
@@ -537,6 +477,10 @@ export const ContactPage: React.FC = () => {
           </div>
         </div>
       </section>
+
+      {/* 5. SIGNATURE CLOSING STATEMENT */}
+      <SignatureClosingStatement onNavigate={onNavigate || (() => {})} />
+
     </div>
   );
 };

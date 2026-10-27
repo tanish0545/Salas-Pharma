@@ -1,36 +1,114 @@
-import React from 'react';
-import { FlaskConical, Microscope, Sparkles, CheckCircle2, ArrowRight } from 'lucide-react';
+import React, { useState } from 'react';
+import { FlaskConical, Microscope, Sparkles, CheckCircle2, ArrowRight, Atom } from 'lucide-react';
 import { VIDEO_ASSETS, MEDIA_CONFIG } from '../config/assets';
 import { BrandedVideo } from '../components/common/BrandedVideo';
-import { AmbientVideoBackground } from '../components/common/AmbientVideoBackground';
+import { ScrollWordReveal } from '../components/common/ScrollWordReveal';
+import { SignatureClosingStatement } from '../components/common/SignatureClosingStatement';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 
 interface ResearchPageProps {
   onNavigate: (route: string) => void;
 }
 
+interface FocusArea {
+  id: string;
+  title: string;
+  tag: string;
+  description: string;
+  scientificDeliverable: string;
+  technologies: string[];
+}
+
 export const ResearchPage: React.FC<ResearchPageProps> = ({ onNavigate }) => {
   useScrollReveal();
+  const [activeFocusId, setActiveFocusId] = useState<string>('modified-release');
+
+  const focusAreas: FocusArea[] = [
+    {
+      id: 'modified-release',
+      title: 'Modified & Sustained Release Formulations',
+      tag: 'Bioavailability & Kinetics',
+      description: 'Engineering hydrophilic and hydrophobic polymeric matrix systems (HPMC, Ethylcellulose) to achieve controlled zero-order release profiles for once-daily antihypertensive and antidiabetic therapeutics.',
+      scientificDeliverable: 'Eliminates peak-trough plasma drug spikes, enhances patient compliance, and minimizes gastrointestinal irritation.',
+      technologies: ['Polymer matrix erosion control', 'Multi-layer bilayer tablet compression', 'In-vitro USP dissolution buffer modeling']
+    },
+    {
+      id: 'taste-masking',
+      title: 'Pediatric & Taste-Masking Technologies',
+      tag: 'Patient Centricity',
+      description: 'Micro-encapsulation of bitter active ingredients using pH-dependent cationic acrylic polymers, paired with homogeneous non-aqueous suspension carriers for pediatric and geriatric oral compliance.',
+      scientificDeliverable: 'Neutralizes unpalatable API taste without impeding gastric release rate or bioavailability.',
+      technologies: ['Fluidized bed Wurster spray coating', 'Ion-exchange resin complexation', 'Stabilized organoleptic flavor profiling']
+    },
+    {
+      id: 'fixed-dose',
+      title: 'Fixed-Dose Combinations (FDCs)',
+      tag: 'Therapeutic Synergy',
+      description: 'Formulating dual and triple active pharmaceuticals in single dosage units while preventing physical and chemical excipient incompatibility through barrier-coating and bilayer partition.',
+      scientificDeliverable: 'Combines synergistic clinical modes of action (e.g. ARB + Diuretic or PPI + Prokinetic) in single, reliable tablets.',
+      technologies: ['Physical segregation bilayer barrier', 'Micro-pellet capsule encapsulation', 'Differential dissolution rate tuning']
+    },
+    {
+      id: 'climatic-stability',
+      title: 'Zone IVb Climatic Stability Optimization',
+      tag: 'Tropical Packaging & Potency',
+      description: 'Designing high-barrier moisture protection systems and desiccated Alu-Alu cold-form blisters tested under ICH accelerated stability conditions (40°C ± 2°C / 75% RH ± 5% RH).',
+      scientificDeliverable: 'Guarantees 24-to-36-month shelf-life potency across humid, tropical sub-continental conditions.',
+      technologies: ['High-density cold-form aluminum foil', 'Dynamic vapor sorption (DVS) moisture profiling', 'Photostability exposure chambers']
+    }
+  ];
+
+  const activeFocus = focusAreas.find(f => f.id === activeFocusId) || focusAreas[0];
 
   return (
-    <div className="research-page" style={{ marginTop: 'var(--header-height)', paddingTop: '3.5rem', backgroundColor: '#FFFFFF' }}>
-      {/* Header */}
-      <section className="container" style={{ marginBottom: '3.5rem' }}>
-        <div style={{ maxWidth: '820px', margin: '0 auto', textAlign: 'center' }}>
-          <span className="section-eyebrow">
-            <FlaskConical size={14} /> Pharmaceutical Science
-          </span>
-          <h1 style={{ fontSize: 'clamp(2.4rem, 4vw, 3.4rem)', marginBottom: '1.25rem', color: 'var(--color-navy)' }}>
-            Analytical Science That Drives Progress
-          </h1>
-          <p style={{ fontSize: '1.15rem', color: 'var(--color-text-muted)', lineHeight: 1.7, margin: 0 }}>
-            Our research and product development focus centers on formulation optimization, analytical rigor, and dependable drug release stability across all finished dosage forms.
-          </p>
+    <div className="research-page" style={{ marginTop: 'var(--header-height)', backgroundColor: '#FFFFFF' }}>
+      
+      {/* 1. EDITORIAL SCIENTIFIC HERO */}
+      <section className="section-spacing" style={{ paddingTop: '4rem', paddingBottom: '3.5rem', borderBottom: '1px solid var(--color-border)', position: 'relative', overflow: 'hidden' }}>
+        
+        {/* Subtle Molecular Linework SVG in background */}
+        <div style={{ position: 'absolute', right: '-50px', top: '20px', opacity: 0.08, pointerEvents: 'none' }} aria-hidden="true">
+          <svg width="450" height="450" viewBox="0 0 200 200" fill="none">
+            <polygon points="100,20 170,60 170,140 100,180 30,140 30,60" stroke="#1456A0" strokeWidth="2" />
+            <polygon points="100,50 145,75 145,125 100,150 55,125 55,75" stroke="#E5242A" strokeWidth="1.5" />
+            <circle cx="100" cy="20" r="6" fill="#1456A0" />
+            <circle cx="170" cy="60" r="6" fill="#20AEEA" />
+            <circle cx="170" cy="140" r="6" fill="#1456A0" />
+            <circle cx="100" cy="180" r="6" fill="#E5242A" />
+            <circle cx="30" cy="140" r="6" fill="#20AEEA" />
+            <circle cx="30" cy="60" r="6" fill="#1456A0" />
+          </svg>
+        </div>
+
+        <div className="container" style={{ position: 'relative', zIndex: 2 }}>
+          <div style={{ maxWidth: '860px', margin: '0 auto', textAlign: 'center' }}>
+            <span className="section-eyebrow">
+              <FlaskConical size={14} /> Pharmaceutical Science & Formulation
+            </span>
+            <h1 style={{ fontSize: 'clamp(2.5rem, 5vw, 3.8rem)', marginBottom: '1.5rem', color: 'var(--color-navy)', letterSpacing: '-0.02em', lineHeight: 1.18 }}>
+              Formulation Science. <br />
+              <span style={{ color: 'var(--color-primary-blue)' }}>Predictable Release Kinetics.</span>
+            </h1>
+            <p style={{ fontSize: '1.25rem', color: 'var(--color-text-body)', lineHeight: 1.7, fontWeight: 400 }}>
+              Bridging laboratory pre-formulation screening with scalable cGMP manufacturing to deliver finished dosage pharmaceuticals with verified bio-absorption and shelf-life stability.
+            </p>
+          </div>
         </div>
       </section>
 
-      {/* Editorial R&D Presentation */}
-      <section style={{ backgroundColor: 'var(--color-bg-light)', borderTop: '1px solid var(--color-border)', borderBottom: '1px solid var(--color-border)', padding: '4rem 0' }}>
+      {/* 2. SCROLL WORD REVEAL (LEUCINE-STYLE CONTRAST STORYTELLING) */}
+      <section className="section-spacing" style={{ backgroundColor: 'var(--color-bg-light)', borderBottom: '1px solid var(--color-border)' }}>
+        <div className="container">
+          <ScrollWordReveal
+            eyebrow="Formulation Discipline"
+            text="A pharmaceutical molecule is only as effective as its delivery mechanism. Through systematic polymer selection, dissolution kinetics, and degradation pathway studies, our science team turns active chemical entities into stable, dependable finished medicines."
+            highlightWords={['delivery', 'polymer', 'dissolution', 'kinetics', 'degradation', 'dependable', 'medicines']}
+          />
+        </div>
+      </section>
+
+      {/* 3. EDITORIAL R&D PRESENTATION */}
+      <section className="section-spacing">
         <div className="container">
           <div 
             style={{
@@ -44,7 +122,7 @@ export const ResearchPage: React.FC<ResearchPageProps> = ({ onNavigate }) => {
               <div 
                 className="img-zoom-wrapper"
                 style={{
-                  borderRadius: 'var(--radius-lg)',
+                  borderRadius: 'var(--radius-xl)',
                   boxShadow: 'var(--shadow-xl)',
                   border: '1px solid var(--color-border)',
                   overflow: 'hidden',
@@ -65,14 +143,14 @@ export const ResearchPage: React.FC<ResearchPageProps> = ({ onNavigate }) => {
                   bottom: 0,
                   left: 0,
                   right: 0,
-                  background: 'linear-gradient(to top, rgba(7, 29, 54, 0.9), transparent)',
-                  padding: '1.25rem 1.5rem',
+                  background: 'linear-gradient(to top, rgba(7, 29, 54, 0.92), transparent)',
+                  padding: '1.75rem 2rem',
                   color: '#FFFFFF',
                 }}>
-                  <span style={{ fontSize: '0.75rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--color-secondary)' }}>
+                  <span style={{ fontSize: '0.75rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.1em', color: 'var(--color-secondary)' }}>
                     Analytical Characterization
                   </span>
-                  <p style={{ margin: '0.2rem 0 0', fontSize: '0.9rem', fontWeight: 600 }}>
+                  <p style={{ margin: '0.25rem 0 0', fontSize: '1rem', fontWeight: 600 }}>
                     HPLC Assay Validation & Quantitative Purity Evaluation
                   </p>
                 </div>
@@ -83,8 +161,8 @@ export const ResearchPage: React.FC<ResearchPageProps> = ({ onNavigate }) => {
               <span className="section-eyebrow">
                 <Microscope size={14} /> Formulation Science
               </span>
-              <h2 style={{ marginBottom: '1.5rem', color: 'var(--color-navy)' }}>
-                Evidence-Based Drug Delivery & Analytical Testing
+              <h2 style={{ marginBottom: '1.5rem', color: 'var(--color-navy)', fontSize: '2.4rem', fontWeight: 800 }}>
+                Evidence-Based Drug Delivery
               </h2>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem', fontSize: '1.05rem', color: 'var(--color-text-body)', lineHeight: 1.75 }}>
                 <p>
@@ -103,7 +181,7 @@ export const ResearchPage: React.FC<ResearchPageProps> = ({ onNavigate }) => {
                   'Container-closure integrity and moisture permeation studies'
                 ].map((point, idx) => (
                   <div key={idx} style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-                    <CheckCircle2 size={18} style={{ color: 'var(--color-primary)', flexShrink: 0 }} />
+                    <CheckCircle2 size={18} style={{ color: 'var(--color-primary-blue)', flexShrink: 0 }} />
                     <span style={{ fontSize: '0.9375rem', color: 'var(--color-navy)', fontWeight: 600 }}>{point}</span>
                   </div>
                 ))}
@@ -113,7 +191,97 @@ export const ResearchPage: React.FC<ResearchPageProps> = ({ onNavigate }) => {
         </div>
       </section>
 
-      {/* Dissolution Kinetics Footage Showcase (salas4.mp4) */}
+      {/* 4. INTERACTIVE SCIENTIFIC FOCUS MATRIX */}
+      <section className="section-spacing" style={{ backgroundColor: 'var(--color-bg-light)', borderTop: '1px solid var(--color-border)', borderBottom: '1px solid var(--color-border)' }}>
+        <div className="container">
+          <div className="section-header" style={{ textAlign: 'center', maxWidth: '780px', margin: '0 auto 3.5rem auto' }}>
+            <span className="section-eyebrow">
+              <Sparkles size={14} /> Core Formulation Disciplines
+            </span>
+            <h2 className="section-title">Key Formulation Programs</h2>
+            <p className="section-description">
+              Select a research area to inspect the formulation mechanics, analytical deliverables, and technological platforms.
+            </p>
+          </div>
+
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2.5rem', alignItems: 'start' }}>
+            
+            {/* Left: Interactive Tab Buttons */}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+              {focusAreas.map((f) => (
+                <button
+                  key={f.id}
+                  type="button"
+                  onClick={() => setActiveFocusId(f.id)}
+                  style={{
+                    padding: '1.5rem 1.75rem',
+                    borderRadius: 'var(--radius-lg)',
+                    textAlign: 'left',
+                    cursor: 'pointer',
+                    border: '1px solid',
+                    borderColor: activeFocusId === f.id ? 'var(--color-primary-blue)' : 'var(--color-border)',
+                    backgroundColor: activeFocusId === f.id ? '#FFFFFF' : 'var(--color-bg-light)',
+                    boxShadow: activeFocusId === f.id ? '0 10px 25px -5px rgba(20, 86, 160, 0.15)' : 'none',
+                    transform: activeFocusId === f.id ? 'translateX(6px)' : 'none',
+                    transition: 'all 0.25s cubic-bezier(0.16, 1, 0.3, 1)',
+                  }}
+                >
+                  <span style={{ fontSize: '0.75rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.08em', color: activeFocusId === f.id ? 'var(--color-accent)' : 'var(--color-text-muted)', display: 'block', marginBottom: '0.35rem' }}>
+                    {f.tag}
+                  </span>
+                  <h3 style={{ margin: 0, fontSize: '1.15rem', color: 'var(--color-navy)', fontWeight: 700 }}>
+                    {f.title}
+                  </h3>
+                </button>
+              ))}
+            </div>
+
+            {/* Right: Dynamic Exploration Panel */}
+            <div style={{ padding: '2.5rem', backgroundColor: '#FFFFFF', borderRadius: 'var(--radius-xl)', border: '1px solid var(--color-border)', boxShadow: 'var(--shadow-md)' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1.25rem' }}>
+                <Atom size={24} style={{ color: 'var(--color-primary-blue)' }} />
+                <span style={{ fontSize: '0.8125rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.1em', color: 'var(--color-primary-blue)' }}>
+                  {activeFocus.tag}
+                </span>
+              </div>
+
+              <h3 style={{ fontSize: '1.6rem', color: 'var(--color-navy)', marginBottom: '1rem', fontWeight: 800 }}>
+                {activeFocus.title}
+              </h3>
+
+              <p style={{ color: 'var(--color-text-body)', lineHeight: 1.75, fontSize: '1.025rem', marginBottom: '1.75rem' }}>
+                {activeFocus.description}
+              </p>
+
+              <div style={{ padding: '1.25rem 1.5rem', backgroundColor: 'var(--color-bg-light)', borderRadius: 'var(--radius-md)', borderLeft: '4px solid var(--color-accent)', marginBottom: '1.75rem' }}>
+                <span style={{ fontSize: '0.75rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--color-accent)', display: 'block', marginBottom: '0.35rem' }}>
+                  Scientific & Patient Deliverable:
+                </span>
+                <p style={{ margin: 0, fontSize: '0.9375rem', color: 'var(--color-navy)', fontWeight: 600, lineHeight: 1.55 }}>
+                  {activeFocus.scientificDeliverable}
+                </p>
+              </div>
+
+              <div>
+                <span style={{ fontSize: '0.8125rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.06em', color: 'var(--color-text-muted)', display: 'block', marginBottom: '0.75rem' }}>
+                  Technical Platforms Employed:
+                </span>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
+                  {activeFocus.technologies.map((t, idx) => (
+                    <div key={idx} style={{ display: 'flex', alignItems: 'center', gap: '0.65rem' }}>
+                      <CheckCircle2 size={16} style={{ color: 'var(--color-teal)', flexShrink: 0 }} />
+                      <span style={{ fontSize: '0.875rem', color: 'var(--color-navy)', fontWeight: 500 }}>{t}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      {/* 5. DISSOLUTION KINETICS FOOTAGE SHOWCASE */}
       <section className="section-spacing" style={{ backgroundColor: '#FFFFFF' }}>
         <div className="container">
           <div 
@@ -148,7 +316,7 @@ export const ResearchPage: React.FC<ResearchPageProps> = ({ onNavigate }) => {
               <div 
                 className="img-zoom-wrapper"
                 style={{
-                  borderRadius: 'var(--radius-lg)',
+                  borderRadius: 'var(--radius-xl)',
                   boxShadow: 'var(--shadow-xl)',
                   border: '1px solid var(--color-border)',
                   overflow: 'hidden',
@@ -164,7 +332,7 @@ export const ResearchPage: React.FC<ResearchPageProps> = ({ onNavigate }) => {
                   loop={true}
                   playsInline={true}
                   ariaLabel="Salas Pharma laboratory tablet dissolution testing footage" 
-                  style={{ width: '100%', height: '380px', objectFit: 'cover' }}
+                  style={{ width: '100%', height: '400px', objectFit: 'cover' }}
                 />
               </div>
             </div>
@@ -172,100 +340,9 @@ export const ResearchPage: React.FC<ResearchPageProps> = ({ onNavigate }) => {
         </div>
       </section>
 
-      {/* R&D Core Pillars with Ambient DNA Background Video */}
-      <AmbientVideoBackground 
-        className="section-spacing"
-        style={{
-          borderTop: '1px solid var(--color-border)',
-          borderBottom: '1px solid var(--color-border)',
-        }}
-      >
-        <div className="container">
-          <div className="section-header">
-            <span className="section-eyebrow">
-              <Sparkles size={14} /> Focus Areas
-            </span>
-            <h2 className="section-title">Four Pillars of R&D Diligence</h2>
-            <p className="section-description">
-              Our structured pharmaceutical development processes ensure reproducible clinical performance and regulatory conformity.
-            </p>
-          </div>
+      {/* 6. SIGNATURE CLOSING STATEMENT */}
+      <SignatureClosingStatement onNavigate={onNavigate} />
 
-          <div 
-            className="reveal-stagger"
-            style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-              gap: '2.5rem',
-            }}
-          >
-            {[
-              {
-                title: 'Formulation Design',
-                desc: 'Selecting optimal polymer carriers, disintegrants, and solubilizers to achieve target dissolution and bio-absorption rates.'
-              },
-              {
-                title: 'Analytical Method Validation',
-                desc: 'Validating analytical testing procedures for precision, linearity, limit of detection, and ruggedness under ICH guidelines.'
-              },
-              {
-                title: 'Stability Chamber Studies',
-                desc: 'Simulating long-term tropical storage conditions (30°C / 75% RH) to substantiate expiration periods and packaging safety.'
-              },
-              {
-                title: 'Scale-Up & Tech Transfer',
-                desc: 'Bridging pilot-scale laboratory batches into commercial manufacturing runs without sacrificing batch-to-batch consistency.'
-              }
-            ].map((p, idx) => (
-              <div 
-                key={idx}
-                className="interactive-card"
-                tabIndex={0}
-                role="region"
-                aria-label={p.title}
-                style={{
-                  padding: '2.25rem',
-                  backgroundColor: 'rgba(255, 255, 255, 0.95)',
-                  borderRadius: 'var(--radius-md)',
-                }}
-              >
-                <span className="card-animated-underline" aria-hidden="true" />
-                <div>
-                  <div style={{ fontSize: '1.25rem', fontWeight: 800, color: 'var(--color-accent)', marginBottom: '0.5rem' }}>
-                    0{idx + 1}.
-                  </div>
-                  <h3 style={{ fontSize: '1.2rem', color: 'var(--color-navy)', marginBottom: '0.75rem' }}>
-                    {p.title}
-                  </h3>
-                  <p style={{ color: 'var(--color-text-body)', fontSize: '0.925rem', lineHeight: 1.65, margin: 0 }}>
-                    {p.desc}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </AmbientVideoBackground>
-
-      {/* CTA */}
-      <section className="section-spacing" style={{ textAlign: 'center', backgroundColor: 'var(--color-bg-light)', borderTop: '1px solid var(--color-border)' }}>
-        <div className="container">
-          <h2 style={{ marginBottom: '1rem', color: 'var(--color-navy)' }}>
-            Have a Technical or Formulation Query?
-          </h2>
-          <p style={{ color: 'var(--color-text-muted)', fontSize: '1.05rem', marginBottom: '2rem', maxWidth: '600px', margin: '0 auto 2rem auto' }}>
-            Our scientific team is available to discuss product capabilities, testing documentation, and quality standards.
-          </p>
-          <button 
-            type="button" 
-            onClick={() => onNavigate('contact')} 
-            className="btn btn-primary"
-          >
-            <span>Inquire With Our Science Team</span>
-            <ArrowRight size={16} />
-          </button>
-        </div>
-      </section>
     </div>
   );
 };

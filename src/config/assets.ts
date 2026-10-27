@@ -32,8 +32,8 @@ export const VIDEO_ASSETS: Record<string, VideoMediaAsset> = {
     id: "hero",
     title: "Precision Cleanroom Formulation & Processing",
     subtitle: "Sterile bioprocessing vessels, stainless-steel formulation lines, and automated cleanrooms",
-    video: "/assets/videos/salas2.mp4",
-    poster: "/assets/videos/posters/salas2.mp4_f50.webp",
+    video: "/assets/videos/salas1.mp4",
+    poster: "/assets/videos/posters/salas1.mp4_f50.webp",
     playbackRate: 1.0, // salas2.mp4 accelerated playback (1.5x - 2.0x recommended speed)
     description: "Full sterile cleanroom facility with high-capacity stainless-steel formulation reactors and cleanroom operator.",
     alt: "Technician in sterile cleanroom attire operating pharmaceutical bioprocess formulation vessels",

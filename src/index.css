@@ -2082,51 +2082,6 @@ button, input, textarea, select {
 }
 
 /* ==========================================================================
-   HERO SEAM FLOATING CAPSULE BADGE (CONCEPT BOARD PANEL 1)
-   ========================================================================== */
-
-.hero-seam-capsule-badge {
-  position: absolute;
-  right: -42px;
-  top: 36%;
-  width: 96px;
-  height: 96px;
-  z-index: 15;
-  pointer-events: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  animation: floatCapsuleBadge 4.5s ease-in-out infinite alternate;
-  will-change: transform;
-}
-
-@keyframes floatCapsuleBadge {
-  0% { transform: translateY(0) rotate(0deg); }
-  100% { transform: translateY(-10px) rotate(4deg); }
-}
-
-.hero-capsule-glow-aura {
-  position: absolute;
-  width: 76px;
-  height: 76px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(32, 174, 234, 0.45) 0%, rgba(229, 36, 42, 0.25) 50%, transparent 75%);
-  filter: blur(10px);
-}
-
-.hero-seam-capsule-svg {
-  width: 100%;
-  height: 100%;
-  filter: drop-shadow(0 8px 24px rgba(7, 29, 54, 0.35));
-}
-
-@media (max-width: 992px) {
-  .hero-seam-capsule-badge {
-    display: none !important;
-  }
-}
-
-/* ==========================================================================
    ANIMATED STATISTICS CARDS (CONCEPT BOARD PANEL 5)
    ========================================================================== */
 
@@ -2562,6 +2517,306 @@ button, input, textarea, select {
 }
 
 /* ==========================================================================
+   SCROLL WORD REVEAL (EDITORIAL CONTRAST STORYTELLING)
+   ========================================================================== */
+
+.scroll-word-reveal-wrap {
+  position: relative;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.scroll-reveal-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--color-primary-blue);
+  margin-bottom: 1.25rem;
+}
+
+.scroll-word-reveal-text {
+  font-size: clamp(1.75rem, 3.5vw, 2.75rem);
+  font-weight: 600;
+  line-height: 1.35;
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+
+.scroll-word {
+  display: inline-block;
+  will-change: color;
+}
+
+.scroll-word.is-muted {
+  color: rgba(11, 37, 69, 0.22);
+}
+
+.scroll-word.is-active {
+  color: var(--color-primary-navy, #0B2545);
+}
+
+.scroll-word.is-highlight {
+  color: var(--color-accent, #E5242A) !important;
+}
+
+/* Dark mode / dark section variant */
+.theme-dark .scroll-word.is-muted,
+.dark-section .scroll-word.is-muted {
+  color: rgba(255, 255, 255, 0.22);
+}
+
+.theme-dark .scroll-word.is-active,
+.dark-section .scroll-word.is-active {
+  color: #FFFFFF;
+}
+
+/* ==========================================================================
+   INTERACTIVE LABORATORY HOTSPOTS
+   ========================================================================== */
+
+.lab-hotspot-container {
+  position: relative;
+  width: 100%;
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  box-shadow: 0 20px 48px -12px rgba(11, 37, 69, 0.18);
+  border: 1px solid var(--color-border);
+  background-color: var(--color-primary-navy);
+}
+
+.lab-hotspot-image-wrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  max-height: 580px;
+}
+
+.lab-hotspot-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.lab-hotspot-pin {
+  position: absolute;
+  width: 32px;
+  height: 32px;
+  transform: translate(-50%, -50%);
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  outline: none;
+}
+
+.lab-hotspot-pin-core {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background-color: var(--color-accent);
+  border: 2px solid #FFFFFF;
+  box-shadow: 0 0 12px rgba(229, 36, 42, 0.8);
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.2s ease;
+}
+
+.lab-hotspot-pin.is-active .lab-hotspot-pin-core,
+.lab-hotspot-pin:hover .lab-hotspot-pin-core {
+  transform: scale(1.35);
+  background-color: #20AEEA;
+  box-shadow: 0 0 16px rgba(32, 174, 234, 0.9);
+}
+
+.lab-hotspot-pulse-ring {
+  position: absolute;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 2px solid var(--color-accent);
+  opacity: 0.6;
+  animation: hotspotPulse 2.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite;
+}
+
+@keyframes hotspotPulse {
+  0% { transform: scale(0.6); opacity: 0.8; }
+  100% { transform: scale(1.6); opacity: 0; }
+}
+
+.lab-hotspot-card {
+  position: absolute;
+  width: 300px;
+  padding: 1.25rem 1.35rem;
+  background: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(20, 86, 160, 0.18);
+  box-shadow: 0 16px 36px -8px rgba(11, 37, 69, 0.25);
+  z-index: 20;
+  transition: opacity 0.25s ease, transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: auto;
+}
+
+@media (max-width: 768px) {
+  .lab-hotspot-card {
+    position: static;
+    width: 100%;
+    margin-top: 1rem;
+    box-shadow: none;
+  }
+}
+
+/* ==========================================================================
+   4-STAGE MANUFACTURING PROCESS JOURNEY
+   ========================================================================== */
+
+.manufacturing-journey-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3.5rem;
+  align-items: start;
+}
+
+.journey-stepper-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.journey-step-btn {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.5rem;
+  padding: 1.75rem 2rem;
+  background-color: var(--color-bg-light);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.journey-step-btn:hover {
+  border-color: rgba(20, 86, 160, 0.3);
+  transform: translateX(4px);
+  background-color: #FFFFFF;
+}
+
+.journey-step-btn.is-active {
+  background-color: #FFFFFF;
+  border-color: var(--color-primary-blue);
+  box-shadow: 0 12px 32px -8px rgba(20, 86, 160, 0.15);
+  transform: translateX(8px);
+}
+
+.journey-step-btn.is-active::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background-color: var(--color-accent);
+}
+
+.journey-step-num {
+  font-family: var(--font-mono, monospace);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--color-primary-blue);
+  background: rgba(20, 86, 160, 0.08);
+  padding: 0.35rem 0.65rem;
+  border-radius: var(--radius-sm);
+  flex-shrink: 0;
+}
+
+.journey-step-btn.is-active .journey-step-num {
+  background-color: var(--color-primary-blue);
+  color: #FFFFFF;
+}
+
+.journey-visual-panel {
+  position: sticky;
+  top: 100px;
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  background-color: var(--color-primary-navy);
+  box-shadow: 0 24px 50px -12px rgba(11, 37, 69, 0.22);
+}
+
+.journey-visual-img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  display: block;
+}
+
+.journey-visual-meta {
+  padding: 1.75rem 2rem;
+  background-color: #FFFFFF;
+  border-top: 1px solid var(--color-border);
+}
+
+@media (max-width: 992px) {
+  .manufacturing-journey-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  .journey-visual-panel {
+    position: static;
+  }
+}
+
+/* ==========================================================================
+   PRODUCT DISCOVERY DRAWER & MODAL
+   ========================================================================== */
+
+.product-drawer-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(11, 37, 69, 0.6);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  z-index: 1000;
+  display: flex;
+  justify-content: flex-end;
+  animation: fadeIn 0.2s ease-out;
+}
+
+.product-drawer-body {
+  width: 100%;
+  max-width: 540px;
+  height: 100%;
+  background-color: #FFFFFF;
+  box-shadow: -16px 0 40px rgba(11, 37, 69, 0.25);
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  animation: slideLeft 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes slideLeft {
+  from { transform: translateX(100%); }
+  to { transform: translateX(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* ==========================================================================
    ACCESSIBILITY & REDUCED MOTION
    ========================================================================== */
 
@@ -2589,9 +2844,15 @@ button, input, textarea, select {
 
   .chem-floating-group-1,
   .chem-floating-group-2,
-  .chem-pulse-node {
+  .chem-pulse-node,
+  .lab-hotspot-pulse-ring {
     animation: none !important;
     transform: none !important;
   }
+
+  .product-drawer-body {
+    animation: none !important;
+  }
 }
+
 

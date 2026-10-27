@@ -1,11 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   FlaskConical,
   Microscope,
   ShieldCheck,
   CheckCircle2,
   ArrowDown,
-  ArrowRight,
   Search,
   Layers,
   FileCheck,
@@ -17,6 +16,8 @@ import { VIDEO_ASSETS, MEDIA_CONFIG } from '../config/assets';
 import { BrandedVideo } from '../components/common/BrandedVideo';
 import { QualitySeal } from '../components/common/QualitySeal';
 import { ScientificParticles } from '../components/common/ScientificParticles';
+import { ScrollWordReveal } from '../components/common/ScrollWordReveal';
+import { SignatureClosingStatement } from '../components/common/SignatureClosingStatement';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 
 interface LaboratoriesPageProps {
@@ -26,6 +27,7 @@ interface LaboratoriesPageProps {
 
 export const LaboratoriesPage: React.FC<LaboratoriesPageProps> = ({ onNavigate }) => {
   useScrollReveal();
+  const [activeHotspotId, setActiveHotspotId] = useState<string>('hplc');
 
   const handleScrollToOverview = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -34,6 +36,47 @@ export const LaboratoriesPage: React.FC<LaboratoriesPageProps> = ({ onNavigate }
       target.scrollIntoView({ behavior: 'smooth' });
     }
   };
+
+  const labHotspots = [
+    {
+      id: 'hplc',
+      name: 'High-Performance Liquid Chromatography (HPLC)',
+      x: 34,
+      y: 38,
+      category: 'Analytical Assay',
+      description: 'Ultra-sensitive chromatographic separation quantifying active pharmaceutical ingredient (API) potency and identifying organic impurities down to sub-microgram thresholds.',
+      protocol: 'Validated under Indian Pharmacopoeia / USP monographs with system suitability checks before every batch assay.',
+    },
+    {
+      id: 'dissolution',
+      name: 'Automated USP Dissolution Station',
+      x: 68,
+      y: 44,
+      category: 'Bioavailability Testing',
+      description: 'Multi-vessel dissolution testing apparatus reproducing physiological human gastrointestinal fluids (pH 1.2 to 6.8) to verify sustained and enteric release profiles.',
+      protocol: 'Measures multi-point release rates at 15, 30, 45, and 60 minutes with spectrophotometric quantitation.',
+    },
+    {
+      id: 'cleanroom',
+      name: 'Class 100 Laminar Airflow Hood',
+      x: 82,
+      y: 28,
+      category: 'Microbiological Control',
+      description: 'HEPA-filtered laminar horizontal airflow generating cleanroom conditions (ISO Class 5) for microbiological sterility assays and pyrogen-free sample handling.',
+      protocol: 'Continuous particulate monitoring and scheduled agar plate exposure tests ensure zero biological contamination.',
+    },
+    {
+      id: 'karl-fischer',
+      name: 'Coulometric Karl Fischer Titration',
+      x: 20,
+      y: 68,
+      category: 'Moisture Stability',
+      description: 'High-precision reagent titration measuring trace residual water in moisture-sensitive beta-lactams, capsules, and effervescent tablet formulations.',
+      protocol: 'Calculates moisture percentage to 0.01% precision to guarantee shelf-life stability in humid climatic zones (Zone IVb).',
+    },
+  ];
+
+  const activeHotspot = labHotspots.find(h => h.id === activeHotspotId) || labHotspots[0];
 
   const capabilities = [
     {
@@ -261,6 +304,125 @@ export const LaboratoriesPage: React.FC<LaboratoriesPageProps> = ({ onNavigate }
             <div className="hero-scroll-dot" />
           </div>
           <span>Scroll to explore</span>
+        </div>
+      </section>
+
+      {/* ====================================================================
+          EDITORIAL CONTRAST STORYTELLING (SCROLL WORD REVEAL)
+          ==================================================================== */}
+      <section className="section-spacing" style={{ backgroundColor: 'var(--color-bg-light)', borderBottom: '1px solid var(--color-border)' }}>
+        <div className="container">
+          <ScrollWordReveal
+            eyebrow="Analytical Discipline"
+            text="Pharmaceutical quality is established before any batch enters production. In our Sikkim laboratories, every chemical compound is scrutinized with chromatographic precision, dissolution kinetics, and continuous stability tracking to ensure uncompromised therapeutic safety."
+            highlightWords={['quality', 'Sikkim', 'chromatographic', 'dissolution', 'stability', 'safety']}
+          />
+        </div>
+      </section>
+
+      {/* ====================================================================
+          INTERACTIVE ANALYTICAL HOTSPOT STATION
+          ==================================================================== */}
+      <section className="section-spacing" style={{ backgroundColor: '#FFFFFF', borderBottom: '1px solid var(--color-border)' }}>
+        <div className="container">
+          <div className="section-header" style={{ textAlign: 'center', maxWidth: '780px', margin: '0 auto 3.5rem auto' }}>
+            <span className="section-eyebrow">
+              <Microscope size={14} /> Interactive Laboratory Tour
+            </span>
+            <h2 className="section-title">Explore Our Analytical Stations</h2>
+            <p className="section-description">
+              Select any highlighted focal point below to inspect the instrumentation, validation standards, and testing protocols active inside our testing suites.
+            </p>
+          </div>
+
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '3rem', alignItems: 'center' }}>
+            
+            {/* Visual Hotspot Canvas */}
+            <div className="lab-hotspot-container">
+              <div className="lab-hotspot-image-wrapper">
+                <img
+                  src={MEDIA_CONFIG.laboratory.environmentImage}
+                  alt="Salas Pharma analytical testing laboratory"
+                  className="lab-hotspot-image"
+                  loading="lazy"
+                  decoding="async"
+                />
+
+                {/* Hotspot Pins */}
+                {labHotspots.map((pin) => (
+                  <button
+                    key={pin.id}
+                    type="button"
+                    className={`lab-hotspot-pin ${activeHotspotId === pin.id ? 'is-active' : ''}`}
+                    style={{ left: `${pin.x}%`, top: `${pin.y}%` }}
+                    onClick={() => setActiveHotspotId(pin.id)}
+                    aria-label={`Inspect ${pin.name}`}
+                  >
+                    <div className="lab-hotspot-pulse-ring" aria-hidden="true" />
+                    <div className="lab-hotspot-pin-core" />
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Dynamic Inspection Card for Selected Hotspot */}
+            <div style={{ padding: '2rem 2.5rem', backgroundColor: 'var(--color-bg-light)', borderRadius: 'var(--radius-xl)', border: '1px solid var(--color-border)', boxShadow: 'var(--shadow-md)' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.25rem' }}>
+                <span style={{ fontSize: '0.75rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.1em', padding: '0.3rem 0.75rem', borderRadius: '100px', backgroundColor: 'rgba(20, 86, 160, 0.1)', color: 'var(--color-primary-blue)' }}>
+                  {activeHotspot.category}
+                </span>
+                <span style={{ fontSize: '0.8125rem', fontWeight: 700, color: 'var(--color-accent)' }}>
+                  Active Station
+                </span>
+              </div>
+
+              <h3 style={{ fontSize: '1.5rem', color: 'var(--color-navy)', marginBottom: '1rem', fontWeight: 700, lineHeight: 1.3 }}>
+                {activeHotspot.name}
+              </h3>
+
+              <p style={{ color: 'var(--color-text-body)', lineHeight: 1.7, fontSize: '1rem', marginBottom: '1.5rem' }}>
+                {activeHotspot.description}
+              </p>
+
+              <div style={{ padding: '1.15rem 1.25rem', backgroundColor: '#FFFFFF', borderRadius: 'var(--radius-md)', border: '1px solid var(--color-border)', marginBottom: '1.75rem' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.35rem' }}>
+                  <ShieldCheck size={16} style={{ color: 'var(--color-primary-blue)' }} />
+                  <span style={{ fontSize: '0.75rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--color-navy)' }}>
+                    Validation Protocol:
+                  </span>
+                </div>
+                <p style={{ margin: 0, fontSize: '0.875rem', color: 'var(--color-text-muted)', lineHeight: 1.55 }}>
+                  {activeHotspot.protocol}
+                </p>
+              </div>
+
+              {/* Selector Tabs */}
+              <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
+                {labHotspots.map((pin) => (
+                  <button
+                    key={pin.id}
+                    type="button"
+                    onClick={() => setActiveHotspotId(pin.id)}
+                    style={{
+                      padding: '0.45rem 0.85rem',
+                      fontSize: '0.8125rem',
+                      fontWeight: 600,
+                      borderRadius: 'var(--radius-sm)',
+                      cursor: 'pointer',
+                      border: '1px solid',
+                      borderColor: activeHotspotId === pin.id ? 'var(--color-primary-blue)' : 'var(--color-border)',
+                      backgroundColor: activeHotspotId === pin.id ? 'var(--color-primary-blue)' : '#FFFFFF',
+                      color: activeHotspotId === pin.id ? '#FFFFFF' : 'var(--color-navy)',
+                      transition: 'all 0.2s ease',
+                    }}
+                  >
+                    {pin.id === 'hplc' ? 'HPLC' : pin.id === 'dissolution' ? 'Dissolution' : pin.id === 'cleanroom' ? 'Cleanroom Hood' : 'Karl Fischer'}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+          </div>
         </div>
       </section>
 
@@ -757,49 +919,9 @@ export const LaboratoriesPage: React.FC<LaboratoriesPageProps> = ({ onNavigate }
       </section>
 
       {/* ====================================================================
-          SECTION F: CONTACT CTA
+          SECTION F: SIGNATURE CLOSING STATEMENT
           ==================================================================== */}
-      <section className="section-spacing" style={{ textAlign: 'center', backgroundColor: '#FFFFFF' }}>
-        <div className="container">
-          <div style={{ maxWidth: '720px', margin: '0 auto' }}>
-            <span className="section-eyebrow">
-              <ShieldCheck size={14} /> Connect With Us
-            </span>
-            <h2 style={{ fontSize: 'clamp(2rem, 3.5vw, 2.8rem)', marginBottom: '1.25rem', color: 'var(--color-navy)', fontWeight: 800 }}>
-              Connect With SALAS Pharma
-            </h2>
-            <p style={{ color: 'var(--color-text-muted)', fontSize: '1.15rem', lineHeight: 1.7, marginBottom: '2.5rem' }}>
-              Contact our team to learn more about our pharmaceutical operations and capabilities.
-            </p>
-            <div style={{ display: 'flex', justifyContent: 'center', gap: '1.25rem', flexWrap: 'wrap' }}>
-              <button
-                type="button"
-                onClick={() => onNavigate('contact')}
-                className="btn btn-primary"
-                style={{
-                  padding: '0.9rem 2.25rem',
-                  fontSize: '1rem',
-                  fontWeight: 700,
-                }}
-              >
-                <span>Contact Us</span>
-                <ArrowRight size={18} />
-              </button>
-              <button
-                type="button"
-                onClick={() => onNavigate('products')}
-                className="btn btn-secondary"
-                style={{
-                  padding: '0.9rem 2.25rem',
-                  fontSize: '1rem',
-                }}
-              >
-                <span>View Products</span>
-              </button>
-            </div>
-          </div>
-        </div>
-      </section>
+      <SignatureClosingStatement onNavigate={onNavigate} />
     </div>
   );
 };
