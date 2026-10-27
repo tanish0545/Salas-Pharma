@@ -141,7 +141,7 @@ export const ManufacturingPage: React.FC<ManufacturingPageProps> = ({ onNavigate
           <div 
             style={{
               display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 300px), 1fr))',
               gap: '4.5rem',
               alignItems: 'center',
             }}
@@ -328,7 +328,7 @@ export const ManufacturingPage: React.FC<ManufacturingPageProps> = ({ onNavigate
           <div 
             style={{
               display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 300px), 1fr))',
               gap: '4rem',
               alignItems: 'center',
             }}
@@ -461,7 +461,7 @@ export const ManufacturingPage: React.FC<ManufacturingPageProps> = ({ onNavigate
           <div 
             style={{
               display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 300px), 1fr))',
               gap: '4rem',
               alignItems: 'center',
             }}

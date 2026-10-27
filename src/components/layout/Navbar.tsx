@@ -219,6 +219,16 @@ export const Navbar: React.FC<NavbarProps> = ({ currentRoute, onNavigate }) => {
             .desktop-nav { display: none !important; }
             .mobile-menu-toggle { display: block !important; }
           }
+          @media (max-width: 480px) {
+            .brand-logo-link img {
+              height: 32px !important;
+              max-width: 140px !important;
+            }
+            .header-actions .btn {
+              padding: 0.4rem 0.75rem !important;
+              font-size: 0.8125rem !important;
+            }
+          }
         `}</style>
       </header>
 

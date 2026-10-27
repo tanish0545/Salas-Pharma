@@ -170,7 +170,7 @@ export const LaboratoriesPage: React.FC<LaboratoriesPageProps> = ({ onNavigate }
             <h1
               className="hero-main-heading"
               style={{
-                fontSize: 'clamp(2.4rem, 5.2vw, 3.8rem)',
+                fontSize: 'clamp(1.85rem, 5vw, 3.8rem)',
                 lineHeight: 1.15,
                 fontWeight: 900,
                 color: '#FFFFFF',
@@ -328,7 +328,7 @@ export const LaboratoriesPage: React.FC<LaboratoriesPageProps> = ({ onNavigate }
             </p>
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '3rem', alignItems: 'center' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 300px), 1fr))', gap: '3rem', alignItems: 'center' }}>
             
             {/* Visual Hotspot Canvas */}
             <div className="lab-hotspot-container">
@@ -435,7 +435,7 @@ export const LaboratoriesPage: React.FC<LaboratoriesPageProps> = ({ onNavigate }
           <div
             style={{
               display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 300px), 1fr))',
               gap: '4.5rem',
               alignItems: 'center',
             }}
@@ -573,7 +573,7 @@ export const LaboratoriesPage: React.FC<LaboratoriesPageProps> = ({ onNavigate }
           <div
             style={{
               display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 300px), 1fr))',
               gap: '4.5rem',
               alignItems: 'center',
               marginBottom: '4.5rem',
@@ -844,7 +844,7 @@ export const LaboratoriesPage: React.FC<LaboratoriesPageProps> = ({ onNavigate }
           <div
             style={{
               display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 300px), 1fr))',
               gap: '4.5rem',
               alignItems: 'center',
             }}

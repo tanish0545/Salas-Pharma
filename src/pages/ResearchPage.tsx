@@ -112,7 +112,7 @@ export const ResearchPage: React.FC<ResearchPageProps> = ({ onNavigate }) => {
           <div 
             style={{
               display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 300px), 1fr))',
               gap: '4.5rem',
               alignItems: 'center',
             }}
@@ -205,7 +205,7 @@ export const ResearchPage: React.FC<ResearchPageProps> = ({ onNavigate }) => {
             </p>
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2.5rem', alignItems: 'start' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))', gap: '2.5rem', alignItems: 'start' }}>
             
             {/* Left: Interactive Tab Buttons */}
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
@@ -288,7 +288,7 @@ export const ResearchPage: React.FC<ResearchPageProps> = ({ onNavigate }) => {
           <div 
             style={{
               display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 300px), 1fr))',
               gap: '4.5rem',
               alignItems: 'center',
             }}

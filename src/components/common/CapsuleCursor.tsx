@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 /**
  * CapsuleCursor Component
@@ -14,24 +14,44 @@ import React, { useEffect, useRef } from 'react';
  *    • Hovering hero sections: Delicate scientific node halo.
  *    • Hovering text fields: Seamlessly reveals native I-beam cursor for typing.
  *    • Clicking: Instant tactile compression and subtle ripple wave without delaying click events.
- * - Full accessibility: Desktop-only, automatically disabled on touch devices or prefers-reduced-motion.
+ * - Full accessibility: Desktop-only, completely disabled on touch devices or prefers-reduced-motion.
+ * - Preserves native cursor until user actually moves mouse; restores native cursor on keyboard Tab.
  */
 export const CapsuleCursor: React.FC = () => {
+  const [isEnabled, setIsEnabled] = useState<boolean>(() => {
+    if (typeof window === 'undefined') return false;
+    const isFinePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+    const isReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    return isFinePointer && !isReducedMotion;
+  });
+
   const containerRef = useRef<HTMLDivElement>(null);
   const cursorRef = useRef<HTMLDivElement>(null);
   const rotatorRef = useRef<SVGGElement>(null);
   const rippleRef = useRef<HTMLDivElement>(null);
 
+  // Synchronize state dynamically if pointer capabilities or motion preferences change
   useEffect(() => {
     if (typeof window === 'undefined') return;
 
-    // Detection checks
-    const isFinePointer = () => window.matchMedia('(hover: hover) and (pointer: fine)').matches;
-    const isReducedMotion = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const fineMedia = window.matchMedia('(hover: hover) and (pointer: fine)');
+    const motionMedia = window.matchMedia('(prefers-reduced-motion: reduce)');
 
-    if (!isFinePointer() || isReducedMotion()) {
-      return;
-    }
+    const updateCapabilities = () => {
+      setIsEnabled(fineMedia.matches && !motionMedia.matches);
+    };
+
+    fineMedia.addEventListener('change', updateCapabilities);
+    motionMedia.addEventListener('change', updateCapabilities);
+
+    return () => {
+      fineMedia.removeEventListener('change', updateCapabilities);
+      motionMedia.removeEventListener('change', updateCapabilities);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!isEnabled || typeof window === 'undefined') return;
 
     const container = containerRef.current;
     const cursor = cursorRef.current;
@@ -39,8 +59,7 @@ export const CapsuleCursor: React.FC = () => {
     const ripple = rippleRef.current;
     if (!container || !cursor) return;
 
-    // Activate custom cursor mode on root html surface
-    document.documentElement.classList.add('has-capsule-cursor');
+    const isFinePointer = () => window.matchMedia('(hover: hover) and (pointer: fine)').matches;
 
     const mouse = { x: -100, y: -100 };
     const lastMouse = { x: -100, y: -100 };
@@ -52,8 +71,10 @@ export const CapsuleCursor: React.FC = () => {
     let animId: number;
 
     const onMouseMove = (e: MouseEvent) => {
-      // Re-assert desktop custom cursor if previously unset by touch
-      if (!document.documentElement.classList.contains('has-capsule-cursor') && isFinePointer()) {
+      if (!isFinePointer()) return;
+
+      // Only hide native cursor when mouse actually moves inside the window
+      if (!document.documentElement.classList.contains('has-capsule-cursor')) {
         document.documentElement.classList.add('has-capsule-cursor');
       }
 
@@ -142,12 +163,22 @@ export const CapsuleCursor: React.FC = () => {
       container.classList.remove('is-visible');
     };
 
+    // Preserve native accessibility for keyboard navigation (Tab key)
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Tab') {
+        document.documentElement.classList.remove('has-capsule-cursor');
+        isVisible = false;
+        container.classList.remove('is-visible');
+      }
+    };
+
     window.addEventListener('mousemove', onMouseMove, { passive: true });
     window.addEventListener('mousedown', onMouseDown, { passive: true });
     window.addEventListener('mouseup', onMouseUp, { passive: true });
     document.addEventListener('mouseleave', onMouseLeave);
     document.addEventListener('mouseenter', onMouseEnter);
     window.addEventListener('touchstart', onTouchStart, { passive: true });
+    window.addEventListener('keydown', onKeyDown);
 
     // 60/120fps direct hardware-accelerated transform loop
     const render = () => {
@@ -182,9 +213,15 @@ export const CapsuleCursor: React.FC = () => {
       document.removeEventListener('mouseleave', onMouseLeave);
       document.removeEventListener('mouseenter', onMouseEnter);
       window.removeEventListener('touchstart', onTouchStart);
+      window.removeEventListener('keydown', onKeyDown);
       cancelAnimationFrame(animId);
     };
-  }, []);
+  }, [isEnabled]);
+
+  // Return null on touch devices or reduced motion to prevent any stuck ghost DOM node
+  if (!isEnabled) {
+    return null;
+  }
 
   return (
     <div 

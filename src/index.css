@@ -700,6 +700,18 @@ button, input, textarea, select {
   }
 }
 
+/* Completely hide custom capsule cursor on touch devices or coarse pointers */
+@media (pointer: coarse), (hover: none) {
+  .capsule-cursor-portal {
+    display: none !important;
+  }
+  html.has-capsule-cursor,
+  html.has-capsule-cursor body,
+  html.has-capsule-cursor * {
+    cursor: auto !important;
+  }
+}
+
 .capsule-cursor-portal {
   position: fixed;
   inset: 0;
@@ -3472,14 +3484,14 @@ button, input, textarea, select {
 
 .scroll-word-reveal-text {
   font-family: var(--font-sans);
-  font-size: clamp(1.75rem, 3.2vw, 2.65rem);
+  font-size: clamp(1.4rem, 2.4vw, 2.2rem);
   font-weight: 600;
-  line-height: 1.55;
+  line-height: 1.5;
   letter-spacing: var(--tracking-snug);
   margin: 0;
   white-space: normal;
   word-wrap: break-word;
-  max-width: 940px;
+  max-width: 860px;
 }
 
 .scroll-word {
@@ -3489,7 +3501,7 @@ button, input, textarea, select {
 }
 
 .scroll-word.is-muted {
-  color: rgba(7, 29, 54, 0.22);
+  color: rgba(7, 29, 54, 0.40);
 }
 
 .scroll-word.is-active {
@@ -3641,7 +3653,7 @@ button, input, textarea, select {
 .storytelling-track,
 .about-storytelling-track {
   position: relative;
-  min-height: 280vh;
+  min-height: 175vh;
   background-color: var(--color-bg-light);
   border-top: 1px solid var(--color-border);
   border-bottom: 1px solid var(--color-border);
@@ -3686,7 +3698,7 @@ button, input, textarea, select {
   .about-storytelling-sticky {
     position: static !important;
     height: auto !important;
-    padding: 4.5rem 1.25rem !important;
+    padding: 3.5rem 1.25rem !important;
   }
   .storytelling-progress-bar {
     display: none !important;
@@ -3696,7 +3708,7 @@ button, input, textarea, select {
 /* Dark mode / dark section variant */
 .theme-dark .scroll-word.is-muted,
 .dark-section .scroll-word.is-muted {
-  color: rgba(255, 255, 255, 0.22);
+  color: rgba(255, 255, 255, 0.40);
 }
 
 .theme-dark .scroll-word.is-active,
@@ -3984,5 +3996,58 @@ button, input, textarea, select {
     animation: none !important;
   }
 }
+
+/* ==========================================================================
+   GLOBAL RESPONSIVE ENHANCEMENTS & MOBILE SAFETY
+   Guarantees zero horizontal overflow, fluid headings, stacked layouts,
+   and clean spacing across all mobile and tablet viewports.
+   ========================================================================== */
+.page-hero-banner {
+  min-height: clamp(380px, 48vh, 520px) !important;
+}
+
+.page-hero-banner h1 {
+  font-size: clamp(1.85rem, 4.5vw, 3.5rem) !important;
+  line-height: 1.2 !important;
+  overflow-wrap: break-word !important;
+  word-break: normal !important;
+}
+
+.page-hero-banner p {
+  font-size: clamp(0.975rem, 1.2vw, 1.15rem) !important;
+  line-height: 1.65 !important;
+}
+
+@media (max-width: 768px) {
+  .page-hero-banner {
+    min-height: auto !important;
+    padding-top: 1rem;
+    padding-bottom: 2rem;
+  }
+  .page-hero-banner .container {
+    padding-top: 2.5rem !important;
+    padding-bottom: 2.5rem !important;
+    padding-left: 1.25rem !important;
+    padding-right: 1.25rem !important;
+  }
+  .page-hero-banner h1 {
+    font-size: clamp(1.75rem, 6vw, 2.25rem) !important;
+    margin-bottom: 1rem !important;
+  }
+  
+  /* Responsive card padding on mobile */
+  .pharma-card,
+  .interactive-card {
+    padding: 1.75rem 1.25rem !important;
+  }
+
+  /* Prevent two-column flex or grids with wide minimums from overflowing */
+  [style*="minmax(320px"],
+  [style*="minmax(340px"],
+  [style*="minmax(300px"] {
+    grid-template-columns: 1fr !important;
+  }
+}
+
 
 

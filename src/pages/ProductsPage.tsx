@@ -504,7 +504,7 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({ onNavigate }) => {
               </button>
             </div>
           ) : (
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(340px, 1fr))', gap: '2rem' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 280px), 1fr))', gap: '2rem' }}>
               {filteredProducts.map((prod) => (
                 <div 
                   key={prod.id}
@@ -582,7 +582,7 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({ onNavigate }) => {
           <div
             style={{
               display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 300px), 1fr))',
               gap: '4rem',
               alignItems: 'center',
             }}
