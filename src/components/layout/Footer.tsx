@@ -87,13 +87,13 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
               aria-label="SALAS Pharma Home"
             >
               <img 
-                src={BRAND_ASSETS.logoWhite || BRAND_ASSETS.logoTransparent} 
+                src={BRAND_ASSETS.logoTransparent}
                 alt="SALAS Pharmaceuticals" 
                 loading="lazy"
                 decoding="async"
-                width={180}
-                height={46}
-                style={{ height: '42px', width: 'auto', display: 'block' }} 
+                width={200}
+                height={52}
+                style={{ height: '48px', width: 'auto', display: 'block', objectFit: 'contain' }} 
               />
             </a>
             <p style={{ color: '#CBD5E1', fontSize: '0.925rem', lineHeight: '1.68', marginBottom: '1.35rem' }}>

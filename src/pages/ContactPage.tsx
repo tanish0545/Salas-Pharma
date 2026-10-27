@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { MapPin, Mail, Phone, Send, CheckCircle2, AlertCircle, Building2, Factory, Copy, Check } from 'lucide-react';
 import { PAGE_HERO_IMAGES } from '../config/assets';
 import { ScientificNetworkArtwork } from '../components/common/ScientificNetworkArtwork';
-import { ScrollWordReveal } from '../components/common/ScrollWordReveal';
+
 import { SignatureClosingStatement } from '../components/common/SignatureClosingStatement';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 
@@ -177,14 +177,6 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
           </div>
         </div>
       </section>
-
-      {/* 2. DEDICATED SCROLL-CONTROLLED STORYTELLING SECTION (PINNED ON DESKTOP) */}
-      <ScrollWordReveal
-        pinnedStorytelling={true}
-        eyebrow="Our Commitment to Responsiveness"
-        text="Pharmaceutical partnerships depend on transparent, reliable communication. Whether you are seeking technical specifications, hospital supply allocations, or facility verification, our corporate leadership ensures timely, professional assistance."
-        highlightWords={['transparent', 'reliable', 'communication', 'specifications', 'allocations', 'professional']}
-      />
 
       {/* 3. DUAL-LOCATION CARDS (VADODARA HQ & SIKKIM PLANT) */}
       <section className="section-spacing">

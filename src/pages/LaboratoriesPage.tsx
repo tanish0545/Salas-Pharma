@@ -17,7 +17,7 @@ import { BrandedVideo } from '../components/common/BrandedVideo';
 import { QualitySeal } from '../components/common/QualitySeal';
 import { ScientificNetworkArtwork } from '../components/common/ScientificNetworkArtwork';
 import { MolecularBackground } from '../components/common/MolecularBackground';
-import { ScrollWordReveal } from '../components/common/ScrollWordReveal';
+
 import { SignatureClosingStatement } from '../components/common/SignatureClosingStatement';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 
@@ -312,16 +312,6 @@ export const LaboratoriesPage: React.FC<LaboratoriesPageProps> = ({ onNavigate }
           </div>
         </div>
       </section>
-
-      {/* ====================================================================
-          2. DEDICATED SCROLL-CONTROLLED STORYTELLING SECTION (PINNED ON DESKTOP)
-          ==================================================================== */}
-      <ScrollWordReveal
-        pinnedStorytelling={true}
-        eyebrow="Analytical Discipline"
-        text="Pharmaceutical quality is established before any batch enters production. In our Sikkim laboratories, every chemical compound is scrutinized with chromatographic precision, dissolution kinetics, and continuous stability tracking to ensure uncompromised therapeutic safety."
-        highlightWords={['quality', 'Sikkim', 'chromatographic', 'dissolution', 'stability', 'safety']}
-      />
 
       {/* ====================================================================
           INTERACTIVE ANALYTICAL HOTSPOT STATION

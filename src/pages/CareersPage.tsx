@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Send, CheckCircle2, Copy, Check, AlertCircle, ArrowRight, MapPin, Briefcase } from 'lucide-react';
 import { PAGE_HERO_IMAGES } from '../config/assets';
 import { ScientificNetworkArtwork } from '../components/common/ScientificNetworkArtwork';
-import { ScrollWordReveal } from '../components/common/ScrollWordReveal';
+
 import { SignatureClosingStatement } from '../components/common/SignatureClosingStatement';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 
@@ -157,14 +157,6 @@ export const CareersPage: React.FC<CareersPageProps> = ({ onNavigate }) => {
           </div>
         </div>
       </section>
-
-      {/* 2. DEDICATED SCROLL-CONTROLLED STORYTELLING SECTION (PINNED ON DESKTOP) */}
-      <ScrollWordReveal
-        pinnedStorytelling={true}
-        eyebrow="Our People & Culture"
-        text="Every medicine that leaves our Sikkim facility carries the dedication of our pharmacists, chemists, and operators. We invest in technical training, rigorous safety standards, and merit-based career progression so our talent can build lasting pharmaceutical careers."
-        highlightWords={['Sikkim', 'pharmacists', 'chemists', 'training', 'safety', 'merit-based', 'careers']}
-      />
 
       {/* 3. DEPARTMENTAL OPPORTUNITIES GRID */}
       <section className="section-spacing">

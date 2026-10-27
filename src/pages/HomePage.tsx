@@ -24,7 +24,6 @@ import { QualitySeal } from '../components/common/QualitySeal';
 import { AnimatedCounter } from '../components/common/AnimatedCounter';
 import { MolecularBackground } from '../components/common/MolecularBackground';
 import { SignatureClosingStatement } from '../components/common/SignatureClosingStatement';
-import { CorePhilosophyCard } from '../components/common/CorePhilosophyCard';
 import { CompanyTimeline } from '../components/common/CompanyTimeline';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 
@@ -427,23 +426,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, isLoaderComplete
                 <span style={{ color: 'var(--color-primary)' }}>Focused on Healthcare.</span>
               </h2>
 
-              <div
-                style={{
-                  padding: '0.75rem 1.25rem',
-                  borderLeft: '3px solid var(--color-accent)',
-                  backgroundColor: 'rgba(229, 36, 42, 0.04)',
-                  borderRadius: '0 var(--radius-sm) var(--radius-sm) 0',
-                  marginBottom: '1.5rem',
-                  fontSize: '1.05rem',
-                  fontStyle: 'italic',
-                  fontWeight: 600,
-                  color: 'var(--color-navy)',
-                }}
-              >
-                “Success Lies in Commitment.”
-              </div>
-
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '1.15rem', fontSize: '1.05rem', color: 'var(--color-text-body)', lineHeight: 1.75 }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '1.15rem', fontSize: '1.05rem', color: 'var(--color-text-body)', lineHeight: 1.75, marginTop: '1.25rem' }}>
                 <p>
                   Established in 2009, Salas Pharma has established its identity through reliable service, collaborative partnerships, and disciplined compliance across India.
                 </p>
@@ -475,10 +458,240 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, isLoaderComplete
       </section>
 
       {/* ====================================================================
-          SECTION 3: OUR CORE PHILOSOPHY
-          Clean, elegant card grounding corporate integrity and commitment
+          SECTION 3: OUR PHARMACEUTICAL EXPERTISE
+          Three informative capability pillars bridging into core domains
           ==================================================================== */}
-      <CorePhilosophyCard />
+      <section className="section-spacing" style={{ backgroundColor: '#FFFFFF', borderBottom: '1px solid var(--color-border)' }}>
+        <div className="container">
+          <div className="section-header" style={{ textAlign: 'center', maxWidth: '780px', margin: '0 auto 3.5rem auto' }}>
+            <span
+              className="section-eyebrow"
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '0.45rem',
+                color: 'var(--color-primary-blue)',
+                fontWeight: 800,
+                fontSize: '0.8125rem',
+                letterSpacing: '0.12em',
+                textTransform: 'uppercase',
+                marginBottom: '0.75rem',
+              }}
+            >
+              <ShieldCheck size={14} /> Comprehensive Capabilities
+            </span>
+            <h2 className="section-title" style={{ fontSize: 'clamp(2rem, 3.2vw, 2.75rem)', fontWeight: 800, color: 'var(--color-navy)', marginBottom: '1rem' }}>
+              Our Pharmaceutical Expertise
+            </h2>
+            <p className="section-description" style={{ fontSize: '1.05rem', color: 'var(--color-text-body)', lineHeight: 1.65, maxWidth: '680px', margin: '0 auto' }}>
+              Explore our therapeutic portfolio and pharmaceutical capabilities, guided by a commitment to quality, scientific discipline, and dependable healthcare solutions.
+            </p>
+          </div>
+
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '2rem' }}>
+            {/* Block 1: Therapeutic Portfolio */}
+            <div
+              className="interactive-card reveal-up delay-100"
+              style={{
+                backgroundColor: 'var(--color-bg-light)',
+                borderRadius: 'var(--radius-lg)',
+                border: '1px solid var(--color-border)',
+                overflow: 'hidden',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'space-between',
+              }}
+            >
+              <div>
+                <div style={{ height: '220px', overflow: 'hidden', position: 'relative' }}>
+                  <img
+                    src="/assets/images/products/products-dosage-forms.webp"
+                    alt="Salas Pharma therapeutic formulations and finished dosage forms"
+                    loading="lazy"
+                    decoding="async"
+                    width={640}
+                    height={220}
+                    style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                  />
+                  <div
+                    style={{
+                      position: 'absolute',
+                      top: '1rem',
+                      left: '1rem',
+                      backgroundColor: 'rgba(7, 29, 54, 0.85)',
+                      color: '#38BDF8',
+                      fontSize: '0.75rem',
+                      fontWeight: 800,
+                      padding: '0.3rem 0.75rem',
+                      borderRadius: '9999px',
+                      backdropFilter: 'blur(4px)',
+                      letterSpacing: '0.08em',
+                      textTransform: 'uppercase',
+                    }}
+                  >
+                    Clinical Depth
+                  </div>
+                </div>
+
+                <div style={{ padding: '2rem' }}>
+                  <h3 style={{ fontSize: '1.35rem', fontWeight: 800, color: 'var(--color-navy)', marginBottom: '0.75rem' }}>
+                    Therapeutic Portfolio
+                  </h3>
+                  <p style={{ fontSize: '0.9375rem', color: 'var(--color-text-body)', lineHeight: 1.65, margin: 0 }}>
+                    Targeted formulation delivery across 8 major therapeutic segments—including Gastroenterology, Pain Management, Antibacterials, Neurology, and General Healthcare—engineered in immediate, sustained-release, and liquid formats.
+                  </p>
+                </div>
+              </div>
+
+              <div style={{ padding: '0 2rem 2rem 2rem' }}>
+                <button
+                  type="button"
+                  onClick={() => onNavigate('products')}
+                  className="btn btn-secondary"
+                  style={{ width: '100%', justifyContent: 'center' }}
+                >
+                  <span>Explore Product Portfolio</span>
+                  <ArrowRight size={15} />
+                </button>
+              </div>
+            </div>
+
+            {/* Block 2: Manufacturing & Quality */}
+            <div
+              className="interactive-card reveal-up delay-200"
+              style={{
+                backgroundColor: 'var(--color-bg-light)',
+                borderRadius: 'var(--radius-lg)',
+                border: '1px solid var(--color-border)',
+                overflow: 'hidden',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'space-between',
+              }}
+            >
+              <div>
+                <div style={{ height: '220px', overflow: 'hidden', position: 'relative' }}>
+                  <img
+                    src="/assets/images/manufacturing/manufacturing-line.webp"
+                    alt="Salas Pharma cleanroom production facility and high-speed tablet compression"
+                    loading="lazy"
+                    decoding="async"
+                    width={640}
+                    height={220}
+                    style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                  />
+                  <div
+                    style={{
+                      position: 'absolute',
+                      top: '1rem',
+                      left: '1rem',
+                      backgroundColor: 'rgba(7, 29, 54, 0.85)',
+                      color: 'var(--color-accent)',
+                      fontSize: '0.75rem',
+                      fontWeight: 800,
+                      padding: '0.3rem 0.75rem',
+                      borderRadius: '9999px',
+                      backdropFilter: 'blur(4px)',
+                      letterSpacing: '0.08em',
+                      textTransform: 'uppercase',
+                    }}
+                  >
+                    cGMP Infrastructure
+                  </div>
+                </div>
+
+                <div style={{ padding: '2rem' }}>
+                  <h3 style={{ fontSize: '1.35rem', fontWeight: 800, color: 'var(--color-navy)', marginBottom: '0.75rem' }}>
+                    Manufacturing & Quality
+                  </h3>
+                  <p style={{ fontSize: '0.9375rem', color: 'var(--color-text-body)', lineHeight: 1.65, margin: 0 }}>
+                    Our dedicated South Sikkim production facility operates under strict cGMP protocols and Schedule M standards, featuring positive-pressure cleanrooms, automated rotary compression, and 100% batch traceability.
+                  </p>
+                </div>
+              </div>
+
+              <div style={{ padding: '0 2rem 2rem 2rem' }}>
+                <button
+                  type="button"
+                  onClick={() => onNavigate('manufacturing')}
+                  className="btn btn-secondary"
+                  style={{ width: '100%', justifyContent: 'center' }}
+                >
+                  <span>View Manufacturing Standards</span>
+                  <ArrowRight size={15} />
+                </button>
+              </div>
+            </div>
+
+            {/* Block 3: Laboratories & Science */}
+            <div
+              className="interactive-card reveal-up delay-300"
+              style={{
+                backgroundColor: 'var(--color-bg-light)',
+                borderRadius: 'var(--radius-lg)',
+                border: '1px solid var(--color-border)',
+                overflow: 'hidden',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'space-between',
+              }}
+            >
+              <div>
+                <div style={{ height: '220px', overflow: 'hidden', position: 'relative' }}>
+                  <img
+                    src="/assets/images/research/rnd-laboratory-research.webp"
+                    alt="Salas Pharma analytical testing and chromatographic assay verification"
+                    loading="lazy"
+                    decoding="async"
+                    width={640}
+                    height={220}
+                    style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                  />
+                  <div
+                    style={{
+                      position: 'absolute',
+                      top: '1rem',
+                      left: '1rem',
+                      backgroundColor: 'rgba(7, 29, 54, 0.85)',
+                      color: '#38BDF8',
+                      fontSize: '0.75rem',
+                      fontWeight: 800,
+                      padding: '0.3rem 0.75rem',
+                      borderRadius: '9999px',
+                      backdropFilter: 'blur(4px)',
+                      letterSpacing: '0.08em',
+                      textTransform: 'uppercase',
+                    }}
+                  >
+                    Analytical Controls
+                  </div>
+                </div>
+
+                <div style={{ padding: '2rem' }}>
+                  <h3 style={{ fontSize: '1.35rem', fontWeight: 800, color: 'var(--color-navy)', marginBottom: '0.75rem' }}>
+                    Laboratories & Science
+                  </h3>
+                  <p style={{ fontSize: '0.9375rem', color: 'var(--color-text-body)', lineHeight: 1.65, margin: 0 }}>
+                    Advanced analytical instrumentation, HPLC purity verification, multi-stage dissolution profiling, and continuous Zone IVb stability testing ensure every released lot adheres strictly to pharmacopeial monographs.
+                  </p>
+                </div>
+              </div>
+
+              <div style={{ padding: '0 2rem 2rem 2rem' }}>
+                <button
+                  type="button"
+                  onClick={() => onNavigate('laboratories')}
+                  className="btn btn-secondary"
+                  style={{ width: '100%', justifyContent: 'center' }}
+                >
+                  <span>Discover Laboratory Controls</span>
+                  <ArrowRight size={15} />
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* ====================================================================
           SECTION 4: MILESTONES IN PHARMACEUTICAL EXCELLENCE

@@ -4,7 +4,7 @@ import { VIDEO_ASSETS, MEDIA_CONFIG, PAGE_HERO_IMAGES } from '../config/assets';
 import { BrandedVideo } from '../components/common/BrandedVideo';
 import { ScientificNetworkArtwork } from '../components/common/ScientificNetworkArtwork';
 import { MolecularBackground } from '../components/common/MolecularBackground';
-import { ScrollWordReveal } from '../components/common/ScrollWordReveal';
+
 import { SignatureClosingStatement } from '../components/common/SignatureClosingStatement';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 
@@ -105,14 +105,6 @@ export const ResearchPage: React.FC<ResearchPageProps> = ({ onNavigate }) => {
           </div>
         </div>
       </section>
-
-      {/* 2. DEDICATED SCROLL-CONTROLLED STORYTELLING SECTION (PINNED ON DESKTOP) */}
-      <ScrollWordReveal
-        pinnedStorytelling={true}
-        eyebrow="Formulation Discipline"
-        text="A pharmaceutical molecule is only as effective as its delivery mechanism. Through systematic polymer selection, dissolution kinetics, and degradation pathway studies, our science team turns active chemical entities into stable, dependable finished medicines."
-        highlightWords={['delivery', 'polymer', 'dissolution', 'kinetics', 'degradation', 'dependable', 'medicines']}
-      />
 
       {/* 3. EDITORIAL R&D PRESENTATION */}
       <section className="section-spacing">

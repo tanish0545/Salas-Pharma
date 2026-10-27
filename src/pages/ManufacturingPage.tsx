@@ -5,7 +5,7 @@ import { BrandedVideo } from '../components/common/BrandedVideo';
 import { QualitySeal } from '../components/common/QualitySeal';
 import { ScientificNetworkArtwork } from '../components/common/ScientificNetworkArtwork';
 import { MolecularBackground } from '../components/common/MolecularBackground';
-import { ScrollWordReveal } from '../components/common/ScrollWordReveal';
+
 import { SignatureClosingStatement } from '../components/common/SignatureClosingStatement';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 
@@ -134,14 +134,6 @@ export const ManufacturingPage: React.FC<ManufacturingPageProps> = ({ onNavigate
           </div>
         </div>
       </section>
-
-      {/* 2. DEDICATED SCROLL-CONTROLLED STORYTELLING SECTION (PINNED ON DESKTOP) */}
-      <ScrollWordReveal
-        pinnedStorytelling={true}
-        eyebrow="cGMP Operational Integrity"
-        text="Manufacturing integrity requires absolute repeatability. In our Sikkim production suites, environmental temperature, relative humidity, and air pressure differentials are monitored continuously, ensuring that every tablet and capsule meets uncompromised pharmacopeial criteria."
-        highlightWords={['repeatability', 'Sikkim', 'temperature', 'humidity', 'uncompromised', 'pharmacopeial']}
-      />
 
       {/* 3. SOUTH SIKKIM FACILITY SPOTLIGHT */}
       <section className="section-spacing">

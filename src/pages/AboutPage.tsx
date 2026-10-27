@@ -26,13 +26,14 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
   return (
     <div className="about-page" style={{ marginTop: 'var(--header-height)', backgroundColor: '#FFFFFF' }}>
       
-      {/* 1. EDITORIAL PAGE HERO WITH STATIC HERO PHOTOGRAPHY */}
+      {/* 1. EDITORIAL PAGE HERO WITH DEDICATED HERO PHOTOGRAPHY */}
       <section className="page-hero-banner" style={{ position: 'relative', overflow: 'hidden', backgroundColor: 'var(--color-navy)', color: '#FFFFFF', minHeight: '440px', display: 'flex', alignItems: 'center' }}>
         <img
           src={PAGE_HERO_IMAGES.about.image}
           alt={PAGE_HERO_IMAGES.about.alt}
           width={1920}
           height={1080}
+          fetchPriority="high"
           decoding="async"
           style={{
             position: 'absolute',
@@ -49,8 +50,9 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
           style={{
             position: 'absolute',
             inset: 0,
-            background: 'linear-gradient(to right, rgba(11, 37, 69, 0.94) 0%, rgba(11, 37, 69, 0.85) 45%, rgba(11, 37, 69, 0.45) 100%)',
+            background: 'linear-gradient(to right, rgba(7, 29, 54, 0.94) 0%, rgba(7, 29, 54, 0.85) 45%, rgba(7, 29, 54, 0.45) 100%)',
             zIndex: 2,
+            pointerEvents: 'none',
           }}
         />
         {/* Restrained Molecular Network Graphic along edge */}
