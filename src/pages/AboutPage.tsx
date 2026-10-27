@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import { Award, Target, Eye, Calendar, MapPin, Building2, Copy, Check } from 'lucide-react';
+import { Award, Target, Eye, MapPin, Building2, Copy, Check } from 'lucide-react';
 import { MEDIA_CONFIG, PAGE_HERO_IMAGES } from '../config/assets';
 import { AnimatedCounter } from '../components/common/AnimatedCounter';
 import { ScientificNetworkArtwork } from '../components/common/ScientificNetworkArtwork';
-import { MolecularBackground } from '../components/common/MolecularBackground';
 import { ScrollWordReveal } from '../components/common/ScrollWordReveal';
 import { SignatureClosingStatement } from '../components/common/SignatureClosingStatement';
+import { CorePhilosophyCard } from '../components/common/CorePhilosophyCard';
+import { CompanyTimeline } from '../components/common/CompanyTimeline';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 
 interface AboutPageProps {
@@ -21,33 +22,6 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
     setCopiedLocation(loc);
     setTimeout(() => setCopiedLocation(null), 2500);
   };
-
-  const timelineEvents = [
-    {
-      year: '2009',
-      title: 'Foundation & Incorporation',
-      desc: 'Salas Pharma was established in Gujarat, India, with the foundational pledge: "Success Lies in Commitment." Began marketing finished oral dosage pharmaceuticals.',
-      tag: 'Genesis',
-    },
-    {
-      year: '2014',
-      title: 'Therapeutic & Distribution Scaling',
-      desc: 'Expanded regional supply chain alliances across North, West, and Eastern India, introducing specialized portfolios in Gastroenterology, Antibacterials, and Pain Management.',
-      tag: 'Expansion',
-    },
-    {
-      year: '2018',
-      title: 'Sikkim Manufacturing Plant Commissioning',
-      desc: 'Commissioned dedicated manufacturing facility in Mamring, South Sikkim, featuring modern cleanroom air-handling units, high-speed tablet compression, and automated packaging lines.',
-      tag: 'Infrastructure',
-    },
-    {
-      year: 'Present',
-      title: '8 Core Therapeutic Segments & Quality Assurance',
-      desc: 'Operating comprehensive quality control laboratories with analytical assay, dissolution kinetics, and continuous stability monitoring serving healthcare providers nationwide.',
-      tag: 'Operations',
-    },
-  ];
 
   return (
     <div className="about-page" style={{ marginTop: 'var(--header-height)', backgroundColor: '#FFFFFF' }}>
@@ -110,52 +84,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
       </section>
 
       {/* 2. RESTORED CORE PHILOSOPHY SECTION (Directly below About Hero) */}
-      <section 
-        className="about-philosophy-section"
-        aria-label="SALAS Pharma Core Philosophy"
-      >
-        {/* Softly blurred abstract laboratory/scientific background */}
-        <img
-          src={MEDIA_CONFIG.research.formulationImage || "/assets/images/research/laboratory-research.webp"}
-          alt=""
-          aria-hidden="true"
-          className="about-philosophy-bg-media"
-          loading="lazy"
-          decoding="async"
-        />
-
-        {/* High-key translucent white overlay */}
-        <div className="about-philosophy-overlay" aria-hidden="true" />
-
-        {/* Subtle Cyclopentane Molecular Linework in Margins */}
-        <MolecularBackground variant="section" theme="light" opacity={0.28} position="split" />
-
-        <div className="container" style={{ position: 'relative', zIndex: 1, padding: '0 1.5rem' }}>
-          <div className="about-philosophy-card reveal-up">
-            <div className="about-philosophy-grid">
-              
-              {/* Left Column: Eyebrow + Primary Statement */}
-              <div className="about-philosophy-left">
-                <span className="about-philosophy-eyebrow">
-                  <span className="about-philosophy-eyebrow-dot" aria-hidden="true" />
-                  OUR CORE PHILOSOPHY
-                </span>
-                <h2 className="about-philosophy-statement">
-                  &ldquo;Success Lies in Commitment.&rdquo;
-                </h2>
-              </div>
-
-              {/* Right Column: Supporting Mission Statement */}
-              <div className="about-philosophy-right">
-                <p className="about-philosophy-desc">
-                  Founded on the belief that enduring success stems from an uncompromising dedication to patient wellness, therapeutic quality, and professional integrity.
-                </p>
-              </div>
-
-            </div>
-          </div>
-        </div>
-      </section>
+      <CorePhilosophyCard />
 
       {/* 3. DEDICATED SCROLL-CONTROLLED STORYTELLING SECTION (PINNED ON DESKTOP) */}
       <ScrollWordReveal
@@ -251,98 +180,8 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
         </div>
       </section>
 
-      {/* 4. INTERACTIVE HERITAGE TIMELINE */}
-      <section className="section-spacing" style={{ backgroundColor: 'var(--color-bg-light)', borderTop: '1px solid var(--color-border)' }}>
-        <div className="container">
-          <div className="section-header" style={{ textAlign: 'center', maxWidth: '720px', margin: '0 auto 4rem auto' }}>
-            <span className="section-eyebrow">
-              <Calendar size={14} /> Chronology of Growth
-            </span>
-            <h2 className="section-title">Milestones in Pharmaceutical Capability</h2>
-            <p className="section-description">
-              A timeline reflecting deliberate, structured growth grounded in operational stability and genuine capacity investment.
-            </p>
-          </div>
-
-          <div style={{ maxWidth: '860px', margin: '0 auto', position: 'relative' }}>
-            {/* Center line */}
-            <div 
-              style={{
-                position: 'absolute',
-                left: '28px',
-                top: '20px',
-                bottom: '20px',
-                width: '2px',
-                backgroundColor: 'rgba(20, 86, 160, 0.2)',
-              }}
-              aria-hidden="true"
-            />
-
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '2.5rem' }}>
-              {timelineEvents.map((evt, idx) => (
-                <div 
-                  key={evt.year} 
-                  className="reveal-up"
-                  style={{
-                    display: 'flex',
-                    alignItems: 'flex-start',
-                    gap: '2rem',
-                    position: 'relative',
-                  }}
-                >
-                  {/* Node icon */}
-                  <div 
-                    style={{
-                      width: '58px',
-                      height: '58px',
-                      borderRadius: '50%',
-                      backgroundColor: idx === 0 ? 'var(--color-accent)' : idx === 2 ? 'var(--color-primary-blue)' : '#FFFFFF',
-                      color: idx === 0 || idx === 2 ? '#FFFFFF' : 'var(--color-primary)',
-                      border: '3px solid var(--color-primary)',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      fontWeight: 800,
-                      fontSize: '0.85rem',
-                      flexShrink: 0,
-                      zIndex: 2,
-                      boxShadow: '0 4px 12px rgba(11, 37, 69, 0.12)',
-                    }}
-                  >
-                    {evt.year}
-                  </div>
-
-                  {/* Content card */}
-                  <div 
-                    style={{
-                      flex: 1,
-                      backgroundColor: '#FFFFFF',
-                      borderRadius: 'var(--radius-lg)',
-                      padding: '2rem 2.25rem',
-                      border: '1px solid var(--color-border)',
-                      boxShadow: 'var(--shadow-sm)',
-                      transition: 'transform 0.25s ease, box-shadow 0.25s ease',
-                    }}
-                    className="interactive-card"
-                  >
-                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.75rem', flexWrap: 'wrap', gap: '0.5rem' }}>
-                      <h3 style={{ fontSize: '1.25rem', color: 'var(--color-navy)', margin: 0, fontWeight: 700 }}>
-                        {evt.title}
-                      </h3>
-                      <span style={{ fontSize: '0.75rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em', padding: '0.25rem 0.65rem', borderRadius: '100px', backgroundColor: 'rgba(20, 86, 160, 0.08)', color: 'var(--color-primary-blue)' }}>
-                        {evt.tag}
-                      </span>
-                    </div>
-                    <p style={{ margin: 0, color: 'var(--color-text-body)', lineHeight: 1.65, fontSize: '0.975rem' }}>
-                      {evt.desc}
-                    </p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* 4. CHRONOLOGICAL HERITAGE TIMELINE */}
+      <CompanyTimeline />
 
       {/* 5. STRATEGIC HUBS (VADODARA HQ & SIKKIM PLANT) */}
       <section className="section-spacing" style={{ borderTop: '1px solid var(--color-border)' }}>

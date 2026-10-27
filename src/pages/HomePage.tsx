@@ -24,6 +24,8 @@ import { QualitySeal } from '../components/common/QualitySeal';
 import { AnimatedCounter } from '../components/common/AnimatedCounter';
 import { MolecularBackground } from '../components/common/MolecularBackground';
 import { SignatureClosingStatement } from '../components/common/SignatureClosingStatement';
+import { CorePhilosophyCard } from '../components/common/CorePhilosophyCard';
+import { CompanyTimeline } from '../components/common/CompanyTimeline';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 
 interface HomePageProps {
@@ -177,7 +179,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, isLoaderComplete
             {/* Eyebrow */}
             <div className="hero-hybrid-eyebrow">
               <span className="hero-hybrid-eyebrow-dot" aria-hidden="true" />
-              <span>SCIENCE · QUALITY · COMMITMENT</span>
+              <span>SALAS PHARMACEUTICALS PVT. LTD.</span>
             </div>
 
             {/* Headline with Cyan Highlight */}
@@ -473,7 +475,19 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, isLoaderComplete
       </section>
 
       {/* ====================================================================
-          SECTION 3: THERAPEUTIC AREAS & PRODUCTS (SECTION 5.3)
+          SECTION 3: OUR CORE PHILOSOPHY
+          Clean, elegant card grounding corporate integrity and commitment
+          ==================================================================== */}
+      <CorePhilosophyCard />
+
+      {/* ====================================================================
+          SECTION 4: MILESTONES IN PHARMACEUTICAL EXCELLENCE
+          Alternating central vertical timeline tracing company growth
+          ==================================================================== */}
+      <CompanyTimeline />
+
+      {/* ====================================================================
+          SECTION 5: THERAPEUTIC AREAS & PRODUCTS (SECTION 5.3)
           Distinct image-led composition entering from the RIGHT.
           Alternating sequence step 2: RIGHT
           ==================================================================== */}
@@ -740,6 +754,8 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, isLoaderComplete
                   muted={true}
                   loop={true}
                   playsInline={true}
+                  preload="none"
+                  priority={false}
                   ariaLabel={VIDEO_ASSETS.laboratoryHero.alt}
                   style={{ width: '100%', height: '440px', objectFit: 'cover' }}
                 />
@@ -1036,6 +1052,8 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, isLoaderComplete
                   muted={true}
                   loop={true}
                   playsInline={true}
+                  preload="none"
+                  priority={false}
                   ariaLabel={VIDEO_ASSETS.research.alt}
                   style={{ width: '100%', height: '460px', objectFit: 'cover' }}
                 />
@@ -1144,9 +1162,199 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, isLoaderComplete
       </section>
 
       {/* ====================================================================
-          SECTION 7: COMPANY CAPABILITIES & VERIFIED MILESTONES (SECTION 5.7)
+          SECTION 8: PRODUCT & PORTFOLIO DISCOVERY
+          Clean, verified bridge to the Products catalog showcasing approved dosage forms
+          ==================================================================== */}
+      <section className="section-spacing" style={{ backgroundColor: 'var(--color-bg-white)', borderBottom: '1px solid var(--color-border)' }}>
+        <div className="container">
+          <div className="section-header" style={{ textAlign: 'center', maxWidth: '720px', margin: '0 auto 3.5rem auto' }}>
+            <span
+              className="section-eyebrow"
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '0.45rem',
+                color: 'var(--color-primary-blue)',
+                fontWeight: 800,
+                fontSize: '0.8125rem',
+                letterSpacing: '0.12em',
+                textTransform: 'uppercase',
+                marginBottom: '0.75rem',
+              }}
+            >
+              <Pill size={14} /> Comprehensive Portfolio
+            </span>
+            <h2 className="section-title" style={{ fontSize: 'clamp(2rem, 3.2vw, 2.75rem)', fontWeight: 800, color: 'var(--color-navy)', marginBottom: '1rem' }}>
+              Formulations Engineered for Patient Wellness
+            </h2>
+            <p className="section-description" style={{ fontSize: '1.05rem', color: 'var(--color-text-body)', lineHeight: 1.65, maxWidth: '640px', margin: '0 auto' }}>
+              From immediate-release oral tablets and sustained-action capsules to oral suspensions, explore our diverse finished dosage forms manufactured under strict cGMP protocols.
+            </p>
+          </div>
+
+          {/* Authentic Finished Dosage Visual Showcase */}
+          <div
+            className="reveal-up"
+            style={{
+              marginBottom: '3rem',
+              borderRadius: 'var(--radius-xl)',
+              overflow: 'hidden',
+              boxShadow: 'var(--shadow-lg)',
+              border: '1px solid var(--color-border)',
+              maxHeight: '340px',
+              position: 'relative',
+            }}
+          >
+            <img
+              src="/assets/images/products/dosage-forms.webp"
+              alt="Salas Pharma finished oral dosage forms, blister packaging and capsules"
+              loading="lazy"
+              decoding="async"
+              width={1200}
+              height={340}
+              style={{ width: '100%', height: '340px', objectFit: 'cover' }}
+            />
+            <div
+              style={{
+                position: 'absolute',
+                bottom: 0,
+                insetInline: 0,
+                padding: '1.25rem 2rem',
+                background: 'linear-gradient(to top, rgba(7, 29, 54, 0.92) 0%, rgba(7, 29, 54, 0) 100%)',
+                color: '#FFFFFF',
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'flex-end',
+                flexWrap: 'wrap',
+                gap: '1rem',
+              }}
+            >
+              <div>
+                <span style={{ fontSize: '0.75rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.12em', color: '#38BDF8' }}>
+                  Finished Formulations
+                </span>
+                <h3 style={{ fontSize: '1.25rem', fontWeight: 700, margin: '0.25rem 0 0', color: '#FFFFFF' }}>
+                  Multi-Dose Tablets, Precision Micro-Pellet Capsules & Stable Suspensions
+                </h3>
+              </div>
+              <span style={{ fontSize: '0.85rem', color: '#E2E8F0', backgroundColor: 'rgba(255, 255, 255, 0.15)', padding: '0.35rem 0.85rem', borderRadius: '9999px', backdropFilter: 'blur(4px)' }}>
+                Schedule M & cGMP Compliant
+              </span>
+            </div>
+          </div>
+
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '1.75rem', marginBottom: '3rem' }}>
+            {[
+              {
+                title: 'Solid Oral Tablets',
+                badge: 'Immediate & Sustained Release',
+                desc: 'Film-coated, enteric-coated, and modified-release tablets formulated for optimal bioavailability and therapeutic stability.',
+                icon: Pill,
+                action: 'Explore Tablets',
+              },
+              {
+                title: 'Hard Gelatin Capsules',
+                badge: 'Precision Micro-Pellets',
+                desc: 'Specialized encapsulation technology accommodating single and multi-particulate pellet formulations with precise drug delivery.',
+                icon: ShieldCheck,
+                action: 'Explore Capsules',
+              },
+              {
+                title: 'Oral Liquids & Suspensions',
+                badge: 'Homogeneous Delivery',
+                desc: 'Palatable, stable syrups and suspensions formulated to ensure uniform active ingredient distribution and rapid absorption.',
+                icon: FlaskConical,
+                action: 'Explore Liquids',
+              },
+              {
+                title: 'Sterile Injectables',
+                badge: 'Aseptic Processing',
+                desc: 'Precision hospital-care ampoules and vials processed in certified laminar airflow workstations meeting strict sterility assurance.',
+                icon: Activity,
+                action: 'Explore Injectables',
+              },
+            ].map((card, idx) => {
+              const CardIcon = card.icon;
+              return (
+                <div
+                  key={idx}
+                  className={`interactive-card reveal-up delay-${(idx + 1) * 100}`}
+                  style={{
+                    backgroundColor: 'var(--color-bg-light)',
+                    borderRadius: 'var(--radius-lg)',
+                    padding: '2rem 1.75rem',
+                    border: '1px solid var(--color-border)',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'space-between',
+                    cursor: 'pointer',
+                    transition: 'all 0.3s ease',
+                  }}
+                  onClick={() => onNavigate('products')}
+                  role="button"
+                  tabIndex={0}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      e.preventDefault();
+                      onNavigate('products');
+                    }
+                  }}
+                >
+                  <div>
+                    <div
+                      style={{
+                        width: '48px',
+                        height: '48px',
+                        borderRadius: 'var(--radius-sm)',
+                        backgroundColor: '#FFFFFF',
+                        border: '1px solid var(--color-border)',
+                        color: 'var(--color-primary-blue)',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        marginBottom: '1.25rem',
+                        boxShadow: 'var(--shadow-xs)',
+                      }}
+                    >
+                      <CardIcon size={24} />
+                    </div>
+                    <span style={{ fontSize: '0.75rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--color-accent)' }}>
+                      {card.badge}
+                    </span>
+                    <h3 style={{ fontSize: '1.25rem', fontWeight: 800, color: 'var(--color-navy)', marginTop: '0.35rem', marginBottom: '0.75rem' }}>
+                      {card.title}
+                    </h3>
+                    <p style={{ fontSize: '0.9rem', color: 'var(--color-text-body)', lineHeight: 1.6, margin: 0 }}>
+                      {card.desc}
+                    </p>
+                  </div>
+
+                  <div style={{ marginTop: '1.75rem', display: 'flex', alignItems: 'center', gap: '0.45rem', fontSize: '0.875rem', fontWeight: 700, color: 'var(--color-primary-blue)' }}>
+                    <span>{card.action}</span>
+                    <ArrowRight size={15} />
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+
+          <div style={{ textAlign: 'center' }}>
+            <button
+              type="button"
+              onClick={() => onNavigate('products')}
+              className="btn btn-primary"
+              style={{ padding: '0.9rem 2.25rem', fontSize: '1rem' }}
+            >
+              <span>View Complete Pharmaceutical Catalogue</span>
+              <ArrowRight size={17} />
+            </button>
+          </div>
+        </div>
+      </section>
+
+      {/* ====================================================================
+          SECTION 9: WHY SALAS PHARMA (CORPORATE FOUNDATIONS & CAPABILITIES)
           Balanced row of useful features and verified figures entering from RIGHT.
-          Alternating sequence step 6: RIGHT
           ==================================================================== */}
       <section className="section-spacing" style={{ position: 'relative', overflow: 'hidden', backgroundColor: 'var(--color-bg-light)', borderBottom: '1px solid var(--color-border)' }}>
         {/* Subtle Cyclopentane Molecular Linework Background */}
@@ -1214,10 +1422,15 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, isLoaderComplete
       </section>
 
       {/* ====================================================================
-          SECTION 8: SIGNATURE CLOSING EXPERIENCE & CONTACT CTA (SECTION 5.8)
-          High-end editorial stage: "Better Healthcare. Built on Commitment."
+          SECTION 10: SIGNATURE CLOSING EXPERIENCE & CONTACT CTA
+          High-end editorial stage: "Every Step. A Commitment to Better Healthcare."
           ==================================================================== */}
-      <SignatureClosingStatement onNavigate={onNavigate} />
+      <SignatureClosingStatement
+        headline1="Every Step."
+        headline2="A Commitment to Better Healthcare."
+        subtext="Driven by pharmaceutical excellence, we manufacture and deliver high-quality finished dosage products for a healthier tomorrow. Connect with our corporate office or explore healthcare distribution opportunities nationwide."
+        onNavigate={onNavigate}
+      />
     </div>
   );
 };

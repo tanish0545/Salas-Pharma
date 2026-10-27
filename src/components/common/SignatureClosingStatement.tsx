@@ -3,6 +3,13 @@ import { ArrowRight, ShieldCheck } from 'lucide-react';
 
 interface SignatureClosingStatementProps {
   onNavigate: (route: string) => void;
+  headline1?: string;
+  headline2?: string;
+  subtext?: string;
+  primaryCtaText?: string;
+  primaryCtaRoute?: string;
+  secondaryCtaText?: string;
+  secondaryCtaRoute?: string;
 }
 
 /**
@@ -12,14 +19,23 @@ interface SignatureClosingStatementProps {
  * Inspired by high-end digital storytelling & minimal editorial closing statements.
  * Original to SALAS Pharma:
  * - Generous full-width editorial stage with ample negative space.
- * - Bold, memorable editorial statement: "Better Healthcare. Built on Commitment."
+ * - Bold, memorable editorial statement: "Better Healthcare. Built on Commitment." or "Every Step. A Commitment to Better Healthcare."
  * - Centered 45° tilted pharmaceutical capsule motif and fine brand-red accent underline.
  * - Smooth, non-trapping scroll reveal with mask/opacity transition.
  * - Clear supporting sentence and dual high-conversion CTAs.
  * - Seamless natural transition into the light corporate footer.
  * - 100% accessible, responsive, and honors prefers-reduced-motion.
  */
-export const SignatureClosingStatement: React.FC<SignatureClosingStatementProps> = ({ onNavigate }) => {
+export const SignatureClosingStatement: React.FC<SignatureClosingStatementProps> = ({
+  onNavigate,
+  headline1 = 'Better Healthcare.',
+  headline2 = 'Built on Commitment.',
+  subtext,
+  primaryCtaText = 'Connect With Our Team',
+  primaryCtaRoute = 'contact',
+  secondaryCtaText = 'Explore Products Portfolio',
+  secondaryCtaRoute = 'products',
+}) => {
   const sectionRef = useRef<HTMLElement>(null);
   const [isRevealed, setIsRevealed] = useState<boolean>(() => {
     if (typeof window !== 'undefined') {
@@ -148,37 +164,43 @@ export const SignatureClosingStatement: React.FC<SignatureClosingStatementProps>
 
           {/* Large Editorial Centered Statement */}
           <h2 className="signature-closing-statement reveal-elem">
-            <span className="statement-line">Better Healthcare.</span>
+            <span className="statement-line">{headline1}</span>
             <span className="statement-line statement-highlight">
-              Built on Commitment.
+              {headline2}
               <span className="statement-underline" aria-hidden="true" />
             </span>
           </h2>
 
           {/* Compact Verified Supporting Sentence */}
           <p className="signature-closing-subtext reveal-elem">
-            <em>“Success Lies in Commitment.”</em> From our dedicated Sikkim cleanrooms to a pan-India supply network, we formulate, manufacture, and deliver essential medicines with scientific precision and uncompromising quality.
+            {subtext ? (
+              subtext
+            ) : (
+              <>
+                <em>“Success Lies in Commitment.”</em> From our dedicated Sikkim cleanrooms to a pan-India supply network, we formulate, manufacture, and deliver essential medicines with scientific precision and uncompromising quality.
+              </>
+            )}
           </p>
 
           {/* Action CTAs */}
           <div className="signature-closing-actions reveal-elem">
             <button
               type="button"
-              onClick={() => onNavigate('contact')}
+              onClick={() => onNavigate(primaryCtaRoute)}
               className="btn btn-primary signature-btn-primary"
-              aria-label="Connect with SALAS corporate team"
+              aria-label={primaryCtaText}
             >
-              <span>Connect With Our Team</span>
+              <span>{primaryCtaText}</span>
               <ArrowRight size={17} />
             </button>
 
             <button
               type="button"
-              onClick={() => onNavigate('products')}
+              onClick={() => onNavigate(secondaryCtaRoute)}
               className="btn btn-secondary signature-btn-secondary"
-              aria-label="Explore SALAS pharmaceutical products"
+              aria-label={secondaryCtaText}
             >
-              <span>Explore Products Portfolio</span>
+              <span>{secondaryCtaText}</span>
             </button>
           </div>
 
