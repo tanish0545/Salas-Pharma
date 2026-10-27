@@ -63,6 +63,10 @@ export const CapsuleCursor: React.FC = () => {
 
     const mouse = { x: -100, y: -100 };
     const lastMouse = { x: -100, y: -100 };
+    let magnetTargetX = 0;
+    let magnetTargetY = 0;
+    let currentX = -100;
+    let currentY = -100;
     let currentTilt = -45;
     let targetTilt = -45;
     let currentPitch = 0;
@@ -83,6 +87,8 @@ export const CapsuleCursor: React.FC = () => {
 
       if (!isVisible) {
         isVisible = true;
+        currentX = mouse.x;
+        currentY = mouse.y;
         container.classList.add('is-visible');
         lastMouse.x = mouse.x;
         lastMouse.y = mouse.y;
@@ -107,25 +113,42 @@ export const CapsuleCursor: React.FC = () => {
       );
       if (isTextInput) {
         container.classList.add('is-text-mode');
+        magnetTargetX = 0;
+        magnetTargetY = 0;
       } else {
         container.classList.remove('is-text-mode');
       }
 
-      // 2. Interactive targets: links, buttons, action cards
-      const isInteractive = !!target.closest(
+      // 2. Interactive targets & subtle magnetic attraction
+      const interactiveEl = target.closest<HTMLElement>(
         'a, button, [role="button"], input[type="submit"], input[type="button"], .btn, .pharma-card, .interactive-card, .therapeutic-card, .nav-link-item, .clickable'
       );
-      if (isInteractive) {
+      if (interactiveEl && !isTextInput) {
         cursor.classList.add('cursor-hovered');
+        const rect = interactiveEl.getBoundingClientRect();
+        // Subtle magnetic pull toward center of compact interactive buttons/links (capped at 6px)
+        if (rect.width < 280 && rect.height < 90) {
+          const centerX = rect.left + rect.width / 2;
+          const centerY = rect.top + rect.height / 2;
+          const pullX = (centerX - mouse.x) * 0.14;
+          const pullY = (centerY - mouse.y) * 0.14;
+          magnetTargetX = Math.max(-6, Math.min(6, pullX));
+          magnetTargetY = Math.max(-6, Math.min(6, pullY));
+        } else {
+          magnetTargetX = 0;
+          magnetTargetY = 0;
+        }
       } else {
         cursor.classList.remove('cursor-hovered');
+        magnetTargetX = 0;
+        magnetTargetY = 0;
       }
 
       // 3. Hero / scientific sections: subtle scientific halo
       const isHero = !!target.closest(
         '.hero-option5-section, .page-hero-banner, .laboratory-hero-section'
       );
-      if (isHero && !isInteractive) {
+      if (isHero && !interactiveEl) {
         cursor.classList.add('cursor-hero-hover');
       } else {
         cursor.classList.remove('cursor-hero-hover');
@@ -182,14 +205,19 @@ export const CapsuleCursor: React.FC = () => {
 
     // 60/120fps direct hardware-accelerated transform loop
     const render = () => {
-      // 1. Direct instantaneous positioning eliminates any drag lag behind the mouse
-      cursor.style.transform = `translate3d(${mouse.x}px, ${mouse.y}px, 0)`;
+      // 1. Instantaneous positioning with subtle magnetic attraction near interactive elements
+      const targetPosX = mouse.x + magnetTargetX;
+      const targetPosY = mouse.y + magnetTargetY;
+      currentX += (targetPosX - currentX) * 0.85;
+      currentY += (targetPosY - currentY) * 0.85;
+      cursor.style.transform = `translate3d(${currentX.toFixed(1)}px, ${currentY.toFixed(1)}px, 0)`;
 
       // 2. Physics-based smooth settling of directional tilt
       currentTilt += (targetTilt - currentTilt) * 0.22;
       currentPitch += (targetPitch - currentPitch) * 0.22;
       // Decay target tilt back to -45° base orientation when stationary
       targetTilt += (-45 - targetTilt) * 0.08;
+      targetPitch += (0 - targetPitch) * 0.08;
       targetPitch += (0 - targetPitch) * 0.08;
 
       if (rotator) {

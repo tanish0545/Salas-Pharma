@@ -55,16 +55,26 @@
   --font-interface: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
 
   /* Fluid Responsive Typography Scale (clamp) */
-  --font-size-display: clamp(2.75rem, 5vw, 4.25rem);      /* Hero display titles (44px - 68px) */
-  --font-size-h1: clamp(2.2rem, 3.8vw, 3.25rem);           /* Page H1 headings (35px - 52px) */
-  --font-size-h2: clamp(1.75rem, 2.6vw, 2.4rem);           /* Section H2 headings (28px - 38px) */
-  --font-size-h3: clamp(1.25rem, 1.8vw, 1.6rem);           /* Subsection & Card H3 (20px - 26px) */
-  --font-size-h4: clamp(1.05rem, 1.3vw, 1.25rem);          /* Subheadings H4 (17px - 20px) */
-  --font-size-lead: clamp(1.0625rem, 1.35vw, 1.25rem);     /* Lead intro paragraph (17px - 20px) */
-  --font-size-body: clamp(0.9375rem, 1.05vw, 1.0625rem);   /* Primary body text (15px - 17px) */
-  --font-size-body-sm: 0.875rem;                          /* Secondary body & metadata (14px) */
-  --font-size-caption: 0.8125rem;                          /* Eyebrows, badges, labels (13px) */
-  --font-size-micro: 0.75rem;                              /* Micro captions & timestamps (12px) */
+  --font-size-display: clamp(2.75rem, 5vw, 4.25rem);
+  /* Hero display titles (44px - 68px) */
+  --font-size-h1: clamp(2.2rem, 3.8vw, 3.25rem);
+  /* Page H1 headings (35px - 52px) */
+  --font-size-h2: clamp(1.75rem, 2.6vw, 2.4rem);
+  /* Section H2 headings (28px - 38px) */
+  --font-size-h3: clamp(1.25rem, 1.8vw, 1.6rem);
+  /* Subsection & Card H3 (20px - 26px) */
+  --font-size-h4: clamp(1.05rem, 1.3vw, 1.25rem);
+  /* Subheadings H4 (17px - 20px) */
+  --font-size-lead: clamp(1.0625rem, 1.35vw, 1.25rem);
+  /* Lead intro paragraph (17px - 20px) */
+  --font-size-body: clamp(0.9375rem, 1.05vw, 1.0625rem);
+  /* Primary body text (15px - 17px) */
+  --font-size-body-sm: 0.875rem;
+  /* Secondary body & metadata (14px) */
+  --font-size-caption: 0.8125rem;
+  /* Eyebrows, badges, labels (13px) */
+  --font-size-micro: 0.75rem;
+  /* Micro captions & timestamps (12px) */
 
   /* Line Heights */
   --leading-tight: 1.15;
@@ -101,7 +111,9 @@
 }
 
 /* Base Reset */
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -133,7 +145,12 @@ body {
 }
 
 /* Typography Standards */
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   color: var(--color-text-heading);
   font-family: var(--font-sans);
   font-weight: 700;
@@ -141,10 +158,29 @@ h1, h2, h3, h4, h5, h6 {
   letter-spacing: var(--tracking-tight);
 }
 
-h1 { font-size: var(--font-size-h1); font-weight: 800; letter-spacing: var(--tracking-tightest); }
-h2 { font-size: var(--font-size-h2); font-weight: 800; letter-spacing: var(--tracking-tight); }
-h3 { font-size: var(--font-size-h3); font-weight: 700; letter-spacing: var(--tracking-snug); }
-h4 { font-size: var(--font-size-h4); font-weight: 600; letter-spacing: var(--tracking-snug); }
+h1 {
+  font-size: var(--font-size-h1);
+  font-weight: 800;
+  letter-spacing: var(--tracking-tightest);
+}
+
+h2 {
+  font-size: var(--font-size-h2);
+  font-weight: 800;
+  letter-spacing: var(--tracking-tight);
+}
+
+h3 {
+  font-size: var(--font-size-h3);
+  font-weight: 700;
+  letter-spacing: var(--tracking-snug);
+}
+
+h4 {
+  font-size: var(--font-size-h4);
+  font-weight: 600;
+  letter-spacing: var(--tracking-snug);
+}
 
 /* Luxury Editorial Typography Utility Classes */
 .font-display {
@@ -173,7 +209,9 @@ p {
   line-height: var(--leading-body);
 }
 
-p:last-child { margin-bottom: 0; }
+p:last-child {
+  margin-bottom: 0;
+}
 
 .lead-text {
   font-size: var(--font-size-lead);
@@ -187,13 +225,17 @@ a {
   transition: color var(--transition-fast);
 }
 
-img, video {
+img,
+video {
   max-width: 100%;
   height: auto;
   display: block;
 }
 
-button, input, textarea, select {
+button,
+input,
+textarea,
+select {
   font-family: inherit;
   font-size: inherit;
 }
@@ -409,6 +451,7 @@ button, input, textarea, select {
 }
 
 @media (max-width: 768px) {
+
   .reveal-left,
   .reveal-right {
     transform: translateY(18px);
@@ -416,12 +459,29 @@ button, input, textarea, select {
   }
 }
 
-.delay-100 { transition-delay: 100ms; }
-.delay-150 { transition-delay: 150ms; }
-.delay-200 { transition-delay: 200ms; }
-.delay-300 { transition-delay: 300ms; }
-.delay-400 { transition-delay: 400ms; }
-.delay-500 { transition-delay: 500ms; }
+.delay-100 {
+  transition-delay: 100ms;
+}
+
+.delay-150 {
+  transition-delay: 150ms;
+}
+
+.delay-200 {
+  transition-delay: 200ms;
+}
+
+.delay-300 {
+  transition-delay: 300ms;
+}
+
+.delay-400 {
+  transition-delay: 400ms;
+}
+
+.delay-500 {
+  transition-delay: 500ms;
+}
 
 /* Image Hover Zoom Container */
 .img-zoom-wrapper {
@@ -472,7 +532,8 @@ button, input, textarea, select {
   width: 50.5vw;
   height: 100vh;
   height: 100dvh;
-  background: #FFFFFF; /* Pure clean white background */
+  background: #FFFFFF;
+  /* Pure clean white background */
   z-index: 10;
   box-shadow: none;
   border: none;
@@ -613,8 +674,15 @@ button, input, textarea, select {
 }
 
 @keyframes floatMolTop {
-  0% { transform: translateY(16px); opacity: 0; }
-  100% { transform: translateY(-4px); opacity: 1; }
+  0% {
+    transform: translateY(16px);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateY(-4px);
+    opacity: 1;
+  }
 }
 
 .molecular-cluster.cluster-bottom {
@@ -622,23 +690,51 @@ button, input, textarea, select {
 }
 
 @keyframes floatMolBottom {
-  0% { transform: translateY(-16px); opacity: 0; }
-  100% { transform: translateY(4px); opacity: 1; }
+  0% {
+    transform: translateY(-16px);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateY(4px);
+    opacity: 1;
+  }
 }
 
-.particle-float-1 { animation: floatSubtle1 1.8s ease-in-out infinite alternate; }
-.particle-float-2 { animation: floatSubtle2 1.8s ease-in-out infinite alternate; }
-.particle-float-3 { animation: floatSubtle1 2.2s ease-in-out infinite alternate; }
-.particle-float-4 { animation: floatSubtle2 2.2s ease-in-out infinite alternate; }
+.particle-float-1 {
+  animation: floatSubtle1 1.8s ease-in-out infinite alternate;
+}
+
+.particle-float-2 {
+  animation: floatSubtle2 1.8s ease-in-out infinite alternate;
+}
+
+.particle-float-3 {
+  animation: floatSubtle1 2.2s ease-in-out infinite alternate;
+}
+
+.particle-float-4 {
+  animation: floatSubtle2 2.2s ease-in-out infinite alternate;
+}
 
 @keyframes floatSubtle1 {
-  from { transform: translateY(0); }
-  to { transform: translateY(-4px); }
+  from {
+    transform: translateY(0);
+  }
+
+  to {
+    transform: translateY(-4px);
+  }
 }
 
 @keyframes floatSubtle2 {
-  from { transform: translateY(0); }
-  to { transform: translateY(4px); }
+  from {
+    transform: translateY(0);
+  }
+
+  to {
+    transform: translateY(4px);
+  }
 }
 
 /* Dispersing Red & Blue Scientific Particles (Concept Board Panel 2) */
@@ -652,15 +748,37 @@ button, input, textarea, select {
   opacity: 0.85;
 }
 
-.scientific-active .p-left-1 { transform: translate(-28px, -18px); }
-.scientific-active .p-left-2 { transform: translate(-42px, 16px); }
-.scientific-active .p-left-3 { transform: translate(-54px, -24px); }
-.scientific-active .p-left-4 { transform: translate(-65px, 8px); }
+.scientific-active .p-left-1 {
+  transform: translate(-28px, -18px);
+}
 
-.scientific-active .p-right-1 { transform: translate(28px, -18px); }
-.scientific-active .p-right-2 { transform: translate(42px, 16px); }
-.scientific-active .p-right-3 { transform: translate(54px, -24px); }
-.scientific-active .p-right-4 { transform: translate(65px, 8px); }
+.scientific-active .p-left-2 {
+  transform: translate(-42px, 16px);
+}
+
+.scientific-active .p-left-3 {
+  transform: translate(-54px, -24px);
+}
+
+.scientific-active .p-left-4 {
+  transform: translate(-65px, 8px);
+}
+
+.scientific-active .p-right-1 {
+  transform: translate(28px, -18px);
+}
+
+.scientific-active .p-right-2 {
+  transform: translate(42px, 16px);
+}
+
+.scientific-active .p-right-3 {
+  transform: translate(54px, -24px);
+}
+
+.scientific-active .p-right-4 {
+  transform: translate(65px, 8px);
+}
 
 /* ==========================================================================
    CUSTOM CAPSULE CURSOR (CONCEPT BOARD PANEL 3)
@@ -673,6 +791,7 @@ button, input, textarea, select {
    ========================================================================== */
 
 @media (hover: hover) and (pointer: fine) {
+
   html.has-capsule-cursor,
   html.has-capsule-cursor body,
   html.has-capsule-cursor a,
@@ -701,10 +820,12 @@ button, input, textarea, select {
 }
 
 /* Completely hide custom capsule cursor on touch devices or coarse pointers */
-@media (pointer: coarse), (hover: none) {
+@media (pointer: coarse),
+(hover: none) {
   .capsule-cursor-portal {
     display: none !important;
   }
+
   html.has-capsule-cursor,
   html.has-capsule-cursor body,
   html.has-capsule-cursor * {
@@ -783,6 +904,7 @@ button, input, textarea, select {
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
@@ -825,6 +947,7 @@ button, input, textarea, select {
     transform: scale(0.4);
     border-color: rgba(229, 36, 42, 0.8);
   }
+
   100% {
     opacity: 0;
     transform: scale(1.6);
@@ -837,6 +960,7 @@ button, input, textarea, select {
   .cursor-orbit-ring {
     animation: none !important;
   }
+
   .capsule-cursor-svg,
   .capsule-cursor-body {
     transition: none !important;
@@ -871,8 +995,13 @@ button, input, textarea, select {
 }
 
 @keyframes rotateClockwise {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 /* Stationary Core Emblem */
@@ -965,14 +1094,12 @@ button, input, textarea, select {
       rgba(4, 18, 33, 0.96) 0%,
       rgba(4, 18, 33, 0.90) 45%,
       rgba(5, 24, 44, 0.65) 75%,
-      rgba(5, 24, 44, 0.50) 100%
-    ),
+      rgba(5, 24, 44, 0.50) 100%),
     linear-gradient(180deg,
       rgba(4, 18, 33, 0.45) 0%,
       transparent 25%,
       transparent 75%,
-      rgba(4, 18, 33, 0.85) 100%
-    );
+      rgba(4, 18, 33, 0.85) 100%);
   pointer-events: none;
 }
 
@@ -1195,8 +1322,8 @@ button, input, textarea, select {
   box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.65), 0 0 16px -2px rgba(56, 189, 248, 0.15);
   background-color: #061D38;
   transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-              border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-              box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   cursor: pointer;
   /* Reset native button styles */
   padding: 0;
@@ -1267,12 +1394,10 @@ button, input, textarea, select {
 .hero-hybrid-panel-scrim {
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    180deg,
-    rgba(4, 18, 33, 0.05) 0%,
-    rgba(4, 18, 33, 0.35) 50%,
-    rgba(4, 18, 33, 0.92) 100%
-  );
+  background: linear-gradient(180deg,
+      rgba(4, 18, 33, 0.05) 0%,
+      rgba(4, 18, 33, 0.35) 50%,
+      rgba(4, 18, 33, 0.92) 100%);
   pointer-events: none;
 }
 
@@ -1328,14 +1453,17 @@ button, input, textarea, select {
     grid-template-columns: 1fr;
     gap: 3rem;
   }
+
   .hero-hybrid-content {
     max-width: 100%;
   }
+
   .hero-hybrid-gallery {
     max-width: 680px;
     margin: 0 auto;
     width: 100%;
   }
+
   .hero-hybrid-panel {
     height: 300px;
   }
@@ -1347,14 +1475,14 @@ button, input, textarea, select {
     min-height: auto;
     padding-top: 1rem;
   }
+
   .hero-hybrid-video-overlay {
-    background: linear-gradient(
-      180deg,
-      rgba(4, 18, 33, 0.96) 0%,
-      rgba(4, 18, 33, 0.92) 50%,
-      rgba(4, 18, 33, 0.98) 100%
-    );
+    background: linear-gradient(180deg,
+        rgba(4, 18, 33, 0.96) 0%,
+        rgba(4, 18, 33, 0.92) 50%,
+        rgba(4, 18, 33, 0.98) 100%);
   }
+
   .hero-hybrid-container {
     padding-top: 2rem;
     padding-bottom: 2.5rem;
@@ -1362,62 +1490,76 @@ button, input, textarea, select {
     padding-right: 1.25rem;
     gap: 2.25rem;
   }
+
   .hero-hybrid-heading {
     font-size: clamp(2rem, 6.5vw, 2.5rem);
   }
+
   .hero-hybrid-ctas {
     flex-direction: column;
     width: 100%;
     gap: 0.75rem;
   }
+
   .hero-hybrid-btn-primary,
   .hero-hybrid-btn-secondary {
     width: 100%;
     justify-content: center;
   }
+
   .hero-hybrid-highlights {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 0.75rem;
   }
+
   .hero-hybrid-highlight-divider {
     display: none;
   }
+
   .hero-hybrid-highlight-value {
     font-size: 1.15rem;
   }
+
   .hero-hybrid-highlight-label {
     font-size: 0.6875rem;
   }
+
   .hero-hybrid-gallery {
     grid-template-columns: 1fr;
     gap: 0.75rem;
     width: 100%;
     padding: 0.5rem 0;
   }
+
   .hero-hybrid-panel {
     height: 96px;
     transform: none !important;
     border-radius: 10px;
   }
+
   .hero-hybrid-panel:hover {
     transform: none !important;
   }
+
   .hero-hybrid-panel-1,
   .hero-hybrid-panel-2,
   .hero-hybrid-panel-3 {
     margin-top: 0;
     transform: none !important;
   }
+
   .hero-hybrid-panel-inner {
     transform: none !important;
   }
+
   .hero-hybrid-panel-caption {
     padding: 0.75rem 1rem;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
   }
+
   .hero-hybrid-panel-explore {
     opacity: 1;
     transform: none;
@@ -1428,6 +1570,7 @@ button, input, textarea, select {
   .hero-hybrid-panel {
     height: 90px;
   }
+
   .hero-hybrid-panel-title {
     font-size: 0.85rem;
   }
@@ -1439,9 +1582,11 @@ button, input, textarea, select {
     transition: none !important;
     transform: none !important;
   }
+
   .hero-hybrid-panel:hover {
     transform: none !important;
   }
+
   .hero-hybrid-panel-inner {
     transform: none !important;
   }
@@ -1494,14 +1639,12 @@ button, input, textarea, select {
 .hero-option5-video-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    to right,
-    rgba(5, 24, 44, 0.40) 0%,
-    rgba(5, 24, 44, 0.15) 30%,
-    transparent 50%,
-    transparent 85%,
-    rgba(5, 24, 44, 0.25) 100%
-  );
+  background: linear-gradient(to right,
+      rgba(5, 24, 44, 0.40) 0%,
+      rgba(5, 24, 44, 0.15) 30%,
+      transparent 50%,
+      transparent 85%,
+      rgba(5, 24, 44, 0.25) 100%);
   pointer-events: none;
 }
 
@@ -1521,6 +1664,7 @@ button, input, textarea, select {
   0% {
     clip-path: inset(0 100% 0 0);
   }
+
   100% {
     clip-path: inset(0 -30px 0 0);
   }
@@ -1534,12 +1678,10 @@ button, input, textarea, select {
   position: relative;
   width: 100%;
   height: 100%;
-  background: linear-gradient(
-    135deg,
-    rgba(4, 20, 36, 0.96) 0%,
-    rgba(7, 29, 54, 0.94) 45%,
-    rgba(11, 37, 68, 0.95) 100%
-  );
+  background: linear-gradient(135deg,
+      rgba(4, 20, 36, 0.96) 0%,
+      rgba(7, 29, 54, 0.94) 45%,
+      rgba(11, 37, 68, 0.95) 100%);
   clip-path: polygon(0 0, 100% 0, 85% 100%, 0 100%);
   display: flex;
   align-items: center;
@@ -1565,9 +1707,17 @@ button, input, textarea, select {
 }
 
 @keyframes heroChemFloat {
-  0% { transform: translateY(0) scale(1); }
-  50% { transform: translateY(-8px) scale(1.01); }
-  100% { transform: translateY(0) scale(1); }
+  0% {
+    transform: translateY(0) scale(1);
+  }
+
+  50% {
+    transform: translateY(-8px) scale(1.01);
+  }
+
+  100% {
+    transform: translateY(0) scale(1);
+  }
 }
 
 /* Sub-pixel Angled Seam SVG with Restrained SALAS-Red Line */
@@ -1595,10 +1745,12 @@ button, input, textarea, select {
     animation: sciFloatLeft 22s ease-in-out infinite alternate;
     will-change: transform;
   }
+
   .sci-group-right {
     animation: sciFloatRight 26s ease-in-out infinite alternate;
     will-change: transform;
   }
+
   .sci-dna-strand {
     animation: sciFloatDna 20s ease-in-out infinite alternate;
     will-change: transform;
@@ -1606,27 +1758,52 @@ button, input, textarea, select {
 }
 
 @keyframes sciFloatLeft {
-  0% { transform: translateY(0) rotate(0deg); }
-  50% { transform: translateY(-7px) rotate(0.8deg); }
-  100% { transform: translateY(0) rotate(0deg); }
+  0% {
+    transform: translateY(0) rotate(0deg);
+  }
+
+  50% {
+    transform: translateY(-7px) rotate(0.8deg);
+  }
+
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
 }
 
 @keyframes sciFloatRight {
-  0% { transform: translateY(0) rotate(0deg); }
-  50% { transform: translateY(-9px) rotate(-0.8deg); }
-  100% { transform: translateY(0) rotate(0deg); }
+  0% {
+    transform: translateY(0) rotate(0deg);
+  }
+
+  50% {
+    transform: translateY(-9px) rotate(-0.8deg);
+  }
+
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
 }
 
 @keyframes sciFloatDna {
-  0% { transform: translateY(0); }
-  50% { transform: translateY(-5px); }
-  100% { transform: translateY(0); }
+  0% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-5px);
+  }
+
+  100% {
+    transform: translateY(0);
+  }
 }
 
 @media (max-width: 768px) {
   .scientific-network-layer {
     opacity: 0.35 !important;
   }
+
   .sci-dna-strand {
     display: none;
   }
@@ -1750,6 +1927,7 @@ button, input, textarea, select {
     grid-template-columns: repeat(2, 1fr);
     gap: 1.5rem;
   }
+
   .lab-metric-item:nth-child(2) {
     border-right: none;
   }
@@ -1760,11 +1938,13 @@ button, input, textarea, select {
     grid-template-columns: 1fr;
     gap: 1.25rem;
   }
+
   .lab-metric-item {
     border-right: none;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     padding-bottom: 1rem;
   }
+
   .lab-metric-item:last-child {
     border-bottom: none;
     padding-bottom: 0;
@@ -1844,6 +2024,7 @@ button, input, textarea, select {
     opacity: 0;
     transform: translateY(14px);
   }
+
   100% {
     opacity: 1;
     transform: translateY(0);
@@ -2003,13 +2184,16 @@ button, input, textarea, select {
   .hero-option5-panel-stage {
     width: 62%;
   }
+
   .hero-option5-navy-panel {
     width: 100%;
     clip-path: polygon(0 0, 100% 0, 85% 100%, 0 100%);
   }
+
   .hero-option5-seam-svg {
     width: 100%;
   }
+
   .hero-option5-content-inner {
     padding-left: clamp(2rem, 4vw, 3rem);
     padding-right: clamp(2rem, 4vw, 3rem);
@@ -2023,47 +2207,53 @@ button, input, textarea, select {
     height: auto;
     flex-direction: column;
   }
+
   .hero-option5-video-layer {
     position: absolute;
     inset: 0;
     width: 100% !important;
     height: 100% !important;
   }
+
   .hero-option5-video-layer video {
     object-position: center center !important;
     opacity: 0.40;
   }
+
   .hero-option5-panel-stage {
     width: 100% !important;
     height: auto;
     clip-path: none !important;
     animation: heroMobilePanelReveal 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
   }
+
   .hero-option5-navy-panel {
     width: 100% !important;
     height: auto;
     clip-path: none !important;
-    background: linear-gradient(
-      180deg,
-      rgba(4, 20, 36, 0.94) 0%,
-      rgba(7, 29, 54, 0.90) 50%,
-      rgba(11, 37, 68, 0.96) 100%
-    ) !important;
+    background: linear-gradient(180deg,
+        rgba(4, 20, 36, 0.94) 0%,
+        rgba(7, 29, 54, 0.90) 50%,
+        rgba(11, 37, 68, 0.96) 100%) !important;
     padding: 0;
   }
+
   .hero-option5-seam-svg {
     display: none !important;
   }
+
   .hero-option5-content-inner {
     max-width: 100%;
     padding: clamp(2.5rem, 6vw, 3.5rem) 1.5rem !important;
     animation: heroContentReveal 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.15s both;
   }
+
   .hero-option5-ctas {
     flex-direction: column;
     width: 100%;
     gap: 0.75rem;
   }
+
   .hero-option5-btn-primary,
   .hero-option5-btn-secondary {
     width: 100%;
@@ -2076,6 +2266,7 @@ button, input, textarea, select {
     opacity: 0;
     transform: translateY(10px);
   }
+
   100% {
     opacity: 1;
     transform: translateY(0);
@@ -2088,11 +2279,13 @@ button, input, textarea, select {
     animation: none !important;
     clip-path: none !important;
   }
+
   .hero-option5-content-inner {
     animation: none !important;
     opacity: 1 !important;
     transform: none !important;
   }
+
   .hero-option5-chemistry-art {
     animation: none !important;
   }
@@ -2124,13 +2317,15 @@ button, input, textarea, select {
 
 @media (min-width: 993px) {
   .hero-main-heading {
-    font-size: clamp(3.25rem, 4.5vw, 4.25rem); /* 52px to 68px */
+    font-size: clamp(3.25rem, 4.5vw, 4.25rem);
+    /* 52px to 68px */
   }
 }
 
 @media (max-width: 992px) {
   .hero-main-heading {
-    font-size: clamp(2.125rem, 6.5vw, 2.625rem); /* 34px to 42px */
+    font-size: clamp(2.125rem, 6.5vw, 2.625rem);
+    /* 34px to 42px */
     line-height: 1.2;
   }
 }
@@ -2141,6 +2336,7 @@ button, input, textarea, select {
     opacity: 0.3;
     transform: translateY(10px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -2214,9 +2410,20 @@ button, input, textarea, select {
 }
 
 @keyframes scrollDotMotion {
-  0% { transform: translate(-50%, 0); opacity: 1; }
-  50% { transform: translate(-50%, 8px); opacity: 0.25; }
-  100% { transform: translate(-50%, 0); opacity: 1; }
+  0% {
+    transform: translate(-50%, 0);
+    opacity: 1;
+  }
+
+  50% {
+    transform: translate(-50%, 8px);
+    opacity: 0.25;
+  }
+
+  100% {
+    transform: translate(-50%, 0);
+    opacity: 1;
+  }
 }
 
 /* Interactive Card System (Therapeutic, Analytical, and Service Cards) */
@@ -2227,9 +2434,9 @@ button, input, textarea, select {
   border-radius: var(--radius-md);
   padding: 2rem 1.75rem;
   transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
-              box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1),
-              border-color 0.3s ease,
-              background-color 0.25s ease;
+    box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.3s ease,
+    background-color 0.25s ease;
   cursor: pointer;
   display: flex;
   flex-direction: column;
@@ -2380,8 +2587,8 @@ button, input, textarea, select {
   overflow: hidden;
   box-shadow: 0 2px 8px -2px rgba(6, 29, 56, 0.05);
   transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
-              box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1),
-              border-color 0.25s ease;
+    box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.25s ease;
   cursor: pointer;
   text-align: left;
   outline: none;
@@ -2425,8 +2632,8 @@ button, input, textarea, select {
 /* Subtle Icon Scale / Movement */
 .therapeutic-card .therapeutic-card-icon {
   transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
-              box-shadow 0.3s ease,
-              border-color 0.3s ease;
+    box-shadow 0.3s ease,
+    border-color 0.3s ease;
 }
 
 .therapeutic-card:hover .therapeutic-card-icon,
@@ -2478,26 +2685,57 @@ button, input, textarea, select {
 
 /* Molecular Background Drift & Pulse Animations */
 @keyframes molDriftL {
-  0% { transform: translate(0, 0); }
-  50% { transform: translate(4px, -5px); }
-  100% { transform: translate(0, 0); }
+  0% {
+    transform: translate(0, 0);
+  }
+
+  50% {
+    transform: translate(4px, -5px);
+  }
+
+  100% {
+    transform: translate(0, 0);
+  }
 }
 
 @keyframes molDriftR {
-  0% { transform: translate(0, 0); }
-  50% { transform: translate(-4px, 5px); }
-  100% { transform: translate(0, 0); }
+  0% {
+    transform: translate(0, 0);
+  }
+
+  50% {
+    transform: translate(-4px, 5px);
+  }
+
+  100% {
+    transform: translate(0, 0);
+  }
 }
 
 @keyframes molDriftC {
-  0% { transform: translate(0, 0); }
-  50% { transform: translate(0, -4px); }
-  100% { transform: translate(0, 0); }
+  0% {
+    transform: translate(0, 0);
+  }
+
+  50% {
+    transform: translate(0, -4px);
+  }
+
+  100% {
+    transform: translate(0, 0);
+  }
 }
 
 @keyframes chemPulseAlpha {
-  0%, 100% { opacity: 0.45; }
-  50% { opacity: 0.95; }
+
+  0%,
+  100% {
+    opacity: 0.45;
+  }
+
+  50% {
+    opacity: 0.95;
+  }
 }
 
 .mol-floating-left {
@@ -2535,6 +2773,7 @@ button, input, textarea, select {
 }
 
 @media (prefers-reduced-motion: reduce) {
+
   .mol-floating-left,
   .mol-floating-right,
   .mol-floating-center,
@@ -2599,7 +2838,7 @@ button, input, textarea, select {
 }
 
 /* Staggered Children Reveal */
-.reveal-stagger > * {
+.reveal-stagger>* {
   opacity: 0;
   transform: translateY(24px);
   transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1), transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
@@ -2607,7 +2846,7 @@ button, input, textarea, select {
   will-change: opacity, transform;
 }
 
-.reveal-stagger.is-revealed > * {
+.reveal-stagger.is-revealed>* {
   opacity: 1;
   transform: translateY(0);
 }
@@ -2728,9 +2967,11 @@ button, input, textarea, select {
     justify-content: flex-start;
     padding-left: 48px;
   }
+
   .timeline-content {
     width: 100%;
   }
+
   .timeline-dot {
     left: 20px;
   }
@@ -2809,9 +3050,11 @@ button, input, textarea, select {
   .hero-feature-grid {
     grid-template-columns: repeat(2, 1fr);
   }
+
   .hero-feature-item:nth-child(2) {
     border-right: none;
   }
+
   .hero-feature-item {
     border-bottom: 1px solid var(--color-border);
   }
@@ -2821,6 +3064,7 @@ button, input, textarea, select {
   .hero-feature-grid {
     grid-template-columns: 1fr;
   }
+
   .hero-feature-item {
     border-right: none;
     border-bottom: 1px solid var(--color-border);
@@ -2842,9 +3086,9 @@ button, input, textarea, select {
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  transition: transform 0.24s cubic-bezier(0.16, 1, 0.3, 1), 
-              box-shadow 0.24s cubic-bezier(0.16, 1, 0.3, 1), 
-              border-color 0.22s ease;
+  transition: transform 0.24s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.24s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.22s ease;
   text-decoration: none;
   color: inherit;
   cursor: pointer;
@@ -2988,9 +3232,9 @@ button, input, textarea, select {
   border-radius: var(--radius-lg);
   border: 1px solid var(--color-border);
   box-shadow: var(--shadow-sm);
-  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), 
-              box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1),
-              border-color 0.3s ease;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.3s ease;
   overflow: hidden;
 }
 
@@ -3034,9 +3278,9 @@ button, input, textarea, select {
   text-align: center;
   overflow: hidden;
   transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1),
-              box-shadow 0.28s cubic-bezier(0.16, 1, 0.3, 1),
-              border-color 0.25s ease,
-              background-color 0.25s ease;
+    box-shadow 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.25s ease,
+    background-color 0.25s ease;
 }
 
 .stat-card:hover {
@@ -3292,16 +3536,19 @@ button, input, textarea, select {
     width: 100%;
     gap: 0.85rem;
   }
+
   .signature-btn-primary,
   .signature-btn-secondary {
     width: 100%;
     justify-content: center;
   }
+
   .signature-closing-trust-bar {
     flex-direction: column;
     gap: 0.65rem;
     font-size: 0.8125rem;
   }
+
   .trust-separator {
     display: none;
   }
@@ -3534,20 +3781,18 @@ button, input, textarea, select {
   height: 100%;
   object-fit: cover;
   object-position: center 30%;
-  filter: blur(10px) saturate(0.5) brightness(1.1);
-  opacity: 0.16;
+  filter: blur(5px) saturate(0.5) brightness(1.1);
+  opacity: 10.0;
   pointer-events: none;
 }
 
 .about-philosophy-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    135deg,
-    rgba(255, 255, 255, 0.95) 0%,
-    rgba(248, 250, 252, 0.90) 50%,
-    rgba(241, 245, 249, 0.96) 100%
-  );
+  background: linear-gradient(135deg,
+      rgba(255, 255, 255, 0.95) 0%,
+      rgba(248, 250, 252, 0.90) 50%,
+      rgba(241, 245, 249, 0.96) 100%);
   pointer-events: none;
 }
 
@@ -3585,7 +3830,8 @@ button, input, textarea, select {
   font-weight: 800;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--color-accent); /* #E5242A */
+  color: var(--color-accent);
+  /* #E5242A */
   margin-bottom: 0.85rem;
 }
 
@@ -3624,6 +3870,7 @@ button, input, textarea, select {
     grid-template-columns: 1fr;
     gap: 1.75rem;
   }
+
   .about-philosophy-right {
     border-left: none;
     border-top: 1px solid rgba(226, 232, 240, 0.85);
@@ -3637,9 +3884,11 @@ button, input, textarea, select {
     padding: 2.25rem 1.5rem;
     border-radius: 20px;
   }
+
   .about-philosophy-statement {
     font-size: 1.85rem;
   }
+
   .about-philosophy-desc {
     font-size: 1rem;
     line-height: 1.65;
@@ -3690,16 +3939,19 @@ button, input, textarea, select {
 }
 
 @media (max-width: 768px) {
+
   .storytelling-track,
   .about-storytelling-track {
     min-height: auto !important;
   }
+
   .storytelling-sticky,
   .about-storytelling-sticky {
     position: static !important;
     height: auto !important;
     padding: 3.5rem 1.25rem !important;
   }
+
   .storytelling-progress-bar {
     display: none !important;
   }
@@ -3788,8 +4040,15 @@ button, input, textarea, select {
 }
 
 @keyframes hotspotPulse {
-  0% { transform: scale(0.6); opacity: 0.8; }
-  100% { transform: scale(1.6); opacity: 0; }
+  0% {
+    transform: scale(0.6);
+    opacity: 0.8;
+  }
+
+  100% {
+    transform: scale(1.6);
+    opacity: 0;
+  }
 }
 
 .lab-hotspot-card {
@@ -3915,6 +4174,7 @@ button, input, textarea, select {
     grid-template-columns: 1fr;
     gap: 2rem;
   }
+
   .journey-visual-panel {
     position: static;
   }
@@ -3949,13 +4209,23 @@ button, input, textarea, select {
 }
 
 @keyframes slideLeft {
-  from { transform: translateX(100%); }
-  to { transform: translateX(0); }
+  from {
+    transform: translateX(100%);
+  }
+
+  to {
+    transform: translateX(0);
+  }
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }
 
 /* ==========================================================================
@@ -3963,19 +4233,26 @@ button, input, textarea, select {
    ========================================================================== */
 
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
+
+  *,
+  *::before,
+  *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
-  
+
   .cinematic-loader-overlay {
     display: none !important;
   }
-  
-  .reveal-left, .reveal-right, .reveal-up, .reveal-zoom,
-  .word-reveal-span, .reveal-stagger > * {
+
+  .reveal-left,
+  .reveal-right,
+  .reveal-up,
+  .reveal-zoom,
+  .word-reveal-span,
+  .reveal-stagger>* {
     opacity: 1 !important;
     transform: none !important;
   }
@@ -4024,17 +4301,19 @@ button, input, textarea, select {
     padding-top: 1rem;
     padding-bottom: 2rem;
   }
+
   .page-hero-banner .container {
     padding-top: 2.5rem !important;
     padding-bottom: 2.5rem !important;
     padding-left: 1.25rem !important;
     padding-right: 1.25rem !important;
   }
+
   .page-hero-banner h1 {
     font-size: clamp(1.75rem, 6vw, 2.25rem) !important;
     margin-bottom: 1rem !important;
   }
-  
+
   /* Responsive card padding on mobile */
   .pharma-card,
   .interactive-card {
@@ -4049,5 +4328,287 @@ button, input, textarea, select {
   }
 }
 
+/* ==========================================================================
+   FEATURE 2: RESTFUL ROUTE ENTRANCE TRANSITION
+   Subtle fade and vertical rise (220ms) that never causes blank screens,
+   stale overlays, or navigation lag.
+   ========================================================================== */
+@keyframes routeTransitionIn {
+  0% {
+    opacity: 0;
+    transform: translateY(8px);
+  }
 
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 
+.page-route-transition {
+  animation: routeTransitionIn 0.22s cubic-bezier(0.16, 1, 0.3, 1) both;
+  will-change: opacity, transform;
+  width: 100%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-route-transition {
+    animation: none !important;
+    transform: none !important;
+  }
+}
+
+/* ==========================================================================
+   FEATURE 5: IMMERSIVE FULL-SCREEN CHAPTER NAVIGATION (SALAS PHARMA)
+   Cinematic horizontal accordion on desktop, responsive stacked cards on mobile.
+   ========================================================================== */
+.chapter-nav-section {
+  position: relative;
+  background-color: #071D36;
+  border-top: 1px solid rgba(56, 189, 248, 0.15);
+  border-bottom: 1px solid rgba(56, 189, 248, 0.15);
+}
+
+.chapter-nav-track {
+  display: flex;
+  gap: 1.25rem;
+  height: 500px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.chapter-panel {
+  position: relative;
+  flex: 1;
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background-color: #0B2545;
+  cursor: pointer;
+  padding: 2.25rem 1.75rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: left;
+  transition: flex 0.45s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease, box-shadow 0.3s ease;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.chapter-panel:focus-visible {
+  border-color: #38BDF8;
+  box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.4), 0 12px 32px rgba(6, 29, 56, 0.5);
+}
+
+.chapter-panel.is-active,
+.chapter-panel:hover {
+  flex: 2.2;
+  border-color: rgba(56, 189, 248, 0.55);
+  box-shadow: 0 16px 40px rgba(4, 18, 36, 0.5);
+}
+
+.chapter-panel-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.chapter-panel-bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.chapter-panel:hover .chapter-panel-bg img,
+.chapter-panel.is-active .chapter-panel-bg img {
+  transform: scale(1.08);
+}
+
+.chapter-panel-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg,
+      rgba(7, 29, 54, 0.4) 0%,
+      rgba(7, 29, 54, 0.72) 45%,
+      rgba(7, 29, 54, 0.96) 100%);
+  transition: opacity 0.35s ease;
+}
+
+.chapter-panel-top {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.chapter-panel-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 0.85rem;
+  background: rgba(7, 29, 54, 0.75);
+  border: 1px solid;
+  border-radius: var(--radius-full);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.chapter-panel-num {
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  font-weight: 800;
+  color: rgba(255, 255, 255, 0.4);
+  letter-spacing: 0.05em;
+}
+
+.chapter-panel-bottom {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.chapter-panel-title {
+  font-size: clamp(1.25rem, 1.8vw, 1.65rem);
+  font-weight: 800;
+  color: #FFFFFF;
+  margin: 0;
+  line-height: 1.25;
+  letter-spacing: -0.015em;
+}
+
+.chapter-panel-desc {
+  font-size: 0.9375rem;
+  color: #CBD5E1;
+  line-height: 1.55;
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  transition: -webkit-line-clamp 0.3s ease;
+}
+
+.chapter-panel.is-active .chapter-panel-desc,
+.chapter-panel:hover .chapter-panel-desc {
+  -webkit-line-clamp: 4;
+  line-clamp: 4;
+}
+
+.chapter-panel-cue {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.875rem;
+  font-weight: 700;
+  margin-top: 0.35rem;
+}
+
+.chapter-cue-icon {
+  transition: transform 0.25s ease;
+}
+
+.chapter-panel:hover .chapter-cue-icon {
+  transform: translate(3px, -3px);
+}
+
+@media (max-width: 992px) {
+  .chapter-nav-track {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    height: auto;
+    gap: 1.25rem;
+  }
+
+  .chapter-panel {
+    height: 340px;
+    flex: none !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .chapter-nav-track {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .chapter-panel {
+    height: 270px;
+    padding: 1.5rem;
+  }
+
+  .chapter-panel-desc {
+    -webkit-line-clamp: 2 !important;
+    line-clamp: 2 !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  .chapter-panel,
+  .chapter-panel-bg img,
+  .chapter-cue-icon {
+    transition: none !important;
+  }
+}
+
+/* ==========================================================================
+   FEATURE 1: CINEMATIC SCROLL STORYTELLING SYSTEM (SALAS PHARMA)
+   Coordinated scroll sequence with crossfading chapters and zero scroll trapping.
+   ========================================================================== */
+.cinematic-story-track {
+  position: relative;
+  min-height: 220vh;
+  background-color: #071D36;
+  border-top: 1px solid rgba(56, 189, 248, 0.15);
+  border-bottom: 1px solid rgba(56, 189, 248, 0.15);
+}
+
+.cinematic-story-sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  z-index: 8;
+}
+
+.cinematic-story-bg-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  will-change: opacity, transform;
+}
+
+@media (max-width: 768px) {
+  .cinematic-story-track {
+    min-height: auto !important;
+  }
+
+  .cinematic-story-sticky {
+    position: static !important;
+    height: auto !important;
+    padding: 3rem 1rem !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cinematic-story-bg-layer {
+    transition: none !important;
+    transform: none !important;
+  }
+}

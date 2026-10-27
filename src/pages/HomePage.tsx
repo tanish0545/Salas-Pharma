@@ -23,6 +23,8 @@ import { QualitySeal } from '../components/common/QualitySeal';
 import { AnimatedCounter } from '../components/common/AnimatedCounter';
 import { SignatureClosingStatement } from '../components/common/SignatureClosingStatement';
 import { CompanyTimeline } from '../components/common/CompanyTimeline';
+import { CinematicScrollStory } from '../components/common/CinematicScrollStory';
+import { ChapterNavigation } from '../components/common/ChapterNavigation';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 
 interface HomePageProps {
@@ -436,6 +438,12 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, isLoaderComplete
           </div>
         </div>
       </section>
+
+      {/* ====================================================================
+          FEATURE 1: CINEMATIC SCROLL STORYTELLING
+          Scroll-driven coordinated capability journey from molecule to medicine.
+          ==================================================================== */}
+      <CinematicScrollStory onNavigate={onNavigate} />
 
       {/* ====================================================================
           2. THERAPEUTIC PORTFOLIO OVERVIEW
@@ -1019,6 +1027,12 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, isLoaderComplete
           </div>
         </div>
       </section>
+
+      {/* ====================================================================
+          FEATURE 5: IMMERSIVE FULL-SCREEN CHAPTER NAVIGATION
+          Interactive image-led panels introducing the 4 core pillars.
+          ==================================================================== */}
+      <ChapterNavigation onNavigate={onNavigate} />
 
       {/* ====================================================================
           5. MILESTONES IN PHARMACEUTICAL EXCELLENCE

@@ -50,9 +50,9 @@ export const CorePhilosophyCard: React.FC<CorePhilosophyCardProps> = ({ id = 'co
             height: '100%',
             objectFit: 'cover',
             objectPosition: 'center 35%',
-            filter: 'blur(3px) saturate(0.7) brightness(1.02)',
+            filter: 'blur(2px) saturate(0.7) brightness(1.02)',
             transform: 'scale(1.04)',
-            opacity: 10.0,
+            opacity: 100.0,
           }}
         >
           <source src="/assets/videos/background.mp4" type="video/mp4" />

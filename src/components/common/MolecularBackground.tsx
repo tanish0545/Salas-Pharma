@@ -17,6 +17,8 @@ export interface MolecularBackgroundProps {
   style?: React.CSSProperties;
   /** Horizontal position bias */
   position?: 'full' | 'left' | 'right' | 'center' | 'split';
+  /** Whether nearby nodes gently deflect with pointer movement on capable desktop devices */
+  interactive?: boolean;
 }
 
 /**
@@ -30,6 +32,7 @@ export interface MolecularBackgroundProps {
  * - Covalent sigma bonds, coordinate dashed lines, and small vertex nodes (2px - 4px).
  * - Restrained SALAS brand palette: Navy (#071D36), Blue (#1456A0), Cyan (#20AEEA), Red (#E5242A).
  * - 100% vector SVG with pointer-events: none and deliberate stacking z-index.
+ * - Reactive pointer movement: nodes deflect gently on desktop without triggering React re-renders.
  * - IntersectionObserver pauses SVG animations when offscreen to conserve CPU/battery.
  * - Full prefers-reduced-motion support.
  */
@@ -42,8 +45,10 @@ export const MolecularBackground: React.FC<MolecularBackgroundProps> = ({
   className = '',
   style = {},
   position = 'full',
+  interactive = true,
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
+  const interactiveLayerRef = useRef<SVGGElement>(null);
   const [isOffscreen, setIsOffscreen] = useState<boolean>(true);
 
   // IntersectionObserver: automatically pauses animations when scrolled out of view
@@ -68,6 +73,48 @@ export const MolecularBackground: React.FC<MolecularBackgroundProps> = ({
     observer.observe(el);
     return () => observer.disconnect();
   }, [animated]);
+
+  // Pointer reactivity: subtle displacement for desktop fine pointers
+  useEffect(() => {
+    if (!interactive || typeof window === 'undefined') return;
+
+    const isFine = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+    const isReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!isFine || isReduced) return;
+
+    const layer = interactiveLayerRef.current;
+    if (!layer) return;
+
+    let targetX = 0;
+    let targetY = 0;
+    let currentX = 0;
+    let currentY = 0;
+    let animId: number;
+
+    const onPointerMove = (e: MouseEvent) => {
+      const normX = (e.clientX / window.innerWidth) - 0.5;
+      const normY = (e.clientY / window.innerHeight) - 0.5;
+      targetX = normX * 14;
+      targetY = normY * 10;
+    };
+
+    const animate = () => {
+      currentX += (targetX - currentX) * 0.08;
+      currentY += (targetY - currentY) * 0.08;
+      if (layer) {
+        layer.style.transform = `translate3d(${currentX.toFixed(2)}px, ${currentY.toFixed(2)}px, 0)`;
+      }
+      animId = requestAnimationFrame(animate);
+    };
+
+    window.addEventListener('mousemove', onPointerMove, { passive: true });
+    animId = requestAnimationFrame(animate);
+
+    return () => {
+      window.removeEventListener('mousemove', onPointerMove);
+      cancelAnimationFrame(animId);
+    };
+  }, [interactive]);
 
   const isDark = theme === 'dark' || variant === 'footer';
 
@@ -444,83 +491,85 @@ export const MolecularBackground: React.FC<MolecularBackgroundProps> = ({
           </radialGradient>
         </defs>
 
-        {/* LEFT FLANK: Cyclopentane Motif (Active on 'full', 'left', 'split') */}
-        {(position === 'full' || position === 'left' || position === 'split') && (
-          <g className="mol-floating-left">
-            {/* Primary Left Pentagon */}
-            <polygon
-              points={getPentagonPoints(120, 180, 68, -90)}
-              stroke={`url(#molSecGrad-${variant})`}
-              strokeWidth="1.3"
-              fill={ringFill}
-            />
-            {getPentagonCoords(120, 180, 68, -90).map(([x, y], i) => (
-              <circle key={`sec-l1-${i}`} cx={x} cy={y} r={2.8} fill={nodeCyanColor} />
-            ))}
+        <g ref={interactiveLayerRef} style={{ willChange: 'transform' }}>
+          {/* LEFT FLANK: Cyclopentane Motif (Active on 'full', 'left', 'split') */}
+          {(position === 'full' || position === 'left' || position === 'split') && (
+            <g className="mol-floating-left">
+              {/* Primary Left Pentagon */}
+              <polygon
+                points={getPentagonPoints(120, 180, 68, -90)}
+                stroke={`url(#molSecGrad-${variant})`}
+                strokeWidth="1.3"
+                fill={ringFill}
+              />
+              {getPentagonCoords(120, 180, 68, -90).map(([x, y], i) => (
+                <circle key={`sec-l1-${i}`} cx={x} cy={y} r={2.8} fill={nodeCyanColor} />
+              ))}
 
-            {/* Connecting bond to secondary satellite */}
-            <line x1="184.7" y1="159" x2="245" y2="135" stroke={primaryBondColor} strokeWidth="1.1" opacity={isDark ? "0.55" : "0.3"} />
-            <circle cx="245" cy="135" r="3.2" fill={nodePrimaryColor} />
-            <circle cx="245" cy="135" r="7" fill={`url(#molNodeGlow-${variant})`} className="chem-pulse-node" />
+              {/* Connecting bond to secondary satellite */}
+              <line x1="184.7" y1="159" x2="245" y2="135" stroke={primaryBondColor} strokeWidth="1.1" opacity={isDark ? "0.55" : "0.3"} />
+              <circle cx="245" cy="135" r="3.2" fill={nodePrimaryColor} />
+              <circle cx="245" cy="135" r="7" fill={`url(#molNodeGlow-${variant})`} className="chem-pulse-node" />
 
-            {/* Satellite Pentagon */}
-            <polygon
-              points={getPentagonPoints(285, 115, 42, 18)}
-              stroke={mutedBondColor}
-              strokeWidth="1.1"
-              fill="none"
-            />
-            {getPentagonCoords(285, 115, 42, 18).map(([x, y], i) => (
-              <circle key={`sec-l2-${i}`} cx={x} cy={y} r={2.2} fill={nodePrimaryColor} />
-            ))}
+              {/* Satellite Pentagon */}
+              <polygon
+                points={getPentagonPoints(285, 115, 42, 18)}
+                stroke={mutedBondColor}
+                strokeWidth="1.1"
+                fill="none"
+              />
+              {getPentagonCoords(285, 115, 42, 18).map(([x, y], i) => (
+                <circle key={`sec-l2-${i}`} cx={x} cy={y} r={2.2} fill={nodePrimaryColor} />
+              ))}
 
-            {/* Coordinate dashed bond down */}
-            <line x1="99" y1="244.7" x2="80" y2="340" stroke={dashedBondColor} strokeWidth="0.8" strokeDasharray="3 3" />
-            <polygon
-              points={getPentagonPoints(75, 385, 48, 54)}
-              stroke={mutedBondColor}
-              strokeWidth="1.1"
-              fill="none"
-            />
-            {getPentagonCoords(75, 385, 48, 54).map(([x, y], i) => (
-              <circle key={`sec-l3-${i}`} cx={x} cy={y} r={2.2} fill={i === 0 ? accentColor : nodeCyanColor} />
-            ))}
-          </g>
-        )}
+              {/* Coordinate dashed bond down */}
+              <line x1="99" y1="244.7" x2="80" y2="340" stroke={dashedBondColor} strokeWidth="0.8" strokeDasharray="3 3" />
+              <polygon
+                points={getPentagonPoints(75, 385, 48, 54)}
+                stroke={mutedBondColor}
+                strokeWidth="1.1"
+                fill="none"
+              />
+              {getPentagonCoords(75, 385, 48, 54).map(([x, y], i) => (
+                <circle key={`sec-l3-${i}`} cx={x} cy={y} r={2.2} fill={i === 0 ? accentColor : nodeCyanColor} />
+              ))}
+            </g>
+          )}
 
-        {/* RIGHT FLANK: Cyclopentane Motif (Active on 'full', 'right', 'split') */}
-        {(position === 'full' || position === 'right' || position === 'split') && (
-          <g className="mol-floating-right">
-            {/* Primary Right Pentagon */}
-            <polygon
-              points={getPentagonPoints(1320, 210, 74, -90)}
-              stroke={`url(#molSecGrad-${variant})`}
-              strokeWidth="1.4"
-              fill={ringFill}
-            />
-            {getPentagonCoords(1320, 210, 74, -90).map(([x, y], i) => (
-              <circle key={`sec-r1-${i}`} cx={x} cy={y} r={i === 0 ? 3.8 : 2.8} fill={i === 0 ? accentColor : nodeCyanColor} />
-            ))}
-            {/* Heteroatom glow accent */}
-            <circle cx="1320" cy="136" r="8" fill={accentColor} opacity={isDark ? "0.3" : "0.15"} className="chem-pulse-node" />
+          {/* RIGHT FLANK: Cyclopentane Motif (Active on 'full', 'right', 'split') */}
+          {(position === 'full' || position === 'right' || position === 'split') && (
+            <g className="mol-floating-right">
+              {/* Primary Right Pentagon */}
+              <polygon
+                points={getPentagonPoints(1320, 210, 74, -90)}
+                stroke={`url(#molSecGrad-${variant})`}
+                strokeWidth="1.4"
+                fill={ringFill}
+              />
+              {getPentagonCoords(1320, 210, 74, -90).map(([x, y], i) => (
+                <circle key={`sec-r1-${i}`} cx={x} cy={y} r={i === 0 ? 3.8 : 2.8} fill={i === 0 ? accentColor : nodeCyanColor} />
+              ))}
+              {/* Heteroatom glow accent */}
+              <circle cx="1320" cy="136" r="8" fill={accentColor} opacity={isDark ? "0.3" : "0.15"} className="chem-pulse-node" />
 
-            {/* Connecting bond towards outer edge */}
-            <line x1="1390.4" y1="187.1" x2="1440" y2="160" stroke={secondaryBondColor} strokeWidth="1.1" opacity={isDark ? "0.55" : "0.3"} />
-            <circle cx="1440" cy="160" r="3" fill={nodePrimaryColor} />
+              {/* Connecting bond towards outer edge */}
+              <line x1="1390.4" y1="187.1" x2="1440" y2="160" stroke={secondaryBondColor} strokeWidth="1.1" opacity={isDark ? "0.55" : "0.3"} />
+              <circle cx="1440" cy="160" r="3" fill={nodePrimaryColor} />
 
-            {/* Satellite Right Pentagon */}
-            <polygon
-              points={getPentagonPoints(1260, 360, 48, 36)}
-              stroke={mutedBondColor}
-              strokeWidth="1.1"
-              fill="none"
-            />
-            {getPentagonCoords(1260, 360, 48, 36).map(([x, y], i) => (
-              <circle key={`sec-r2-${i}`} cx={x} cy={y} r={2.2} fill={nodeCyanColor} />
-            ))}
-            <line x1="1297.1" y1="280.4" x2="1275" y2="320" stroke={dashedBondColor} strokeWidth="0.8" strokeDasharray="3 3" />
-          </g>
-        )}
+              {/* Satellite Right Pentagon */}
+              <polygon
+                points={getPentagonPoints(1260, 360, 48, 36)}
+                stroke={mutedBondColor}
+                strokeWidth="1.1"
+                fill="none"
+              />
+              {getPentagonCoords(1260, 360, 48, 36).map(([x, y], i) => (
+                <circle key={`sec-r2-${i}`} cx={x} cy={y} r={2.2} fill={nodeCyanColor} />
+              ))}
+              <line x1="1297.1" y1="280.4" x2="1275" y2="320" stroke={dashedBondColor} strokeWidth="0.8" strokeDasharray="3 3" />
+            </g>
+          )}
+        </g>
       </svg>
     </div>
   );

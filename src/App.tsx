@@ -97,21 +97,23 @@ export function App() {
 
       {/* Main Page Stage (Already loaded & live beneath loader curtains) */}
       <main style={{ flex: '1 0 auto' }}>
-        <Suspense fallback={<div style={{ minHeight: '80vh', backgroundColor: 'var(--color-bg-white)' }} />}>
-          {currentRoute === 'home' && (
-            <HomePage 
-              onNavigate={handleNavigate} 
-              isLoaderComplete={!showCinematicLoader} 
-            />
-          )}
-          {currentRoute === 'about' && <AboutPage onNavigate={handleNavigate} />}
-          {currentRoute === 'products' && <ProductsPage onNavigate={handleNavigate} />}
-          {currentRoute === 'laboratories' && <LaboratoriesPage onNavigate={handleNavigate} />}
-          {currentRoute === 'manufacturing' && <ManufacturingPage onNavigate={handleNavigate} />}
-          {currentRoute === 'research' && <ResearchPage onNavigate={handleNavigate} />}
-          {currentRoute === 'careers' && <CareersPage onNavigate={handleNavigate} />}
-          {currentRoute === 'contact' && <ContactPage onNavigate={handleNavigate} />}
-        </Suspense>
+        <div key={currentRoute} className="page-route-transition">
+          <Suspense fallback={<div style={{ minHeight: '80vh', backgroundColor: 'var(--color-bg-white)' }} />}>
+            {currentRoute === 'home' && (
+              <HomePage 
+                onNavigate={handleNavigate} 
+                isLoaderComplete={!showCinematicLoader} 
+              />
+            )}
+            {currentRoute === 'about' && <AboutPage onNavigate={handleNavigate} />}
+            {currentRoute === 'products' && <ProductsPage onNavigate={handleNavigate} />}
+            {currentRoute === 'laboratories' && <LaboratoriesPage onNavigate={handleNavigate} />}
+            {currentRoute === 'manufacturing' && <ManufacturingPage onNavigate={handleNavigate} />}
+            {currentRoute === 'research' && <ResearchPage onNavigate={handleNavigate} />}
+            {currentRoute === 'careers' && <CareersPage onNavigate={handleNavigate} />}
+            {currentRoute === 'contact' && <ContactPage onNavigate={handleNavigate} />}
+          </Suspense>
+        </div>
       </main>
 
       {/* Corporate Footer */}
