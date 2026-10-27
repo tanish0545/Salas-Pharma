@@ -17,6 +17,7 @@ import { VIDEO_ASSETS, MEDIA_CONFIG, PAGE_HERO_IMAGES } from '../config/assets';
 import { BrandedVideo } from '../components/common/BrandedVideo';
 import { QualitySeal } from '../components/common/QualitySeal';
 import { ScientificNetworkArtwork } from '../components/common/ScientificNetworkArtwork';
+import { MolecularBackground } from '../components/common/MolecularBackground';
 import { ScrollWordReveal } from '../components/common/ScrollWordReveal';
 import { SignatureClosingStatement } from '../components/common/SignatureClosingStatement';
 import { useScrollReveal } from '../hooks/useScrollReveal';
@@ -771,8 +772,10 @@ export const LaboratoriesPage: React.FC<LaboratoriesPageProps> = ({ onNavigate }
       {/* ====================================================================
           SECTION D: LABORATORY CAPABILITIES
           ==================================================================== */}
-      <section className="section-spacing" style={{ backgroundColor: '#FFFFFF' }}>
-        <div className="container">
+      <section className="section-spacing" style={{ position: 'relative', overflow: 'hidden', backgroundColor: '#FFFFFF' }}>
+        {/* Subtle Cyclopentane Molecular Linework Background */}
+        <MolecularBackground variant="section" theme="light" opacity={0.4} position="split" />
+        <div className="container" style={{ position: 'relative', zIndex: 1 }}>
           <div className="section-header">
             <span className="section-eyebrow">
               <Search size={14} /> Core Competencies

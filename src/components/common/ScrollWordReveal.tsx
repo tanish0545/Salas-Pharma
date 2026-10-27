@@ -1,4 +1,5 @@
 import React, { useRef, useEffect, useState } from 'react';
+import { MolecularBackground } from './MolecularBackground';
 
 export interface ScrollWordRevealProps {
   text: string;
@@ -172,8 +173,10 @@ export const ScrollWordReveal: React.FC<ScrollWordRevealProps> = ({
         className="storytelling-track about-storytelling-track" 
         aria-label={ariaLabel || eyebrow || "SALAS Pharma Foundational Storytelling"}
       >
-        <div className="storytelling-sticky about-storytelling-sticky">
-          <div className="container">
+        <div className="storytelling-sticky about-storytelling-sticky" style={{ position: 'sticky' }}>
+          {/* Subtle Cyclopentane Molecular Linework in Storytelling Background (Non-intrusive) */}
+          <MolecularBackground variant="section" theme="light" opacity={0.35} position="split" />
+          <div className="container" style={{ position: 'relative', zIndex: 10 }}>
             {content}
           </div>
         </div>

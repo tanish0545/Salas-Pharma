@@ -4,6 +4,7 @@ import { VIDEO_ASSETS, MEDIA_CONFIG, PAGE_HERO_IMAGES } from '../config/assets';
 import { BrandedVideo } from '../components/common/BrandedVideo';
 import { QualitySeal } from '../components/common/QualitySeal';
 import { ScientificNetworkArtwork } from '../components/common/ScientificNetworkArtwork';
+import { MolecularBackground } from '../components/common/MolecularBackground';
 import { ScrollWordReveal } from '../components/common/ScrollWordReveal';
 import { SignatureClosingStatement } from '../components/common/SignatureClosingStatement';
 import { useScrollReveal } from '../hooks/useScrollReveal';
@@ -242,8 +243,10 @@ export const ManufacturingPage: React.FC<ManufacturingPageProps> = ({ onNavigate
       </section>
 
       {/* 4. 4-STAGE INTERACTIVE MANUFACTURING PROCESS JOURNEY */}
-      <section className="section-spacing" style={{ backgroundColor: 'var(--color-bg-light)', borderTop: '1px solid var(--color-border)', borderBottom: '1px solid var(--color-border)' }}>
-        <div className="container">
+      <section className="section-spacing" style={{ position: 'relative', overflow: 'hidden', backgroundColor: 'var(--color-bg-light)', borderTop: '1px solid var(--color-border)', borderBottom: '1px solid var(--color-border)' }}>
+        {/* Subtle Cyclopentane Molecular Linework Background */}
+        <MolecularBackground variant="section" theme="light" opacity={0.35} position="split" />
+        <div className="container" style={{ position: 'relative', zIndex: 1 }}>
           <div className="section-header" style={{ textAlign: 'center', maxWidth: '780px', margin: '0 auto 4rem auto' }}>
             <span className="section-eyebrow">
               <Cpu size={14} /> Step-by-Step Flow

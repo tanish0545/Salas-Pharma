@@ -159,3 +159,4 @@ Automated verification script (`scratch/verify_production.cjs`) tested:
   - Byte-range streaming enabled for `.mp4` video files (`Accept-Ranges: bytes`).
   - Strict security headers (`X-Content-Type-Options: nosniff`, `X-Frame-Options: DENY`, `Referrer-Policy: strict-origin-when-cross-origin`).
 - **Production Build:** `npm run build` succeeds cleanly in 2.43s. Ready for immediate production deployment.
+

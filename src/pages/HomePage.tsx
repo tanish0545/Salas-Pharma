@@ -23,6 +23,7 @@ import { MEDIA_CONFIG, VIDEO_ASSETS, PAGE_HERO_IMAGES } from '../config/assets';
 import { BrandedVideo } from '../components/common/BrandedVideo';
 import { QualitySeal } from '../components/common/QualitySeal';
 import { AnimatedCounter } from '../components/common/AnimatedCounter';
+import { MolecularBackground } from '../components/common/MolecularBackground';
 import { SignatureClosingStatement } from '../components/common/SignatureClosingStatement';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 
@@ -1246,8 +1247,10 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, isLoaderComplete
           Balanced row of useful features and verified figures entering from RIGHT.
           Alternating sequence step 6: RIGHT
           ==================================================================== */}
-      <section className="section-spacing" style={{ backgroundColor: 'var(--color-bg-light)', borderBottom: '1px solid var(--color-border)' }}>
-        <div className="container">
+      <section className="section-spacing" style={{ position: 'relative', overflow: 'hidden', backgroundColor: 'var(--color-bg-light)', borderBottom: '1px solid var(--color-border)' }}>
+        {/* Subtle Cyclopentane Molecular Linework Background */}
+        <MolecularBackground variant="section" theme="light" opacity={0.4} position="split" />
+        <div className="container" style={{ position: 'relative', zIndex: 1 }}>
           <div className="section-header">
             <span className="section-eyebrow">
               <ShieldCheck size={14} /> Grounded In Excellence

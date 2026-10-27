@@ -1881,10 +1881,10 @@ button, input, textarea, select {
 
 .site-footer {
   position: relative;
-  background-color: #F7F9FC;
-  color: #0B2340;
+  background-color: #071D36;
+  color: #F8FAFC;
   overflow: hidden;
-  border-top: 1px solid #E2E8F0;
+  border-top: 1px solid rgba(56, 189, 248, 0.2);
 }
 
 /* Subtle Blue-to-Red Brand Top Accent Ribbon */
@@ -1895,66 +1895,75 @@ button, input, textarea, select {
   left: 0;
   right: 0;
   height: 3px;
-  background: linear-gradient(90deg, #1456A0 0%, #3B82F6 35%, #E52D27 50%, #3B82F6 65%, #1456A0 100%);
+  background: linear-gradient(90deg, #1456A0 0%, #20AEEA 35%, #E5242A 50%, #20AEEA 65%, #1456A0 100%);
   z-index: 5;
 }
 
-/* Chemistry SVG Artwork Background Layer (Light adaptation) */
-.footer-chemistry-layer {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: 1;
-  overflow: hidden;
-}
-
-.footer-chemistry-svg {
-  width: 100%;
-  height: 100%;
-  display: block;
-}
-
-/* Chemistry Molecular Drift Animations */
-@keyframes chemDriftLeft {
+/* Molecular Background Drift & Pulse Animations */
+@keyframes molDriftL {
   0% { transform: translate(0, 0); }
-  50% { transform: translate(5px, -6px); }
+  50% { transform: translate(4px, -5px); }
   100% { transform: translate(0, 0); }
 }
 
-@keyframes chemDriftRight {
+@keyframes molDriftR {
   0% { transform: translate(0, 0); }
-  50% { transform: translate(-5px, 6px); }
+  50% { transform: translate(-4px, 5px); }
+  100% { transform: translate(0, 0); }
+}
+
+@keyframes molDriftC {
+  0% { transform: translate(0, 0); }
+  50% { transform: translate(0, -4px); }
   100% { transform: translate(0, 0); }
 }
 
 @keyframes chemPulseAlpha {
-  0%, 100% { opacity: 0.35; }
-  50% { opacity: 0.65; }
+  0%, 100% { opacity: 0.45; }
+  50% { opacity: 0.95; }
 }
 
-.chem-floating-group-1 {
-  animation: chemDriftLeft 22s cubic-bezier(0.45, 0, 0.55, 1) infinite;
-  transform-origin: 15% 30%;
+.mol-floating-left {
+  animation: molDriftL 28s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+  transform-origin: 10% 25%;
   will-change: transform;
 }
 
-.chem-floating-group-2 {
-  animation: chemDriftRight 26s cubic-bezier(0.45, 0, 0.55, 1) infinite;
-  transform-origin: 85% 65%;
+.mol-floating-right {
+  animation: molDriftR 32s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+  transform-origin: 90% 60%;
+  will-change: transform;
+}
+
+.mol-floating-center {
+  animation: molDriftC 24s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+  transform-origin: 50% 50%;
   will-change: transform;
 }
 
 .chem-pulse-node {
-  animation: chemPulseAlpha 6s ease-in-out infinite;
+  animation: chemPulseAlpha 5s ease-in-out infinite;
 }
 
-/* Paused when footer is scrolled offscreen or prefers-reduced-motion */
-.site-footer.is-offscreen .chem-floating-group-1,
-.site-footer.is-offscreen .chem-floating-group-2,
+/* Paused when section/footer is scrolled offscreen or prefers-reduced-motion */
+.is-offscreen .mol-floating-left,
+.is-offscreen .mol-floating-right,
+.is-offscreen .mol-floating-center,
+.is-offscreen .chem-pulse-node,
+.site-footer.is-offscreen .mol-floating-left,
+.site-footer.is-offscreen .mol-floating-right,
+.site-footer.is-offscreen .mol-floating-center,
 .site-footer.is-offscreen .chem-pulse-node {
   animation-play-state: paused !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mol-floating-left,
+  .mol-floating-right,
+  .mol-floating-center,
+  .chem-pulse-node {
+    animation: none !important;
+  }
 }
 
 /* Footer Link with Blue-to-Red Animated Underline */
@@ -1962,11 +1971,11 @@ button, input, textarea, select {
   position: relative;
   display: inline-flex;
   align-items: center;
-  gap: 0.35rem;
-  color: #475569;
+  gap: 0.45rem;
+  color: #94A3B8;
   font-size: 0.9375rem;
   text-decoration: none;
-  padding: 0.2rem 0;
+  padding: 0.25rem 0;
   transition: color 0.2s ease, transform 0.2s ease;
 }
 
@@ -1977,7 +1986,7 @@ button, input, textarea, select {
   left: 0;
   width: 100%;
   height: 2px;
-  background: linear-gradient(90deg, #1456A0 0%, #E52D27 100%);
+  background: linear-gradient(90deg, #20AEEA 0%, #E5242A 100%);
   transform: scaleX(0);
   transform-origin: left;
   transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
@@ -1986,14 +1995,30 @@ button, input, textarea, select {
 
 .footer-nav-link:hover,
 .footer-nav-link:focus-visible {
-  color: #1456A0;
-  transform: translateX(3px);
-  outline: none;
+  color: #38BDF8;
+  transform: translateX(4px);
 }
 
 .footer-nav-link:hover::after,
 .footer-nav-link:focus-visible::after {
   transform: scaleX(1);
+}
+
+/* Luxury Translucent Cards for Corporate Office & Sikkim Plant in Footer */
+.footer-facility-card {
+  background-color: rgba(11, 37, 69, 0.72);
+  border: 1px solid rgba(56, 189, 248, 0.2);
+  border-radius: var(--radius-md);
+  padding: 1.5rem;
+  box-shadow: 0 8px 24px -4px rgba(4, 18, 36, 0.45);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: border-color 0.25s ease, transform 0.25s ease;
+}
+
+.footer-facility-card:hover {
+  border-color: rgba(56, 189, 248, 0.4);
+  transform: translateY(-2px);
 }
 
 /* Staggered Children Reveal */

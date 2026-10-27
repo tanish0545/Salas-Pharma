@@ -155,3 +155,4 @@ This audit evaluates the entire SALAS Pharma website following recent iterations
 - **Fonts Optimization:** Use Google Fonts `display=swap` with `preconnect` for `Cormorant Garamond` and `Plus Jakarta Sans`.
 - **Hosting (`vercel.json`):** Clean URLs, SPA rewrites, and 1-year immutable caching for `/assets/*` are already properly configured.
 - **Bundle Optimization:** es2022 target with CSS code splitting and manual vendor chunks (`vendor-react`, `vendor-icons`). Oxlint passes with 0 warnings.
+

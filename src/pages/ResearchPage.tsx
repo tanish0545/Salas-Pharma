@@ -3,6 +3,7 @@ import { FlaskConical, Microscope, Sparkles, CheckCircle2, ArrowRight, Atom } fr
 import { VIDEO_ASSETS, MEDIA_CONFIG, PAGE_HERO_IMAGES } from '../config/assets';
 import { BrandedVideo } from '../components/common/BrandedVideo';
 import { ScientificNetworkArtwork } from '../components/common/ScientificNetworkArtwork';
+import { MolecularBackground } from '../components/common/MolecularBackground';
 import { ScrollWordReveal } from '../components/common/ScrollWordReveal';
 import { SignatureClosingStatement } from '../components/common/SignatureClosingStatement';
 import { useScrollReveal } from '../hooks/useScrollReveal';
@@ -201,8 +202,10 @@ export const ResearchPage: React.FC<ResearchPageProps> = ({ onNavigate }) => {
       </section>
 
       {/* 4. INTERACTIVE SCIENTIFIC FOCUS MATRIX */}
-      <section className="section-spacing" style={{ backgroundColor: 'var(--color-bg-light)', borderTop: '1px solid var(--color-border)', borderBottom: '1px solid var(--color-border)' }}>
-        <div className="container">
+      <section className="section-spacing" style={{ position: 'relative', overflow: 'hidden', backgroundColor: 'var(--color-bg-light)', borderTop: '1px solid var(--color-border)', borderBottom: '1px solid var(--color-border)' }}>
+        {/* Subtle Cyclopentane Molecular Linework Background */}
+        <MolecularBackground variant="section" theme="light" opacity={0.35} position="split" />
+        <div className="container" style={{ position: 'relative', zIndex: 1 }}>
           <div className="section-header" style={{ textAlign: 'center', maxWidth: '780px', margin: '0 auto 3.5rem auto' }}>
             <span className="section-eyebrow">
               <Sparkles size={14} /> Core Formulation Disciplines
