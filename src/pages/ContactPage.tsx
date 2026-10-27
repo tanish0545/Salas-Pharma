@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { MapPin, Mail, Phone, Send, CheckCircle2, AlertCircle, Building2, Factory, Copy, Check, ExternalLink } from 'lucide-react';
+import { MEDIA_CONFIG } from '../config/assets';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 
 export const ContactPage: React.FC = () => {
@@ -89,7 +90,7 @@ export const ContactPage: React.FC = () => {
         </div>
       </section>
 
-      {/* Corporate & Manufacturing Location Cards */}
+      {/* Corporate & Manufacturing Location Cards with Authentic Architecture Photos */}
       <section style={{ backgroundColor: 'var(--color-bg-light)', borderTop: '1px solid var(--color-border)', borderBottom: '1px solid var(--color-border)', padding: '4rem 0' }}>
         <div className="container">
           <div 
@@ -101,75 +102,83 @@ export const ContactPage: React.FC = () => {
           >
             {/* Vadodara Corporate Office */}
             <div 
-              className="reveal-left"
+              className="reveal-left pharma-card"
               style={{
-                backgroundColor: '#FFFFFF',
-                borderRadius: 'var(--radius-lg)',
-                padding: '2.5rem',
-                border: '1px solid var(--color-border)',
-                boxShadow: 'var(--shadow-sm)',
                 display: 'flex',
                 flexDirection: 'column',
                 justifyContent: 'space-between',
               }}
             >
               <div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1.25rem' }}>
-                  <div 
-                    style={{
-                      width: '46px',
-                      height: '46px',
-                      borderRadius: 'var(--radius-sm)',
-                      backgroundColor: 'var(--color-primary-subtle)',
-                      color: 'var(--color-primary)',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                    }}
-                  >
-                    <Building2 size={24} />
-                  </div>
-                  <div>
-                    <span style={{ fontSize: '0.75rem', fontWeight: 800, textTransform: 'uppercase', color: 'var(--color-primary)', letterSpacing: '0.08em' }}>
-                      Headquarters
-                    </span>
-                    <h3 style={{ fontSize: '1.3rem', color: 'var(--color-navy)', margin: 0 }}>
-                      Corporate Office
-                    </h3>
-                  </div>
+                <div className="pharma-card-img-wrap" style={{ height: '220px' }}>
+                  <img 
+                    src={MEDIA_CONFIG.contact.officeImage} 
+                    alt="Salas Pharmaceuticals corporate headquarters in Vadodara Gujarat" 
+                    loading="lazy" 
+                    decoding="async" 
+                    width={480} 
+                    height={220} 
+                  />
                 </div>
-
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '1.2rem', color: 'var(--color-text-body)', fontSize: '0.95rem' }}>
-                  <div style={{ display: 'flex', gap: '0.85rem' }}>
-                    <MapPin size={20} style={{ color: 'var(--color-primary)', flexShrink: 0, marginTop: '0.2rem' }} />
+                <div className="pharma-card-seam" />
+                <div className="pharma-card-body">
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1.25rem' }}>
+                    <div 
+                      style={{
+                        width: '42px',
+                        height: '42px',
+                        borderRadius: 'var(--radius-sm)',
+                        backgroundColor: 'var(--color-primary-subtle)',
+                        color: 'var(--color-primary)',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                      }}
+                    >
+                      <Building2 size={22} />
+                    </div>
                     <div>
-                      <strong>Salas Pharmaceuticals Pvt. Ltd.</strong><br />
-                      1st Floor, 4th Vama Villa Society,<br />
-                      Behind Joy Complex, Nizampura,<br />
-                      Vadodara, Gujarat – 390002
+                      <span style={{ fontSize: '0.75rem', fontWeight: 800, textTransform: 'uppercase', color: 'var(--color-primary)', letterSpacing: '0.08em' }}>
+                        Headquarters
+                      </span>
+                      <h3 style={{ fontSize: '1.25rem', color: 'var(--color-navy)', margin: 0 }}>
+                        Corporate Office
+                      </h3>
                     </div>
                   </div>
 
-                  <div style={{ display: 'flex', gap: '0.85rem', alignItems: 'flex-start' }}>
-                    <Phone size={19} style={{ color: 'var(--color-primary)', flexShrink: 0, marginTop: '0.15rem' }} />
-                    <div>
-                      <a href="tel:06122323212" style={{ color: 'var(--color-navy)', fontWeight: 600 }}>0612-2323212</a>
-                      <div style={{ fontSize: '0.75rem', color: 'var(--color-accent)', fontWeight: 600, marginTop: '0.15rem' }}>
-                        * Flagged for client verification (0612 is Bihar STD; Vadodara office is Gujarat)
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '1.2rem', color: 'var(--color-text-body)', fontSize: '0.95rem' }}>
+                    <div style={{ display: 'flex', gap: '0.85rem' }}>
+                      <MapPin size={20} style={{ color: 'var(--color-primary)', flexShrink: 0, marginTop: '0.2rem' }} />
+                      <div>
+                        <strong>Salas Pharmaceuticals Pvt. Ltd.</strong><br />
+                        1st Floor, 4th Vama Villa Society,<br />
+                        Behind Joy Complex, Nizampura,<br />
+                        Vadodara, Gujarat – 390002
                       </div>
                     </div>
-                  </div>
 
-                  <div style={{ display: 'flex', gap: '0.85rem', alignItems: 'center' }}>
-                    <Mail size={19} style={{ color: 'var(--color-primary)', flexShrink: 0 }} />
-                    <a href="mailto:info@salaspharma.co.in" style={{ color: 'var(--color-primary)', fontWeight: 600 }}>
-                      info@salaspharma.co.in
-                    </a>
+                    <div style={{ display: 'flex', gap: '0.85rem', alignItems: 'flex-start' }}>
+                      <Phone size={19} style={{ color: 'var(--color-primary)', flexShrink: 0, marginTop: '0.15rem' }} />
+                      <div>
+                        <a href="tel:06122323212" style={{ color: 'var(--color-navy)', fontWeight: 600 }}>0612-2323212</a>
+                        <div style={{ fontSize: '0.75rem', color: 'var(--color-accent)', fontWeight: 600, marginTop: '0.15rem' }}>
+                          * Flagged for client verification (0612 is Bihar STD; Vadodara office is Gujarat)
+                        </div>
+                      </div>
+                    </div>
+
+                    <div style={{ display: 'flex', gap: '0.85rem', alignItems: 'center' }}>
+                      <Mail size={19} style={{ color: 'var(--color-primary)', flexShrink: 0 }} />
+                      <a href="mailto:info@salaspharma.co.in" style={{ color: 'var(--color-primary)', fontWeight: 600 }}>
+                        info@salaspharma.co.in
+                      </a>
+                    </div>
                   </div>
                 </div>
               </div>
 
-              <div style={{ marginTop: '2rem', paddingTop: '1.25rem', borderTop: '1px solid var(--color-border-light)' }}>
+              <div style={{ padding: '0 1.75rem 1.75rem', borderTop: '1px solid var(--color-border-light)', paddingTop: '1.25rem' }}>
                 <span style={{ fontSize: '0.8125rem', color: 'var(--color-text-muted)' }}>
                   Business Hours: Mon – Sat (9:30 AM – 6:30 PM IST)
                 </span>
@@ -178,77 +187,85 @@ export const ContactPage: React.FC = () => {
 
             {/* Sikkim Manufacturing Facility */}
             <div 
-              className="reveal-right"
+              className="reveal-right pharma-card"
               style={{
-                backgroundColor: '#FFFFFF',
-                borderRadius: 'var(--radius-lg)',
-                padding: '2.5rem',
-                border: '1px solid var(--color-border)',
-                boxShadow: 'var(--shadow-sm)',
                 display: 'flex',
                 flexDirection: 'column',
                 justifyContent: 'space-between',
               }}
             >
               <div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1.25rem' }}>
-                  <div 
-                    style={{
-                      width: '46px',
-                      height: '46px',
-                      borderRadius: 'var(--radius-sm)',
-                      backgroundColor: 'var(--color-accent-subtle)',
-                      color: 'var(--color-accent)',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                    }}
-                  >
-                    <Factory size={24} />
-                  </div>
-                  <div>
-                    <span style={{ fontSize: '0.75rem', fontWeight: 800, textTransform: 'uppercase', color: 'var(--color-accent)', letterSpacing: '0.08em' }}>
-                      Cleanroom Plant
-                    </span>
-                    <h3 style={{ fontSize: '1.3rem', color: 'var(--color-navy)', margin: 0 }}>
-                      Manufacturing Facility
-                    </h3>
-                  </div>
+                <div className="pharma-card-img-wrap" style={{ height: '220px' }}>
+                  <img 
+                    src={MEDIA_CONFIG.contact.facilityImage} 
+                    alt="Salas Pharmaceuticals manufacturing unit in South Sikkim" 
+                    loading="lazy" 
+                    decoding="async" 
+                    width={480} 
+                    height={220} 
+                  />
                 </div>
-
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '1.2rem', color: 'var(--color-text-body)', fontSize: '0.95rem' }}>
-                  <div style={{ display: 'flex', gap: '0.85rem' }}>
-                    <MapPin size={20} style={{ color: 'var(--color-accent)', flexShrink: 0, marginTop: '0.2rem' }} />
+                <div className="pharma-card-seam" />
+                <div className="pharma-card-body">
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1.25rem' }}>
+                    <div 
+                      style={{
+                        width: '42px',
+                        height: '42px',
+                        borderRadius: 'var(--radius-sm)',
+                        backgroundColor: 'var(--color-accent-subtle)',
+                        color: 'var(--color-accent)',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                      }}
+                    >
+                      <Factory size={22} />
+                    </div>
                     <div>
-                      <strong>Salas Pharmaceuticals Pvt. Ltd.</strong><br />
-                      Khatian No. 14, Plot Nos. 3 & 4,<br />
-                      Village Kharpani, Mamring,<br />
-                      South Sikkim, Sikkim – 737132
+                      <span style={{ fontSize: '0.75rem', fontWeight: 800, textTransform: 'uppercase', color: 'var(--color-accent)', letterSpacing: '0.08em' }}>
+                        Cleanroom Plant
+                      </span>
+                      <h3 style={{ fontSize: '1.25rem', color: 'var(--color-navy)', margin: 0 }}>
+                        Manufacturing Facility
+                      </h3>
                     </div>
                   </div>
 
-                  <div style={{ display: 'flex', gap: '0.85rem', alignItems: 'flex-start' }}>
-                    <Phone size={19} style={{ color: 'var(--color-accent)', flexShrink: 0, marginTop: '0.15rem' }} />
-                    <div>
-                      <span style={{ color: 'var(--color-text-muted)' }}>Telephone not specified in content record</span>
-                      <div style={{ fontSize: '0.75rem', color: 'var(--color-accent)', fontWeight: 600, marginTop: '0.15rem' }}>
-                        * Awaiting dedicated Sikkim plant telephone from client
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '1.2rem', color: 'var(--color-text-body)', fontSize: '0.95rem' }}>
+                    <div style={{ display: 'flex', gap: '0.85rem' }}>
+                      <MapPin size={20} style={{ color: 'var(--color-accent)', flexShrink: 0, marginTop: '0.2rem' }} />
+                      <div>
+                        <strong>Salas Pharmaceuticals Pvt. Ltd.</strong><br />
+                        Khatian No. 14, Plot Nos. 3 & 4,<br />
+                        Village Kharpani, Mamring,<br />
+                        South Sikkim, Sikkim – 737132
                       </div>
                     </div>
-                  </div>
 
-                  <div style={{ display: 'flex', gap: '0.85rem', alignItems: 'center' }}>
-                    <Mail size={19} style={{ color: 'var(--color-accent)', flexShrink: 0 }} />
-                    <a href="mailto:adminsikkim@salaspharma.co.in" style={{ color: 'var(--color-primary)', fontWeight: 600 }}>
-                      adminsikkim@salaspharma.co.in
-                    </a>
+                    <div style={{ display: 'flex', gap: '0.85rem', alignItems: 'flex-start' }}>
+                      <Phone size={19} style={{ color: 'var(--color-accent)', flexShrink: 0, marginTop: '0.15rem' }} />
+                      <div>
+                        <span style={{ color: 'var(--color-text-muted)' }}>Telephone not specified in content record</span>
+                        <div style={{ fontSize: '0.75rem', color: 'var(--color-accent)', fontWeight: 600, marginTop: '0.15rem' }}>
+                          * Awaiting dedicated Sikkim plant telephone from client
+                        </div>
+                      </div>
+                    </div>
+
+                    <div style={{ display: 'flex', gap: '0.85rem', alignItems: 'center' }}>
+                      <Mail size={19} style={{ color: 'var(--color-accent)', flexShrink: 0 }} />
+                      <a href="mailto:adminsikkim@salaspharma.co.in" style={{ color: 'var(--color-primary)', fontWeight: 600 }}>
+                        adminsikkim@salaspharma.co.in
+                      </a>
+                    </div>
                   </div>
                 </div>
               </div>
 
-              <div style={{ marginTop: '2rem', paddingTop: '1.25rem', borderTop: '1px solid var(--color-border-light)' }}>
+              <div style={{ padding: '0 1.75rem 1.75rem', borderTop: '1px solid var(--color-border-light)', paddingTop: '1.25rem' }}>
                 <span style={{ fontSize: '0.8125rem', color: 'var(--color-text-muted)' }}>
-                  Production Operations: 24/7 Monitored Cleanrooms
+                  Facility Operations: Mon – Sat (8:00 AM – 5:00 PM IST)
                 </span>
               </div>
             </div>

@@ -2,6 +2,8 @@ import React, { useState, useMemo } from 'react';
 import { Search, Pill, X, ArrowRight } from 'lucide-react';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 
+import { MEDIA_CONFIG } from '../config/assets';
+
 interface ProductsPageProps {
   onNavigate: (route: string) => void;
 }
@@ -148,18 +150,87 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({ onNavigate }) => {
 
   return (
     <div className="products-page" style={{ marginTop: 'var(--header-height)', paddingTop: '3.5rem', backgroundColor: '#FFFFFF' }}>
-      {/* Header */}
-      <section className="container" style={{ marginBottom: '3rem' }}>
-        <div style={{ maxWidth: '820px', margin: '0 auto', textAlign: 'center' }}>
-          <span className="section-eyebrow">
-            <Pill size={14} /> Pharmaceutical Catalogue
-          </span>
-          <h1 style={{ fontSize: 'clamp(2.2rem, 4vw, 3.2rem)', marginBottom: '1.25rem', color: 'var(--color-navy)' }}>
-            Explore Our Pharmaceutical Portfolio
-          </h1>
-          <p style={{ fontSize: '1.125rem', color: 'var(--color-text-muted)', lineHeight: 1.7, marginBottom: 0 }}>
-            We produce a diverse portfolio of pharmaceutical products across multiple dosage forms and therapeutic segments, committed to safety, stability, and therapeutic consistency.
-          </p>
+      {/* Hero Showcase with Photographic Dosage Form Image */}
+      <section className="container" style={{ marginBottom: '3.5rem' }}>
+        <div 
+          style={{ 
+            display: 'grid', 
+            gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', 
+            gap: '3.5rem', 
+            alignItems: 'center',
+            backgroundColor: 'var(--color-bg-light)',
+            padding: '3rem',
+            borderRadius: 'var(--radius-lg)',
+            border: '1px solid var(--color-border)',
+          }}
+        >
+          <div className="reveal-left">
+            <span className="section-eyebrow">
+              <Pill size={14} /> Pharmaceutical Catalogue
+            </span>
+            <h1 style={{ fontSize: 'clamp(2.2rem, 3.8vw, 3.2rem)', marginBottom: '1.25rem', color: 'var(--color-navy)' }}>
+              Finished Dosage Formulations & Portfolio
+            </h1>
+            <p style={{ fontSize: '1.1rem', color: 'var(--color-text-body)', lineHeight: 1.7, marginBottom: '2rem' }}>
+              Salas Pharma produces a diverse portfolio of pharmaceutical products spanning 8 key therapeutic segments. Our manufacturing capabilities support solid orals, liquids, and sterile dosage forms manufactured under stringent quality protocols.
+            </p>
+            <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+              <button 
+                type="button" 
+                onClick={() => onNavigate('contact')} 
+                className="btn btn-primary"
+              >
+                <span>Institutional Inquiries</span>
+                <ArrowRight size={16} />
+              </button>
+              <button 
+                type="button" 
+                onClick={() => onNavigate('manufacturing')} 
+                className="btn btn-secondary"
+              >
+                <span>Manufacturing Specs</span>
+              </button>
+            </div>
+          </div>
+
+          <div className="reveal-right">
+            <div 
+              className="img-zoom-wrapper" 
+              style={{ 
+                borderRadius: 'var(--radius-md)', 
+                overflow: 'hidden', 
+                boxShadow: 'var(--shadow-xl)',
+                border: '1px solid var(--color-border)',
+                position: 'relative',
+              }}
+            >
+              <img 
+                src={MEDIA_CONFIG.products.image} 
+                alt="Salas Pharma finished pharmaceutical dosage forms - tablets, capsules, ampoules" 
+                loading="lazy" 
+                decoding="async" 
+                width={640} 
+                height={400} 
+                style={{ width: '100%', height: '360px', objectFit: 'cover', display: 'block' }}
+              />
+              <div style={{
+                position: 'absolute',
+                bottom: 0,
+                left: 0,
+                right: 0,
+                background: 'linear-gradient(to top, rgba(7, 29, 54, 0.9), transparent)',
+                padding: '1.25rem 1.5rem',
+                color: '#FFFFFF',
+              }}>
+                <span style={{ fontSize: '0.75rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--color-secondary)' }}>
+                  Dosage Diversity
+                </span>
+                <p style={{ margin: '0.2rem 0 0', fontSize: '0.9rem', fontWeight: 600 }}>
+                  Solid Orals, Multi-Particulates & Sterile Formulations
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 

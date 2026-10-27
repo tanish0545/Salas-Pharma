@@ -488,72 +488,35 @@ export const LaboratoriesPage: React.FC<LaboratoriesPageProps> = ({ onNavigate }
           <div
             style={{
               display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
               gap: '2rem',
             }}
           >
             {/* Card 1: Analytical Chemistry & Chromatography */}
-            <div
-              className="reveal-up"
-              style={{
-                backgroundColor: '#FFFFFF',
-                borderRadius: 'var(--radius-lg)',
-                overflow: 'hidden',
-                border: '1px solid var(--color-border)',
-                boxShadow: 'var(--shadow-sm)',
-                transition: 'transform 0.3s ease, box-shadow 0.3s ease',
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.transform = 'translateY(-5px)';
-                e.currentTarget.style.boxShadow = 'var(--shadow-lg)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.transform = 'translateY(0)';
-                e.currentTarget.style.boxShadow = 'var(--shadow-sm)';
-              }}
-            >
-              <div className="img-zoom-wrapper" style={{ height: '240px' }}>
+            <div className="pharma-card reveal-up">
+              <div className="pharma-card-img-wrap">
                 <img
-                  src={MEDIA_CONFIG.laboratory.analyticalImage}
-                  alt="Scientists in protective lab coats performing analytical chemistry testing"
+                  src={MEDIA_CONFIG.laboratory.hplcImage || MEDIA_CONFIG.laboratory.analyticalImage}
+                  alt="HPLC high performance liquid chromatography instrumentation in pharmaceutical laboratory"
                   loading="lazy"
                   decoding="async"
                   width={400}
                   height={240}
-                  style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                 />
               </div>
-              <div style={{ padding: '1.75rem' }}>
-                <h4 style={{ fontSize: '1.15rem', fontWeight: 700, color: 'var(--color-navy)', marginBottom: '0.5rem' }}>
-                  Analytical Instruments & Assays
-                </h4>
-                <p style={{ fontSize: '0.9rem', color: 'var(--color-text-body)', lineHeight: 1.6, margin: 0 }}>
+              <div className="pharma-card-seam" />
+              <div className="pharma-card-body">
+                <span className="pharma-card-tag">Instrumentation</span>
+                <h3 className="pharma-card-title">HPLC & Chromatography</h3>
+                <p className="pharma-card-desc">
                   High-performance chromatography, spectrophotometric characterization, and quantitative evaluation of active pharmaceutical compounds.
                 </p>
               </div>
             </div>
 
             {/* Card 2: Precision Microscope Inspection */}
-            <div
-              className="reveal-up delay-100"
-              style={{
-                backgroundColor: '#FFFFFF',
-                borderRadius: 'var(--radius-lg)',
-                overflow: 'hidden',
-                border: '1px solid var(--color-border)',
-                boxShadow: 'var(--shadow-sm)',
-                transition: 'transform 0.3s ease, box-shadow 0.3s ease',
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.transform = 'translateY(-5px)';
-                e.currentTarget.style.boxShadow = 'var(--shadow-lg)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.transform = 'translateY(0)';
-                e.currentTarget.style.boxShadow = 'var(--shadow-sm)';
-              }}
-            >
-              <div className="img-zoom-wrapper" style={{ height: '240px' }}>
+            <div className="pharma-card reveal-up" style={{ animationDelay: '100ms' }}>
+              <div className="pharma-card-img-wrap">
                 <img
                   src={MEDIA_CONFIG.laboratory.microscopeImage}
                   alt="Laboratory scientist examining pharmaceutical samples using a precision binocular microscope"
@@ -561,40 +524,21 @@ export const LaboratoriesPage: React.FC<LaboratoriesPageProps> = ({ onNavigate }
                   decoding="async"
                   width={400}
                   height={240}
-                  style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                 />
               </div>
-              <div style={{ padding: '1.75rem' }}>
-                <h4 style={{ fontSize: '1.15rem', fontWeight: 700, color: 'var(--color-navy)', marginBottom: '0.5rem' }}>
-                  Microscopic Sample Inspection
-                </h4>
-                <p style={{ fontSize: '0.9rem', color: 'var(--color-text-body)', lineHeight: 1.6, margin: 0 }}>
+              <div className="pharma-card-seam" />
+              <div className="pharma-card-body">
+                <span className="pharma-card-tag">Microscopy</span>
+                <h3 className="pharma-card-title">Microscopic Sample Inspection</h3>
+                <p className="pharma-card-desc">
                   Particle sizing, crystal morphology analysis, and granular stability assessment utilizing precision binocular microscopy.
                 </p>
               </div>
             </div>
 
             {/* Card 3: Quality-Driven Formulation Testing */}
-            <div
-              className="reveal-up delay-200"
-              style={{
-                backgroundColor: '#FFFFFF',
-                borderRadius: 'var(--radius-lg)',
-                overflow: 'hidden',
-                border: '1px solid var(--color-border)',
-                boxShadow: 'var(--shadow-sm)',
-                transition: 'transform 0.3s ease, box-shadow 0.3s ease',
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.transform = 'translateY(-5px)';
-                e.currentTarget.style.boxShadow = 'var(--shadow-lg)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.transform = 'translateY(0)';
-                e.currentTarget.style.boxShadow = 'var(--shadow-sm)';
-              }}
-            >
-              <div className="img-zoom-wrapper" style={{ height: '240px' }}>
+            <div className="pharma-card reveal-up" style={{ animationDelay: '200ms' }}>
+              <div className="pharma-card-img-wrap">
                 <img
                   src={MEDIA_CONFIG.quality.image}
                   alt="Laboratory glassware and pharmaceutical quality control testing"
@@ -602,15 +546,36 @@ export const LaboratoriesPage: React.FC<LaboratoriesPageProps> = ({ onNavigate }
                   decoding="async"
                   width={400}
                   height={240}
-                  style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                 />
               </div>
-              <div style={{ padding: '1.75rem' }}>
-                <h4 style={{ fontSize: '1.15rem', fontWeight: 700, color: 'var(--color-navy)', marginBottom: '0.5rem' }}>
-                  Laboratory Glassware & Controls
-                </h4>
-                <p style={{ fontSize: '0.9rem', color: 'var(--color-text-body)', lineHeight: 1.6, margin: 0 }}>
+              <div className="pharma-card-seam" />
+              <div className="pharma-card-body">
+                <span className="pharma-card-tag">Standards</span>
+                <h3 className="pharma-card-title">Laboratory Glassware & Controls</h3>
+                <p className="pharma-card-desc">
                   Calibrated volumetric glassware, standardized chemical reagents, and rigorous in-process controls supporting batch uniformity.
+                </p>
+              </div>
+            </div>
+
+            {/* Card 4: Laboratory Environment & AHU */}
+            <div className="pharma-card reveal-up" style={{ animationDelay: '300ms' }}>
+              <div className="pharma-card-img-wrap">
+                <img
+                  src={MEDIA_CONFIG.laboratory.environmentImage}
+                  alt="Modern clean pharmaceutical laboratory testing environment"
+                  loading="lazy"
+                  decoding="async"
+                  width={400}
+                  height={240}
+                />
+              </div>
+              <div className="pharma-card-seam" />
+              <div className="pharma-card-body">
+                <span className="pharma-card-tag">Environment</span>
+                <h3 className="pharma-card-title">Controlled Environment</h3>
+                <p className="pharma-card-desc">
+                  Calibrated humidity controls, laminar airflow workstations, and cleanroom air handling maintaining test environment stability.
                 </p>
               </div>
             </div>

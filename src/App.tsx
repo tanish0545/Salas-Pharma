@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback, lazy, Suspense } from 'react';
 import { CinematicLoader } from './components/common/CinematicLoader';
+import { CapsuleCursor } from './components/common/CapsuleCursor';
 import { Navbar } from './components/layout/Navbar';
 import { Footer } from './components/layout/Footer';
 
@@ -80,6 +81,9 @@ export function App() {
 
   return (
     <div className="salas-pharma-app" style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+      {/* Custom Capsule Cursor for Desktop (Concept Board Panel 3) */}
+      <CapsuleCursor />
+
       {/* Exactly ONE initial intro/loading experience */}
       {showCinematicLoader && (
         <CinematicLoader onComplete={handleLoaderComplete} />

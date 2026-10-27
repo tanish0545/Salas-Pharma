@@ -2,6 +2,7 @@ import React from 'react';
 import { Award, Target, Eye, Compass, ArrowRight, Calendar } from 'lucide-react';
 import { MEDIA_CONFIG } from '../config/assets';
 import { AmbientVideoBackground } from '../components/common/AmbientVideoBackground';
+import { AnimatedCounter } from '../components/common/AnimatedCounter';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 
 interface AboutPageProps {
@@ -68,7 +69,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
         </div>
       </AmbientVideoBackground>
 
-      {/* Editorial Story */}
+      {/* Editorial Story & Facility Image */}
       <section className="section-spacing">
         <div className="container">
           <div 
@@ -86,17 +87,35 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
                   borderRadius: 'var(--radius-lg)',
                   boxShadow: 'var(--shadow-xl)',
                   border: '1px solid var(--color-border)',
+                  overflow: 'hidden',
+                  position: 'relative',
                 }}
               >
                 <img 
-                  src={MEDIA_CONFIG.hero.image} 
-                  alt="Salas Pharma laboratory cleanroom" 
+                  src={MEDIA_CONFIG.about.image} 
+                  alt="Salas Pharmaceuticals Sikkim manufacturing facility in scenic valley" 
                   loading="lazy"
                   decoding="async"
                   width={640}
                   height={480}
-                  style={{ width: '100%', height: '480px', objectFit: 'cover' }}
+                  style={{ width: '100%', height: '440px', objectFit: 'cover', display: 'block' }}
                 />
+                <div style={{
+                  position: 'absolute',
+                  bottom: 0,
+                  left: 0,
+                  right: 0,
+                  background: 'linear-gradient(to top, rgba(7, 29, 54, 0.88), transparent)',
+                  padding: '1.5rem',
+                  color: '#FFFFFF',
+                }}>
+                  <span style={{ fontSize: '0.75rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.1em', color: 'var(--color-secondary)' }}>
+                    Production Infrastructure
+                  </span>
+                  <p style={{ margin: '0.25rem 0 0', fontSize: '0.95rem', fontWeight: 600 }}>
+                    Salas Pharmaceuticals Facility — Mamring, South Sikkim
+                  </p>
+                </div>
               </div>
             </div>
 
@@ -121,13 +140,125 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
 
               <div style={{ marginTop: '2.5rem', display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '1.25rem' }}>
                 <div style={{ padding: '1.25rem', backgroundColor: 'var(--color-bg-light)', borderRadius: 'var(--radius-sm)', borderLeft: '3px solid var(--color-primary)' }}>
-                  <h4 style={{ fontSize: '1.1rem', fontWeight: 800, color: 'var(--color-primary)', margin: 0 }}>2009</h4>
+                  <h4 style={{ fontSize: '1.1rem', fontWeight: 800, color: 'var(--color-primary)', margin: 0 }}>
+                    <AnimatedCounter target={2009} />
+                  </h4>
                   <p style={{ fontSize: '0.85rem', color: 'var(--color-text-muted)', margin: 0, marginTop: '0.2rem' }}>Year Established</p>
                 </div>
                 <div style={{ padding: '1.25rem', backgroundColor: 'var(--color-bg-light)', borderRadius: 'var(--radius-sm)', borderLeft: '3px solid var(--color-accent)' }}>
                   <h4 style={{ fontSize: '1.1rem', fontWeight: 800, color: 'var(--color-accent)', margin: 0 }}>Pan-India</h4>
                   <p style={{ fontSize: '0.85rem', color: 'var(--color-text-muted)', margin: 0, marginTop: '0.2rem' }}>Distribution Reach</p>
                 </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Image-Led Operational Pillars */}
+      <section className="section-spacing" style={{ backgroundColor: 'var(--color-bg-light)', borderTop: '1px solid var(--color-border)' }}>
+        <div className="container">
+          <div className="section-header">
+            <span className="section-eyebrow">
+              <Compass size={14} /> Strategic Foundations
+            </span>
+            <h2 className="section-title">Pillars of Our Pharmaceutical Practice</h2>
+            <p className="section-description">
+              Combining dedicated manufacturing infrastructure, disciplined quality testing, and expert personnel to deliver consistent therapeutics.
+            </p>
+          </div>
+
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2rem' }}>
+            {/* Pillar 1: Sikkim Facility */}
+            <div className="pharma-card reveal-up">
+              <div className="pharma-card-img-wrap">
+                <img 
+                  src={MEDIA_CONFIG.about.image} 
+                  alt="Salas Pharma dedicated manufacturing facility" 
+                  loading="lazy" 
+                  decoding="async" 
+                  width={400} 
+                  height={240} 
+                />
+              </div>
+              <div className="pharma-card-seam" />
+              <div className="pharma-card-body">
+                <span className="pharma-card-tag">Infrastructure</span>
+                <h3 className="pharma-card-title">Dedicated Sikkim Plant</h3>
+                <p className="pharma-card-desc">
+                  Equipped with controlled cleanroom suites, modern granulation, tablet compression, and automated packaging lines in Mamring, South Sikkim.
+                </p>
+                <button 
+                  type="button" 
+                  onClick={() => onNavigate('manufacturing')}
+                  className="card-cta"
+                  style={{ background: 'none', border: 'none', padding: 0, cursor: 'pointer' }}
+                >
+                  <span>Explore Facility</span>
+                  <ArrowRight size={14} />
+                </button>
+              </div>
+            </div>
+
+            {/* Pillar 2: Quality Commitment */}
+            <div className="pharma-card reveal-up" style={{ animationDelay: '150ms' }}>
+              <div className="pharma-card-img-wrap">
+                <img 
+                  src={MEDIA_CONFIG.quality.image} 
+                  alt="Quality assurance testing and compliance inspection" 
+                  loading="lazy" 
+                  decoding="async" 
+                  width={400} 
+                  height={240} 
+                />
+              </div>
+              <div className="pharma-card-seam" />
+              <div className="pharma-card-body">
+                <span className="pharma-card-tag">Quality Assurance</span>
+                <h3 className="pharma-card-title">Rigorous Analytical Testing</h3>
+                <p className="pharma-card-desc">
+                  Systematic raw material verification, dissolution profile screening, and physical dosage evaluation throughout formulation and packaging.
+                </p>
+                <button 
+                  type="button" 
+                  onClick={() => onNavigate('laboratories')}
+                  className="card-cta"
+                  style={{ background: 'none', border: 'none', padding: 0, cursor: 'pointer' }}
+                >
+                  <span>View Laboratories</span>
+                  <ArrowRight size={14} />
+                </button>
+              </div>
+            </div>
+
+            {/* Pillar 3: People & Purpose */}
+            <div className="pharma-card reveal-up" style={{ animationDelay: '300ms' }}>
+              <div className="pharma-card-img-wrap">
+                <img 
+                  src={MEDIA_CONFIG.careers.image} 
+                  alt="Salas Pharma multidisciplinary research and quality control team" 
+                  loading="lazy" 
+                  decoding="async" 
+                  width={400} 
+                  height={240} 
+                />
+              </div>
+              <div className="pharma-card-seam" />
+              <div className="pharma-card-body">
+                <span className="pharma-card-tag">Human Capital</span>
+                <h3 className="pharma-card-title">People & Integrity</h3>
+                <p className="pharma-card-desc">
+                  An experienced cadre of pharmaceutical professionals, analytical chemists, and regulatory specialists committed to patient healthcare.
+                </p>
+                <button 
+                  type="button" 
+                  onClick={() => onNavigate('careers')}
+                  className="card-cta"
+                  style={{ background: 'none', border: 'none', padding: 0, cursor: 'pointer' }}
+                >
+                  <span>Join Our Team</span>
+                  <ArrowRight size={14} />
+                </button>
               </div>
             </div>
           </div>

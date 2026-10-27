@@ -4,32 +4,34 @@
    ========================================================================== */
 
 :root {
-  /* Brand Color Tokens */
-  --color-primary: #0A4D9E;
-  --color-primary-hover: #073B75;
-  --color-primary-light: #1E66BC;
-  --color-primary-subtle: #EBF3FC;
+  /* Brand Color Tokens (SALAS Palette) */
+  --color-primary: #1456A0;
+  --color-primary-hover: #0E417A;
+  --color-primary-light: #20AEEA;
+  --color-primary-subtle: #EBF4FC;
 
-  --color-navy: #061D38;
+  --color-navy: #071D36;
   --color-navy-dark: #041224;
-  --color-navy-light: #0D2C54;
+  --color-navy-light: #0E294A;
 
-  --color-accent: #E52D27;
-  --color-accent-hover: #C5221F;
+  --color-accent: #E5242A;
+  --color-accent-hover: #C51D22;
   --color-accent-subtle: #FEF2F2;
   --color-accent-border: #FCA5A5;
 
-  /* Neutral Backgrounds (Strictly White & Pristine Light Gray) */
+  --color-cyan: #20AEEA;
+
+  /* Neutral Backgrounds */
   --color-bg-white: #FFFFFF;
   --color-bg-surface: #FFFFFF;
-  --color-bg-light: #F8FAFC;
-  --color-bg-alt: #F1F5F9;
+  --color-bg-light: #F5F8FC;
+  --color-bg-alt: #EDF3F9;
 
   /* Typography Colors */
-  --color-text-heading: #061D38;
-  --color-text-body: #334155;
-  --color-text-muted: #64748B;
-  --color-text-light: #94A3B8;
+  --color-text-heading: #071D36;
+  --color-text-body: #102641;
+  --color-text-muted: #52647A;
+  --color-text-light: #8292A6;
 
   /* Borders & Dividers */
   --color-border: #E2E8F0;
@@ -240,6 +242,54 @@ button, input, textarea, select {
 }
 
 /* ==========================================================================
+   NAVBAR & HEADER NAVIGATION
+   ========================================================================== */
+
+.nav-link-item {
+  position: relative;
+  text-decoration: none;
+  padding: 0.45rem 0;
+  outline: none;
+  display: inline-block;
+  color: var(--color-text-body);
+  transition: color 0.2s ease;
+}
+
+.nav-link-item::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2.5px;
+  background: linear-gradient(90deg, var(--color-primary) 0%, var(--color-accent) 100%);
+  border-radius: var(--radius-full);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.nav-link-item:hover::after,
+.nav-link-item:focus-visible::after {
+  transform: scaleX(1);
+}
+
+.nav-link-item.active {
+  color: var(--color-primary);
+  font-weight: 700;
+}
+
+.nav-link-item.active::after {
+  transform: scaleX(1);
+}
+
+.nav-link-item:focus-visible {
+  outline: 2px solid var(--color-primary-light);
+  outline-offset: 4px;
+  border-radius: 2px;
+}
+
+/* ==========================================================================
    SCROLL DIRECTIONAL REVEAL ANIMATIONS
    ========================================================================== */
 
@@ -322,9 +372,7 @@ button, input, textarea, select {
   pointer-events: none;
 }
 
-/* Centre-splitting Royal Blue Theatre Curtain Panels
-   Uniform, identical royal-blue color matching base with zero initial box-shadow,
-   eliminating premature center partition lines, dark stripes, or color seams. */
+/* Centre-splitting Pure White Theatre Curtain Panels */
 .loader-curtain {
   position: absolute;
   top: 0;
@@ -332,7 +380,7 @@ button, input, textarea, select {
   width: 50.5vw;
   height: 100vh;
   height: 100dvh;
-  background: #061D38; /* Exact matching uniform royal blue */
+  background: #FFFFFF; /* Pure clean white background */
   z-index: 10;
   box-shadow: none;
   border: none;
@@ -381,9 +429,9 @@ button, input, textarea, select {
 }
 
 /* ==========================================================================
-   STAGES 1, 2 & 3: REFINED THIN WHITE CAPSULE OUTLINE & SCIENTIFIC ELEMENTS
-   Hollow capsule drawn with thin white strokes, opening visibly from the centre,
-   releasing a thin DNA double helix and molecular structures.
+   STAGES 1, 2 & 3: BRAND GRADIENT CAPSULE & SCIENTIFIC ELEMENTS
+   Centrally positioned red-and-blue gradient capsule opening smoothly,
+   releasing delicate scientific DNA strands and molecular nodes.
    ========================================================================== */
 
 .capsule-minimal-stage {
@@ -394,12 +442,12 @@ button, input, textarea, select {
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1), transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1), transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .capsule-minimal-stage.capsule-dissolved {
   opacity: 0;
-  transform: scale(0.85);
+  transform: scale(0.9);
   pointer-events: none;
 }
 
@@ -407,30 +455,30 @@ button, input, textarea, select {
   width: 100%;
   height: 100%;
   overflow: visible;
-  filter: drop-shadow(0 10px 28px rgba(0, 0, 0, 0.4));
+  filter: drop-shadow(0 14px 36px rgba(20, 86, 160, 0.18));
 }
 
-/* Capsule Outline Halves Opening Visibly from Centre */
+/* Capsule Shell Halves Opening Visibly from Centre */
 .capsule-half-outline {
   transform-origin: 180px 80px;
-  transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
   will-change: transform;
 }
 
 .capsule-half-outline.left-half.opened {
-  transform: translateX(-48px);
+  transform: translateX(-40px) rotate(-1.5deg);
 }
 
 .capsule-half-outline.right-half.opened {
-  transform: translateX(48px);
+  transform: translateX(40px) rotate(1.5deg);
 }
 
 /* Scientific Elements Emerge (DNA Double Helix & Molecular Clusters) */
 .scientific-elements-group {
   transform-origin: 180px 80px;
   opacity: 0;
-  transform: scale(0.65);
-  transition: opacity 0.45s ease-out, transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+  transform: scale(0.7);
+  transition: opacity 0.4s ease-out, transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .scientific-elements-group.scientific-active {
@@ -443,11 +491,11 @@ button, input, textarea, select {
 .dna-strand-2 {
   stroke-dasharray: 240;
   stroke-dashoffset: 240;
-  animation: drawDnaStrand 0.6s cubic-bezier(0.2, 0.8, 0.3, 1) forwards;
+  animation: drawDnaStrand 0.55s cubic-bezier(0.2, 0.8, 0.3, 1) forwards;
 }
 
 .dna-strand-2 {
-  animation-delay: 0.08s;
+  animation-delay: 0.06s;
 }
 
 @keyframes drawDnaStrand {
@@ -458,7 +506,7 @@ button, input, textarea, select {
 
 .dna-rung {
   opacity: 0;
-  animation: fadeInRung 0.35s ease-out 0.2s forwards;
+  animation: fadeInRung 0.3s ease-out 0.15s forwards;
 }
 
 @keyframes fadeInRung {
@@ -469,20 +517,20 @@ button, input, textarea, select {
 
 /* Molecular Cluster Float */
 .molecular-cluster.cluster-top {
-  animation: floatMolTop 0.65s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: floatMolTop 0.55s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 @keyframes floatMolTop {
-  0% { transform: translateY(18px); opacity: 0; }
+  0% { transform: translateY(16px); opacity: 0; }
   100% { transform: translateY(-4px); opacity: 1; }
 }
 
 .molecular-cluster.cluster-bottom {
-  animation: floatMolBottom 0.65s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: floatMolBottom 0.55s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 @keyframes floatMolBottom {
-  0% { transform: translateY(-18px); opacity: 0; }
+  0% { transform: translateY(-16px); opacity: 0; }
   100% { transform: translateY(4px); opacity: 1; }
 }
 
@@ -493,92 +541,170 @@ button, input, textarea, select {
 
 @keyframes floatSubtle1 {
   from { transform: translateY(0); }
-  to { transform: translateY(-5px); }
+  to { transform: translateY(-4px); }
 }
 
 @keyframes floatSubtle2 {
   from { transform: translateY(0); }
-  to { transform: translateY(5px); }
+  to { transform: translateY(4px); }
 }
+
+/* Dispersing Red & Blue Scientific Particles (Concept Board Panel 2) */
+.dispersing-particles .loader-particle {
+  transition: transform 0.55s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s ease-out;
+  will-change: transform, opacity;
+  opacity: 0;
+}
+
+.scientific-active .loader-particle {
+  opacity: 0.85;
+}
+
+.scientific-active .p-left-1 { transform: translate(-28px, -18px); }
+.scientific-active .p-left-2 { transform: translate(-42px, 16px); }
+.scientific-active .p-left-3 { transform: translate(-54px, -24px); }
+.scientific-active .p-left-4 { transform: translate(-65px, 8px); }
+
+.scientific-active .p-right-1 { transform: translate(28px, -18px); }
+.scientific-active .p-right-2 { transform: translate(42px, 16px); }
+.scientific-active .p-right-3 { transform: translate(54px, -24px); }
+.scientific-active .p-right-4 { transform: translate(65px, 8px); }
 
 /* ==========================================================================
-   STAGE 4: ORIGINAL MASTER SALAS PHARMA LOGO & SPECULAR SHINE SWEEP
-   Original SALAS logo inside its clean, opaque white square background
+   CUSTOM CAPSULE CURSOR (CONCEPT BOARD PANEL 3)
+   45-degree bicolored capsule with hover aura, click ripple & trail particles
    ========================================================================== */
 
-.loader-logo-presentation {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) scale(0.92);
+.capsule-cursor-portal {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 99999;
   opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1), transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: auto;
-  z-index: 25;
+  transition: opacity 0.25s ease;
 }
 
-.loader-logo-presentation.logo-active {
+.capsule-cursor-portal.is-visible {
   opacity: 1;
-  transform: translate(-50%, -50%) scale(1);
-  pointer-events: auto;
 }
 
-/* Original Clean, Opaque White Square Logo Container */
-.loader-logo-square-card {
-  position: relative;
-  background-color: #FFFFFF !important;
-  border-radius: 16px;
-  padding: 1.5rem 2rem;
+.capsule-cursor-body {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 32px;
+  height: 32px;
+  margin-top: -16px;
+  margin-left: -16px;
+  pointer-events: none;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.45);
-  overflow: hidden;
-  max-width: min(340px, 85vw);
-  width: auto;
-  border: none !important;
+  will-change: transform;
 }
 
-.loader-original-logo-img {
-  width: 100%;
-  max-width: 250px;
-  height: auto;
-  aspect-ratio: 1024 / 844;
-  object-fit: contain;
+.capsule-cursor-svg {
   display: block;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  transform-origin: center;
 }
 
-/* Brief Specular Shine Across Logo Card */
-.loader-card-shine {
+.capsule-cursor-body.cursor-hovered .capsule-cursor-svg {
+  transform: scale(1.18);
+}
+
+.capsule-cursor-body.cursor-clicked .capsule-cursor-svg {
+  transform: scale(0.92);
+}
+
+/* Concentric Aura Glow Ring on Hover (Panel 3) */
+.cursor-aura-ring {
   position: absolute;
-  top: -50%;
-  left: -120%;
-  width: 60%;
-  height: 200%;
-  background: linear-gradient(
-    115deg,
-    transparent 0%,
-    rgba(255, 255, 255, 0) 20%,
-    rgba(255, 255, 255, 0.85) 50%,
-    rgba(255, 255, 255, 0) 80%,
-    transparent 100%
-  );
-  transform: skewX(-24deg);
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(32, 174, 234, 0.65);
+  box-shadow: 0 0 14px rgba(32, 174, 234, 0.35);
+  opacity: 0;
+  transform: scale(0.65);
+  transition: opacity 0.25s ease, transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   pointer-events: none;
 }
 
-.logo-active .loader-card-shine {
-  animation: cardShineSweep 0.65s cubic-bezier(0.4, 0, 0.2, 1) 0.1s forwards;
+.capsule-cursor-body.cursor-hovered .cursor-aura-ring {
+  opacity: 1;
+  transform: scale(1.15);
+  animation: cursorAuraPulse 1.8s infinite ease-in-out;
 }
 
-@keyframes cardShineSweep {
-  0% { left: -120%; }
-  100% { left: 160%; }
+@keyframes cursorAuraPulse {
+  0%, 100% {
+    transform: scale(1.15);
+    border-color: rgba(32, 174, 234, 0.65);
+    box-shadow: 0 0 14px rgba(32, 174, 234, 0.35);
+  }
+  50% {
+    transform: scale(1.32);
+    border-color: rgba(229, 36, 42, 0.65);
+    box-shadow: 0 0 18px rgba(229, 36, 42, 0.35);
+  }
+}
+
+/* Expanding Click Ripple Wave (Panel 3) */
+.cursor-ripple-wave {
+  position: absolute;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 2px solid rgba(229, 36, 42, 0.85);
+  animation: cursorRipple 0.45s ease-out forwards;
+  pointer-events: none;
+}
+
+@keyframes cursorRipple {
+  0% {
+    transform: scale(0.35);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.7);
+    opacity: 0;
+  }
+}
+
+/* Molecular Trail Micro-Dots (Panel 3) */
+.cursor-trail-dot {
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 50%;
+  pointer-events: none;
+  box-shadow: 0 0 6px currentColor;
+  will-change: transform, opacity;
+  animation: cursorTrailFade 0.4s ease-out forwards;
+}
+
+@keyframes cursorTrailFade {
+  0% {
+    opacity: 0.95;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+/* On desktop with capsule cursor, customize pointer behavior */
+@media (hover: hover) and (pointer: fine) {
+  body.has-capsule-cursor {
+    cursor: default;
+  }
+  body.has-capsule-cursor a,
+  body.has-capsule-cursor button,
+  body.has-capsule-cursor [role="button"],
+  body.has-capsule-cursor input,
+  body.has-capsule-cursor select {
+    cursor: pointer;
+  }
 }
 
 /* ==========================================================================
@@ -1679,6 +1805,399 @@ button, input, textarea, select {
   .timeline-dot {
     left: 20px;
   }
+}
+
+/* ==========================================================================
+   HERO FEATURE STRIP (PHASE 3.A)
+   Clean 4-column feature strip below hero linking core strengths
+   ========================================================================== */
+
+.hero-feature-strip {
+  background-color: var(--color-bg-white);
+  border-bottom: 1px solid var(--color-border);
+  box-shadow: 0 4px 20px rgba(7, 29, 54, 0.04);
+  position: relative;
+  z-index: 5;
+}
+
+.hero-feature-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.hero-feature-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.15rem;
+  padding: 1.75rem 1.5rem;
+  transition: background-color var(--transition-fast), transform var(--transition-fast);
+  border-right: 1px solid var(--color-border);
+}
+
+.hero-feature-item:last-child {
+  border-right: none;
+}
+
+.hero-feature-item:hover {
+  background-color: var(--color-bg-light);
+}
+
+.hero-feature-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-sm);
+  background-color: var(--color-primary-subtle);
+  color: var(--color-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: transform var(--transition-fast), background-color var(--transition-fast), color var(--transition-fast);
+}
+
+.hero-feature-item:hover .hero-feature-icon {
+  transform: translateY(-2px);
+  background-color: var(--color-primary);
+  color: #FFFFFF;
+}
+
+.hero-feature-title {
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: var(--color-navy);
+  margin-bottom: 0.25rem;
+  line-height: 1.3;
+}
+
+.hero-feature-desc {
+  font-size: 0.8125rem;
+  color: var(--color-text-muted);
+  line-height: 1.5;
+  margin: 0;
+}
+
+@media (max-width: 1024px) {
+  .hero-feature-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .hero-feature-item:nth-child(2) {
+    border-right: none;
+  }
+  .hero-feature-item {
+    border-bottom: 1px solid var(--color-border);
+  }
+}
+
+@media (max-width: 640px) {
+  .hero-feature-grid {
+    grid-template-columns: 1fr;
+  }
+  .hero-feature-item {
+    border-right: none;
+    border-bottom: 1px solid var(--color-border);
+    padding: 1.25rem 1rem;
+  }
+}
+
+/* ==========================================================================
+   PREMIUM PHARMACEUTICAL CARD SYSTEM (PHASE 5)
+   Unified, image-led card design across all pages
+   ========================================================================== */
+
+.pharma-card {
+  position: relative;
+  background-color: #FFFFFF;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.24s cubic-bezier(0.16, 1, 0.3, 1), 
+              box-shadow 0.24s cubic-bezier(0.16, 1, 0.3, 1), 
+              border-color 0.22s ease;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}
+
+.pharma-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-xl);
+  border-color: rgba(20, 86, 160, 0.35);
+}
+
+.pharma-card:focus-visible {
+  outline: 2px solid var(--color-primary-light);
+  outline-offset: 3px;
+}
+
+/* Animated Bottom Blue-to-Red Gradient Underline (Reveals Left-to-Right) */
+.pharma-card::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--color-primary) 0%, var(--color-cyan) 50%, var(--color-accent) 100%);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 5;
+}
+
+.pharma-card:hover::after,
+.pharma-card:focus-visible::after {
+  transform: scaleX(1);
+}
+
+/* Image Header with Controlled Subtle Zoom (1.035x) */
+.pharma-card-img-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background-color: var(--color-bg-light);
+}
+
+.pharma-card-img-wrap.aspect-4-3 {
+  aspect-ratio: 4 / 3;
+}
+
+.pharma-card-img-wrap img,
+.pharma-card-img-wrap .branded-video-container {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+}
+
+.pharma-card:hover .pharma-card-img-wrap img {
+  transform: scale(1.035);
+}
+
+/* Blue-to-Red Gradient Underline Seam */
+.pharma-card-seam {
+  height: 2.5px;
+  width: 100%;
+  background: linear-gradient(90deg, var(--color-primary) 0%, var(--color-primary-light) 50%, var(--color-accent) 100%);
+  opacity: 0.75;
+  transition: opacity 0.2s ease;
+}
+
+.pharma-card:hover .pharma-card-seam {
+  opacity: 1;
+}
+
+/* Card Content Body */
+.pharma-card-body {
+  padding: 1.75rem;
+  display: flex;
+  flex-direction: column;
+  flex: 1 0 auto;
+}
+
+.pharma-card-badge,
+.pharma-card-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-primary);
+  margin-bottom: 0.65rem;
+}
+
+.pharma-card-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--color-navy);
+  margin-bottom: 0.75rem;
+  line-height: 1.35;
+  transition: color 0.2s ease;
+}
+
+.pharma-card:hover .pharma-card-title {
+  color: var(--color-primary);
+}
+
+.pharma-card-text,
+.pharma-card-desc {
+  font-size: 0.9375rem;
+  color: var(--color-text-body);
+  line-height: 1.65;
+  margin-bottom: 1.5rem;
+  flex-grow: 1;
+}
+
+.pharma-card-action,
+.card-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  margin-top: auto;
+  transition: color 0.2s ease, gap 0.2s ease;
+}
+
+.pharma-card:hover .pharma-card-action,
+.pharma-card:hover .card-cta {
+  color: var(--color-accent);
+  gap: 0.65rem;
+}
+
+/* Subtle Interactive Card (Icon-Led) */
+.interactive-card {
+  position: relative;
+  background-color: #FFFFFF;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), 
+              box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.3s ease;
+  overflow: hidden;
+}
+
+.interactive-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+  border-color: rgba(20, 86, 160, 0.3);
+}
+
+.interactive-card:focus-visible {
+  outline: 2px solid var(--color-primary-light);
+  outline-offset: 3px;
+}
+
+.card-animated-underline {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--color-primary) 0%, var(--color-accent) 100%);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.3s ease;
+}
+
+.interactive-card:hover .card-animated-underline {
+  transform: scaleX(1);
+}
+
+/* ==========================================================================
+   HERO SEAM FLOATING CAPSULE BADGE (CONCEPT BOARD PANEL 1)
+   ========================================================================== */
+
+.hero-seam-capsule-badge {
+  position: absolute;
+  right: -42px;
+  top: 36%;
+  width: 96px;
+  height: 96px;
+  z-index: 15;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: floatCapsuleBadge 4.5s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+@keyframes floatCapsuleBadge {
+  0% { transform: translateY(0) rotate(0deg); }
+  100% { transform: translateY(-10px) rotate(4deg); }
+}
+
+.hero-capsule-glow-aura {
+  position: absolute;
+  width: 76px;
+  height: 76px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(32, 174, 234, 0.45) 0%, rgba(229, 36, 42, 0.25) 50%, transparent 75%);
+  filter: blur(10px);
+}
+
+.hero-seam-capsule-svg {
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 8px 24px rgba(7, 29, 54, 0.35));
+}
+
+@media (max-width: 992px) {
+  .hero-seam-capsule-badge {
+    display: none !important;
+  }
+}
+
+/* ==========================================================================
+   ANIMATED STATISTICS CARDS (CONCEPT BOARD PANEL 5)
+   ========================================================================== */
+
+.stat-card {
+  position: relative;
+  padding: 2.25rem 1.75rem;
+  background-color: var(--color-bg-light);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border);
+  text-align: center;
+  overflow: hidden;
+  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.25s ease,
+              background-color 0.25s ease;
+}
+
+.stat-card:hover {
+  background-color: #FFFFFF;
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg);
+  border-color: rgba(20, 86, 160, 0.35);
+}
+
+.stat-card-icon-wrap {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background-color: #FFFFFF;
+  border: 1px solid var(--color-border);
+  color: var(--color-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.25rem;
+  box-shadow: var(--shadow-xs);
+  transition: transform 0.25s ease, background-color 0.25s ease, color 0.25s ease;
+}
+
+.stat-card:hover .stat-card-icon-wrap {
+  transform: scale(1.08);
+  background-color: var(--color-primary);
+  color: #FFFFFF;
+  border-color: var(--color-primary);
+}
+
+.stat-card-gradient-underline {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--color-primary) 0%, var(--color-cyan) 50%, var(--color-accent) 100%);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.stat-card:hover .stat-card-gradient-underline {
+  transform: scaleX(1);
 }
 
 /* ==========================================================================

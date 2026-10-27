@@ -13,11 +13,14 @@ import {
   Sparkles,
   CheckCircle2,
   Users,
-  Compass
+  Compass,
+  Building2,
+  Globe
 } from 'lucide-react';
 import { MEDIA_CONFIG, VIDEO_ASSETS } from '../config/assets';
 import { BrandedVideo } from '../components/common/BrandedVideo';
 import { QualitySeal } from '../components/common/QualitySeal';
+import { AnimatedCounter } from '../components/common/AnimatedCounter';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 
 interface HomePageProps {
@@ -87,26 +90,43 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
     },
   ];
 
-  const highlights = [
+  const highlights: Array<{
+    metric: React.ReactNode;
+    label: string;
+    description: string;
+    icon: React.ComponentType<{ size?: number; className?: string; style?: React.CSSProperties }>;
+  }> = [
     {
-      metric: 'Established 2009',
+      metric: (
+        <span>
+          Est. <AnimatedCounter target={2009} />
+        </span>
+      ),
       label: 'Corporate Heritage',
-      description: 'Over 15 years of dedicated pharmaceutical service, compliance, and collaborative growth across India.'
+      description: 'Over 15 years of dedicated pharmaceutical service, compliance, and collaborative growth across India.',
+      icon: Building2,
     },
     {
-      metric: '8 Segments',
+      metric: (
+        <span>
+          <AnimatedCounter target={8} /> Segments
+        </span>
+      ),
       label: 'Therapeutic Depth',
-      description: 'Comprehensive product solutions addressing diverse chronic and acute medical requirements.'
+      description: 'Comprehensive product solutions addressing diverse chronic and acute medical requirements.',
+      icon: Pill,
     },
     {
       metric: 'Multi-Dosage',
       label: 'Manufacturing Versatility',
-      description: 'High-precision production capabilities for tablets, capsules, and injectables in cleanroom facilities.'
+      description: 'High-precision production capabilities for tablets, capsules, and injectables in cleanroom facilities.',
+      icon: Factory,
     },
     {
       metric: 'Pan-India',
       label: 'Distribution Presence',
-      description: 'Robust supply and marketing network ensuring accessible healthcare delivery nationwide.'
+      description: 'Robust supply and marketing network ensuring accessible healthcare delivery nationwide.',
+      icon: Globe,
     }
   ];
 
@@ -330,6 +350,97 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
               vectorEffect="non-scaling-stroke"
             />
           </svg>
+
+          {/* Concept Board Panel 1: Scientific Floating Capsule Badge along Seam */}
+          <div className="hero-seam-capsule-badge" aria-hidden="true">
+            <div className="hero-capsule-glow-aura" />
+            <svg className="hero-seam-capsule-svg" viewBox="0 0 100 100" fill="none">
+              <defs>
+                <linearGradient id="seamCapRed" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stopColor="#FF4D47" />
+                  <stop offset="100%" stopColor="#B31217" />
+                </linearGradient>
+                <linearGradient id="seamCapBlue" x1="0%" y1="100%" x2="100%" y2="0%">
+                  <stop offset="0%" stopColor="#20AEEA" />
+                  <stop offset="100%" stopColor="#071D36" />
+                </linearGradient>
+                <linearGradient id="seamCapGloss" x1="0%" y1="0%" x2="0%" y2="100%">
+                  <stop offset="0%" stopColor="#FFFFFF" stopOpacity="0.85" />
+                  <stop offset="45%" stopColor="#FFFFFF" stopOpacity="0.2" />
+                  <stop offset="100%" stopColor="#000000" stopOpacity="0.1" />
+                </linearGradient>
+                <filter id="seamGlowFilter" x="-30%" y="-30%" width="160%" height="160%">
+                  <feGaussianBlur stdDeviation="3.5" result="blur" />
+                  <feMerge>
+                    <feMergeNode in="blur" />
+                    <feMergeNode in="SourceGraphic" />
+                  </feMerge>
+                </filter>
+              </defs>
+              {/* Molecular Orbit Ring */}
+              <circle cx="50" cy="50" r="38" stroke="#20AEEA" strokeWidth="1" strokeDasharray="3 4" opacity="0.5" />
+              <circle cx="50" cy="12" r="2.8" fill="#20AEEA" opacity="0.8" />
+              <circle cx="82" cy="68" r="2.8" fill="#E5242A" opacity="0.8" />
+              <circle cx="18" cy="62" r="2.2" fill="#60A5FA" opacity="0.7" />
+              {/* 45-degree tilted capsule */}
+              <g transform="rotate(-40 50 50)" filter="url(#seamGlowFilter)">
+                <path d="M 38 50 A 12 12 0 0 1 62 50 L 62 36 A 12 12 0 0 0 38 36 Z" fill="url(#seamCapRed)" />
+                <path d="M 38 50 A 12 12 0 0 1 62 50 L 62 36 A 12 12 0 0 0 38 36 Z" fill="url(#seamCapGloss)" />
+                <path d="M 38 50 L 62 50 L 62 64 A 12 12 0 0 1 38 64 Z" fill="url(#seamCapBlue)" />
+                <path d="M 38 50 L 62 50 L 62 64 A 12 12 0 0 1 38 64 Z" fill="url(#seamCapGloss)" />
+                <line x1="37.5" y1="50" x2="62.5" y2="50" stroke="#FFFFFF" strokeWidth="2" />
+              </g>
+            </svg>
+          </div>
+        </div>
+      </section>
+
+      {/* ====================================================================
+          FEATURE STRIP: 4 CORE PILLARS BELOW HERO (PHASE 3.A)
+          ==================================================================== */}
+      <section className="hero-feature-strip" aria-label="SALAS Core Foundations">
+        <div className="container">
+          <div className="hero-feature-grid">
+            <div className="hero-feature-item">
+              <div className="hero-feature-icon">
+                <Factory size={22} />
+              </div>
+              <div>
+                <h3 className="hero-feature-title">Precision Formulation</h3>
+                <p className="hero-feature-desc">Dedicated Sikkim cleanrooms and automated compression lines</p>
+              </div>
+            </div>
+
+            <div className="hero-feature-item">
+              <div className="hero-feature-icon">
+                <ShieldCheck size={22} />
+              </div>
+              <div>
+                <h3 className="hero-feature-title">Quality Assurance</h3>
+                <p className="hero-feature-desc">Rigorous multi-stage analytical testing & batch traceability</p>
+              </div>
+            </div>
+
+            <div className="hero-feature-item">
+              <div className="hero-feature-icon">
+                <Pill size={22} />
+              </div>
+              <div>
+                <h3 className="hero-feature-title"><AnimatedCounter target={8} /> Therapeutic Areas</h3>
+                <p className="hero-feature-desc">Specialized solid and liquid dosage forms across clinical needs</p>
+              </div>
+            </div>
+
+            <div className="hero-feature-item">
+              <div className="hero-feature-icon">
+                <Compass size={22} />
+              </div>
+              <div>
+                <h3 className="hero-feature-title">Pan-India Reach</h3>
+                <p className="hero-feature-desc">Robust healthcare supply network serving partners since <AnimatedCounter target={2009} /></p>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -367,14 +478,18 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
                 </p>
               </div>
 
-              <div style={{ marginTop: '2.5rem', display: 'flex', gap: '1.5rem', flexWrap: 'wrap' }}>
+              <div style={{ marginTop: '2.5rem', display: 'flex', gap: '1.5rem', flexWrap: 'wrap', alignItems: 'center' }}>
+                <button
+                  type="button"
+                  onClick={() => onNavigate('about')}
+                  className="btn btn-primary"
+                >
+                  <span>Explore Company Heritage</span>
+                  <ArrowRight size={16} />
+                </button>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-                  <CheckCircle2 size={22} style={{ color: 'var(--color-primary)' }} />
-                  <span style={{ fontWeight: 600, color: 'var(--color-navy)' }}>Service & Collaborative Partnerships</span>
-                </div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-                  <CheckCircle2 size={22} style={{ color: 'var(--color-accent)' }} />
-                  <span style={{ fontWeight: 600, color: 'var(--color-navy)' }}>Pan-India Distribution Reach</span>
+                  <CheckCircle2 size={20} style={{ color: 'var(--color-primary)' }} />
+                  <span style={{ fontWeight: 600, color: 'var(--color-navy)', fontSize: '0.95rem' }}>Pan-India Supply</span>
                 </div>
               </div>
             </div>
@@ -390,8 +505,8 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
                 }}
               >
                 <img
-                  src={MEDIA_CONFIG.quality.image}
-                  alt={MEDIA_CONFIG.quality.alt}
+                  src={MEDIA_CONFIG.about.image}
+                  alt={MEDIA_CONFIG.about.alt}
                   loading="lazy"
                   decoding="async"
                   width={640}
@@ -438,6 +553,161 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
                   <p style={{ fontSize: '0.8125rem', color: 'var(--color-text-muted)', margin: 0 }}>
                     Analytical testing ensuring compliance with applicable regulatory specifications.
                   </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ====================================================================
+          CORE OPERATIONAL PILLARS (CONCEPT BOARD PANEL 4)
+          4 Image-Led Cards with Hover Effects & Direct Navigation
+          ==================================================================== */}
+      <section className="section-spacing" style={{ backgroundColor: 'var(--color-bg-light)', borderTop: '1px solid var(--color-border)', borderBottom: '1px solid var(--color-border)' }}>
+        <div className="container">
+          <div className="section-header">
+            <span className="section-eyebrow">
+              <FlaskConical size={14} /> Core Capabilities
+            </span>
+            <h2 className="section-title">Core Pharmaceutical Operations</h2>
+            <p className="section-description">
+              Integrated infrastructure spanning formulations, research diligence, high-capacity manufacturing, and validated laboratory testing.
+            </p>
+          </div>
+
+          <div
+            className="reveal-stagger"
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
+              gap: '1.75rem',
+            }}
+          >
+            {/* Card 1: Products */}
+            <div
+              className="pharma-card reveal-up"
+              onClick={() => onNavigate('products')}
+              role="button"
+              tabIndex={0}
+              onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') onNavigate('products'); }}
+            >
+              <div className="pharma-card-img-wrap">
+                <img
+                  src={MEDIA_CONFIG.products.dosageFormsImage}
+                  alt="Salas Pharma diverse finished dosage forms"
+                  loading="lazy"
+                  decoding="async"
+                  width={640}
+                  height={360}
+                />
+              </div>
+              <div className="pharma-card-seam" />
+              <div className="pharma-card-body">
+                <span className="pharma-card-badge">Finished Dosage</span>
+                <h3 className="pharma-card-title">Products</h3>
+                <p className="pharma-card-text">
+                  Diverse pharmaceutical portfolio across multiple solid, liquid, and sterile dosage forms.
+                </p>
+                <div className="pharma-card-action">
+                  <span>Explore Products</span>
+                  <ArrowRight size={15} />
+                </div>
+              </div>
+            </div>
+
+            {/* Card 2: R&D and Innovation */}
+            <div
+              className="pharma-card reveal-up delay-100"
+              onClick={() => onNavigate('research')}
+              role="button"
+              tabIndex={0}
+              onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') onNavigate('research'); }}
+            >
+              <div className="pharma-card-img-wrap">
+                <img
+                  src={MEDIA_CONFIG.research.image}
+                  alt="Salas Pharma analytical HPLC chromatography and R&D"
+                  loading="lazy"
+                  decoding="async"
+                  width={640}
+                  height={360}
+                />
+              </div>
+              <div className="pharma-card-seam" />
+              <div className="pharma-card-body">
+                <span className="pharma-card-badge">Formulation Diligence</span>
+                <h3 className="pharma-card-title">R&D and Innovation</h3>
+                <p className="pharma-card-text">
+                  Driven by pharmaceutical science to develop stable, bio-available therapies for better health.
+                </p>
+                <div className="pharma-card-action">
+                  <span>Explore R&D</span>
+                  <ArrowRight size={15} />
+                </div>
+              </div>
+            </div>
+
+            {/* Card 3: Manufacturing & Quality */}
+            <div
+              className="pharma-card reveal-up delay-200"
+              onClick={() => onNavigate('manufacturing')}
+              role="button"
+              tabIndex={0}
+              onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') onNavigate('manufacturing'); }}
+            >
+              <div className="pharma-card-img-wrap">
+                <img
+                  src={MEDIA_CONFIG.manufacturing.cleanroomImage}
+                  alt="Salas Pharma bioprocess vessels and cleanroom air handling"
+                  loading="lazy"
+                  decoding="async"
+                  width={640}
+                  height={360}
+                />
+              </div>
+              <div className="pharma-card-seam" />
+              <div className="pharma-card-body">
+                <span className="pharma-card-badge">Facility Infrastructure</span>
+                <h3 className="pharma-card-title">Manufacturing & Quality</h3>
+                <p className="pharma-card-text">
+                  Advanced Sikkim production suites ensuring uncompromised batch quality and consistency.
+                </p>
+                <div className="pharma-card-action">
+                  <span>View Manufacturing</span>
+                  <ArrowRight size={15} />
+                </div>
+              </div>
+            </div>
+
+            {/* Card 4: Laboratories */}
+            <div
+              className="pharma-card reveal-up delay-300"
+              onClick={() => onNavigate('laboratories')}
+              role="button"
+              tabIndex={0}
+              onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') onNavigate('laboratories'); }}
+            >
+              <div className="pharma-card-img-wrap">
+                <img
+                  src={MEDIA_CONFIG.laboratory.analyticalImage}
+                  alt="Salas Pharma analytical testing and laboratory evaluation"
+                  loading="lazy"
+                  decoding="async"
+                  width={640}
+                  height={360}
+                />
+              </div>
+              <div className="pharma-card-seam" />
+              <div className="pharma-card-body">
+                <span className="pharma-card-badge">Analytical Rigor</span>
+                <h3 className="pharma-card-title">Laboratories</h3>
+                <p className="pharma-card-text">
+                  State-of-the-art analytical instrumentation ensuring patient safety, potency, and compliance.
+                </p>
+                <div className="pharma-card-action">
+                  <span>Visit Laboratories</span>
+                  <ArrowRight size={15} />
                 </div>
               </div>
             </div>
@@ -564,6 +834,17 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
                   </div>
                 ))}
               </div>
+
+              <div style={{ marginTop: '2rem' }}>
+                <button
+                  type="button"
+                  onClick={() => onNavigate('research')}
+                  className="btn btn-secondary"
+                >
+                  <span>Explore Formulation Science & R&D</span>
+                  <ArrowRight size={16} />
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -587,55 +868,88 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
           <div
             style={{
               display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-              gap: '2.5rem',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+              gap: '2rem',
               marginBottom: '3.5rem',
             }}
           >
             {/* Manufacturing Line Visual Card */}
             <div
-              className="reveal-left"
-              style={{
-                backgroundColor: 'var(--color-bg-light)',
-                borderRadius: 'var(--radius-lg)',
-                overflow: 'hidden',
-                border: '1px solid var(--color-border)',
-                boxShadow: 'var(--shadow-md)',
-              }}
+              className="pharma-card reveal-up"
+              onClick={() => onNavigate('manufacturing')}
+              role="button"
+              tabIndex={0}
+              onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') onNavigate('manufacturing'); }}
             >
-              <div className="img-zoom-wrapper" style={{ height: '320px' }}>
+              <div className="pharma-card-img-wrap" style={{ height: '260px' }}>
                 <img
                   src={MEDIA_CONFIG.manufacturing.image}
                   alt={MEDIA_CONFIG.manufacturing.alt}
                   loading="lazy"
                   decoding="async"
                   width={640}
-                  height={320}
-                  style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                  height={260}
                 />
               </div>
-              <div style={{ padding: '2rem' }}>
-                <h3 style={{ fontSize: '1.3rem', marginBottom: '0.75rem', color: 'var(--color-navy)' }}>
+              <div className="pharma-card-seam" />
+              <div className="pharma-card-body">
+                <span className="pharma-card-badge">Compression Technology</span>
+                <h3 className="pharma-card-title">
                   Tablet & Capsule Production Lines
                 </h3>
-                <p style={{ color: 'var(--color-text-body)', fontSize: '0.9375rem', lineHeight: 1.65 }}>
+                <p className="pharma-card-text">
                   Equipped with stainless-steel rotary tablet presses and automated capsule filling machinery, maintaining strict environmental temperature and humidity control.
                 </p>
+                <div className="pharma-card-action">
+                  <span>View Production Lines</span>
+                  <ArrowRight size={15} />
+                </div>
               </div>
             </div>
 
-            {/* Packaging & Cleanroom Card */}
+            {/* Sterile Cleanroom & Formulation Reactors Card */}
             <div
-              className="reveal-right"
-              style={{
-                backgroundColor: 'var(--color-bg-light)',
-                borderRadius: 'var(--radius-lg)',
-                overflow: 'hidden',
-                border: '1px solid var(--color-border)',
-                boxShadow: 'var(--shadow-md)',
-              }}
+              className="pharma-card reveal-up delay-100"
+              onClick={() => onNavigate('manufacturing')}
+              role="button"
+              tabIndex={0}
+              onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') onNavigate('manufacturing'); }}
             >
-              <div className="img-zoom-wrapper" style={{ height: '320px' }}>
+              <div className="pharma-card-img-wrap" style={{ height: '260px' }}>
+                <img
+                  src={MEDIA_CONFIG.manufacturing.cleanroomImage}
+                  alt="Salas Pharma sterile bioprocess formulation vessels and AHU cleanrooms"
+                  loading="lazy"
+                  decoding="async"
+                  width={640}
+                  height={260}
+                />
+              </div>
+              <div className="pharma-card-seam" />
+              <div className="pharma-card-body">
+                <span className="pharma-card-badge">Cleanroom Architecture</span>
+                <h3 className="pharma-card-title">
+                  Bioprocess Vessels & Air Handling
+                </h3>
+                <p className="pharma-card-text">
+                  Multi-stage HEPA air filtration and positive-pressure cleanroom suites ensure uncompromised aseptic environments for sensitive active ingredients.
+                </p>
+                <div className="pharma-card-action">
+                  <span>Explore Cleanroom Facility</span>
+                  <ArrowRight size={15} />
+                </div>
+              </div>
+            </div>
+
+            {/* Packaging & Optical Inspection Card */}
+            <div
+              className="pharma-card reveal-up delay-200"
+              onClick={() => onNavigate('manufacturing')}
+              role="button"
+              tabIndex={0}
+              onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') onNavigate('manufacturing'); }}
+            >
+              <div className="pharma-card-img-wrap" style={{ height: '260px' }}>
                 <BrandedVideo
                   src={VIDEO_ASSETS.manufacturing.video}
                   poster={VIDEO_ASSETS.manufacturing.poster}
@@ -648,13 +962,19 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
                   style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                 />
               </div>
-              <div style={{ padding: '2rem' }}>
-                <h3 style={{ fontSize: '1.3rem', marginBottom: '0.75rem', color: 'var(--color-navy)' }}>
+              <div className="pharma-card-seam" />
+              <div className="pharma-card-body">
+                <span className="pharma-card-badge">Packaging Integrity</span>
+                <h3 className="pharma-card-title">
                   Automated Cleanroom Packaging
                 </h3>
-                <p style={{ color: 'var(--color-text-body)', fontSize: '0.9375rem', lineHeight: 1.65 }}>
+                <p className="pharma-card-text">
                   High-speed blister packaging lines coupled with inline optical inspection ensure intact product sealing, accurate batch coding, and tamper-evident cartoning.
                 </p>
+                <div className="pharma-card-action">
+                  <span>Inspect Packaging Standards</span>
+                  <ArrowRight size={15} />
+                </div>
               </div>
             </div>
           </div>
@@ -665,7 +985,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
               onClick={() => onNavigate('manufacturing')}
               className="btn btn-secondary"
             >
-              <span>Explore Manufacturing Infrastructure</span>
+              <span>Explore Full Manufacturing Infrastructure</span>
               <ArrowRight size={16} />
             </button>
           </div>
@@ -925,59 +1245,46 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
               gap: '2rem',
             }}
           >
-            {highlights.map((h, idx) => (
-              <div
-                key={idx}
-                className="reveal-up"
-                style={{
-                  padding: '2.5rem 1.75rem',
-                  backgroundColor: 'var(--color-bg-light)',
-                  borderRadius: 'var(--radius-lg)',
-                  border: '1px solid var(--color-border)',
-                  textAlign: 'center',
-                  transition: 'all 0.3s ease',
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.backgroundColor = '#FFFFFF';
-                  e.currentTarget.style.transform = 'translateY(-5px)';
-                  e.currentTarget.style.boxShadow = 'var(--shadow-md)';
-                  e.currentTarget.style.borderColor = 'var(--color-primary)';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.backgroundColor = 'var(--color-bg-light)';
-                  e.currentTarget.style.transform = 'translateY(0)';
-                  e.currentTarget.style.boxShadow = 'none';
-                  e.currentTarget.style.borderColor = 'var(--color-border)';
-                }}
-              >
+            {highlights.map((h, idx) => {
+              const IconComp = h.icon;
+              return (
                 <div
-                  style={{
-                    fontSize: '1.85rem',
-                    fontWeight: 800,
-                    color: 'var(--color-primary)',
-                    marginBottom: '0.4rem',
-                    letterSpacing: '-0.02em',
-                  }}
+                  key={idx}
+                  className="stat-card reveal-up"
                 >
-                  {h.metric}
+                  <div className="stat-card-icon-wrap">
+                    <IconComp size={24} />
+                  </div>
+                  <div
+                    style={{
+                      fontSize: '2.1rem',
+                      fontWeight: 800,
+                      color: 'var(--color-navy)',
+                      marginBottom: '0.35rem',
+                      letterSpacing: '-0.02em',
+                    }}
+                  >
+                    {h.metric}
+                  </div>
+                  <div
+                    style={{
+                      fontSize: '0.85rem',
+                      fontWeight: 700,
+                      textTransform: 'uppercase',
+                      letterSpacing: '0.08em',
+                      color: 'var(--color-accent)',
+                      marginBottom: '0.85rem',
+                    }}
+                  >
+                    {h.label}
+                  </div>
+                  <p style={{ fontSize: '0.875rem', color: 'var(--color-text-body)', lineHeight: 1.6, margin: 0 }}>
+                    {h.description}
+                  </p>
+                  <div className="stat-card-gradient-underline" />
                 </div>
-                <div
-                  style={{
-                    fontSize: '0.85rem',
-                    fontWeight: 700,
-                    textTransform: 'uppercase',
-                    letterSpacing: '0.08em',
-                    color: 'var(--color-accent)',
-                    marginBottom: '1rem',
-                  }}
-                >
-                  {h.label}
-                </div>
-                <p style={{ fontSize: '0.875rem', color: 'var(--color-text-body)', lineHeight: 1.6, margin: 0 }}>
-                  {h.description}
-                </p>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>
@@ -1031,29 +1338,50 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
             </div>
 
             <div className="reveal-right">
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '1rem' }}>
-                {[
-                  { title: 'Continuous Professional Learning', desc: 'Engage with updated GMP methodologies, analytical instrumentation, and industry practices.' },
-                  { title: 'Collaborative Environment', desc: 'Work alongside experienced professionals in formulation, quality control, and distribution management.' },
-                  { title: 'Purpose-Driven Work', desc: 'Contribute directly to expanding healthcare accessibility through dependable pharmaceutical products.' }
-                ].map((item, idx) => (
-                  <div
-                    key={idx}
-                    style={{
-                      padding: '1.25rem 1.5rem',
-                      backgroundColor: 'var(--color-bg-light)',
-                      borderRadius: 'var(--radius-sm)',
-                      borderLeft: '4px solid var(--color-primary)',
-                    }}
-                  >
-                    <h4 style={{ fontSize: '0.95rem', fontWeight: 700, color: 'var(--color-navy)', marginBottom: '0.25rem' }}>
-                      {item.title}
-                    </h4>
-                    <p style={{ fontSize: '0.85rem', color: 'var(--color-text-body)', margin: 0 }}>
-                      {item.desc}
-                    </p>
+              <div 
+                className="pharma-card"
+                onClick={() => onNavigate('careers')}
+                role="button"
+                tabIndex={0}
+                onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') onNavigate('careers'); }}
+              >
+                <div className="pharma-card-img-wrap" style={{ height: '240px' }}>
+                  <img
+                    src={MEDIA_CONFIG.careers.image}
+                    alt={MEDIA_CONFIG.careers.alt}
+                    loading="lazy"
+                    decoding="async"
+                    width={600}
+                    height={240}
+                  />
+                </div>
+                <div className="pharma-card-seam" />
+                <div style={{ padding: '1.5rem', backgroundColor: '#FFFFFF' }}>
+                  <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '0.85rem' }}>
+                    {[
+                      { title: 'Continuous Professional Learning', desc: 'Engage with updated GMP methodologies, analytical instrumentation, and industry practices.' },
+                      { title: 'Collaborative Environment', desc: 'Work alongside experienced professionals in formulation, quality control, and distribution management.' },
+                      { title: 'Purpose-Driven Work', desc: 'Contribute directly to expanding healthcare accessibility through dependable pharmaceutical products.' }
+                    ].map((item, idx) => (
+                      <div
+                        key={idx}
+                        style={{
+                          padding: '0.85rem 1.15rem',
+                          backgroundColor: 'var(--color-bg-light)',
+                          borderRadius: 'var(--radius-sm)',
+                          borderLeft: '3px solid var(--color-primary)',
+                        }}
+                      >
+                        <h4 style={{ fontSize: '0.9rem', fontWeight: 700, color: 'var(--color-navy)', marginBottom: '0.15rem' }}>
+                          {item.title}
+                        </h4>
+                        <p style={{ fontSize: '0.8125rem', color: 'var(--color-text-body)', margin: 0, lineHeight: 1.5 }}>
+                          {item.desc}
+                        </p>
+                      </div>
+                    ))}
                   </div>
-                ))}
+                </div>
               </div>
             </div>
           </div>

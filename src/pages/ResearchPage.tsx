@@ -1,6 +1,6 @@
 import React from 'react';
 import { FlaskConical, Microscope, Sparkles, CheckCircle2, ArrowRight } from 'lucide-react';
-import { VIDEO_ASSETS } from '../config/assets';
+import { VIDEO_ASSETS, MEDIA_CONFIG } from '../config/assets';
 import { BrandedVideo } from '../components/common/BrandedVideo';
 import { AmbientVideoBackground } from '../components/common/AmbientVideoBackground';
 import { useScrollReveal } from '../hooks/useScrollReveal';
@@ -15,16 +15,16 @@ export const ResearchPage: React.FC<ResearchPageProps> = ({ onNavigate }) => {
   return (
     <div className="research-page" style={{ marginTop: 'var(--header-height)', paddingTop: '3.5rem', backgroundColor: '#FFFFFF' }}>
       {/* Header */}
-      <section className="container" style={{ marginBottom: '4rem' }}>
+      <section className="container" style={{ marginBottom: '3.5rem' }}>
         <div style={{ maxWidth: '820px', margin: '0 auto', textAlign: 'center' }}>
           <span className="section-eyebrow">
             <FlaskConical size={14} /> Pharmaceutical Science
           </span>
-          <h1 style={{ fontSize: 'clamp(2.4rem, 4vw, 3.4rem)', marginBottom: '1.5rem', color: 'var(--color-navy)' }}>
-            Science That Drives Progress
+          <h1 style={{ fontSize: 'clamp(2.4rem, 4vw, 3.4rem)', marginBottom: '1.25rem', color: 'var(--color-navy)' }}>
+            Analytical Science That Drives Progress
           </h1>
-          <p style={{ fontSize: '1.2rem', color: 'var(--color-text-muted)', lineHeight: 1.7 }}>
-            Our research and product development focus centers on formulation optimization, analytical rigor, and dependable drug release stability across all dosage forms.
+          <p style={{ fontSize: '1.15rem', color: 'var(--color-text-muted)', lineHeight: 1.7, margin: 0 }}>
+            Our research and product development focus centers on formulation optimization, analytical rigor, and dependable drug release stability across all finished dosage forms.
           </p>
         </div>
       </section>
@@ -47,19 +47,35 @@ export const ResearchPage: React.FC<ResearchPageProps> = ({ onNavigate }) => {
                   borderRadius: 'var(--radius-lg)',
                   boxShadow: 'var(--shadow-xl)',
                   border: '1px solid var(--color-border)',
+                  overflow: 'hidden',
+                  position: 'relative',
                 }}
               >
-                <BrandedVideo 
-                  src={VIDEO_ASSETS.research.video} 
-                  poster={VIDEO_ASSETS.research.poster}
-                  playbackRate={VIDEO_ASSETS.research.playbackRate}
-                  autoPlay={true}
-                  muted={true}
-                  loop={true}
-                  playsInline={true}
-                  ariaLabel="Salas Pharma laboratory research and analytical testing footage" 
-                  style={{ width: '100%', height: '440px', objectFit: 'cover' }}
+                <img 
+                  src={MEDIA_CONFIG.research.image} 
+                  alt="High performance liquid chromatography HPLC system in Salas Pharma research lab" 
+                  loading="lazy"
+                  decoding="async"
+                  width={640}
+                  height={440}
+                  style={{ width: '100%', height: '420px', objectFit: 'cover', display: 'block' }}
                 />
+                <div style={{
+                  position: 'absolute',
+                  bottom: 0,
+                  left: 0,
+                  right: 0,
+                  background: 'linear-gradient(to top, rgba(7, 29, 54, 0.9), transparent)',
+                  padding: '1.25rem 1.5rem',
+                  color: '#FFFFFF',
+                }}>
+                  <span style={{ fontSize: '0.75rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--color-secondary)' }}>
+                    Analytical Characterization
+                  </span>
+                  <p style={{ margin: '0.2rem 0 0', fontSize: '0.9rem', fontWeight: 600 }}>
+                    HPLC Assay Validation & Quantitative Purity Evaluation
+                  </p>
+                </div>
               </div>
             </div>
 
@@ -91,6 +107,65 @@ export const ResearchPage: React.FC<ResearchPageProps> = ({ onNavigate }) => {
                     <span style={{ fontSize: '0.9375rem', color: 'var(--color-navy)', fontWeight: 600 }}>{point}</span>
                   </div>
                 ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Dissolution Kinetics Footage Showcase (salas4.mp4) */}
+      <section className="section-spacing" style={{ backgroundColor: '#FFFFFF' }}>
+        <div className="container">
+          <div 
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
+              gap: '4.5rem',
+              alignItems: 'center',
+            }}
+          >
+            <div className="reveal-left">
+              <span className="section-eyebrow">
+                <Sparkles size={14} /> Release Profiles
+              </span>
+              <h2 className="section-title">In-Vitro Dissolution Kinetics & Release Science</h2>
+              <p style={{ color: 'var(--color-text-body)', fontSize: '1.05rem', lineHeight: 1.75, marginBottom: '1.5rem' }}>
+                Tablet disintegration and effervescence behavior determine the timing and consistency of active drug bioavailability. Through automated multi-vessel dissolution testing, our formulations are optimized to deliver dependable therapeutic curves.
+              </p>
+              <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+                <button 
+                  type="button" 
+                  onClick={() => onNavigate('laboratories')} 
+                  className="btn btn-primary"
+                >
+                  <span>Explore Testing Laboratories</span>
+                  <ArrowRight size={16} />
+                </button>
+              </div>
+            </div>
+
+            <div className="reveal-right">
+              <div 
+                className="img-zoom-wrapper"
+                style={{
+                  borderRadius: 'var(--radius-lg)',
+                  boxShadow: 'var(--shadow-xl)',
+                  border: '1px solid var(--color-border)',
+                  overflow: 'hidden',
+                  backgroundColor: '#000000',
+                }}
+              >
+                <BrandedVideo 
+                  src={VIDEO_ASSETS.research.video} 
+                  poster={VIDEO_ASSETS.research.poster}
+                  playbackRate={VIDEO_ASSETS.research.playbackRate}
+                  autoPlay={true}
+                  muted={true}
+                  loop={true}
+                  playsInline={true}
+                  ariaLabel="Salas Pharma laboratory tablet dissolution testing footage" 
+                  style={{ width: '100%', height: '380px', objectFit: 'cover' }}
+                />
               </div>
             </div>
           </div>
