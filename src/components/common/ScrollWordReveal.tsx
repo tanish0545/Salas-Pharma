@@ -1,12 +1,13 @@
 import React, { useRef, useEffect, useState } from 'react';
 
-interface ScrollWordRevealProps {
+export interface ScrollWordRevealProps {
   text: string;
   className?: string;
   tag?: 'h2' | 'h3' | 'p' | 'div';
   highlightWords?: string[];
   eyebrow?: string;
-  pinnedStorytelling?: boolean; // Pinned sticky desktop storytelling specifically for About Us
+  pinnedStorytelling?: boolean; // Pinned sticky desktop storytelling sequence
+  ariaLabel?: string;
 }
 
 /**
@@ -16,8 +17,8 @@ interface ScrollWordRevealProps {
  * 
  * Features:
  * - Natural Word Spacing: Words wrap naturally with authentic spaces between inline spans.
- * - Desktop Pinned Storytelling (About Us only): Uses CSS position: sticky over a 300vh track.
- * - Initial Pin Buffer (8%) & Reading Dwell Buffer (22%): Paragraph stays fully illuminated & pinned before release.
+ * - Desktop Pinned Storytelling: Uses CSS position: sticky over a 280vh track.
+ * - Initial Pin Buffer (8%) & Reading Dwell Buffer (20%): Paragraph stays fully illuminated & pinned before release.
  * - Mobile Safe: Automatically unpins on viewports <= 768px for normal document flow.
  * - Accessibility: Selectable text, screen-reader friendly, and respects prefers-reduced-motion.
  */
@@ -28,6 +29,7 @@ export const ScrollWordReveal: React.FC<ScrollWordRevealProps> = ({
   highlightWords = [],
   eyebrow,
   pinnedStorytelling = false,
+  ariaLabel,
 }) => {
   const trackRef = useRef<HTMLDivElement>(null);
   const words = text.split(/\s+/).filter(Boolean);
@@ -59,8 +61,8 @@ export const ScrollWordReveal: React.FC<ScrollWordRevealProps> = ({
       let visualProgress = 0;
 
       if (pinnedStorytelling && !isMobile) {
-        // Desktop Pinned Storytelling (About Us only):
-        // Total distance where .about-storytelling-sticky stays pinned in the viewport
+        // Desktop Pinned Storytelling:
+        // Total distance where .storytelling-sticky stays pinned in the viewport
         const scrollDistance = rect.height - windowHeight;
 
         if (scrollDistance > 0) {
@@ -70,16 +72,16 @@ export const ScrollWordReveal: React.FC<ScrollWordRevealProps> = ({
 
           // Timeline calibration:
           // 0.00 -> 0.08: Initial settle cushion (paragraph firmly pinned, ready to reveal)
-          // 0.08 -> 0.78: Active word-by-word progressive illumination phase
-          // 0.78 -> 1.00: Completed reading dwell buffer (full sentence held pinned & legible before release)
+          // 0.08 -> 0.80: Active word-by-word progressive illumination phase
+          // 0.80 -> 1.00: Completed reading dwell buffer (full sentence held pinned & legible before release)
           if (clampedProgress <= 0.08) {
             targetCount = 0;
             visualProgress = 0;
-          } else if (clampedProgress >= 0.78) {
+          } else if (clampedProgress >= 0.80) {
             targetCount = words.length;
             visualProgress = 1;
           } else {
-            const revealProgress = (clampedProgress - 0.08) / 0.70;
+            const revealProgress = (clampedProgress - 0.08) / 0.72;
             targetCount = Math.min(words.length, Math.max(0, Math.round(revealProgress * words.length)));
             visualProgress = revealProgress;
           }
@@ -88,7 +90,7 @@ export const ScrollWordReveal: React.FC<ScrollWordRevealProps> = ({
           visualProgress = 1;
         }
       } else {
-        // Standard Viewport Reveal (for all other pages, or mobile viewports <= 768px):
+        // Standard Viewport Reveal (for non-pinned sections, or mobile viewports <= 768px):
         const startTrigger = windowHeight * 0.85;
         const endTrigger = windowHeight * 0.30;
         const totalDistance = startTrigger - endTrigger + rect.height;
@@ -165,8 +167,12 @@ export const ScrollWordReveal: React.FC<ScrollWordRevealProps> = ({
 
   if (pinnedStorytelling) {
     return (
-      <section ref={trackRef} className="about-storytelling-track" aria-label="SALAS Pharma Foundational Storytelling">
-        <div className="about-storytelling-sticky">
+      <section 
+        ref={trackRef} 
+        className="storytelling-track about-storytelling-track" 
+        aria-label={ariaLabel || eyebrow || "SALAS Pharma Foundational Storytelling"}
+      >
+        <div className="storytelling-sticky about-storytelling-sticky">
           <div className="container">
             {content}
           </div>

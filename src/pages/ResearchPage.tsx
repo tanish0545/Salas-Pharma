@@ -108,16 +108,13 @@ export const ResearchPage: React.FC<ResearchPageProps> = ({ onNavigate }) => {
         </div>
       </section>
 
-      {/* 2. SCROLL WORD REVEAL (LEUCINE-STYLE CONTRAST STORYTELLING) */}
-      <section className="section-spacing" style={{ backgroundColor: 'var(--color-bg-light)', borderBottom: '1px solid var(--color-border)' }}>
-        <div className="container">
-          <ScrollWordReveal
-            eyebrow="Formulation Discipline"
-            text="A pharmaceutical molecule is only as effective as its delivery mechanism. Through systematic polymer selection, dissolution kinetics, and degradation pathway studies, our science team turns active chemical entities into stable, dependable finished medicines."
-            highlightWords={['delivery', 'polymer', 'dissolution', 'kinetics', 'degradation', 'dependable', 'medicines']}
-          />
-        </div>
-      </section>
+      {/* 2. DEDICATED SCROLL-CONTROLLED STORYTELLING SECTION (PINNED ON DESKTOP) */}
+      <ScrollWordReveal
+        pinnedStorytelling={true}
+        eyebrow="Formulation Discipline"
+        text="A pharmaceutical molecule is only as effective as its delivery mechanism. Through systematic polymer selection, dissolution kinetics, and degradation pathway studies, our science team turns active chemical entities into stable, dependable finished medicines."
+        highlightWords={['delivery', 'polymer', 'dissolution', 'kinetics', 'degradation', 'dependable', 'medicines']}
+      />
 
       {/* 3. EDITORIAL R&D PRESENTATION */}
       <section className="section-spacing">

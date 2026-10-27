@@ -161,16 +161,13 @@ export const CareersPage: React.FC<CareersPageProps> = ({ onNavigate }) => {
         </div>
       </section>
 
-      {/* 2. SCROLL WORD REVEAL (LEUCINE-INSPIRED CONTRAST STORYTELLING) */}
-      <section className="section-spacing" style={{ backgroundColor: 'var(--color-bg-light)', borderBottom: '1px solid var(--color-border)' }}>
-        <div className="container">
-          <ScrollWordReveal
-            eyebrow="Our People & Culture"
-            text="Every medicine that leaves our Sikkim facility carries the dedication of our pharmacists, chemists, and operators. We invest in technical training, rigorous safety standards, and merit-based career progression so our talent can build lasting pharmaceutical careers."
-            highlightWords={['Sikkim', 'pharmacists', 'chemists', 'training', 'safety', 'merit-based', 'careers']}
-          />
-        </div>
-      </section>
+      {/* 2. DEDICATED SCROLL-CONTROLLED STORYTELLING SECTION (PINNED ON DESKTOP) */}
+      <ScrollWordReveal
+        pinnedStorytelling={true}
+        eyebrow="Our People & Culture"
+        text="Every medicine that leaves our Sikkim facility carries the dedication of our pharmacists, chemists, and operators. We invest in technical training, rigorous safety standards, and merit-based career progression so our talent can build lasting pharmaceutical careers."
+        highlightWords={['Sikkim', 'pharmacists', 'chemists', 'training', 'safety', 'merit-based', 'careers']}
+      />
 
       {/* 3. DEPARTMENTAL OPPORTUNITIES GRID */}
       <section className="section-spacing">

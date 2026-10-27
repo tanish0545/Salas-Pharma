@@ -334,17 +334,14 @@ export const LaboratoriesPage: React.FC<LaboratoriesPageProps> = ({ onNavigate }
       </section>
 
       {/* ====================================================================
-          EDITORIAL CONTRAST STORYTELLING (SCROLL WORD REVEAL)
+          2. DEDICATED SCROLL-CONTROLLED STORYTELLING SECTION (PINNED ON DESKTOP)
           ==================================================================== */}
-      <section className="section-spacing" style={{ backgroundColor: 'var(--color-bg-light)', borderBottom: '1px solid var(--color-border)' }}>
-        <div className="container">
-          <ScrollWordReveal
-            eyebrow="Analytical Discipline"
-            text="Pharmaceutical quality is established before any batch enters production. In our Sikkim laboratories, every chemical compound is scrutinized with chromatographic precision, dissolution kinetics, and continuous stability tracking to ensure uncompromised therapeutic safety."
-            highlightWords={['quality', 'Sikkim', 'chromatographic', 'dissolution', 'stability', 'safety']}
-          />
-        </div>
-      </section>
+      <ScrollWordReveal
+        pinnedStorytelling={true}
+        eyebrow="Analytical Discipline"
+        text="Pharmaceutical quality is established before any batch enters production. In our Sikkim laboratories, every chemical compound is scrutinized with chromatographic precision, dissolution kinetics, and continuous stability tracking to ensure uncompromised therapeutic safety."
+        highlightWords={['quality', 'Sikkim', 'chromatographic', 'dissolution', 'stability', 'safety']}
+      />
 
       {/* ====================================================================
           INTERACTIVE ANALYTICAL HOTSPOT STATION

@@ -137,16 +137,13 @@ export const ManufacturingPage: React.FC<ManufacturingPageProps> = ({ onNavigate
         </div>
       </section>
 
-      {/* 2. SCROLL WORD REVEAL (LEUCINE-STYLE CONTRAST STORYTELLING) */}
-      <section className="section-spacing" style={{ backgroundColor: 'var(--color-bg-light)', borderBottom: '1px solid var(--color-border)' }}>
-        <div className="container">
-          <ScrollWordReveal
-            eyebrow="cGMP Operational Integrity"
-            text="Manufacturing integrity requires absolute repeatability. In our Sikkim production suites, environmental temperature, relative humidity, and air pressure differentials are monitored continuously, ensuring that every tablet and capsule meets uncompromised pharmacopeial criteria."
-            highlightWords={['repeatability', 'Sikkim', 'temperature', 'humidity', 'uncompromised', 'pharmacopeial']}
-          />
-        </div>
-      </section>
+      {/* 2. DEDICATED SCROLL-CONTROLLED STORYTELLING SECTION (PINNED ON DESKTOP) */}
+      <ScrollWordReveal
+        pinnedStorytelling={true}
+        eyebrow="cGMP Operational Integrity"
+        text="Manufacturing integrity requires absolute repeatability. In our Sikkim production suites, environmental temperature, relative humidity, and air pressure differentials are monitored continuously, ensuring that every tablet and capsule meets uncompromised pharmacopeial criteria."
+        highlightWords={['repeatability', 'Sikkim', 'temperature', 'humidity', 'uncompromised', 'pharmacopeial']}
+      />
 
       {/* 3. SOUTH SIKKIM FACILITY SPOTLIGHT */}
       <section className="section-spacing">

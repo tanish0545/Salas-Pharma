@@ -47,6 +47,41 @@
   --shadow-primary: 0 8px 24px -4px rgba(10, 77, 158, 0.25);
   --shadow-glow: 0 0 35px rgba(10, 77, 158, 0.15);
 
+  /* ========================================================================
+     PREMIUM LUXURY PHARMACEUTICAL TYPOGRAPHY SYSTEM
+     ======================================================================== */
+  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-serif: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+  --font-interface: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+
+  /* Fluid Responsive Typography Scale (clamp) */
+  --font-size-display: clamp(2.75rem, 5vw, 4.25rem);      /* Hero display titles (44px - 68px) */
+  --font-size-h1: clamp(2.2rem, 3.8vw, 3.25rem);           /* Page H1 headings (35px - 52px) */
+  --font-size-h2: clamp(1.75rem, 2.6vw, 2.4rem);           /* Section H2 headings (28px - 38px) */
+  --font-size-h3: clamp(1.25rem, 1.8vw, 1.6rem);           /* Subsection & Card H3 (20px - 26px) */
+  --font-size-h4: clamp(1.05rem, 1.3vw, 1.25rem);          /* Subheadings H4 (17px - 20px) */
+  --font-size-lead: clamp(1.0625rem, 1.35vw, 1.25rem);     /* Lead intro paragraph (17px - 20px) */
+  --font-size-body: clamp(0.9375rem, 1.05vw, 1.0625rem);   /* Primary body text (15px - 17px) */
+  --font-size-body-sm: 0.875rem;                          /* Secondary body & metadata (14px) */
+  --font-size-caption: 0.8125rem;                          /* Eyebrows, badges, labels (13px) */
+  --font-size-micro: 0.75rem;                              /* Micro captions & timestamps (12px) */
+
+  /* Line Heights */
+  --leading-tight: 1.15;
+  --leading-heading: 1.24;
+  --leading-snug: 1.38;
+  --leading-body: 1.72;
+  --leading-relaxed: 1.85;
+
+  /* Letter Spacing */
+  --tracking-tightest: -0.035em;
+  --tracking-tight: -0.02em;
+  --tracking-snug: -0.01em;
+  --tracking-normal: 0em;
+  --tracking-wide: 0.04em;
+  --tracking-wider: 0.08em;
+  --tracking-widest: 0.14em;
+
   /* Geometry & Radius */
   --radius-xs: 4px;
   --radius-sm: 8px;
@@ -73,13 +108,14 @@
 }
 
 html {
-  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-family: var(--font-sans);
   font-size: 16px;
-  line-height: 1.6;
+  line-height: var(--leading-body);
   color: var(--color-text-body);
   background-color: var(--color-bg-white);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
   overflow-x: clip;
 }
 
@@ -88,6 +124,7 @@ body {
   min-height: 100vh;
   overflow-x: clip;
   position: relative;
+  font-family: var(--font-sans);
 }
 
 .salas-pharma-app {
@@ -98,17 +135,51 @@ body {
 /* Typography Standards */
 h1, h2, h3, h4, h5, h6 {
   color: var(--color-text-heading);
+  font-family: var(--font-sans);
   font-weight: 700;
-  line-height: 1.25;
-  letter-spacing: -0.02em;
+  line-height: var(--leading-heading);
+  letter-spacing: var(--tracking-tight);
 }
 
-h1 { font-size: clamp(2.2rem, 4.5vw, 3.6rem); font-weight: 800; }
-h2 { font-size: clamp(1.8rem, 3.2vw, 2.6rem); font-weight: 800; }
-h3 { font-size: clamp(1.3rem, 2.2vw, 1.8rem); font-weight: 700; }
-h4 { font-size: 1.25rem; font-weight: 600; }
-p { margin-bottom: 1rem; color: var(--color-text-body); }
+h1 { font-size: var(--font-size-h1); font-weight: 800; letter-spacing: var(--tracking-tightest); }
+h2 { font-size: var(--font-size-h2); font-weight: 800; letter-spacing: var(--tracking-tight); }
+h3 { font-size: var(--font-size-h3); font-weight: 700; letter-spacing: var(--tracking-snug); }
+h4 { font-size: var(--font-size-h4); font-weight: 600; letter-spacing: var(--tracking-snug); }
+
+/* Luxury Editorial Typography Utility Classes */
+.font-display {
+  font-size: var(--font-size-display);
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tightest);
+  font-weight: 800;
+}
+
+.font-editorial {
+  font-family: var(--font-serif);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.font-editorial-italic {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 500;
+}
+
+p {
+  margin-bottom: 1rem;
+  color: var(--color-text-body);
+  font-size: var(--font-size-body);
+  line-height: var(--leading-body);
+}
+
 p:last-child { margin-bottom: 0; }
+
+.lead-text {
+  font-size: var(--font-size-lead);
+  line-height: var(--leading-relaxed);
+  color: var(--color-text-muted);
+}
 
 a {
   color: inherit;
@@ -152,25 +223,32 @@ button, input, textarea, select {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  font-size: 0.8125rem;
+  font-size: var(--font-size-caption);
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.12em;
+  letter-spacing: var(--tracking-widest);
   color: var(--color-primary);
   background-color: var(--color-primary-subtle);
-  padding: 0.35rem 0.9rem;
+  padding: 0.35rem 0.95rem;
   border-radius: var(--radius-full);
-  margin-bottom: 1rem;
+  margin-bottom: 1.15rem;
+  border: 1px solid rgba(20, 86, 160, 0.12);
 }
 
 .section-title {
-  margin-bottom: 1.15rem;
+  font-size: var(--font-size-h2);
+  line-height: var(--leading-heading);
+  letter-spacing: var(--tracking-tight);
+  margin-bottom: 1.25rem;
 }
 
 .section-description {
-  font-size: 1.125rem;
+  font-size: var(--font-size-lead);
   color: var(--color-text-muted);
-  line-height: 1.7;
+  line-height: var(--leading-relaxed);
+  max-width: 68ch;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* ==========================================================================
@@ -2252,20 +2330,21 @@ button, input, textarea, select {
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
-  font-size: 0.75rem;
+  font-size: var(--font-size-micro);
   font-weight: 800;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
+  letter-spacing: var(--tracking-wider);
   color: var(--color-primary);
-  margin-bottom: 0.65rem;
+  margin-bottom: 0.75rem;
 }
 
 .pharma-card-title {
-  font-size: 1.25rem;
+  font-size: var(--font-size-h3);
   font-weight: 700;
   color: var(--color-navy);
-  margin-bottom: 0.75rem;
-  line-height: 1.35;
+  margin-bottom: 0.85rem;
+  line-height: var(--leading-snug);
+  letter-spacing: var(--tracking-snug);
   transition: color 0.2s ease;
 }
 
@@ -2275,9 +2354,9 @@ button, input, textarea, select {
 
 .pharma-card-text,
 .pharma-card-desc {
-  font-size: 0.9375rem;
+  font-size: var(--font-size-body);
   color: var(--color-text-body);
-  line-height: 1.65;
+  line-height: var(--leading-body);
   margin-bottom: 1.5rem;
   flex-grow: 1;
 }
@@ -2790,22 +2869,27 @@ button, input, textarea, select {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  font-size: 0.8125rem;
+  font-size: var(--font-size-caption);
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.12em;
-  color: var(--color-primary-blue);
-  margin-bottom: 1.5rem;
+  letter-spacing: var(--tracking-widest);
+  color: var(--color-primary);
+  background-color: var(--color-primary-subtle);
+  padding: 0.35rem 0.9rem;
+  border-radius: var(--radius-full);
+  margin-bottom: 2rem;
 }
 
 .scroll-word-reveal-text {
-  font-size: clamp(1.65rem, 3.2vw, 2.5rem);
+  font-family: var(--font-sans);
+  font-size: clamp(1.75rem, 3.2vw, 2.65rem);
   font-weight: 600;
-  line-height: 1.6;
-  letter-spacing: -0.015em;
+  line-height: 1.55;
+  letter-spacing: var(--tracking-snug);
   margin: 0;
   white-space: normal;
   word-wrap: break-word;
+  max-width: 940px;
 }
 
 .scroll-word {
@@ -2815,29 +2899,32 @@ button, input, textarea, select {
 }
 
 .scroll-word.is-muted {
-  color: rgba(11, 37, 69, 0.22);
+  color: rgba(7, 29, 54, 0.22);
 }
 
 .scroll-word.is-active {
-  color: var(--color-primary-navy, #0B2545);
+  color: var(--color-navy);
 }
 
 .scroll-word.is-highlight {
-  color: var(--color-accent, #E5242A) !important;
+  color: var(--color-accent) !important;
+  font-weight: 700;
 }
 
 /* ==========================================================================
-   PINNED DESKTOP STORYTELLING (ABOUT US DEDICATED SECTION)
+   PINNED DESKTOP STORYTELLING (STANDARDIZED ACROSS MANIFESTO SECTIONS)
    ========================================================================== */
 
+.storytelling-track,
 .about-storytelling-track {
   position: relative;
-  min-height: 300vh;
+  min-height: 280vh;
   background-color: var(--color-bg-light);
   border-top: 1px solid var(--color-border);
   border-bottom: 1px solid var(--color-border);
 }
 
+.storytelling-sticky,
 .about-storytelling-sticky {
   position: sticky;
   top: 0;
@@ -2853,11 +2940,11 @@ button, input, textarea, select {
 }
 
 .storytelling-progress-bar {
-  margin-top: 2.5rem;
-  width: 160px;
+  margin-top: 3rem;
+  width: 180px;
   height: 3px;
   background: rgba(20, 86, 160, 0.15);
-  border-radius: 2px;
+  border-radius: var(--radius-full);
   overflow: hidden;
 }
 
@@ -2868,9 +2955,11 @@ button, input, textarea, select {
 }
 
 @media (max-width: 768px) {
+  .storytelling-track,
   .about-storytelling-track {
     min-height: auto !important;
   }
+  .storytelling-sticky,
   .about-storytelling-sticky {
     position: static !important;
     height: auto !important;

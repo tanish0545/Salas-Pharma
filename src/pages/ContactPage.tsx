@@ -181,16 +181,13 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
         </div>
       </section>
 
-      {/* 2. SCROLL WORD REVEAL (LEUCINE-INSPIRED CONTRAST STORYTELLING) */}
-      <section className="section-spacing" style={{ backgroundColor: 'var(--color-bg-light)', borderBottom: '1px solid var(--color-border)' }}>
-        <div className="container">
-          <ScrollWordReveal
-            eyebrow="Our Commitment to Responsiveness"
-            text="Pharmaceutical partnerships depend on transparent, reliable communication. Whether you are seeking technical specifications, hospital supply allocations, or facility verification, our corporate leadership ensures timely, professional assistance."
-            highlightWords={['transparent', 'reliable', 'communication', 'specifications', 'allocations', 'professional']}
-          />
-        </div>
-      </section>
+      {/* 2. DEDICATED SCROLL-CONTROLLED STORYTELLING SECTION (PINNED ON DESKTOP) */}
+      <ScrollWordReveal
+        pinnedStorytelling={true}
+        eyebrow="Our Commitment to Responsiveness"
+        text="Pharmaceutical partnerships depend on transparent, reliable communication. Whether you are seeking technical specifications, hospital supply allocations, or facility verification, our corporate leadership ensures timely, professional assistance."
+        highlightWords={['transparent', 'reliable', 'communication', 'specifications', 'allocations', 'professional']}
+      />
 
       {/* 3. DUAL-LOCATION CARDS (VADODARA HQ & SIKKIM PLANT) */}
       <section className="section-spacing">

@@ -343,16 +343,13 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({ onNavigate }) => {
         </div>
       </section>
 
-      {/* 2. SCROLL WORD REVEAL (LEUCINE-INSPIRED CONTRAST) */}
-      <section className="section-spacing" style={{ backgroundColor: 'var(--color-bg-light)', borderBottom: '1px solid var(--color-border)' }}>
-        <div className="container">
-          <ScrollWordReveal
-            eyebrow="Therapeutic Standard"
-            text="Every batch manufactured under Salas Pharma undergoes stringent assay testing, dissolution kinetic verification, and microbiological stability evaluation. We maintain robust packaging integrity so vital medications arrive with uncompromised therapeutic potency."
-            highlightWords={['Salas', 'Pharma', 'assay', 'dissolution', 'stability', 'uncompromised', 'therapeutic']}
-          />
-        </div>
-      </section>
+      {/* 2. DEDICATED SCROLL-CONTROLLED STORYTELLING SECTION (PINNED ON DESKTOP) */}
+      <ScrollWordReveal
+        pinnedStorytelling={true}
+        eyebrow="Therapeutic Standard"
+        text="Every batch manufactured under Salas Pharma undergoes stringent assay testing, dissolution kinetic verification, and microbiological stability evaluation. We maintain robust packaging integrity so vital medications arrive with uncompromised therapeutic potency."
+        highlightWords={['Salas', 'Pharma', 'assay', 'dissolution', 'stability', 'uncompromised', 'therapeutic']}
+      />
 
       {/* 3. MULTI-AXIS FILTER & SEARCH COMMAND BAR */}
       <section id="catalogue-explorer" style={{ backgroundColor: '#FFFFFF', borderBottom: '1px solid var(--color-border)', padding: '2.5rem 0' }}>
