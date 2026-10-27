@@ -165,3 +165,42 @@ export const MEDIA_CONFIG = {
     alt: "Salas Pharma analytical testing and research laboratory facilities",
   },
 };
+
+/**
+ * Static Art-Directed Hero Images for Every Page
+ * High-resolution static photography replacing background video heroes.
+ */
+export const PAGE_HERO_IMAGES = {
+  home: {
+    image: "/assets/images/hero/hero-home.jpg",
+    alt: "Salas Pharma modern pharmaceutical manufacturing cleanroom facility",
+  },
+  about: {
+    image: "/assets/images/hero/hero-about.jpg",
+    alt: "Salas Pharma pharmaceutical researchers collaborating in modern facility",
+  },
+  products: {
+    image: "/assets/images/hero/hero-products.jpg",
+    alt: "Salas Pharma finished pharmaceutical formulations, tablets and capsules",
+  },
+  laboratories: {
+    image: "/assets/images/hero/hero-laboratories.jpg",
+    alt: "Salas Pharma analytical testing laboratory with precision instrumentation",
+  },
+  manufacturing: {
+    image: "/assets/images/hero/hero-manufacturing.jpg",
+    alt: "Salas Pharma automated pharmaceutical production cleanroom",
+  },
+  research: {
+    image: "/assets/images/hero/hero-research.jpg",
+    alt: "Salas Pharma formulation development and dissolution research laboratory",
+  },
+  careers: {
+    image: "/assets/images/hero/hero-careers.jpg",
+    alt: "Salas Pharma pharmaceutical specialists collaborating in corporate workplace",
+  },
+  contact: {
+    image: "/assets/images/hero/hero-contact.jpg",
+    alt: "Salas Pharma modern corporate headquarters and pharmaceutical campus",
+  },
+};

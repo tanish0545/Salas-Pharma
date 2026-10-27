@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { MapPin, Mail, Send, CheckCircle2, AlertCircle, Building2, Factory, Copy, Check } from 'lucide-react';
+import { PAGE_HERO_IMAGES } from '../config/assets';
 import { ScrollWordReveal } from '../components/common/ScrollWordReveal';
 import { SignatureClosingStatement } from '../components/common/SignatureClosingStatement';
 import { useScrollReveal } from '../hooks/useScrollReveal';
@@ -88,18 +89,42 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
   return (
     <div className="contact-page" style={{ marginTop: 'var(--header-height)', backgroundColor: '#FFFFFF' }}>
       
-      {/* 1. EDITORIAL HEADER */}
-      <section className="section-spacing" style={{ paddingTop: '4rem', paddingBottom: '3.5rem', borderBottom: '1px solid var(--color-border)' }}>
-        <div className="container">
-          <div style={{ maxWidth: '860px', margin: '0 auto', textAlign: 'center' }}>
-            <span className="section-eyebrow">
+      {/* 1. HERO SHOWCASE WITH STATIC HERO PHOTOGRAPHY */}
+      <section className="page-hero-banner" style={{ position: 'relative', overflow: 'hidden', backgroundColor: 'var(--color-navy)', color: '#FFFFFF', minHeight: '440px', display: 'flex', alignItems: 'center' }}>
+        <img
+          src={PAGE_HERO_IMAGES.contact.image}
+          alt={PAGE_HERO_IMAGES.contact.alt}
+          width={1920}
+          height={1080}
+          decoding="async"
+          style={{
+            position: 'absolute',
+            inset: 0,
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+            objectPosition: 'center 35%',
+            zIndex: 1,
+          }}
+        />
+        <div
+          style={{
+            position: 'absolute',
+            inset: 0,
+            background: 'linear-gradient(to right, rgba(11, 37, 69, 0.95) 0%, rgba(11, 37, 69, 0.88) 50%, rgba(11, 37, 69, 0.45) 100%)',
+            zIndex: 2,
+          }}
+        />
+        <div className="container" style={{ position: 'relative', zIndex: 3, padding: '4.5rem 1.5rem', width: '100%' }}>
+          <div style={{ maxWidth: '820px' }}>
+            <span className="section-eyebrow" style={{ color: 'var(--color-teal)' }}>
               <Mail size={14} /> Corporate Liaison
             </span>
-            <h1 style={{ fontSize: 'clamp(2.5rem, 5vw, 3.8rem)', marginBottom: '1.5rem', color: 'var(--color-navy)', letterSpacing: '-0.02em', lineHeight: 1.18 }}>
+            <h1 style={{ fontSize: 'clamp(2.5rem, 5vw, 3.8rem)', marginBottom: '1.25rem', color: '#FFFFFF', letterSpacing: '-0.02em', lineHeight: 1.18 }}>
               Open Communication. <br />
-              <span style={{ color: 'var(--color-primary-blue)' }}>Direct Corporate Dialogue.</span>
+              <span style={{ color: '#60A5FA' }}>Direct Corporate Dialogue.</span>
             </h1>
-            <p style={{ fontSize: '1.25rem', color: 'var(--color-text-body)', lineHeight: 1.7, fontWeight: 400 }}>
+            <p style={{ fontSize: '1.25rem', color: '#CBD5E1', lineHeight: 1.7, fontWeight: 400 }}>
               We welcome formal inquiries from licensed healthcare practitioners, institutional procurement officers, distribution alliances, and regulatory authorities.
             </p>
           </div>

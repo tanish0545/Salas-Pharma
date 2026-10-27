@@ -12,7 +12,7 @@ import {
   ClipboardList,
   TestTube2
 } from 'lucide-react';
-import { VIDEO_ASSETS, MEDIA_CONFIG } from '../config/assets';
+import { VIDEO_ASSETS, MEDIA_CONFIG, PAGE_HERO_IMAGES } from '../config/assets';
 import { BrandedVideo } from '../components/common/BrandedVideo';
 import { QualitySeal } from '../components/common/QualitySeal';
 import { ScientificParticles } from '../components/common/ScientificParticles';
@@ -126,7 +126,7 @@ export const LaboratoriesPage: React.FC<LaboratoriesPageProps> = ({ onNavigate }
           backgroundColor: '#FFFFFF',
         }}
       >
-        {/* Full-width Dedicated Laboratory Hero Video Background (Lab2.mp4) */}
+        {/* Full-width Dedicated Laboratory Hero Static Image Background */}
         <div
           style={{
             position: 'absolute',
@@ -134,31 +134,27 @@ export const LaboratoriesPage: React.FC<LaboratoriesPageProps> = ({ onNavigate }
             zIndex: 1,
           }}
         >
-          <BrandedVideo
-            src={VIDEO_ASSETS.laboratoryHero.video}
-            poster={VIDEO_ASSETS.laboratoryHero.poster}
-            playbackRate={VIDEO_ASSETS.laboratoryHero.playbackRate}
-            autoPlay={true}
-            muted={true}
-            loop={true}
-            playsInline={true}
-            priority={true}
-            ariaLabel={VIDEO_ASSETS.laboratoryHero.alt}
+          <img
+            src={PAGE_HERO_IMAGES.laboratories.image}
+            alt={PAGE_HERO_IMAGES.laboratories.alt}
+            width={1920}
+            height={1080}
+            decoding="async"
             style={{
               width: '100%',
               height: '100%',
               objectFit: 'cover',
               objectPosition: 'center 42%',
+              display: 'block',
             }}
           />
-          {/* Natural Footage Clarity: Left & Center (0-65%) remain completely clear and unwashed;
-              Gradual right-side white fade begins at ~65% to guarantee crisp text legibility */}
+          {/* Natural Footage Clarity: Left & Center remain clear; gradual right-side white fade ensures text legibility */}
           <div
             className="hero-gradient-mask"
             style={{
               position: 'absolute',
               inset: 0,
-              background: 'linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0) 65%, rgba(255, 255, 255, 0.35) 75%, rgba(255, 255, 255, 0.85) 88%, #FFFFFF 100%)',
+              background: 'linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.4) 55%, rgba(255, 255, 255, 0.88) 78%, #FFFFFF 100%)',
               pointerEvents: 'none',
             }}
           />

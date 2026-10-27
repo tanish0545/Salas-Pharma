@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { FlaskConical, Microscope, Sparkles, CheckCircle2, ArrowRight, Atom } from 'lucide-react';
-import { VIDEO_ASSETS, MEDIA_CONFIG } from '../config/assets';
+import { VIDEO_ASSETS, MEDIA_CONFIG, PAGE_HERO_IMAGES } from '../config/assets';
 import { BrandedVideo } from '../components/common/BrandedVideo';
 import { ScrollWordReveal } from '../components/common/ScrollWordReveal';
 import { SignatureClosingStatement } from '../components/common/SignatureClosingStatement';
@@ -63,33 +63,55 @@ export const ResearchPage: React.FC<ResearchPageProps> = ({ onNavigate }) => {
   return (
     <div className="research-page" style={{ marginTop: 'var(--header-height)', backgroundColor: '#FFFFFF' }}>
       
-      {/* 1. EDITORIAL SCIENTIFIC HERO */}
-      <section className="section-spacing" style={{ paddingTop: '4rem', paddingBottom: '3.5rem', borderBottom: '1px solid var(--color-border)', position: 'relative', overflow: 'hidden' }}>
-        
-        {/* Subtle Molecular Linework SVG in background */}
-        <div style={{ position: 'absolute', right: '-50px', top: '20px', opacity: 0.08, pointerEvents: 'none' }} aria-hidden="true">
-          <svg width="450" height="450" viewBox="0 0 200 200" fill="none">
-            <polygon points="100,20 170,60 170,140 100,180 30,140 30,60" stroke="#1456A0" strokeWidth="2" />
+      {/* 1. EDITORIAL SCIENTIFIC HERO WITH STATIC HERO PHOTOGRAPHY */}
+      <section className="page-hero-banner" style={{ position: 'relative', overflow: 'hidden', backgroundColor: 'var(--color-navy)', color: '#FFFFFF', minHeight: '440px', display: 'flex', alignItems: 'center' }}>
+        <img
+          src={PAGE_HERO_IMAGES.research.image}
+          alt={PAGE_HERO_IMAGES.research.alt}
+          width={1920}
+          height={1080}
+          decoding="async"
+          style={{
+            position: 'absolute',
+            inset: 0,
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+            objectPosition: 'center 40%',
+            zIndex: 1,
+          }}
+        />
+        <div
+          style={{
+            position: 'absolute',
+            inset: 0,
+            background: 'linear-gradient(to right, rgba(11, 37, 69, 0.95) 0%, rgba(11, 37, 69, 0.88) 45%, rgba(11, 37, 69, 0.4) 100%)',
+            zIndex: 2,
+          }}
+        />
+        {/* Subtle Molecular Linework SVG */}
+        <div style={{ position: 'absolute', right: '40px', top: '20px', opacity: 0.15, pointerEvents: 'none', zIndex: 3 }} aria-hidden="true">
+          <svg width="380" height="380" viewBox="0 0 200 200" fill="none">
+            <polygon points="100,20 170,60 170,140 100,180 30,140 30,60" stroke="#FFFFFF" strokeWidth="1.5" />
             <polygon points="100,50 145,75 145,125 100,150 55,125 55,75" stroke="#E5242A" strokeWidth="1.5" />
-            <circle cx="100" cy="20" r="6" fill="#1456A0" />
-            <circle cx="170" cy="60" r="6" fill="#20AEEA" />
-            <circle cx="170" cy="140" r="6" fill="#1456A0" />
-            <circle cx="100" cy="180" r="6" fill="#E5242A" />
-            <circle cx="30" cy="140" r="6" fill="#20AEEA" />
-            <circle cx="30" cy="60" r="6" fill="#1456A0" />
+            <circle cx="100" cy="20" r="5" fill="#38BDF8" />
+            <circle cx="170" cy="60" r="5" fill="#FFFFFF" />
+            <circle cx="170" cy="140" r="5" fill="#38BDF8" />
+            <circle cx="100" cy="180" r="5" fill="#E5242A" />
+            <circle cx="30" cy="140" r="5" fill="#38BDF8" />
+            <circle cx="30" cy="60" r="5" fill="#FFFFFF" />
           </svg>
         </div>
-
-        <div className="container" style={{ position: 'relative', zIndex: 2 }}>
-          <div style={{ maxWidth: '860px', margin: '0 auto', textAlign: 'center' }}>
-            <span className="section-eyebrow">
+        <div className="container" style={{ position: 'relative', zIndex: 4, padding: '4.5rem 1.5rem', width: '100%' }}>
+          <div style={{ maxWidth: '820px' }}>
+            <span className="section-eyebrow" style={{ color: 'var(--color-teal)' }}>
               <FlaskConical size={14} /> Pharmaceutical Science & Formulation
             </span>
-            <h1 style={{ fontSize: 'clamp(2.5rem, 5vw, 3.8rem)', marginBottom: '1.5rem', color: 'var(--color-navy)', letterSpacing: '-0.02em', lineHeight: 1.18 }}>
+            <h1 style={{ fontSize: 'clamp(2.4rem, 4.5vw, 3.6rem)', marginBottom: '1.25rem', color: '#FFFFFF', letterSpacing: '-0.02em', lineHeight: 1.18, fontWeight: 800 }}>
               Formulation Science. <br />
-              <span style={{ color: 'var(--color-primary-blue)' }}>Predictable Release Kinetics.</span>
+              <span style={{ color: '#38BDF8' }}>Predictable Release Kinetics.</span>
             </h1>
-            <p style={{ fontSize: '1.25rem', color: 'var(--color-text-body)', lineHeight: 1.7, fontWeight: 400 }}>
+            <p style={{ fontSize: '1.2rem', color: 'rgba(255, 255, 255, 0.92)', lineHeight: 1.65, fontWeight: 400, margin: 0 }}>
               Bridging laboratory pre-formulation screening with scalable cGMP manufacturing to deliver finished dosage pharmaceuticals with verified bio-absorption and shelf-life stability.
             </p>
           </div>

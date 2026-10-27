@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Award, Target, Eye, Compass, Calendar, MapPin, Building2, Copy, Check } from 'lucide-react';
-import { MEDIA_CONFIG } from '../config/assets';
+import { MEDIA_CONFIG, PAGE_HERO_IMAGES } from '../config/assets';
 import { AnimatedCounter } from '../components/common/AnimatedCounter';
 import { ScrollWordReveal } from '../components/common/ScrollWordReveal';
 import { SignatureClosingStatement } from '../components/common/SignatureClosingStatement';
@@ -50,49 +50,71 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
   return (
     <div className="about-page" style={{ marginTop: 'var(--header-height)', backgroundColor: '#FFFFFF' }}>
       
-      {/* 1. EDITORIAL PAGE HERO */}
-      <section className="section-spacing" style={{ paddingTop: '4rem', paddingBottom: '3.5rem', borderBottom: '1px solid var(--color-border)' }}>
-        <div className="container">
-          <div style={{ maxWidth: '860px', margin: '0 auto', textAlign: 'center' }}>
-            <span className="section-eyebrow">
+      {/* 1. EDITORIAL PAGE HERO WITH STATIC HERO PHOTOGRAPHY */}
+      <section className="page-hero-banner" style={{ position: 'relative', overflow: 'hidden', backgroundColor: 'var(--color-navy)', color: '#FFFFFF', minHeight: '440px', display: 'flex', alignItems: 'center' }}>
+        <img
+          src={PAGE_HERO_IMAGES.about.image}
+          alt={PAGE_HERO_IMAGES.about.alt}
+          width={1920}
+          height={1080}
+          decoding="async"
+          style={{
+            position: 'absolute',
+            inset: 0,
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+            objectPosition: 'center 35%',
+            zIndex: 1,
+          }}
+        />
+        {/* Dark editorial gradient overlay to guarantee 100% WCAG AAA text contrast */}
+        <div
+          style={{
+            position: 'absolute',
+            inset: 0,
+            background: 'linear-gradient(to right, rgba(11, 37, 69, 0.94) 0%, rgba(11, 37, 69, 0.85) 45%, rgba(11, 37, 69, 0.45) 100%)',
+            zIndex: 2,
+          }}
+        />
+        <div className="container" style={{ position: 'relative', zIndex: 3, padding: '4.5rem 1.5rem', width: '100%' }}>
+          <div style={{ maxWidth: '820px' }}>
+            <span className="section-eyebrow" style={{ color: 'var(--color-teal)' }}>
               <Compass size={14} /> Corporate Heritage & Identity
             </span>
-            <h1 style={{ fontSize: 'clamp(2.5rem, 5vw, 3.8rem)', marginBottom: '1.75rem', color: 'var(--color-navy)', letterSpacing: '-0.02em', lineHeight: 1.18 }}>
+            <h1 style={{ fontSize: 'clamp(2.4rem, 4.5vw, 3.6rem)', marginBottom: '1.25rem', color: '#FFFFFF', letterSpacing: '-0.02em', lineHeight: 1.18, fontWeight: 800 }}>
               Precision Formulation. <br />
-              <span style={{ color: 'var(--color-primary-blue)' }}>Unwavering Commitment.</span>
+              <span style={{ color: '#38BDF8' }}>Unwavering Commitment.</span>
             </h1>
-            <p style={{ fontSize: '1.25rem', color: 'var(--color-text-body)', lineHeight: 1.7, fontWeight: 400 }}>
+            <p style={{ fontSize: '1.2rem', color: 'rgba(255, 255, 255, 0.92)', lineHeight: 1.65, fontWeight: 400, marginBottom: '2rem' }}>
               Headquartered in India, Salas Pharma manufactures, markets, and distributes high-quality finished dosage pharmaceuticals engineered to support dependable healthcare outcomes nationwide.
             </p>
 
-            <div style={{ display: 'flex', justifyContent: 'center', gap: '2.5rem', marginTop: '2.5rem', flexWrap: 'wrap' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+            <div style={{ display: 'flex', gap: '2rem', flexWrap: 'wrap' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem' }}>
                 <span style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: 'var(--color-accent)' }} />
-                <span style={{ fontWeight: 600, fontSize: '0.9375rem', color: 'var(--color-navy)' }}>Founded in 2009</span>
+                <span style={{ fontWeight: 600, fontSize: '0.9375rem', color: '#FFFFFF' }}>Founded in 2009</span>
               </div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-                <span style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: 'var(--color-primary-blue)' }} />
-                <span style={{ fontWeight: 600, fontSize: '0.9375rem', color: 'var(--color-navy)' }}>Vadodara Corporate Office</span>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem' }}>
+                <span style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: '#38BDF8' }} />
+                <span style={{ fontWeight: 600, fontSize: '0.9375rem', color: '#FFFFFF' }}>Vadodara Corporate Office</span>
               </div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem' }}>
                 <span style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: 'var(--color-teal)' }} />
-                <span style={{ fontWeight: 600, fontSize: '0.9375rem', color: 'var(--color-navy)' }}>Mamring, Sikkim Plant</span>
+                <span style={{ fontWeight: 600, fontSize: '0.9375rem', color: '#FFFFFF' }}>Mamring, Sikkim Plant</span>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* 2. SCROLL WORD REVEAL (LEUCINE-INSPIRED EDITORIAL STORY CONTRAST) */}
-      <section className="section-spacing" style={{ backgroundColor: 'var(--color-bg-light)', borderBottom: '1px solid var(--color-border)' }}>
-        <div className="container">
-          <ScrollWordReveal
-            eyebrow="Our Foundational Ethos"
-            text="At Salas Pharma, every finished pharmaceutical dosage represents a disciplined commitment to patient health. We unite strict cGMP manufacturing standards, rigorous analytical validation, and nationwide distribution to ensure essential therapeutic solutions remain accessible and uncompromisingly reliable."
-            highlightWords={['Salas', 'Pharma', 'commitment', 'cGMP', 'analytical', 'accessible', 'reliable']}
-          />
-        </div>
-      </section>
+      {/* 2. DEDICATED SCROLL-CONTROLLED STORYTELLING SECTION (PINNED ON DESKTOP) */}
+      <ScrollWordReveal
+        pinnedStorytelling={true}
+        eyebrow="Our Foundational Ethos"
+        text="At Salas Pharma, every finished pharmaceutical dosage represents a disciplined commitment to patient health. We unite strict cGMP manufacturing standards, rigorous analytical validation, and nationwide distribution to ensure essential therapeutic solutions remain accessible and uncompromisingly reliable."
+        highlightWords={['Salas', 'Pharma', 'commitment', 'cGMP', 'analytical', 'accessible', 'reliable']}
+      />
 
       {/* 3. CORPORATE HERITAGE & INFRASTRUCTURE SHOWCASE */}
       <section className="section-spacing">

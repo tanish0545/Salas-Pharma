@@ -127,3 +127,4 @@ Leucine.ai positions itself as an enterprise AI platform for pharmaceutical manu
 2. **No Hardware Exhaustion:** Single-video playback manager ensures only 1 video decoder runs at any time.
 3. **No Continuous RAF Re-renders:** State updates are strictly decoupled from cursor and scroll listeners.
 4. **No Synthetic Claims:** Zero fabricated certifications, customer logos, or unverified statistical claims.
+

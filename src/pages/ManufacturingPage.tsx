@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Factory, ShieldCheck, MapPin, CheckCircle2, Cpu, ArrowRight } from 'lucide-react';
-import { VIDEO_ASSETS, MEDIA_CONFIG } from '../config/assets';
+import { VIDEO_ASSETS, MEDIA_CONFIG, PAGE_HERO_IMAGES } from '../config/assets';
 import { BrandedVideo } from '../components/common/BrandedVideo';
 import { QualitySeal } from '../components/common/QualitySeal';
 import { ScrollWordReveal } from '../components/common/ScrollWordReveal';
@@ -85,18 +85,42 @@ export const ManufacturingPage: React.FC<ManufacturingPageProps> = ({ onNavigate
   return (
     <div className="manufacturing-page" style={{ marginTop: 'var(--header-height)', backgroundColor: '#FFFFFF' }}>
       
-      {/* 1. PAGE HEADER */}
-      <section className="section-spacing" style={{ paddingTop: '4rem', paddingBottom: '3.5rem', borderBottom: '1px solid var(--color-border)' }}>
-        <div className="container">
-          <div style={{ maxWidth: '860px', margin: '0 auto', textAlign: 'center' }}>
-            <span className="section-eyebrow">
+      {/* 1. EDITORIAL PAGE HERO WITH STATIC HERO PHOTOGRAPHY */}
+      <section className="page-hero-banner" style={{ position: 'relative', overflow: 'hidden', backgroundColor: 'var(--color-navy)', color: '#FFFFFF', minHeight: '440px', display: 'flex', alignItems: 'center' }}>
+        <img
+          src={PAGE_HERO_IMAGES.manufacturing.image}
+          alt={PAGE_HERO_IMAGES.manufacturing.alt}
+          width={1920}
+          height={1080}
+          decoding="async"
+          style={{
+            position: 'absolute',
+            inset: 0,
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+            objectPosition: 'center 35%',
+            zIndex: 1,
+          }}
+        />
+        <div
+          style={{
+            position: 'absolute',
+            inset: 0,
+            background: 'linear-gradient(to right, rgba(11, 37, 69, 0.95) 0%, rgba(11, 37, 69, 0.88) 45%, rgba(11, 37, 69, 0.4) 100%)',
+            zIndex: 2,
+          }}
+        />
+        <div className="container" style={{ position: 'relative', zIndex: 3, padding: '4.5rem 1.5rem', width: '100%' }}>
+          <div style={{ maxWidth: '820px' }}>
+            <span className="section-eyebrow" style={{ color: 'var(--color-teal)' }}>
               <Factory size={14} /> Production Infrastructure
             </span>
-            <h1 style={{ fontSize: 'clamp(2.5rem, 5vw, 3.8rem)', marginBottom: '1.5rem', color: 'var(--color-navy)', letterSpacing: '-0.02em', lineHeight: 1.18 }}>
+            <h1 style={{ fontSize: 'clamp(2.4rem, 4.5vw, 3.6rem)', marginBottom: '1.25rem', color: '#FFFFFF', letterSpacing: '-0.02em', lineHeight: 1.18, fontWeight: 800 }}>
               Engineering Precision. <br />
-              <span style={{ color: 'var(--color-primary-blue)' }}>Manufacturing Excellence.</span>
+              <span style={{ color: '#38BDF8' }}>Manufacturing Excellence.</span>
             </h1>
-            <p style={{ fontSize: '1.25rem', color: 'var(--color-text-body)', lineHeight: 1.7, fontWeight: 400 }}>
+            <p style={{ fontSize: '1.2rem', color: 'rgba(255, 255, 255, 0.92)', lineHeight: 1.65, fontWeight: 400, margin: 0 }}>
               Operating dedicated pharmaceutical manufacturing facilities in South Sikkim, engineered for solid orals, cleanroom processing, and automated packaging under strict Schedule M cGMP controls.
             </p>
           </div>

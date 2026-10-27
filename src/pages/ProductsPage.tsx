@@ -1,7 +1,7 @@
 import React, { useState, useMemo } from 'react';
 import { Search, Pill, X, ArrowRight, Filter, ShieldCheck, AlertCircle } from 'lucide-react';
 import { useScrollReveal } from '../hooks/useScrollReveal';
-import { MEDIA_CONFIG } from '../config/assets';
+import { PAGE_HERO_IMAGES } from '../config/assets';
 import { ScrollWordReveal } from '../components/common/ScrollWordReveal';
 import { SignatureClosingStatement } from '../components/common/SignatureClosingStatement';
 
@@ -270,81 +270,65 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({ onNavigate }) => {
   return (
     <div className="products-page" style={{ marginTop: 'var(--header-height)', backgroundColor: '#FFFFFF' }}>
       
-      {/* 1. EDITORIAL HERO & DOSAGE DIVERSITY */}
-      <section className="section-spacing" style={{ paddingTop: '4rem', paddingBottom: '3.5rem', borderBottom: '1px solid var(--color-border)' }}>
-        <div className="container">
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '4rem', alignItems: 'center' }}>
-            <div className="reveal-left">
-              <span className="section-eyebrow">
-                <Pill size={14} /> Comprehensive Finished Dosages
-              </span>
-              <h1 style={{ fontSize: 'clamp(2.4rem, 4.5vw, 3.6rem)', color: 'var(--color-navy)', letterSpacing: '-0.02em', lineHeight: 1.18, marginBottom: '1.5rem' }}>
-                Therapeutic Breadth. <br />
-                <span style={{ color: 'var(--color-primary-blue)' }}>Formulation Discipline.</span>
-              </h1>
-              <p style={{ fontSize: '1.2rem', color: 'var(--color-text-body)', lineHeight: 1.7, marginBottom: '2rem' }}>
-                Salas Pharma manufactures and distributes high-quality pharmaceuticals across 8 therapeutic segments, offering dependable oral solids, liquids, and sterile dosages engineered to strict Indian pharmacopeial and cGMP standards.
-              </p>
+      {/* 1. EDITORIAL HERO WITH STATIC HERO PHOTOGRAPHY */}
+      <section className="page-hero-banner" style={{ position: 'relative', overflow: 'hidden', backgroundColor: 'var(--color-navy)', color: '#FFFFFF', minHeight: '440px', display: 'flex', alignItems: 'center' }}>
+        <img
+          src={PAGE_HERO_IMAGES.products.image}
+          alt={PAGE_HERO_IMAGES.products.alt}
+          width={1920}
+          height={1080}
+          decoding="async"
+          style={{
+            position: 'absolute',
+            inset: 0,
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+            objectPosition: 'center right',
+            zIndex: 1,
+          }}
+        />
+        <div
+          style={{
+            position: 'absolute',
+            inset: 0,
+            background: 'linear-gradient(to right, rgba(11, 37, 69, 0.95) 0%, rgba(11, 37, 69, 0.88) 45%, rgba(11, 37, 69, 0.4) 100%)',
+            zIndex: 2,
+          }}
+        />
+        <div className="container" style={{ position: 'relative', zIndex: 3, padding: '4.5rem 1.5rem', width: '100%' }}>
+          <div style={{ maxWidth: '820px' }}>
+            <span className="section-eyebrow" style={{ color: 'var(--color-teal)' }}>
+              <Pill size={14} /> Comprehensive Finished Dosages
+            </span>
+            <h1 style={{ fontSize: 'clamp(2.4rem, 4.5vw, 3.6rem)', color: '#FFFFFF', letterSpacing: '-0.02em', lineHeight: 1.18, marginBottom: '1.25rem', fontWeight: 800 }}>
+              Therapeutic Breadth. <br />
+              <span style={{ color: '#38BDF8' }}>Formulation Discipline.</span>
+            </h1>
+            <p style={{ fontSize: '1.2rem', color: 'rgba(255, 255, 255, 0.92)', lineHeight: 1.65, marginBottom: '2rem' }}>
+              Salas Pharma manufactures and distributes high-quality pharmaceuticals across 8 therapeutic segments, offering dependable oral solids, liquids, and sterile dosages engineered to strict Indian pharmacopeial and cGMP standards.
+            </p>
 
-              <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
-                <button
-                  type="button"
-                  onClick={() => {
-                    const el = document.getElementById('catalogue-explorer');
-                    el?.scrollIntoView({ behavior: 'smooth' });
-                  }}
-                  className="btn btn-primary"
-                >
-                  <span>Explore 8 Therapeutic Segments</span>
-                  <ArrowRight size={16} />
-                </button>
-                <button
-                  type="button"
-                  onClick={() => onNavigate('manufacturing')}
-                  className="btn btn-secondary"
-                >
-                  <span>Quality & Cleanroom Specs</span>
-                </button>
-              </div>
-            </div>
-
-            <div className="reveal-right">
-              <div 
-                className="img-zoom-wrapper" 
-                style={{ 
-                  borderRadius: 'var(--radius-xl)', 
-                  overflow: 'hidden', 
-                  boxShadow: 'var(--shadow-xl)',
-                  border: '1px solid var(--color-border)',
-                  position: 'relative',
+            <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+              <button
+                type="button"
+                onClick={() => {
+                  const el = document.getElementById('catalogue-explorer');
+                  el?.scrollIntoView({ behavior: 'smooth' });
                 }}
+                className="btn btn-primary"
               >
-                <img 
-                  src={MEDIA_CONFIG.products.image} 
-                  alt="Salas Pharma finished pharmaceutical dosage forms - tablets, capsules, sterile ampoules" 
-                  loading="lazy" 
-                  decoding="async" 
-                  width={640} 
-                  height={420} 
-                  style={{ width: '100%', height: '400px', objectFit: 'cover', display: 'block' }}
-                />
-                <div style={{
-                  position: 'absolute',
-                  bottom: 0,
-                  left: 0,
-                  right: 0,
-                  background: 'linear-gradient(to top, rgba(7, 29, 54, 0.92), transparent)',
-                  padding: '1.75rem 2rem',
-                  color: '#FFFFFF',
-                }}>
-                  <span style={{ fontSize: '0.75rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.1em', color: 'var(--color-secondary)' }}>
-                    Formulation Diversity
-                  </span>
-                  <p style={{ margin: '0.25rem 0 0', fontSize: '1.05rem', fontWeight: 600 }}>
-                    Solid Orals, Multi-Particulate Pellets & Sterile Formulations
-                  </p>
-                </div>
-              </div>
+                <span>Explore 8 Therapeutic Segments</span>
+                <ArrowRight size={16} />
+              </button>
+              <button
+                type="button"
+                onClick={() => onNavigate('manufacturing')}
+                className="btn btn-secondary"
+                style={{ backgroundColor: 'rgba(255, 255, 255, 0.1)', color: '#FFFFFF', borderColor: 'rgba(255, 255, 255, 0.3)' }}
+              >
+                <span>Quality & Cleanroom Specs</span>
+              </button>
             </div>
           </div>
         </div>

@@ -131,3 +131,4 @@ Every page adheres to:
 2. **Bundle Footprint:** Minimized vendor chunks (`vendor-react`, `vendor-icons`), entry bundle under 50 kB gzip.
 3. **Hardware Decoder Safety:** `VideoPlaybackManager` ensures `video.pause()` when out of viewport or when another video is requested.
 4. **Universal Accessibility (WCAG 2.1 AA):** All interactive buttons and drawer close controls contain `aria-label`, visible keyboard focus states, and screen reader friendly dialog semantics.
+
