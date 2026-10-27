@@ -14,7 +14,6 @@ import {
   CheckCircle2,
   Compass,
   Building2,
-  Globe,
   Microscope,
   FileCheck
 } from 'lucide-react';
@@ -22,7 +21,6 @@ import { MEDIA_CONFIG, VIDEO_ASSETS, PAGE_HERO_IMAGES } from '../config/assets';
 import { BrandedVideo } from '../components/common/BrandedVideo';
 import { QualitySeal } from '../components/common/QualitySeal';
 import { AnimatedCounter } from '../components/common/AnimatedCounter';
-import { MolecularBackground } from '../components/common/MolecularBackground';
 import { SignatureClosingStatement } from '../components/common/SignatureClosingStatement';
 import { CompanyTimeline } from '../components/common/CompanyTimeline';
 import { useScrollReveal } from '../hooks/useScrollReveal';
@@ -101,41 +99,6 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, isLoaderComplete
       detail: 'Core broad-spectrum medicines manufactured under rigorous quality control for healthcare providers nationwide.',
       color: '#0A4D9E'
     },
-  ];
-
-  const highlights = [
-    {
-      metric: (
-        <span>
-          Est. <AnimatedCounter target={2009} />
-        </span>
-      ),
-      label: 'Corporate Heritage',
-      description: 'Over 15 years of dedicated pharmaceutical service, compliance, and collaborative growth across India.',
-      icon: Building2,
-    },
-    {
-      metric: (
-        <span>
-          <AnimatedCounter target={8} /> Segments
-        </span>
-      ),
-      label: 'Therapeutic Depth',
-      description: 'Comprehensive product solutions addressing diverse chronic and acute medical requirements.',
-      icon: Pill,
-    },
-    {
-      metric: 'Multi-Dosage',
-      label: 'Manufacturing Versatility',
-      description: 'High-precision production capabilities for tablets, capsules, and injectables in cleanroom facilities.',
-      icon: Factory,
-    },
-    {
-      metric: 'Pan-India',
-      label: 'Distribution Presence',
-      description: 'Robust supply and marketing network ensuring accessible healthcare delivery nationwide.',
-      icon: Globe,
-    }
   ];
 
   const currentSegment = therapeuticSegments.find(s => s.id === activeCategory) || therapeuticSegments[0];
@@ -233,14 +196,19 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, isLoaderComplete
             </div>
           </div>
 
-          {/* RIGHT ASYMMETRIC GALLERY: 3 Angled Panels */}
+          {/* RIGHT ASYMMETRIC GALLERY: 3 Angled Panels — interactive, keyboard-accessible */}
           <div className="hero-hybrid-gallery" aria-label="Pharmaceutical Operations Gallery">
-            {/* Panel 1: Laboratory Research */}
-            <div className="hero-hybrid-panel hero-hybrid-panel-1">
+            {/* Panel 1: R&D Laboratory → research route */}
+            <button
+              type="button"
+              className="hero-hybrid-panel hero-hybrid-panel-1"
+              onClick={() => onNavigate('research')}
+              aria-label="Explore R&D Laboratory — navigate to R&D and Innovation"
+            >
               <div className="hero-hybrid-panel-inner">
                 <img
                   src="/assets/images/research/rnd-laboratory-research.webp"
-                  alt="Pharmaceutical laboratory research and formulation development"
+                  alt="Pharmaceutical R&D laboratory research and formulation development"
                   loading="eager"
                   decoding="async"
                 />
@@ -248,16 +216,22 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, isLoaderComplete
                 <div className="hero-hybrid-panel-caption">
                   <span className="hero-hybrid-panel-tag">R&D</span>
                   <span className="hero-hybrid-panel-title">Laboratory Research</span>
+                  <span className="hero-hybrid-panel-explore" aria-hidden="true">Explore →</span>
                 </div>
               </div>
-            </div>
+            </button>
 
-            {/* Panel 2: Manufacturing Equipment */}
-            <div className="hero-hybrid-panel hero-hybrid-panel-2">
+            {/* Panel 2: cGMP Cleanroom Facility → manufacturing route */}
+            <button
+              type="button"
+              className="hero-hybrid-panel hero-hybrid-panel-2"
+              onClick={() => onNavigate('manufacturing')}
+              aria-label="Explore cGMP Cleanroom Facility — navigate to Manufacturing & Quality"
+            >
               <div className="hero-hybrid-panel-inner">
                 <img
                   src="/assets/images/manufacturing/manufacturing-cleanroom.webp"
-                  alt="Pharmaceutical manufacturing equipment and cleanroom facility"
+                  alt="Pharmaceutical cGMP cleanroom manufacturing facility"
                   loading="eager"
                   decoding="async"
                 />
@@ -265,26 +239,33 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, isLoaderComplete
                 <div className="hero-hybrid-panel-caption">
                   <span className="hero-hybrid-panel-tag">cGMP</span>
                   <span className="hero-hybrid-panel-title">Cleanroom Facility</span>
+                  <span className="hero-hybrid-panel-explore" aria-hidden="true">Explore →</span>
                 </div>
               </div>
-            </div>
+            </button>
 
-            {/* Panel 3: Quality Control */}
-            <div className="hero-hybrid-panel hero-hybrid-panel-3">
+            {/* Panel 3: Quality Assurance → manufacturing route */}
+            <button
+              type="button"
+              className="hero-hybrid-panel hero-hybrid-panel-3"
+              onClick={() => onNavigate('manufacturing')}
+              aria-label="Explore Quality Assurance — navigate to Manufacturing & Quality"
+            >
               <div className="hero-hybrid-panel-inner">
                 <img
                   src="/assets/images/quality/quality-control.webp"
-                  alt="Scientist performing quality-control testing and assay analysis"
+                  alt="Scientist performing quality assurance testing and analytical assay"
                   loading="eager"
                   decoding="async"
                 />
                 <div className="hero-hybrid-panel-scrim" />
                 <div className="hero-hybrid-panel-caption">
-                  <span className="hero-hybrid-panel-tag">Assurance</span>
+                  <span className="hero-hybrid-panel-tag">Quality Assurance</span>
                   <span className="hero-hybrid-panel-title">Quality Testing</span>
+                  <span className="hero-hybrid-panel-explore" aria-hidden="true">Explore →</span>
                 </div>
               </div>
-            </div>
+            </button>
           </div>
         </div>
       </section>
@@ -339,9 +320,8 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, isLoaderComplete
       </section>
 
       {/* ====================================================================
-          SECTION 2: COMPANY INTRODUCTION (SECTION 5.2)
-          Editorial statement with image group 1 entering from the LEFT.
-          Alternating sequence step 1: LEFT
+          1. COMPANY INTRODUCTION
+          Editorial statement with facility imagery from Mamring, South Sikkim.
           ==================================================================== */}
       <section className="section-spacing" style={{ backgroundColor: 'var(--color-bg-light)', borderBottom: '1px solid var(--color-border)' }}>
         <div className="container">
@@ -353,7 +333,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, isLoaderComplete
               alignItems: 'center',
             }}
           >
-            {/* Image Group 1: Enters from LEFT */}
+            {/* Facility Visual */}
             <div className="reveal-left">
               <div
                 className="img-zoom-wrapper"
@@ -416,7 +396,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, isLoaderComplete
               </div>
             </div>
 
-            {/* Editorial Statement: Enters from RIGHT */}
+            {/* Editorial Statement */}
             <div className="reveal-right">
               <span className="section-eyebrow">
                 <Compass size={14} /> Corporate Heritage & Purpose
@@ -458,251 +438,8 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, isLoaderComplete
       </section>
 
       {/* ====================================================================
-          SECTION 3: OUR PHARMACEUTICAL EXPERTISE
-          Three informative capability pillars bridging into core domains
-          ==================================================================== */}
-      <section className="section-spacing" style={{ backgroundColor: '#FFFFFF', borderBottom: '1px solid var(--color-border)' }}>
-        <div className="container">
-          <div className="section-header" style={{ textAlign: 'center', maxWidth: '780px', margin: '0 auto 3.5rem auto' }}>
-            <span
-              className="section-eyebrow"
-              style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '0.45rem',
-                color: 'var(--color-primary-blue)',
-                fontWeight: 800,
-                fontSize: '0.8125rem',
-                letterSpacing: '0.12em',
-                textTransform: 'uppercase',
-                marginBottom: '0.75rem',
-              }}
-            >
-              <ShieldCheck size={14} /> Comprehensive Capabilities
-            </span>
-            <h2 className="section-title" style={{ fontSize: 'clamp(2rem, 3.2vw, 2.75rem)', fontWeight: 800, color: 'var(--color-navy)', marginBottom: '1rem' }}>
-              Our Pharmaceutical Expertise
-            </h2>
-            <p className="section-description" style={{ fontSize: '1.05rem', color: 'var(--color-text-body)', lineHeight: 1.65, maxWidth: '680px', margin: '0 auto' }}>
-              Explore our therapeutic portfolio and pharmaceutical capabilities, guided by a commitment to quality, scientific discipline, and dependable healthcare solutions.
-            </p>
-          </div>
-
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '2rem' }}>
-            {/* Block 1: Therapeutic Portfolio */}
-            <div
-              className="interactive-card reveal-up delay-100"
-              style={{
-                backgroundColor: 'var(--color-bg-light)',
-                borderRadius: 'var(--radius-lg)',
-                border: '1px solid var(--color-border)',
-                overflow: 'hidden',
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'space-between',
-              }}
-            >
-              <div>
-                <div style={{ height: '220px', overflow: 'hidden', position: 'relative' }}>
-                  <img
-                    src="/assets/images/products/products-dosage-forms.webp"
-                    alt="Salas Pharma therapeutic formulations and finished dosage forms"
-                    loading="lazy"
-                    decoding="async"
-                    width={640}
-                    height={220}
-                    style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                  />
-                  <div
-                    style={{
-                      position: 'absolute',
-                      top: '1rem',
-                      left: '1rem',
-                      backgroundColor: 'rgba(7, 29, 54, 0.85)',
-                      color: '#38BDF8',
-                      fontSize: '0.75rem',
-                      fontWeight: 800,
-                      padding: '0.3rem 0.75rem',
-                      borderRadius: '9999px',
-                      backdropFilter: 'blur(4px)',
-                      letterSpacing: '0.08em',
-                      textTransform: 'uppercase',
-                    }}
-                  >
-                    Clinical Depth
-                  </div>
-                </div>
-
-                <div style={{ padding: '2rem' }}>
-                  <h3 style={{ fontSize: '1.35rem', fontWeight: 800, color: 'var(--color-navy)', marginBottom: '0.75rem' }}>
-                    Therapeutic Portfolio
-                  </h3>
-                  <p style={{ fontSize: '0.9375rem', color: 'var(--color-text-body)', lineHeight: 1.65, margin: 0 }}>
-                    Targeted formulation delivery across 8 major therapeutic segments—including Gastroenterology, Pain Management, Antibacterials, Neurology, and General Healthcare—engineered in immediate, sustained-release, and liquid formats.
-                  </p>
-                </div>
-              </div>
-
-              <div style={{ padding: '0 2rem 2rem 2rem' }}>
-                <button
-                  type="button"
-                  onClick={() => onNavigate('products')}
-                  className="btn btn-secondary"
-                  style={{ width: '100%', justifyContent: 'center' }}
-                >
-                  <span>Explore Product Portfolio</span>
-                  <ArrowRight size={15} />
-                </button>
-              </div>
-            </div>
-
-            {/* Block 2: Manufacturing & Quality */}
-            <div
-              className="interactive-card reveal-up delay-200"
-              style={{
-                backgroundColor: 'var(--color-bg-light)',
-                borderRadius: 'var(--radius-lg)',
-                border: '1px solid var(--color-border)',
-                overflow: 'hidden',
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'space-between',
-              }}
-            >
-              <div>
-                <div style={{ height: '220px', overflow: 'hidden', position: 'relative' }}>
-                  <img
-                    src="/assets/images/manufacturing/manufacturing-line.webp"
-                    alt="Salas Pharma cleanroom production facility and high-speed tablet compression"
-                    loading="lazy"
-                    decoding="async"
-                    width={640}
-                    height={220}
-                    style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                  />
-                  <div
-                    style={{
-                      position: 'absolute',
-                      top: '1rem',
-                      left: '1rem',
-                      backgroundColor: 'rgba(7, 29, 54, 0.85)',
-                      color: 'var(--color-accent)',
-                      fontSize: '0.75rem',
-                      fontWeight: 800,
-                      padding: '0.3rem 0.75rem',
-                      borderRadius: '9999px',
-                      backdropFilter: 'blur(4px)',
-                      letterSpacing: '0.08em',
-                      textTransform: 'uppercase',
-                    }}
-                  >
-                    cGMP Infrastructure
-                  </div>
-                </div>
-
-                <div style={{ padding: '2rem' }}>
-                  <h3 style={{ fontSize: '1.35rem', fontWeight: 800, color: 'var(--color-navy)', marginBottom: '0.75rem' }}>
-                    Manufacturing & Quality
-                  </h3>
-                  <p style={{ fontSize: '0.9375rem', color: 'var(--color-text-body)', lineHeight: 1.65, margin: 0 }}>
-                    Our dedicated South Sikkim production facility operates under strict cGMP protocols and Schedule M standards, featuring positive-pressure cleanrooms, automated rotary compression, and 100% batch traceability.
-                  </p>
-                </div>
-              </div>
-
-              <div style={{ padding: '0 2rem 2rem 2rem' }}>
-                <button
-                  type="button"
-                  onClick={() => onNavigate('manufacturing')}
-                  className="btn btn-secondary"
-                  style={{ width: '100%', justifyContent: 'center' }}
-                >
-                  <span>View Manufacturing Standards</span>
-                  <ArrowRight size={15} />
-                </button>
-              </div>
-            </div>
-
-            {/* Block 3: Laboratories & Science */}
-            <div
-              className="interactive-card reveal-up delay-300"
-              style={{
-                backgroundColor: 'var(--color-bg-light)',
-                borderRadius: 'var(--radius-lg)',
-                border: '1px solid var(--color-border)',
-                overflow: 'hidden',
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'space-between',
-              }}
-            >
-              <div>
-                <div style={{ height: '220px', overflow: 'hidden', position: 'relative' }}>
-                  <img
-                    src="/assets/images/research/rnd-laboratory-research.webp"
-                    alt="Salas Pharma analytical testing and chromatographic assay verification"
-                    loading="lazy"
-                    decoding="async"
-                    width={640}
-                    height={220}
-                    style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                  />
-                  <div
-                    style={{
-                      position: 'absolute',
-                      top: '1rem',
-                      left: '1rem',
-                      backgroundColor: 'rgba(7, 29, 54, 0.85)',
-                      color: '#38BDF8',
-                      fontSize: '0.75rem',
-                      fontWeight: 800,
-                      padding: '0.3rem 0.75rem',
-                      borderRadius: '9999px',
-                      backdropFilter: 'blur(4px)',
-                      letterSpacing: '0.08em',
-                      textTransform: 'uppercase',
-                    }}
-                  >
-                    Analytical Controls
-                  </div>
-                </div>
-
-                <div style={{ padding: '2rem' }}>
-                  <h3 style={{ fontSize: '1.35rem', fontWeight: 800, color: 'var(--color-navy)', marginBottom: '0.75rem' }}>
-                    Laboratories & Science
-                  </h3>
-                  <p style={{ fontSize: '0.9375rem', color: 'var(--color-text-body)', lineHeight: 1.65, margin: 0 }}>
-                    Advanced analytical instrumentation, HPLC purity verification, multi-stage dissolution profiling, and continuous Zone IVb stability testing ensure every released lot adheres strictly to pharmacopeial monographs.
-                  </p>
-                </div>
-              </div>
-
-              <div style={{ padding: '0 2rem 2rem 2rem' }}>
-                <button
-                  type="button"
-                  onClick={() => onNavigate('laboratories')}
-                  className="btn btn-secondary"
-                  style={{ width: '100%', justifyContent: 'center' }}
-                >
-                  <span>Discover Laboratory Controls</span>
-                  <ArrowRight size={15} />
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ====================================================================
-          SECTION 4: MILESTONES IN PHARMACEUTICAL EXCELLENCE
-          Alternating central vertical timeline tracing company growth
-          ==================================================================== */}
-      <CompanyTimeline />
-
-      {/* ====================================================================
-          SECTION 5: THERAPEUTIC AREAS & PRODUCTS (SECTION 5.3)
-          Distinct image-led composition entering from the RIGHT.
-          Alternating sequence step 2: RIGHT
+          2. THERAPEUTIC PORTFOLIO OVERVIEW
+          Interactive 8-specialty selector, segment cards, and dosage forms showcase.
           ==================================================================== */}
       <section className="section-spacing" style={{ backgroundColor: 'var(--color-bg-white)', borderBottom: '1px solid var(--color-border)' }}>
         <div className="container">
@@ -802,7 +539,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, isLoaderComplete
               </div>
             </div>
 
-            {/* Image Group 2: Enters from RIGHT */}
+            {/* Image Group: Dosage Forms Showcase */}
             <div className="reveal-right">
               <div
                 className="img-zoom-wrapper"
@@ -856,7 +593,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, isLoaderComplete
           </div>
 
           {/* 8-Card Grid Layout */}
-          <div className="therapeutic-grid reveal-stagger">
+          <div className="therapeutic-grid reveal-stagger" style={{ marginBottom: '4rem' }}>
             {therapeuticSegments.map((seg) => {
               const IconComp = seg.icon;
               return (
@@ -921,13 +658,220 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, isLoaderComplete
               );
             })}
           </div>
+
+          {/* Authentic Finished Dosage Visual Showcase */}
+          <div
+            className="reveal-up"
+            style={{
+              marginBottom: '3rem',
+              borderRadius: 'var(--radius-xl)',
+              overflow: 'hidden',
+              boxShadow: 'var(--shadow-lg)',
+              border: '1px solid var(--color-border)',
+              maxHeight: '340px',
+              position: 'relative',
+            }}
+          >
+            <img
+              src="/assets/images/products/dosage-forms.webp"
+              alt="Salas Pharma finished oral dosage forms, blister packaging and capsules"
+              loading="lazy"
+              decoding="async"
+              width={1200}
+              height={340}
+              style={{ width: '100%', height: '340px', objectFit: 'cover' }}
+            />
+            <div
+              style={{
+                position: 'absolute',
+                bottom: 0,
+                insetInline: 0,
+                padding: '1.25rem 2rem',
+                background: 'linear-gradient(to top, rgba(7, 29, 54, 0.92) 0%, rgba(7, 29, 54, 0) 100%)',
+                color: '#FFFFFF',
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'flex-end',
+                flexWrap: 'wrap',
+                gap: '1rem',
+              }}
+            >
+              <div>
+                <span style={{ fontSize: '0.75rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.12em', color: '#38BDF8' }}>
+                  Finished Formulations
+                </span>
+                <h3 style={{ fontSize: '1.25rem', fontWeight: 700, margin: '0.25rem 0 0', color: '#FFFFFF' }}>
+                  Multi-Dose Tablets, Precision Micro-Pellet Capsules & Stable Suspensions
+                </h3>
+              </div>
+              <span style={{ fontSize: '0.85rem', color: '#E2E8F0', backgroundColor: 'rgba(255, 255, 255, 0.15)', padding: '0.35rem 0.85rem', borderRadius: '9999px', backdropFilter: 'blur(4px)' }}>
+                Schedule M & cGMP Compliant
+              </span>
+            </div>
+          </div>
+
+          <div style={{ textAlign: 'center' }}>
+            <button
+              type="button"
+              onClick={() => onNavigate('products')}
+              className="btn btn-primary"
+              style={{ padding: '0.9rem 2.25rem', fontSize: '1rem' }}
+            >
+              <span>Explore Complete Product Portfolio</span>
+              <ArrowRight size={17} />
+            </button>
+          </div>
         </div>
       </section>
 
       {/* ====================================================================
-          SECTION 4: LABORATORIES (SECTION 5.4)
-          Professional laboratory imagery entering from the LEFT.
-          Alternating sequence step 3: LEFT
+          3. MANUFACTURING AND QUALITY OVERVIEW
+          Cleanroom architecture, rotary compression, Quality Seal, & batch traceability.
+          ==================================================================== */}
+      <section className="section-spacing" style={{ backgroundColor: 'var(--color-bg-light)', borderBottom: '1px solid var(--color-border)' }}>
+        <div className="container">
+          <div className="section-header">
+            <span className="section-eyebrow">
+              <Factory size={14} /> Sikkim Manufacturing Facility
+            </span>
+            <h2 className="section-title">Precision in Every Process</h2>
+            <p className="section-description">
+              Our production infrastructure in South Sikkim incorporates cleanroom architecture, high-efficiency tablet and capsule compression, and automated packaging systems.
+            </p>
+          </div>
+
+          <div
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
+              gap: '4.5rem',
+              alignItems: 'center',
+            }}
+          >
+            {/* Left Narrative & Quality Seal */}
+            <div className="reveal-left">
+              <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '2rem' }}>
+                <QualitySeal size={220} />
+              </div>
+
+              <h3 style={{ fontSize: '1.65rem', fontWeight: 800, color: 'var(--color-navy)', marginBottom: '1rem', textAlign: 'center' }}>
+                Quality Assured at Every Phase
+              </h3>
+              <p style={{ fontSize: '1rem', color: 'var(--color-text-body)', lineHeight: 1.7, marginBottom: '1.75rem', textAlign: 'center' }}>
+                Quality assurance at Salas Pharma is an active operational discipline embedded within every phase of raw material qualification, blending, compression, and final release.
+              </p>
+
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '0.85rem', marginBottom: '2rem' }}>
+                {[
+                  { title: 'Raw Material Testing', desc: 'Pre-production identification and assay testing' },
+                  { title: 'In-Process Checks', desc: 'Hardness, friability, and dissolution profiling' },
+                  { title: 'Batch Traceability', desc: 'Complete batch manufacturing records for every lot' },
+                  { title: 'Stability Testing', desc: 'Climate-controlled multi-zone shelf-life validation' }
+                ].map((item, idx) => (
+                  <div key={idx} style={{ padding: '0.85rem', backgroundColor: '#FFFFFF', borderRadius: 'var(--radius-sm)', border: '1px solid var(--color-border)' }}>
+                    <h4 style={{ fontSize: '0.875rem', fontWeight: 700, color: 'var(--color-navy)', margin: '0 0 0.25rem' }}>
+                      {item.title}
+                    </h4>
+                    <p style={{ fontSize: '0.785rem', color: 'var(--color-text-muted)', margin: 0 }}>
+                      {item.desc}
+                    </p>
+                  </div>
+                ))}
+              </div>
+
+              <div style={{ display: 'flex', justifyContent: 'center' }}>
+                <button
+                  type="button"
+                  onClick={() => onNavigate('manufacturing')}
+                  className="btn btn-primary"
+                >
+                  <span>View Manufacturing Standards</span>
+                  <ArrowRight size={16} />
+                </button>
+              </div>
+            </div>
+
+            {/* Right Visual Cards */}
+            <div className="reveal-right">
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '1.75rem' }}>
+                {/* Visual Card 1: Compression Machinery */}
+                <div
+                  className="img-zoom-wrapper delay-100"
+                  style={{
+                    borderRadius: 'var(--radius-lg)',
+                    boxShadow: 'var(--shadow-lg)',
+                    border: '1px solid var(--color-border)',
+                    position: 'relative',
+                  }}
+                >
+                  <img
+                    src={PAGE_HERO_IMAGES.manufacturing.image}
+                    alt={PAGE_HERO_IMAGES.manufacturing.alt}
+                    loading="lazy"
+                    decoding="async"
+                    width={640}
+                    height={260}
+                    style={{ width: '100%', height: '240px', objectFit: 'cover' }}
+                  />
+                  <div
+                    style={{
+                      position: 'absolute',
+                      bottom: 0,
+                      insetInline: 0,
+                      padding: '0.85rem 1.25rem',
+                      background: 'linear-gradient(to top, rgba(7, 29, 54, 0.92) 0%, rgba(7, 29, 54, 0) 100%)',
+                      color: '#FFFFFF',
+                    }}
+                  >
+                    <span style={{ fontSize: '0.875rem', fontWeight: 700 }}>
+                      Rotary Tablet Compression & High-Speed Tooling
+                    </span>
+                  </div>
+                </div>
+
+                {/* Visual Card 2: Cleanroom Architecture */}
+                <div
+                  className="img-zoom-wrapper delay-200"
+                  style={{
+                    borderRadius: 'var(--radius-lg)',
+                    boxShadow: 'var(--shadow-lg)',
+                    border: '1px solid var(--color-border)',
+                    position: 'relative',
+                  }}
+                >
+                  <img
+                    src={MEDIA_CONFIG.manufacturing.cleanroomImage}
+                    alt="Salas Pharma sterile bioprocess formulation vessels and AHU cleanrooms"
+                    loading="lazy"
+                    decoding="async"
+                    width={640}
+                    height={260}
+                    style={{ width: '100%', height: '240px', objectFit: 'cover' }}
+                  />
+                  <div
+                    style={{
+                      position: 'absolute',
+                      bottom: 0,
+                      insetInline: 0,
+                      padding: '0.85rem 1.25rem',
+                      background: 'linear-gradient(to top, rgba(7, 29, 54, 0.92) 0%, rgba(7, 29, 54, 0) 100%)',
+                      color: '#FFFFFF',
+                    }}
+                  >
+                    <span style={{ fontSize: '0.875rem', fontWeight: 700 }}>
+                      Positive-Pressure HEPA Cleanroom Suites & Bioprocess Vessels
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ====================================================================
+          4. LABORATORY AND SCIENTIFIC CAPABILITIES
+          HPLC purity, active dissolution kinetics, and continuous stability controls.
           ==================================================================== */}
       <section className="section-spacing" style={{ backgroundColor: '#FFFFFF', borderBottom: '1px solid var(--color-border)' }}>
         <div className="container">
@@ -949,7 +893,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, isLoaderComplete
               alignItems: 'center',
             }}
           >
-            {/* Image Group 3: Enters from LEFT */}
+            {/* Laboratory Video & Badge */}
             <div className="reveal-left">
               <div
                 className="img-zoom-wrapper"
@@ -997,7 +941,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, isLoaderComplete
               </div>
             </div>
 
-            {/* Right Analytical Laboratory Pillars: Enters from RIGHT */}
+            {/* Analytical Laboratory Pillars */}
             <div className="reveal-right">
               <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
                 {[
@@ -1077,566 +1021,14 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, isLoaderComplete
       </section>
 
       {/* ====================================================================
-          SECTION 5: MANUFACTURING & QUALITY (SECTION 5.5)
-          Production image group 4 entering from the RIGHT.
-          Alternating sequence step 4: RIGHT
+          5. MILESTONES IN PHARMACEUTICAL EXCELLENCE
+          Verified corporate milestones tracing our journey from 2009 to Present.
           ==================================================================== */}
-      <section className="section-spacing" style={{ backgroundColor: 'var(--color-bg-light)', borderBottom: '1px solid var(--color-border)' }}>
-        <div className="container">
-          <div className="section-header">
-            <span className="section-eyebrow">
-              <Factory size={14} /> Sikkim Manufacturing Facility
-            </span>
-            <h2 className="section-title">Precision in Every Process</h2>
-            <p className="section-description">
-              Our production infrastructure in South Sikkim incorporates cleanroom architecture, high-efficiency tablet and capsule compression, and automated packaging systems.
-            </p>
-          </div>
-
-          <div
-            style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-              gap: '4.5rem',
-              alignItems: 'center',
-            }}
-          >
-            {/* Left Narrative & Quality Seal: Enters from LEFT */}
-            <div className="reveal-left">
-              <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '2rem' }}>
-                <QualitySeal size={220} />
-              </div>
-
-              <h3 style={{ fontSize: '1.65rem', fontWeight: 800, color: 'var(--color-navy)', marginBottom: '1rem', textAlign: 'center' }}>
-                Quality Assured at Every Phase
-              </h3>
-              <p style={{ fontSize: '1rem', color: 'var(--color-text-body)', lineHeight: 1.7, marginBottom: '1.75rem', textAlign: 'center' }}>
-                Quality assurance at Salas Pharma is an active operational discipline embedded within every phase of raw material qualification, blending, compression, and final release.
-              </p>
-
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '0.85rem', marginBottom: '2rem' }}>
-                {[
-                  { title: 'Raw Material Testing', desc: 'Pre-production identification and assay testing' },
-                  { title: 'In-Process Checks', desc: 'Hardness, friability, and dissolution profiling' },
-                  { title: 'Batch Traceability', desc: 'Complete batch manufacturing records for every lot' },
-                  { title: 'Stability Testing', desc: 'Climate-controlled multi-zone shelf-life validation' }
-                ].map((item, idx) => (
-                  <div key={idx} style={{ padding: '0.85rem', backgroundColor: '#FFFFFF', borderRadius: 'var(--radius-sm)', border: '1px solid var(--color-border)' }}>
-                    <h4 style={{ fontSize: '0.875rem', fontWeight: 700, color: 'var(--color-navy)', margin: '0 0 0.25rem' }}>
-                      {item.title}
-                    </h4>
-                    <p style={{ fontSize: '0.785rem', color: 'var(--color-text-muted)', margin: 0 }}>
-                      {item.desc}
-                    </p>
-                  </div>
-                ))}
-              </div>
-
-              <div style={{ display: 'flex', justifyContent: 'center' }}>
-                <button
-                  type="button"
-                  onClick={() => onNavigate('manufacturing')}
-                  className="btn btn-primary"
-                >
-                  <span>View Manufacturing Standards</span>
-                  <ArrowRight size={16} />
-                </button>
-              </div>
-            </div>
-
-            {/* Image Group 4: Enters from RIGHT */}
-            <div className="reveal-right">
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '1.75rem' }}>
-                {/* Visual Card 1: Compression Machinery */}
-                <div
-                  className="img-zoom-wrapper delay-100"
-                  style={{
-                    borderRadius: 'var(--radius-lg)',
-                    boxShadow: 'var(--shadow-lg)',
-                    border: '1px solid var(--color-border)',
-                    position: 'relative',
-                  }}
-                >
-                  <img
-                    src={PAGE_HERO_IMAGES.manufacturing.image}
-                    alt={PAGE_HERO_IMAGES.manufacturing.alt}
-                    loading="lazy"
-                    decoding="async"
-                    width={640}
-                    height={260}
-                    style={{ width: '100%', height: '240px', objectFit: 'cover' }}
-                  />
-                  <div
-                    style={{
-                      position: 'absolute',
-                      bottom: 0,
-                      insetInline: 0,
-                      padding: '0.85rem 1.25rem',
-                      background: 'linear-gradient(to top, rgba(7, 29, 54, 0.92) 0%, rgba(7, 29, 54, 0) 100%)',
-                      color: '#FFFFFF',
-                    }}
-                  >
-                    <span style={{ fontSize: '0.875rem', fontWeight: 700 }}>
-                      Rotary Tablet Compression & High-Speed Tooling
-                    </span>
-                  </div>
-                </div>
-
-                {/* Visual Card 2: Cleanroom Architecture */}
-                <div
-                  className="img-zoom-wrapper delay-200"
-                  style={{
-                    borderRadius: 'var(--radius-lg)',
-                    boxShadow: 'var(--shadow-lg)',
-                    border: '1px solid var(--color-border)',
-                    position: 'relative',
-                  }}
-                >
-                  <img
-                    src={MEDIA_CONFIG.manufacturing.cleanroomImage}
-                    alt="Salas Pharma sterile bioprocess formulation vessels and AHU cleanrooms"
-                    loading="lazy"
-                    decoding="async"
-                    width={640}
-                    height={260}
-                    style={{ width: '100%', height: '240px', objectFit: 'cover' }}
-                  />
-                  <div
-                    style={{
-                      position: 'absolute',
-                      bottom: 0,
-                      insetInline: 0,
-                      padding: '0.85rem 1.25rem',
-                      background: 'linear-gradient(to top, rgba(7, 29, 54, 0.92) 0%, rgba(7, 29, 54, 0) 100%)',
-                      color: '#FFFFFF',
-                    }}
-                  >
-                    <span style={{ fontSize: '0.875rem', fontWeight: 700 }}>
-                      Positive-Pressure HEPA Cleanroom Suites & Bioprocess Vessels
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      <CompanyTimeline />
 
       {/* ====================================================================
-          SECTION 6: R&D AND INNOVATION (SECTION 5.6)
-          Scientific imagery group 5 entering from the LEFT.
-          Alternating sequence step 5: LEFT
-          ==================================================================== */}
-      <section className="section-spacing" style={{ backgroundColor: '#FFFFFF', borderBottom: '1px solid var(--color-border)' }}>
-        <div className="container">
-          <div className="section-header">
-            <span className="section-eyebrow">
-              <FlaskConical size={14} /> Formulation & Analytics
-            </span>
-            <h2 className="section-title">Science That Drives Progress</h2>
-            <p className="section-description">
-              Our commitment to pharmaceutical science is anchored in rigorous laboratory research, systematic testing, and reproducible formulation workflows.
-            </p>
-          </div>
-
-          <div
-            style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-              gap: '4rem',
-              alignItems: 'center',
-            }}
-          >
-            {/* Image Group 5: Enters from LEFT */}
-            <div className="reveal-left">
-              <div
-                className="img-zoom-wrapper"
-                style={{
-                  borderRadius: 'var(--radius-lg)',
-                  boxShadow: 'var(--shadow-xl)',
-                  border: '1px solid var(--color-border)',
-                }}
-              >
-                <BrandedVideo
-                  src={VIDEO_ASSETS.research.video}
-                  poster={VIDEO_ASSETS.research.poster}
-                  playbackRate={VIDEO_ASSETS.research.playbackRate}
-                  autoPlay={true}
-                  muted={true}
-                  loop={true}
-                  playsInline={true}
-                  preload="none"
-                  priority={false}
-                  ariaLabel={VIDEO_ASSETS.research.alt}
-                  style={{ width: '100%', height: '460px', objectFit: 'cover' }}
-                />
-              </div>
-              <div
-                style={{
-                  backgroundColor: 'var(--color-bg-light)',
-                  border: '1px solid var(--color-border)',
-                  borderRadius: 'var(--radius-md)',
-                  padding: '1rem 1.25rem',
-                  marginTop: '-1.5rem',
-                  marginLeft: '1.5rem',
-                  marginRight: '1.5rem',
-                  position: 'relative',
-                  zIndex: 2,
-                  boxShadow: 'var(--shadow-sm)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '0.85rem',
-                }}
-              >
-                <FlaskConical size={20} style={{ color: 'var(--color-primary)', flexShrink: 0 }} />
-                <span style={{ fontSize: '0.85rem', color: 'var(--color-navy)', fontWeight: 600 }}>
-                  Formulation Science: Bioequivalent dosage forms engineered for targeted bioavailability
-                </span>
-              </div>
-            </div>
-
-            {/* Right Detailed Scientific Focus Areas: Enters from RIGHT */}
-            <div className="reveal-right">
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
-                {[
-                  {
-                    title: 'Laboratory Research & Analytical Chemistry',
-                    desc: 'Utilising validated analytical protocols, chromatography, and spectroscopic methods to characterise pharmaceutical active ingredients.',
-                    icon: FlaskConical
-                  },
-                  {
-                    title: 'Scientific Testing & In-Process Controls',
-                    desc: 'Continuous analytical checks across blending, compression, and coating stages to maintain strict batch-to-batch uniformity.',
-                    icon: ShieldCheck
-                  },
-                  {
-                    title: 'Product Formulation Development',
-                    desc: 'Developing stable, bioequivalent dosage forms engineered for targeted bioavailability and patient convenience.',
-                    icon: Pill
-                  },
-                  {
-                    title: 'Quality-Focused Process Optimization',
-                    desc: 'Standardised operating procedures aligned with applicable Indian pharmacopeial and regulatory guidelines.',
-                    icon: Factory
-                  }
-                ].map((item, idx) => (
-                  <div
-                    key={idx}
-                    style={{
-                      display: 'flex',
-                      gap: '1.15rem',
-                      padding: '1.15rem 1.25rem',
-                      backgroundColor: 'var(--color-bg-light)',
-                      borderRadius: 'var(--radius-md)',
-                      border: '1px solid var(--color-border)',
-                    }}
-                  >
-                    <div
-                      style={{
-                        width: '42px',
-                        height: '42px',
-                        borderRadius: 'var(--radius-sm)',
-                        backgroundColor: '#FFFFFF',
-                        border: '1px solid var(--color-border)',
-                        color: 'var(--color-primary)',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        flexShrink: 0,
-                      }}
-                    >
-                      <item.icon size={20} />
-                    </div>
-                    <div>
-                      <h4 style={{ fontSize: '1rem', fontWeight: 700, marginBottom: '0.25rem', color: 'var(--color-navy)' }}>
-                        {item.title}
-                      </h4>
-                      <p style={{ fontSize: '0.875rem', color: 'var(--color-text-body)', margin: 0, lineHeight: 1.55 }}>
-                        {item.desc}
-                      </p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-
-              <div style={{ marginTop: '2rem' }}>
-                <button
-                  type="button"
-                  onClick={() => onNavigate('research')}
-                  className="btn btn-secondary"
-                >
-                  <span>Explore Formulation Science & R&D</span>
-                  <ArrowRight size={16} />
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ====================================================================
-          SECTION 8: PRODUCT & PORTFOLIO DISCOVERY
-          Clean, verified bridge to the Products catalog showcasing approved dosage forms
-          ==================================================================== */}
-      <section className="section-spacing" style={{ backgroundColor: 'var(--color-bg-white)', borderBottom: '1px solid var(--color-border)' }}>
-        <div className="container">
-          <div className="section-header" style={{ textAlign: 'center', maxWidth: '720px', margin: '0 auto 3.5rem auto' }}>
-            <span
-              className="section-eyebrow"
-              style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '0.45rem',
-                color: 'var(--color-primary-blue)',
-                fontWeight: 800,
-                fontSize: '0.8125rem',
-                letterSpacing: '0.12em',
-                textTransform: 'uppercase',
-                marginBottom: '0.75rem',
-              }}
-            >
-              <Pill size={14} /> Comprehensive Portfolio
-            </span>
-            <h2 className="section-title" style={{ fontSize: 'clamp(2rem, 3.2vw, 2.75rem)', fontWeight: 800, color: 'var(--color-navy)', marginBottom: '1rem' }}>
-              Formulations Engineered for Patient Wellness
-            </h2>
-            <p className="section-description" style={{ fontSize: '1.05rem', color: 'var(--color-text-body)', lineHeight: 1.65, maxWidth: '640px', margin: '0 auto' }}>
-              From immediate-release oral tablets and sustained-action capsules to oral suspensions, explore our diverse finished dosage forms manufactured under strict cGMP protocols.
-            </p>
-          </div>
-
-          {/* Authentic Finished Dosage Visual Showcase */}
-          <div
-            className="reveal-up"
-            style={{
-              marginBottom: '3rem',
-              borderRadius: 'var(--radius-xl)',
-              overflow: 'hidden',
-              boxShadow: 'var(--shadow-lg)',
-              border: '1px solid var(--color-border)',
-              maxHeight: '340px',
-              position: 'relative',
-            }}
-          >
-            <img
-              src="/assets/images/products/dosage-forms.webp"
-              alt="Salas Pharma finished oral dosage forms, blister packaging and capsules"
-              loading="lazy"
-              decoding="async"
-              width={1200}
-              height={340}
-              style={{ width: '100%', height: '340px', objectFit: 'cover' }}
-            />
-            <div
-              style={{
-                position: 'absolute',
-                bottom: 0,
-                insetInline: 0,
-                padding: '1.25rem 2rem',
-                background: 'linear-gradient(to top, rgba(7, 29, 54, 0.92) 0%, rgba(7, 29, 54, 0) 100%)',
-                color: '#FFFFFF',
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'flex-end',
-                flexWrap: 'wrap',
-                gap: '1rem',
-              }}
-            >
-              <div>
-                <span style={{ fontSize: '0.75rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.12em', color: '#38BDF8' }}>
-                  Finished Formulations
-                </span>
-                <h3 style={{ fontSize: '1.25rem', fontWeight: 700, margin: '0.25rem 0 0', color: '#FFFFFF' }}>
-                  Multi-Dose Tablets, Precision Micro-Pellet Capsules & Stable Suspensions
-                </h3>
-              </div>
-              <span style={{ fontSize: '0.85rem', color: '#E2E8F0', backgroundColor: 'rgba(255, 255, 255, 0.15)', padding: '0.35rem 0.85rem', borderRadius: '9999px', backdropFilter: 'blur(4px)' }}>
-                Schedule M & cGMP Compliant
-              </span>
-            </div>
-          </div>
-
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '1.75rem', marginBottom: '3rem' }}>
-            {[
-              {
-                title: 'Solid Oral Tablets',
-                badge: 'Immediate & Sustained Release',
-                desc: 'Film-coated, enteric-coated, and modified-release tablets formulated for optimal bioavailability and therapeutic stability.',
-                icon: Pill,
-                action: 'Explore Tablets',
-              },
-              {
-                title: 'Hard Gelatin Capsules',
-                badge: 'Precision Micro-Pellets',
-                desc: 'Specialized encapsulation technology accommodating single and multi-particulate pellet formulations with precise drug delivery.',
-                icon: ShieldCheck,
-                action: 'Explore Capsules',
-              },
-              {
-                title: 'Oral Liquids & Suspensions',
-                badge: 'Homogeneous Delivery',
-                desc: 'Palatable, stable syrups and suspensions formulated to ensure uniform active ingredient distribution and rapid absorption.',
-                icon: FlaskConical,
-                action: 'Explore Liquids',
-              },
-              {
-                title: 'Sterile Injectables',
-                badge: 'Aseptic Processing',
-                desc: 'Precision hospital-care ampoules and vials processed in certified laminar airflow workstations meeting strict sterility assurance.',
-                icon: Activity,
-                action: 'Explore Injectables',
-              },
-            ].map((card, idx) => {
-              const CardIcon = card.icon;
-              return (
-                <div
-                  key={idx}
-                  className={`interactive-card reveal-up delay-${(idx + 1) * 100}`}
-                  style={{
-                    backgroundColor: 'var(--color-bg-light)',
-                    borderRadius: 'var(--radius-lg)',
-                    padding: '2rem 1.75rem',
-                    border: '1px solid var(--color-border)',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    justifyContent: 'space-between',
-                    cursor: 'pointer',
-                    transition: 'all 0.3s ease',
-                  }}
-                  onClick={() => onNavigate('products')}
-                  role="button"
-                  tabIndex={0}
-                  onKeyDown={(e) => {
-                    if (e.key === 'Enter' || e.key === ' ') {
-                      e.preventDefault();
-                      onNavigate('products');
-                    }
-                  }}
-                >
-                  <div>
-                    <div
-                      style={{
-                        width: '48px',
-                        height: '48px',
-                        borderRadius: 'var(--radius-sm)',
-                        backgroundColor: '#FFFFFF',
-                        border: '1px solid var(--color-border)',
-                        color: 'var(--color-primary-blue)',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        marginBottom: '1.25rem',
-                        boxShadow: 'var(--shadow-xs)',
-                      }}
-                    >
-                      <CardIcon size={24} />
-                    </div>
-                    <span style={{ fontSize: '0.75rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--color-accent)' }}>
-                      {card.badge}
-                    </span>
-                    <h3 style={{ fontSize: '1.25rem', fontWeight: 800, color: 'var(--color-navy)', marginTop: '0.35rem', marginBottom: '0.75rem' }}>
-                      {card.title}
-                    </h3>
-                    <p style={{ fontSize: '0.9rem', color: 'var(--color-text-body)', lineHeight: 1.6, margin: 0 }}>
-                      {card.desc}
-                    </p>
-                  </div>
-
-                  <div style={{ marginTop: '1.75rem', display: 'flex', alignItems: 'center', gap: '0.45rem', fontSize: '0.875rem', fontWeight: 700, color: 'var(--color-primary-blue)' }}>
-                    <span>{card.action}</span>
-                    <ArrowRight size={15} />
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-
-          <div style={{ textAlign: 'center' }}>
-            <button
-              type="button"
-              onClick={() => onNavigate('products')}
-              className="btn btn-primary"
-              style={{ padding: '0.9rem 2.25rem', fontSize: '1rem' }}
-            >
-              <span>View Complete Pharmaceutical Catalogue</span>
-              <ArrowRight size={17} />
-            </button>
-          </div>
-        </div>
-      </section>
-
-      {/* ====================================================================
-          SECTION 9: WHY SALAS PHARMA (CORPORATE FOUNDATIONS & CAPABILITIES)
-          Balanced row of useful features and verified figures entering from RIGHT.
-          ==================================================================== */}
-      <section className="section-spacing" style={{ position: 'relative', overflow: 'hidden', backgroundColor: 'var(--color-bg-light)', borderBottom: '1px solid var(--color-border)' }}>
-        {/* Subtle Cyclopentane Molecular Linework Background */}
-        <MolecularBackground variant="section" theme="light" opacity={0.4} position="split" />
-        <div className="container" style={{ position: 'relative', zIndex: 1 }}>
-          <div className="section-header">
-            <span className="section-eyebrow">
-              <ShieldCheck size={14} /> Grounded In Excellence
-            </span>
-            <h2 className="section-title">Corporate Foundations & Capabilities</h2>
-            <p className="section-description">
-              Salas Pharma combines dedicated manufacturing, scientific diligence, and reliable distribution to advance accessibility to essential healthcare.
-            </p>
-          </div>
-
-          <div
-            style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
-              gap: '2rem',
-            }}
-          >
-            {highlights.map((h, idx) => {
-              const IconComp = h.icon;
-              return (
-                <div
-                  key={idx}
-                  className={`stat-card reveal-right delay-${(idx + 1) * 100}`}
-                >
-                  <div className="stat-card-icon-wrap">
-                    <IconComp size={24} />
-                  </div>
-                  <div
-                    style={{
-                      fontSize: '2.1rem',
-                      fontWeight: 800,
-                      color: 'var(--color-navy)',
-                      marginBottom: '0.35rem',
-                      letterSpacing: '-0.02em',
-                    }}
-                  >
-                    {h.metric}
-                  </div>
-                  <div
-                    style={{
-                      fontSize: '0.85rem',
-                      fontWeight: 700,
-                      textTransform: 'uppercase',
-                      letterSpacing: '0.08em',
-                      color: 'var(--color-accent)',
-                      marginBottom: '0.85rem',
-                    }}
-                  >
-                    {h.label}
-                  </div>
-                  <p style={{ fontSize: '0.875rem', color: 'var(--color-text-body)', lineHeight: 1.6, margin: 0 }}>
-                    {h.description}
-                  </p>
-                  <div className="stat-card-gradient-underline" />
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* ====================================================================
-          SECTION 10: SIGNATURE CLOSING EXPERIENCE & CONTACT CTA
-          High-end editorial stage: "Every Step. A Commitment to Better Healthcare."
+          6. CLOSING CONTACT & INQUIRY SECTION
+          High-end editorial stage connecting visitors with Salas corporate leadership.
           ==================================================================== */}
       <SignatureClosingStatement
         headline1="Every Step."

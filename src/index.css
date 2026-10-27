@@ -910,7 +910,7 @@ button, input, textarea, select {
 
 .hero-hybrid-section {
   position: relative;
-  min-height: clamp(680px, calc(100vh - var(--header-height)), 860px);
+  min-height: clamp(620px, calc(100vh - var(--header-height)), 820px);
   margin-top: var(--header-height);
   overflow: hidden;
   background-color: #041424;
@@ -964,17 +964,21 @@ button, input, textarea, select {
   pointer-events: none;
 }
 
-/* Main Hero Content Container */
+/* Main Hero Content Container — robust alignment, zero left-clipping */
 .hero-hybrid-container {
   position: relative;
   z-index: 3;
   display: grid;
-  grid-template-columns: 1.15fr 0.95fr;
-  gap: clamp(2rem, 4vw, 4rem);
+  grid-template-columns: minmax(0, 1.18fr) minmax(0, 0.92fr);
+  gap: clamp(2rem, 3.5vw, 3.5rem);
   align-items: center;
-  padding-top: clamp(2.5rem, 5vh, 4.5rem);
-  padding-bottom: clamp(2.5rem, 5vh, 4.5rem);
+  padding-top: clamp(2rem, 4vh, 3.5rem);
+  padding-bottom: clamp(2rem, 4vh, 3.5rem);
+  padding-left: clamp(1.75rem, 4vw, 3.5rem);
+  padding-right: clamp(1.75rem, 4vw, 3.5rem);
+  max-width: 1360px;
   width: 100%;
+  box-sizing: border-box;
 }
 
 /* Left Content Column */
@@ -983,7 +987,9 @@ button, input, textarea, select {
   flex-direction: column;
   align-items: flex-start;
   text-align: left;
-  max-width: 620px;
+  max-width: 600px;
+  width: 100%;
+  min-width: 0;
 }
 
 /* Eyebrow badge */
@@ -1016,14 +1022,16 @@ button, input, textarea, select {
 /* Headline */
 .hero-hybrid-heading {
   font-family: var(--font-heading, "Plus Jakarta Sans", sans-serif);
-  font-size: clamp(2.25rem, 3.8vw, 3.5rem);
+  font-size: clamp(2.15rem, 3.4vw, 3.25rem);
   font-weight: 800;
   line-height: 1.15;
   letter-spacing: -0.025em;
   color: #FFFFFF;
-  margin: 0 0 1.25rem 0;
+  margin: 0 0 1.15rem 0;
   display: flex;
   flex-direction: column;
+  word-break: normal;
+  overflow-wrap: break-word;
 }
 
 .hero-hybrid-highlight {
@@ -1034,11 +1042,11 @@ button, input, textarea, select {
 
 /* Description */
 .hero-hybrid-description {
-  font-size: clamp(1rem, 1.2vw, 1.125rem);
-  line-height: 1.68;
+  font-size: clamp(0.975rem, 1.15vw, 1.075rem);
+  line-height: 1.65;
   color: #CBD5E1;
-  margin: 0 0 2rem 0;
-  max-width: 540px;
+  margin: 0 0 1.75rem 0;
+  max-width: 530px;
 }
 
 /* Call to Action Buttons */
@@ -1047,7 +1055,7 @@ button, input, textarea, select {
   flex-wrap: wrap;
   gap: 1rem;
   align-items: center;
-  margin-bottom: 2.5rem;
+  margin-bottom: 2rem;
 }
 
 .hero-hybrid-btn-primary {
@@ -1178,6 +1186,11 @@ button, input, textarea, select {
               border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1),
               box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   cursor: pointer;
+  /* Reset native button styles */
+  padding: 0;
+  appearance: none;
+  -webkit-appearance: none;
+  text-align: left;
 }
 
 .hero-hybrid-panel:hover {
@@ -1187,23 +1200,41 @@ button, input, textarea, select {
   z-index: 5;
 }
 
+.hero-hybrid-panel:focus-visible {
+  outline: 2px solid #38BDF8;
+  outline-offset: 4px;
+  border-color: #38BDF8;
+}
+
 .hero-hybrid-panel-1 {
-  margin-top: -22px;
+  transform: skewX(-7deg) translateY(-8px);
 }
 
 .hero-hybrid-panel-2 {
-  margin-top: 22px;
+  transform: skewX(-7deg) translateY(12px);
 }
 
 .hero-hybrid-panel-3 {
-  margin-top: -6px;
+  transform: skewX(-7deg) translateY(2px);
+}
+
+.hero-hybrid-panel-1:hover {
+  transform: skewX(-7deg) translateY(-16px) scale(1.03);
+}
+
+.hero-hybrid-panel-2:hover {
+  transform: skewX(-7deg) translateY(4px) scale(1.03);
+}
+
+.hero-hybrid-panel-3:hover {
+  transform: skewX(-7deg) translateY(-6px) scale(1.03);
 }
 
 .hero-hybrid-panel-inner {
   position: relative;
   width: 100%;
   height: 100%;
-  transform: skewX(8deg) scale(1.24);
+  transform: skewX(7deg) scale(1.22);
   transform-origin: center center;
 }
 
@@ -1261,6 +1292,24 @@ button, input, textarea, select {
   line-height: 1.25;
 }
 
+/* Interactive "Explore →" cue: hidden by default, slides in on hover */
+.hero-hybrid-panel-explore {
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #38BDF8;
+  letter-spacing: 0.06em;
+  opacity: 0;
+  transform: translateY(4px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  pointer-events: none;
+}
+
+.hero-hybrid-panel:hover .hero-hybrid-panel-explore,
+.hero-hybrid-panel:focus-visible .hero-hybrid-panel-explore {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 /* Tablet & Intermediate Viewports (769px – 1100px) */
 @media (max-width: 1100px) {
   .hero-hybrid-container {
@@ -1276,7 +1325,7 @@ button, input, textarea, select {
     width: 100%;
   }
   .hero-hybrid-panel {
-    height: 330px;
+    height: 300px;
   }
 }
 
@@ -1297,6 +1346,8 @@ button, input, textarea, select {
   .hero-hybrid-container {
     padding-top: 2rem;
     padding-bottom: 2.5rem;
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
     gap: 2.25rem;
   }
   .hero-hybrid-heading {
@@ -1327,44 +1378,46 @@ button, input, textarea, select {
     font-size: 0.6875rem;
   }
   .hero-hybrid-gallery {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 0.65rem;
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
     width: 100%;
     padding: 0.5rem 0;
   }
   .hero-hybrid-panel {
-    height: 200px;
-    transform: skewX(-4deg);
-    border-radius: 8px;
+    height: 96px;
+    transform: none !important;
+    border-radius: 10px;
   }
   .hero-hybrid-panel:hover {
-    transform: skewX(-4deg);
+    transform: none !important;
   }
   .hero-hybrid-panel-1,
   .hero-hybrid-panel-2,
   .hero-hybrid-panel-3 {
     margin-top: 0;
+    transform: none !important;
   }
   .hero-hybrid-panel-inner {
-    transform: skewX(4deg) scale(1.18);
+    transform: none !important;
   }
   .hero-hybrid-panel-caption {
-    padding: 0.65rem 0.4rem;
+    padding: 0.75rem 1rem;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
   }
-  .hero-hybrid-panel-tag {
-    font-size: 0.6rem;
-  }
-  .hero-hybrid-panel-title {
-    font-size: 0.75rem;
+  .hero-hybrid-panel-explore {
+    opacity: 1;
+    transform: none;
   }
 }
 
 @media (max-width: 480px) {
   .hero-hybrid-panel {
-    height: 165px;
+    height: 90px;
   }
   .hero-hybrid-panel-title {
-    font-size: 0.7rem;
+    font-size: 0.85rem;
   }
 }
 
