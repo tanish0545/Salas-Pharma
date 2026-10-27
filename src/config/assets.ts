@@ -48,6 +48,16 @@ export const VIDEO_ASSETS: Record<string, VideoMediaAsset> = {
     description: "Automated high-speed packaging conveyor line with inline optical inspection and monitoring.",
     alt: "Pharmaceutical production specialists operating automated bottle packaging and conveyor line",
   },
+  productionHero: {
+    id: "productionHero",
+    title: "High-Speed Automated Packaging & Conveyor Lines",
+    subtitle: "Continuous automated bottle filling, labeling, and inline optical quality inspection",
+    video: "/assets/videos/salas1.mp4",
+    poster: "/assets/videos/posters/salas1.mp4_f50.webp",
+    playbackRate: 1.0,
+    description: "Automated high-speed packaging conveyor line with inline optical inspection and monitoring.",
+    alt: "Pharmaceutical production specialists operating automated bottle packaging and conveyor line",
+  },
   research: {
     id: "research",
     title: "Formulation Dissolution & Bioavailability",

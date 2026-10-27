@@ -20,7 +20,7 @@ import {
   FileCheck,
   HeartHandshake
 } from 'lucide-react';
-import { MEDIA_CONFIG, VIDEO_ASSETS, PAGE_HERO_IMAGES } from '../config/assets';
+import { MEDIA_CONFIG, VIDEO_ASSETS } from '../config/assets';
 import { BrandedVideo } from '../components/common/BrandedVideo';
 import { QualitySeal } from '../components/common/QualitySeal';
 import { AnimatedCounter } from '../components/common/AnimatedCounter';
@@ -152,23 +152,22 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, isLoaderComplete
         className="hero-option5-section"
         aria-label="SALAS Pharmaceuticals Home Hero"
       >
-        {/* RIGHT LAYER: Pharmaceutical Manufacturing Static Hero Image */}
+        {/* RIGHT LAYER: Pharmaceutical Manufacturing Video (salas1.mp4) with Fallback Poster */}
         <div className="hero-option5-video-layer">
-          <img
-            src={PAGE_HERO_IMAGES.home.image}
-            alt={PAGE_HERO_IMAGES.home.alt}
-            width={1920}
-            height={1080}
-            decoding="async"
-            style={{
-              width: '100%',
-              height: '100%',
-              objectFit: 'cover',
-              objectPosition: 'center right',
-              display: 'block',
-            }}
+          <BrandedVideo
+            src={VIDEO_ASSETS.manufacturing.video}
+            poster={VIDEO_ASSETS.manufacturing.poster}
+            playbackRate={1.0}
+            autoPlay={true}
+            muted={true}
+            loop={true}
+            playsInline={true}
+            priority={true}
+            isReadyToPlay={_isLoaderComplete}
+            ariaLabel="Salas Pharma automated pharmaceutical manufacturing and packaging line"
+            style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: '75% center' }}
           />
-          {/* Subtle localized boundary overlay (preserves natural image contrast and seam transition) */}
+          {/* Subtle localized boundary overlay (preserves natural video contrast and seam transition) */}
           <div className="hero-option5-video-overlay" />
         </div>
 

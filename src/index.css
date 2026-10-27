@@ -78,17 +78,21 @@ html {
   line-height: 1.6;
   color: var(--color-text-body);
   background-color: var(--color-bg-white);
-  scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 body {
   background-color: var(--color-bg-white);
   min-height: 100vh;
-  overflow-x: hidden;
+  overflow-x: clip;
   position: relative;
+}
+
+.salas-pharma-app {
+  overflow-x: clip;
+  width: 100%;
 }
 
 /* Typography Standards */
@@ -2815,7 +2819,7 @@ button, input, textarea, select {
 
 .about-storytelling-track {
   position: relative;
-  min-height: 220vh;
+  min-height: 300vh;
   background-color: var(--color-bg-light);
   border-top: 1px solid var(--color-border);
   border-bottom: 1px solid var(--color-border);
@@ -2829,9 +2833,10 @@ button, input, textarea, select {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 2rem 1.5rem;
+  padding: calc(var(--header-height, 80px) + 1rem) 1.5rem 2rem;
   overflow: hidden;
   box-sizing: border-box;
+  z-index: 5;
 }
 
 .storytelling-progress-bar {

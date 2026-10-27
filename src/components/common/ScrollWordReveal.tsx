@@ -16,9 +16,10 @@ interface ScrollWordRevealProps {
  * 
  * Features:
  * - Natural Word Spacing: Words wrap naturally with authentic spaces between inline spans.
- * - Desktop Pinned Storytelling (About Us only): Uses CSS position: sticky over a 220vh track.
- * - Mobile Safe: Automatically unpins on viewports <= 768px to ensure mobile users are not trapped.
- * - Accessibility: Normal text flow, selectable text, screen-reader friendly, and respects prefers-reduced-motion.
+ * - Desktop Pinned Storytelling (About Us only): Uses CSS position: sticky over a 300vh track.
+ * - Initial Pin Buffer (8%) & Reading Dwell Buffer (22%): Paragraph stays fully illuminated & pinned before release.
+ * - Mobile Safe: Automatically unpins on viewports <= 768px for normal document flow.
+ * - Accessibility: Selectable text, screen-reader friendly, and respects prefers-reduced-motion.
  */
 export const ScrollWordReveal: React.FC<ScrollWordRevealProps> = ({
   text,
@@ -31,19 +32,9 @@ export const ScrollWordReveal: React.FC<ScrollWordRevealProps> = ({
   const trackRef = useRef<HTMLDivElement>(null);
   const words = text.split(/\s+/).filter(Boolean);
 
-  const [activeWordCount, setActiveWordCount] = useState<number>(() => {
-    if (typeof window !== 'undefined') {
-      if (
-        window.matchMedia('(prefers-reduced-motion: reduce)').matches ||
-        !('IntersectionObserver' in window)
-      ) {
-        return words.length;
-      }
-    }
-    return 0;
-  });
-
-  const [progressPercent, setProgressPercent] = useState<number>(0);
+  const isReducedMotion = typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const [activeWordCount, setActiveWordCount] = useState<number>(() => isReducedMotion ? words.length : 0);
+  const [progressPercent, setProgressPercent] = useState<number>(() => isReducedMotion ? 100 : 0);
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
@@ -54,82 +45,81 @@ export const ScrollWordReveal: React.FC<ScrollWordRevealProps> = ({
     const trackEl = trackRef.current;
     if (!trackEl) return;
 
-    let isIntersecting = false;
     let ticking = false;
 
     const updateWordsOnScroll = () => {
-      if (!isIntersecting || !trackEl) {
-        ticking = false;
-        return;
-      }
+      ticking = false;
+      if (!trackEl) return;
 
       const rect = trackEl.getBoundingClientRect();
       const windowHeight = window.innerHeight;
       const isMobile = window.innerWidth <= 768;
 
-      let progress = 0;
+      let targetCount = 0;
+      let visualProgress = 0;
 
       if (pinnedStorytelling && !isMobile) {
-        // Sticky Pinning Progress:
-        // Track height is e.g. 220vh.
-        // Scroll distance where it stays sticky = rect.height - windowHeight.
+        // Desktop Pinned Storytelling (About Us only):
+        // Total distance where .about-storytelling-sticky stays pinned in the viewport
         const scrollDistance = rect.height - windowHeight;
+
         if (scrollDistance > 0) {
-          // -rect.top is the distance scrolled into the track from the top of the viewport
+          // Distance scrolled past top of the track (when top of track reaches top of viewport)
           const currentScrolled = -rect.top;
-          progress = Math.min(1, Math.max(0, currentScrolled / scrollDistance));
+          const clampedProgress = Math.min(1, Math.max(0, currentScrolled / scrollDistance));
+
+          // Timeline calibration:
+          // 0.00 -> 0.08: Initial settle cushion (paragraph firmly pinned, ready to reveal)
+          // 0.08 -> 0.78: Active word-by-word progressive illumination phase
+          // 0.78 -> 1.00: Completed reading dwell buffer (full sentence held pinned & legible before release)
+          if (clampedProgress <= 0.08) {
+            targetCount = 0;
+            visualProgress = 0;
+          } else if (clampedProgress >= 0.78) {
+            targetCount = words.length;
+            visualProgress = 1;
+          } else {
+            const revealProgress = (clampedProgress - 0.08) / 0.70;
+            targetCount = Math.min(words.length, Math.max(0, Math.round(revealProgress * words.length)));
+            visualProgress = revealProgress;
+          }
         } else {
-          progress = 1;
+          targetCount = words.length;
+          visualProgress = 1;
         }
       } else {
-        // Standard Viewport Reveal (for other pages and mobile screens):
+        // Standard Viewport Reveal (for all other pages, or mobile viewports <= 768px):
         const startTrigger = windowHeight * 0.85;
-        const endTrigger = windowHeight * 0.35;
+        const endTrigger = windowHeight * 0.30;
         const totalDistance = startTrigger - endTrigger + rect.height;
         const currentScroll = startTrigger - rect.top;
-        progress = Math.min(1, Math.max(0, currentScroll / totalDistance));
+        const rawProgress = Math.min(1, Math.max(0, currentScroll / totalDistance));
+        targetCount = Math.min(words.length, Math.round(rawProgress * words.length));
+        visualProgress = rawProgress;
       }
 
-      const targetCount = Math.min(words.length, Math.floor(progress * (words.length + 1)));
-      setActiveWordCount(targetCount);
-      setProgressPercent(Math.round(progress * 100));
-      ticking = false;
+      setActiveWordCount(prev => (prev !== targetCount ? targetCount : prev));
+      const roundedPercent = Math.round(visualProgress * 100);
+      setProgressPercent(prev => (prev !== roundedPercent ? roundedPercent : prev));
     };
 
-    const onScroll = () => {
-      if (!ticking && isIntersecting) {
+    const handleScroll = () => {
+      if (!ticking) {
         window.requestAnimationFrame(updateWordsOnScroll);
         ticking = true;
       }
     };
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const entry = entries[0];
-        if (entry) {
-          isIntersecting = entry.isIntersecting;
-          if (isIntersecting) {
-            window.addEventListener('scroll', onScroll, { passive: true });
-            window.addEventListener('resize', onScroll, { passive: true });
-            updateWordsOnScroll();
-          } else {
-            window.removeEventListener('scroll', onScroll);
-            window.removeEventListener('resize', onScroll);
-          }
-        }
-      },
-      {
-        threshold: [0, 0.1, 0.25, 0.5, 0.75, 1],
-        rootMargin: pinnedStorytelling ? '0px 0px 0px 0px' : '80px 0px 80px 0px',
-      }
-    );
+    // Passive listener for instantaneous responsiveness
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('resize', handleScroll, { passive: true });
 
-    observer.observe(trackEl);
+    // Initial measurement
+    updateWordsOnScroll();
 
     return () => {
-      observer.disconnect();
-      window.removeEventListener('scroll', onScroll);
-      window.removeEventListener('resize', onScroll);
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', handleScroll);
     };
   }, [words.length, pinnedStorytelling]);
 
@@ -161,7 +151,7 @@ export const ScrollWordReveal: React.FC<ScrollWordRevealProps> = ({
         })}
       </Tag>
 
-      {/* Progress affordance on pinned storytelling desktop mode */}
+      {/* Progress bar affordance on pinned storytelling desktop mode */}
       {pinnedStorytelling && (
         <div className="storytelling-progress-bar" aria-hidden="true">
           <div

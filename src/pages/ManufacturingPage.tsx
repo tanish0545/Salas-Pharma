@@ -373,14 +373,14 @@ export const ManufacturingPage: React.FC<ManufacturingPageProps> = ({ onNavigate
                 }}
               >
                 <BrandedVideo
-                  src={VIDEO_ASSETS.productionHero.video}
-                  poster={VIDEO_ASSETS.productionHero.poster}
-                  playbackRate={VIDEO_ASSETS.productionHero.playbackRate}
+                  src={VIDEO_ASSETS.manufacturing.video}
+                  poster={VIDEO_ASSETS.manufacturing.poster}
+                  playbackRate={VIDEO_ASSETS.manufacturing.playbackRate}
                   autoPlay={true}
                   muted={true}
                   loop={true}
                   playsInline={true}
-                  ariaLabel={VIDEO_ASSETS.productionHero.alt}
+                  ariaLabel={VIDEO_ASSETS.manufacturing.alt}
                   style={{ width: '100%', height: '420px', objectFit: 'cover' }}
                 />
               </div>
